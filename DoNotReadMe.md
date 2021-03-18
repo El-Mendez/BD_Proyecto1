@@ -1,6 +1,6 @@
 # Proyecto 1 de Base de Datos
 ***
-Consiste en crear un juego de memoria usando React.
+Consiste en realizar una plataforma de música
 ```bash
 # Instalar las dependencias
 npm install
