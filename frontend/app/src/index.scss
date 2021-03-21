@@ -1,6 +1,7 @@
 @import "./style/variables";
 @import "~bootstrap/scss/bootstrap";
 @import '~react-pro-sidebar/dist/scss/styles.scss';
+@import './components/report/report.scss';
 
 body {
   background: $primary;
