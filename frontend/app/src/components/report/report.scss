@@ -1,0 +1,26 @@
+@import './artistReport/artisReport';
+
+.card{
+  width: 187px;
+  height: 310px;
+  align-items: center;
+  padding: 5px;
+  background-color: $gray;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+  cursor: pointer;
+  &:hover{
+    background-color: $light-gray;
+  }
+}
+
+.card-img-top{
+  width: 95%;
+}
+.card-text{
+  font-size: 14px;
+}
+
+.card-tittle{
+  font-weight: 545;
+}
