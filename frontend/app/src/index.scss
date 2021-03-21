@@ -1,8 +1,9 @@
 @import "./style/variables";
 @import "~bootstrap/scss/bootstrap";
+@import '~react-pro-sidebar/dist/scss/styles.scss';
 
 body {
-  background: $secondary;
+  background: $primary;
 }
 
 .label{
@@ -50,7 +51,6 @@ body {
   border-radius: 500px;
   width: 100%;
   line-height: 1;
-  font-width: 700;
   padding: 17px;
   transform: translate3d(0px,0px,0px);
   transition-duration: 33ms;
@@ -86,4 +86,8 @@ body {
     top: 0.8em;
     width: 42%;
   }
+}
+
+.pro-sidebar{
+  height: 100vh;
 }
