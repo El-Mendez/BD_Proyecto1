@@ -1,7 +1,8 @@
 import React from 'react';
 import ReportItem from './reportItem'
 import ArtistReport from './artistReport/artistReport'
-import UserReport from "./userReport/userReport";
+import UsersReport from "./userReport/usersReport";
+import GenresReport from "./genresReport/genresReport";
 
 export default class report extends React.Component{
     render() {
@@ -29,7 +30,8 @@ export default class report extends React.Component{
                 {/*        description={'Usuarios más activos'}/>*/}
                 {/*</div>*/}
                 {/*<ArtistReport/>*/}
-                <UserReport/>
+                {/*<UsersReport/>*/}
+                <GenresReport/>
             </div>
 
         );

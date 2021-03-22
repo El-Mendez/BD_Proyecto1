@@ -1,4 +1,4 @@
-.card{
+.report-card{
   width: 187px;
   height: 310px;
   align-items: center;
@@ -37,5 +37,26 @@
 
 .thumbnail-user{
   width: 80px;
+}
+
+.genre-bg{
+  background-color: #9fa8da;
+}
+
+h1{
+  cursor: default;
+}
+
+.genre-card{
+  width: 250px;
+  height: 170px;
+  &:hover{
+    h1{
+      transition-duration: 0.5s;
+      transition-property: font-size;
+      font-size: 4.5rem;
+    }
+  }
+
 }
 
