@@ -1,0 +1,22 @@
+.logIn-btn{
+  background-color: $color-dark;
+  color: $secondary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color: $color-light;
+    color: #FFF;
+  }
+}
+
+.signIn-btn{
+  background-color: transparent;
+  color: $secondary;
+  border: solid 2px $secondary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color:$secondary;
+    color: $primary;
+  }
+}

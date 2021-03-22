@@ -1,5 +1,5 @@
 import React from 'react';
-import InputContainer from '../utils/input'
+import InputContainer from '../utils/userInput'
 export default class registerForm extends React.Component{
     render(){
         return(
