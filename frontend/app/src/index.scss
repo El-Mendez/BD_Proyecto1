@@ -2,46 +2,13 @@
 @import "~bootstrap/scss/bootstrap";
 @import '~react-pro-sidebar/dist/scss/styles.scss';
 @import './components/report/report.scss';
+@import './components/utils/utils.scss';
+@import './components/logIn/logIn.scss';
 
 body {
   background: $primary;
 }
 
-.label{
-  color: #acacae;
-  display: block;
-  font-size: 17px;
-  left: 20px;
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  transform: translateY(75%);
-  transition-duration: .15s;
-  transition-property: font-size,transform;
-}
-
-.input{
-  background-clip: padding-box;
-  background-color: #fff;
-  border: none;
-  border-radius: 2px;
-  box-sizing: border-box;
-  display: block;
-  font-size: 17px;
-  line-height: 1.41;
-  padding: 26px 20px 10px;
-  width: 100%;
-  transition-duration: .15s;
-  transition-property: box-shadow;
-  &:focus{
-    box-shadow: 0 20px 20px 0 #0000001C;
-    outline:0px;
-    +.label{
-      font-size: 12px;
-      transform: translateY(50%);
-    }
-  }
-}
 
 .form-container{
   margin-top: 6rem;
