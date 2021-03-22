@@ -6,8 +6,8 @@ export default class artistItem extends React.Component {
     render() {
         return(
             <div className={'thumbnail-col'}>
-                <img src={test} className={'rounded-circle thumbnail'}/>
-                <h1 className={'text-center'}>ArtistName</h1>
+                <img src={test} className={'rounded-circle thumbnail-artist'}/>
+                <h6 className={'text-center text-secondary'}>{this.props.userName}</h6>
             </div>
         );
     }
