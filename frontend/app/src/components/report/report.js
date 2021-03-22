@@ -4,6 +4,7 @@ import ArtistReport from './artistReport/artistReport'
 import UsersReport from "./userReport/usersReport";
 import GenresReport from "./genresReport/genresReport";
 import AlbumsReport from "./albumsReport/albumsReport";
+import MonthsReport from "./month_subsReport/monthsReport";
 
 export default class report extends React.Component{
     render() {
@@ -33,7 +34,8 @@ export default class report extends React.Component{
                 {/*<ArtistReport/>*/}
                 {/*<UsersReport/>*/}
                 {/*<GenresReport/>*/}
-                <AlbumsReport/>
+                {/*<AlbumsReport/>*/}
+                <MonthsReport/>
             </div>
 
         );
