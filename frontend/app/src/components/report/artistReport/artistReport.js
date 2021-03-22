@@ -5,7 +5,8 @@ export default class artistReport extends React.Component{
     render() {
         return(
             <div className={'d-flex flex-wrap'}>
-               <ArtistItem/>
+               <ArtistItem
+               userName = {'Bruno Mars'}/>
             </div>
         );
     }

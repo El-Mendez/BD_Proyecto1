@@ -1,0 +1,46 @@
+@import '../../style/variables';
+
+#player {
+  width: 100%;
+  //height: fit-content;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.colored-icon {
+  color: #9fa8da;
+}
+
+#yt-player {
+  width: 0;
+  height: 0;
+}
+
+#playButton {
+  width: fit-content;
+  height: fit-content;
+  background: none;
+  padding: 0;
+}
+
+#volume-container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+#volume-slider {
+  height: 3px;
+  outline: none;
+  opacity: 0.7;
+  margin: 5px;
+  transition: opacity .2s;
+}
+
+#volume-slider:hover {
+  opacity: 1;
+}

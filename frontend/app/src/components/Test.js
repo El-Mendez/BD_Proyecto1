@@ -2,6 +2,7 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import SideBar from "./sideBar/sideBar";
 import Report from "./report/report";
+import Player from "./player/Player";
 
 
 export default class Test extends React.Component {
@@ -9,8 +10,9 @@ export default class Test extends React.Component {
         return (
             <div className={'d-flex'}>
                 <SideBar/>
-                <main>
+                <main className={'w-100'}>
                     <Report />
+                    {/*<Player videoId="An7Q1GkEf3g"/>*/}
                 </main>
 
             </div>
