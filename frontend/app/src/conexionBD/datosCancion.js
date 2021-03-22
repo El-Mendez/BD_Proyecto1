@@ -1,5 +1,5 @@
 const pool = require('./datosBD')
-const ObtenerDatosCancion = async (nombreCancion) => {
+export default obtenerDatosCancion = async (nombreCancion) => {
     try{
         let query = 'select c.nombre as cancion, a.nombre as artista, g.nombre as genero from canciones c'
         query += ' inner join artista a on c.id_artista = a.Id_artista'
@@ -11,13 +11,16 @@ const ObtenerDatosCancion = async (nombreCancion) => {
             let artista = val.artista;
             let cancion = val.cancion;
             let genero = val.genero;
-            console.log('Nombre Cancion: ' + cancion)
+            /* console.log('Nombre Cancion: ' + cancion)
             console.log('Nombre artista: ' + artista)
-            console.log('Nombre artista: ' + genero)
-        });
-        pool.end();                         
-
+            console.log('Nombre artista: ' + genero) */
+        }) 
+        pool.end()
+        return artista, cancion, genero;
+        
     }catch(e){
         console.log("Ha ocurrido un error con la conexion a la BD: " + e)
-    }}
-ObtenerDatosCancion();
+        pool.end();     
+        return null                    
+    }
+}
