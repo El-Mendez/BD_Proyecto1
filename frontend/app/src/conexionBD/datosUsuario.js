@@ -1,5 +1,5 @@
 const pool = require('./datosBD')
-const ObtenerDatosUsuario = async (id) => {
+export default obtenerDatosUsuario = async (id) => {
     try{
         let query = 'select u.username, u.nombres, u.apellidos, u.correo, tu.descripcion from usuarios u'
         query += ' inner join tipo_usuario tu on u.id_tipoUsuario = tu.id_tipoUsuario'
@@ -10,16 +10,19 @@ const ObtenerDatosUsuario = async (id) => {
             let nombres = val.nombres;
             let apellidos = val.apellidos;
             let correo = val.correo;
-            let descripcion = val.descripcion;
+            let tipoUsuario = val.tipoUsuario;
             /* console.log('username: ' + username)
             console.log('nombres: ' + nombres)
             console.log('apellidos: ' + apellidos)
             console.log('correo: ' + correo)
-            console.log('descripcion: ' + descripcion) */
-        });
-        pool.end();                         
-
+            console.log('tipoUsuario: ' + tipoUsuario) */
+        })
+        pool.end();
+        return username, nombres, apellidos, correo, tipoUsuario
+        
     }catch(e){
         console.log("Ha ocurrido un error con la conexion a la BD: " + e)
-    }}
-ObtenerDatosUsuario()
+        pool.end();
+        return null                         
+    }
+}
