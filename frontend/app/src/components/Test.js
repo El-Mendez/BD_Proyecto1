@@ -12,7 +12,7 @@ export default class Test extends React.Component {
                 <SideBar/>
                 <main className={'w-100'}>
                     <Report />
-                    {/*<Player videoId="An7Q1GkEf3g"/>*/}
+                    <Player videoId="An7Q1GkEf3g" name="sucker for pain" artist="Imagine Dragons"/>
                 </main>
 
             </div>
