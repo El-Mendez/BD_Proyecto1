@@ -1,9 +1,9 @@
 const pool = require('./datosBD')
-const insertBD = async () => {
+const insertBD = async (tabla, datos) => {
     try{
-        const valor = 'insert into prueba values ($1)';
-        const values = ['SOMEBODY KILL ME']
-        await pool.query(valor, values)           //Lo se, soy muy creativo con los nombres
+        let query = 'insert into $1 values ($2)';
+        await pool.query([tabla, datos], query)
+        pool.end();              
     }catch(e){
         console.log("Ha ocurrido un error con la conexion a la BD")
     }}
