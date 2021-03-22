@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import './player.scss'
 import YTPlayer from 'yt-player'
 import { FaPauseCircle, FaPlayCircle, FaVolumeUp } from 'react-icons/fa'
+import formatSeconds from "../utils/formatSeconds";
 
 export default class Player extends React.Component {
     constructor(props) {
@@ -10,10 +11,13 @@ export default class Player extends React.Component {
         this.state = {
             isPaused: true,
             volume: 100,
+            songLength: 0,
+            currentTime: 0,
         }
 
         this.handlePlay = this.handlePlay.bind(this);
         this.handleVolumeChange = this.handleVolumeChange.bind(this);
+        this.handleTimeJump = this.handleTimeJump.bind(this);
     }
 
     componentDidMount() {
@@ -23,21 +27,44 @@ export default class Player extends React.Component {
             autoplay: true,
             controls: false,
             keyboard: false,
-            volume: this.state.volume
+            volume: this.state.volume,
+            currentTime: 0
         });
 
         this.player.load(this.props.videoId);
+
+        this.player.on('playing', () => {
+            this.setState({isPaused: false});
+        });
+
+        this.player.on('paused', () => {
+            this.setState({isPaused: true});
+        });
+
+        this.player.on('timeupdate', (seconds) => {
+            this.setState({currentTime: seconds})
+        });
+
+        this.player.on('unstarted', () => {
+            this.setState({songLength: this.player.getDuration()})
+        })
     }
 
     handlePlay() {
         try {
             if (this.state.isPaused) {
                 this.player.play();
-                this.setState({isPaused: false})
             } else  {
                 this.player.pause();
-                this.setState({isPaused: true})
             }
+        } catch (e) {}
+    }
+
+    handleTimeJump(e) {
+        try {
+            const desiredTime = e.target.value
+            this.player.seek(desiredTime);
+            this.setState({currentTime: desiredTime})
         } catch (e) {}
     }
 
@@ -57,13 +84,24 @@ export default class Player extends React.Component {
 
         return (
             <div id="player">
-                <div>
-                    Canción
+                <div id="song-details-container">
+                    <span className="visible-text">{this.props.name}</span>
+                    <span className="discrete-text" autoCapitalize="true">{this.props.artist}</span>
                 </div>
-                <div>
+                <div id="media-controls-container">
                     <Button id="playButton" onClick={this.handlePlay}>
                         {item}
                     </Button>
+                    <div id="time-details-container">
+                        <span className="discrete-text">{formatSeconds(this.state.currentTime)}</span>
+                        <input id="played-time-slider" className="elegant-slider"
+                            type="range"
+                            min="0" max={this.state.songLength}
+                            value={this.state.currentTime}
+                            onChange={this.handleTimeJump}/>
+                        <span className="discrete-text">{formatSeconds(this.state.songLength)}</span>
+                    </div>
+
                     <div id='yt-player'/>
                 </div>
                 <div id="volume-container">
@@ -72,7 +110,7 @@ export default class Player extends React.Component {
                         type="range"
                         min="0" max="100"
                         defaultValue={this.state.volume}
-                        id="volume-slider"
+                        className="elegant-slider"
                         onChange={this.handleVolumeChange}/>
                 </div>
             </div>
