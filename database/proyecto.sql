@@ -195,17 +195,17 @@ VALUES
 
 INSERT INTO canciones (nombre, link, id_artista)
 VALUES
-       ('Filthy','watch?v=4ORVDPVA-UY',1),
-       ('Midnight Summer Jam','watch?v=URTtLCNoHXU',1),
-       ('Sauce','watch?v=DLgzY8uL86U',1),
-       ('Man of the Woods','watch?v=W1HSG8qW0f4',1),
-       ('Higher Higher','https://www.youtube.com/watch?v=0cA_0MOcYGg',1),
-       ('Wave','watch?v=vhiScmcP1Sw',1),
-       ('Supplies','watch?v=cMIWOx66l4w',1),
-       ('Flannel','watch?v=ajehuvVNxxo',1),
-       ('Montana','watch?v=BD0F1ETLzJ4',1),
-       ('Breeze Off the Pond','watch?v=L_QExPc1Ziw',1),
-       ('Young Man','watch?v=0wtf_q3J_vE',1);
+       ('Filthy','4ORVDPVA-UY',1),
+       ('Midnight Summer Jam','URTtLCNoHXU',1),
+       ('Sauce','DLgzY8uL86U',1),
+       ('Man of the Woods','W1HSG8qW0f4',1),
+       ('Higher Higher','0cA_0MOcYGg',1),
+       ('Wave','vhiScmcP1Sw',1),
+       ('Supplies','cMIWOx66l4w',1),
+       ('Flannel','ajehuvVNxxo',1),
+       ('Montana','BD0F1ETLzJ4',1),
+       ('Breeze Off the Pond','L_QExPc1Ziw',1),
+       ('Young Man','0wtf_q3J_vE',1);
 
 -- QUERIES
 
