@@ -117,6 +117,21 @@ CREATE TABLE genero_canciones(
         REFERENCES canciones(id_cancion)
 );
 
+CREATE TABLE escucha_cancion (
+    id_cancion INT,
+    id_usuario VARCHAR (150),
+    fecha date NOT NULL,
+    cantidad int NOT NULL,
+
+    CONSTRAINT cancionEscuchada
+        FOREIGN KEY (id_cancion)
+        REFERENCES canciones(id_cancion),
+
+    CONSTRAINT usuarioEscucha
+        FOREIGN KEY (id_usuario)
+        REFERENCES usuarios(username)
+);
+
 INSERT INTO tipo_usuario (descripcion)
 VALUES
        ('Freemium'),
@@ -187,4 +202,3 @@ VALUES
        ('Montana','watch?v=BD0F1ETLzJ4',1),
        ('Breeze Off the Pond','watch?v=L_QExPc1Ziw',1),
        ('Young Man','watch?v=0wtf_q3J_vE',1);
-
