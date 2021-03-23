@@ -5,11 +5,9 @@ import test from '../utils/badLiar.jpg'
 export default class logIn extends React.Component{
     render(){
         return(
-            <div className={'container d-flex justify-content-around'}>
-                <div >
+            <div className={'d-flex justify-content-around bg-secondary vw-100 vh-100'}>
                 <LogInformContainer/>
-                </div>
-                <img src={test} className={'mr-5'}/>
+                <img src={test} className={'mr-5  d-none d-lg-block'}/>
             </div>
         );
     }
