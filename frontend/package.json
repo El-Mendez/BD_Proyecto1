@@ -26,7 +26,6 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3",
     "bootstrap": "^4.6.0",
     "css-loader": "^5.1.2",
     "file-loader": "^6.2.0",
