@@ -1,17 +1,5 @@
 const pool = require('../credentials');
 
-const getSongs = async (req, res) => {
-    const response = await pool.query('select * from canciones')
-    res.status(200).json(response.rows)
-};
-
-const logIn = async (req, res) => {
-    const { username, contrasena} = req.body
-    const response = await pool.query('select * from usuarios u where u.username like $1 and contraseña = crypt($2, contraseña)', [username, contrasena]);
-    res.status(200).json(response.rows);
-}
-
-
 const createUser = async (req, res) => {
     try {
         const { username, contrasena, nombres, apellidos, correo, id_tipoUsuario } = req.body;
@@ -28,8 +16,15 @@ const createUser = async (req, res) => {
     }
 }
 
+const logIn = async (req, res) => {
+    const { username, contrasena} = req.body
+    const response = await pool.query('select * from usuarios u where u.username like $1 and contraseña = crypt($2, contraseña)', [username, contrasena]);
+    res.status(200).json(response.rows);
+}
+
+
+
 module.exports = {
-    getSongs,
     createUser,
-    logIn
+    logIn,
 }
