@@ -2,11 +2,12 @@ import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Button from "../utils/button";
 import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
+import verificarUsuario from "../../conexionBD/checkUser";
 
  export default function logInform (){
 
      //Hook-Form validation
-     const {register, errors, handleSubmit} = useForm();
+     const {register, errors, handleSubmit} = useForm({mode: 'onChange'});
 
      //State variables
      const [data, setData] = useState({
