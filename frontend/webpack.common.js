@@ -2,15 +2,22 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: {
-        main: "./app/src/index.js",
+        index: "./app/src/index.js",
+        dashboard: "/app/src/dashboard.js"
     },
 
     plugins: [
         new HtmlWebpackPlugin({
-            template: "./app/src/index.html"
-        })
+            template: "./app/src/index.html",
+            filename: "index.html",
+            chunks: ["index"]
+        }),
+        new HtmlWebpackPlugin({
+            template: "./app/src/dashboard.html",
+            filename: "dashboard.html",
+            chunks: ["dashboard"]
+        }),
     ],
-
 
     module: {
         rules: [
