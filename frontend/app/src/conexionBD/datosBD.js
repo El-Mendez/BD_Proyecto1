@@ -1,5 +1,6 @@
 //Para instalar la libreria: npm i pg
-const { Pool,  Client } = require('pg') //Pool y Client son casi lo mismo
+//const { Pool,  Client } = require('pg') //Pool y Client son casi lo mismo
+import Pool from 'pg';
 const config = {
     user: 'patito',
     host: 'postgresql-24257-0.cloudclusters.net',

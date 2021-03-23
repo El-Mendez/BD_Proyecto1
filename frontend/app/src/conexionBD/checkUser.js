@@ -1,5 +1,8 @@
-const pool = require('./datosBD')
-export default verificarUsuario = async (username, password) => {
+//const pool = require('./datosBD')
+
+import pool from './datosBD';
+
+const verificarUsuario = async (username, password) => {
     try{
         let query = "SELECT * FROM usuarios u WHERE "
         query += " u.username like $1 AND "
@@ -18,4 +21,6 @@ export default verificarUsuario = async (username, password) => {
         return false;
     }
 }
+
+export default verificarUsuario;
 //verificarUsuario('Zara12', 'noSequePoner')
