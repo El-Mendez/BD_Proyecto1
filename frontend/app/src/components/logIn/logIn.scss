@@ -11,12 +11,12 @@
 
 .signIn-btn{
   background-color: transparent;
-  color: $secondary;
-  border: solid 2px $secondary;
+  color: $primary;
+  border: solid 2px $primary;
   margin-bottom: 18px;
   &:hover{
     transform: scale(1.04);
-    background-color:$secondary;
-    color: $primary;
+    background-color:$primary;
+    color: $secondary;
   }
 }
