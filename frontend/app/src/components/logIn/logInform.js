@@ -2,7 +2,7 @@ import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Button from "../utils/button";
 import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
-import verificarUsuario from "../../conexionBD/checkUser";
+
 
  export default function logInform (){
 
@@ -11,12 +11,12 @@ import verificarUsuario from "../../conexionBD/checkUser";
 
      //State variables
      const [data, setData] = useState({
-         email:'',
+         username:'',
          password:''
      })
 
      const [filled, setFilled] = useState({
-         email: false,
+         username: false,
          password: false
      });
 
@@ -42,45 +42,61 @@ import verificarUsuario from "../../conexionBD/checkUser";
 
     const onSubmit = (data) =>{
         console.log(data)
+        location.href='../../dashboard.html'
+    }
+
+    const handleClick = () => {
+        console.log('testing')
+
     }
 
     return(
        <Fragment>
            <form onSubmit={handleSubmit(onSubmit)} >
                <div className={'position-relative mt-2'}>
-                   <input className={"input " + (filled.email? 'is-filled':' ')}
-                          type={'email'}
-                          name={'email'}
+                   <input className={"input " + (filled.username? 'is-filled':' ')}
+                          type={'text'}
+                          name={'username'}
                           onChange={handleInputChange}
                           ref={
                               register({
                                   required:{
                                       value: true,
-                                      message: 'Es necesario que ingreses tu correo electrónico'
+                                      message: 'Ingresa tu usuario'
                                   },
-                                  pattern:{
-                                      value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                                      message: 'Ingresa un correo electrónico válido. Con un formato como el siguiente: ejemplo@email.com'
-                                  }
                               })
                           }
                    />
-                   <label className={'label'}>Correo electrónico</label>
-                   <span className="text-danger text-small d-block mb-2">
-                       <Exclamation_icon/>
-                        {errors?.email?.message}
-                   </span>
+                   <label className={'label'}>Usuario</label>
+                   <small className="text-danger text-small d-block mb-2">
+                       {/*<Exclamation_icon/>*/}
+                        {errors?.username?.message}
+                   </small>
                </div>
                <div className={'position-relative mt-2'}>
                    <input className={'input ' + (filled.password? 'is-filled':' ')}
                           type={'password'}
                           name={'password'}
                           onChange={handleInputChange}
+                          ref={
+                              register({
+                                  required:{
+                                      value: true,
+                                      message: 'Ingresa tu contraseña'
+                                  },
+                              })
+                          }
                    />
                    <label className={'label'}>Contraseña</label>
-                   <Button
-                       btnClass = {'logIn-btn'}
-                       btnName ={'INICIAR SESIÓN'}/>
+                   <small className="text-danger text-small d-block mb-2">
+                       {/*<Exclamation_icon/>*/}
+                       {errors?.password?.message}
+                   </small>
+                   <button
+                       onSubmit={handleClick}
+                       className={`btn logIn-btn my-3`}>
+                       INICIAR SESIÓN
+                   </button>
                </div>
            </form>
        </Fragment>

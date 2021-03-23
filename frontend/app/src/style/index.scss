@@ -1,9 +1,9 @@
-@import "./style/variables";
-@import "~bootstrap/scss/bootstrap";
-@import '~react-pro-sidebar/dist/scss/styles.scss';
-@import './components/report/report.scss';
-@import './components/utils/utils.scss';
-@import './components/logIn/logIn.scss';
+@import "variables";
+@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import '../../../node_modules/react-pro-sidebar/dist/scss/styles';
+@import '../components/report/report';
+@import '../components/utils/utils';
+@import '../components/logIn/logIn';
 
 body {
   background: $primary;
@@ -19,7 +19,7 @@ body {
   border-radius: 500px;
   width: 100%;
   line-height: 1;
-  padding: 17px;
+  padding: 15px;
   transform: translate3d(0px,0px,0px);
   transition-duration: 33ms;
   transition-property: background-color, transform;
