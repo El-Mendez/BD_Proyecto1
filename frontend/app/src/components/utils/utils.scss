@@ -48,3 +48,45 @@
 .sidebar-menuItem{
   font-size: 20px;
 }
+
+
+.btn{
+  border-radius: 500px;
+  //width: 100%; //agregar en cada boton
+  line-height: 1;
+  padding: 14.5px;
+  transform: translate3d(0px,0px,0px);
+  transition-duration: 33ms;
+  transition-property: background-color, transform;
+}
+
+.facebook-btn{
+  background-color: $facebook;
+  color: $secondary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color: $facebook-hover;
+    color: #FFF;
+  }
+}
+
+.divider{
+  display: table;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  margin: 0px auto 1em;
+  color: rgb(117, 117, 117);
+  position: relative;
+  text-align: center;
+  width: 95%;
+  &:before, &:after{
+    border-top: 1px solid rgb(189, 189, 189);
+    content: "";
+    display: table-cell;
+    position: relative;
+    top: 0.8em;
+    width: 45%;
+  }
+}

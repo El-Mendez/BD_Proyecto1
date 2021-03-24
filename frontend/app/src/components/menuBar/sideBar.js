@@ -4,8 +4,7 @@ import logo from '../utils/zoabl.svg'
 import {BsHouse as I_house,
     BsSearch as I_search,
     BsGrid1X2Fill as I_library,
-    BsPlusSquareFill as I_newPlaylist,
-    BsPeopleCircle as I_user} from 'react-icons/bs';
+    BsPlusSquareFill as I_newPlaylist} from 'react-icons/bs';
 
 
 export default class sideBar extends React.Component{
@@ -49,10 +48,10 @@ export default class sideBar extends React.Component{
                 </SidebarContent>
 
                 <SidebarFooter>
-                    <p className={'sidebar-menuItem ml-4 my-4'}>
-                        <span className={'mr-3'}><I_user/></span>
-                        Username
-                    </p>
+                    {/*<p className={'sidebar-menuItem ml-4 my-4'}>*/}
+                    {/*    <span className={'mr-3'}><I_user/></span>*/}
+                    {/*    Username*/}
+                    {/*</p>*/}
                 </SidebarFooter>
             </ProSidebar>
         );
