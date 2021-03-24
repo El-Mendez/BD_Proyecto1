@@ -322,7 +322,7 @@ DELETE FROM artista WHERE nombre = 'Algo'; -- Entra el nombre del artista a elim
 -- REPORTES PARA EL ADMINISTRADOR
 
 --1 Albums mas recientes de la semana
-SELECT *
+SELECT a.nombre
 FROM albumes a
 WHERE a.fecha_publicacion >= date_trunc('WEEK',now())::DATE;
 --2 Artistas con popularidad creciente en los ultimos 3 meses
@@ -347,6 +347,32 @@ FROM escucha_cancion ec
 	INNER JOIN artista a ON a.id_artista = c.id_artista
 	WHERE fecha >= (current_date - interval '1 month')::date AND fecha < current_date
 	GROUP BY a.nombre;
+
+-- Combinacion de los queries
+SELECT mes1.artista, mes1.cantidad AS mes_pasado, mes2.cantidad AS hace_2_meses, mes3.cantidad AS hace_3_meses
+	FROM (SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		FROM escucha_cancion ec
+		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
+		INNER JOIN artista a ON a.id_artista = c.id_artista
+		WHERE fecha >= (current_date - interval '3 month')::date AND fecha < current_date - interval '2 month'
+		GROUP BY a.nombre) mes3
+	INNER JOIN (
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		FROM escucha_cancion ec
+		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
+		INNER JOIN artista a ON a.id_artista = c.id_artista
+		WHERE fecha >= (current_date - interval '2 month')::date AND fecha < current_date - interval '1 month'
+		GROUP BY a.nombre) mes2 ON mes3.artista = mes2.artista
+	INNER JOIN (
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		FROM escucha_cancion ec
+		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
+		INNER JOIN artista a ON a.id_artista = c.id_artista
+		WHERE fecha >= (current_date - interval '1 month')::date AND fecha < current_date
+		GROUP BY a.nombre) mes1 ON mes1.artista = mes2.artista AND mes1.artista = mes3.artista
+	WHERE mes1 > mes2 AND mes2 > mes3;
+
+
 -- Se comparan la cantidad de canciones escuchadas por mes
 --3. Cantidad de nuevas suscripciones mensuales durante los últimos seis meses
 SELECT s.fecha_inicio, current_date AS fecha_actual FROM suscripcion s
