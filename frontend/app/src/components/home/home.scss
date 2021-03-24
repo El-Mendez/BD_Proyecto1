@@ -1,0 +1,90 @@
+.report-song-card{
+  width: 160px;
+  height: 212px;
+  align-items: center;
+  padding: 5px;
+  background-color: $gray;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+  cursor: pointer;
+  &:hover{
+    background-color: $light-gray;
+  }
+}
+
+.card-img-top{
+  width: 95%;
+}
+.card-text{
+  font-size: 14px;
+}
+
+.card-song-title{
+  font-weight: 545;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
+.thumbnail-col {
+  box-sizing: border-box;
+  margin-left: 24px;
+  margin-top: 24px;
+  position: relative;
+  width: 162px;
+}
+
+.thumbnail-artist{
+  width: 162px;
+}
+
+.thumbnail-user{
+  width: 80px;
+}
+
+.genre-bg{
+  background-color: #9fa8da;
+}
+
+h1{
+  cursor: default;
+}
+
+.genre-card{
+  width: 250px;
+  height: 170px;
+  &:hover{
+    h1{
+      transition-duration: 0.5s;
+      transition-property: font-size;
+      font-size: 4.5rem;
+    }
+  }
+}
+
+.album-card{
+  width: 250px;
+  height: 335px;
+  background-color: transparent;
+  border: none;
+}
+
+.month-br{
+  border-right: solid 2px #323232;
+}
+
+.player-fixed{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10000;
+}
+
+.songs-views{
+  height: 85vh;
+  overflow: auto;
+}
+

@@ -1,6 +1,5 @@
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import Button from "../utils/button";
 import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
 
 

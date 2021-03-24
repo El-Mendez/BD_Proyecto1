@@ -1,9 +1,12 @@
 import React from 'react';
 import LogInform from "./logInform";
-import Button from '../utils/button';
 import logo from '../utils/zoaLogo.png'
 
 export default function logInformContainer(){
+
+    const handleClick = () =>{
+        location.href='../../register.html'
+    }
         return(
             <div className={'form-container d-flex flex-column mt-5'}>
                 <img src={logo} className={'align-self-center w-75'}/>
@@ -12,9 +15,9 @@ export default function logInformContainer(){
                <LogInform/>
                <span className={'divider'}/>
                <h5 className={'text-center mb-0 mt-3'}>¿No tienes una cuenta?</h5>
-                <Button
-                    btnClass = {'signIn-btn'}
-                    btnName ={'REGÍSTRATE'}/>
+                <button onClick={handleClick} className={`btn signIn-btn my-3`}>
+                    REGÍSTRATE
+                </button>
             </div>
         )
 }
