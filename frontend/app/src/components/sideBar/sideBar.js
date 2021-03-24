@@ -1,22 +1,58 @@
 import React from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter } from 'react-pro-sidebar';
+import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
+import logo from '../utils/zoabl.svg'
+import {BsHouse as I_house,
+    BsSearch as I_search,
+    BsGrid1X2Fill as I_library,
+    BsPlusSquareFill as I_newPlaylist,
+    BsPeopleCircle as I_user} from 'react-icons/bs';
 
 
 export default class sideBar extends React.Component{
     render(){
         return(
             <ProSidebar>
-                <Menu iconShape="square">
-                    <MenuItem>Dashboard</MenuItem>
-                    <SubMenu title="Components">
-                        <MenuItem>Component 1</MenuItem>
-                        <MenuItem>Component 2</MenuItem>
-                    </SubMenu>
-                </Menu>
+                <SidebarHeader className={'d-flex justify-content-center'}>
+                    <img src={logo} alt="Zoa Logo" className={'logo w-75'}/>
+                </SidebarHeader>
+                <SidebarContent>
+                    <Menu>
+                        <MenuItem>
+                            <p className={'sidebar-menuItem'}>
+                                <span className={'mr-3'}><I_house/></span>
+                                Home
+                            </p>
+                        </MenuItem>
+
+                        <MenuItem>
+                            <p className={'sidebar-menuItem'}>
+                                <span className={'mr-3'}><I_search/></span>
+                                Search
+                            </p>
+                        </MenuItem>
+
+                        <MenuItem>
+                            <p className={'sidebar-menuItem'}>
+                                <span className={'mr-3'}><I_library/></span>
+                                Library
+                            </p>
+                        </MenuItem>
+
+                        <MenuItem>
+                            <p className={'sidebar-menuItem'}>
+                                <span className={'mr-3'}><I_newPlaylist/></span>
+                                Crear Playlist
+                            </p>
+                        </MenuItem>
+
+                    </Menu>
+                </SidebarContent>
+
                 <SidebarFooter>
-                    {/**
-                     *  You can add a footer for the sidebar ex: copyright
-                     */}
+                    <p className={'sidebar-menuItem ml-4 my-4'}>
+                        <span className={'mr-3'}><I_user/></span>
+                        Username
+                    </p>
                 </SidebarFooter>
             </ProSidebar>
         );
