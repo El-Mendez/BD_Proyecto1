@@ -2,12 +2,11 @@ const { Router } = require('express');
 const router = Router();
 
 const { createUser, logIn } = require('../controllers/usuarios')
-const { getSongs, getSongByArtistName } = require('../controllers/songs');
+const { getSongs } = require('../controllers/songs');
 const { searchArtist } = require('../controllers/artist');
 const { getAlbums, getAlbumsByArtist } = require('../controllers/albums');
 
 router.get('/songs', getSongs);
-router.get('/songs/artist', getSongByArtistName);
 
 router.post('/users/', createUser);
 router.get('/users/', logIn);
