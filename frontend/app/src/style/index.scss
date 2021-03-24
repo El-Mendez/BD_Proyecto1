@@ -4,6 +4,7 @@
 @import '../components/report/report';
 @import '../components/utils/utils';
 @import '../components/logIn/logIn';
+@import '../components/home/home.scss';
 
 body {
   background: $primary;
@@ -11,7 +12,7 @@ body {
 
 
 .form-container{
-  margin-top: 6rem;
+  margin-top: 2rem;
   width: 450px;
 }
 
@@ -19,7 +20,7 @@ body {
   border-radius: 500px;
   width: 100%;
   line-height: 1;
-  padding: 15px;
+  padding: 14.5px;
   transform: translate3d(0px,0px,0px);
   transition-duration: 33ms;
   transition-property: background-color, transform;
@@ -45,17 +46,26 @@ body {
   color: rgb(117, 117, 117);
   position: relative;
   text-align: center;
-  width: 85%;
+  width: 95%;
   &:before, &:after{
     border-top: 1px solid rgb(189, 189, 189);
     content: "";
     display: table-cell;
     position: relative;
     top: 0.8em;
-    width: 42%;
+    width: 45%;
   }
 }
 
 .pro-sidebar{
   height: 100vh;
+  min-width: 240px;
+}
+
+a{
+  color: $color-dark;
+  text-decoration: underline;
+  &:hover{
+    color: $color-medium
+  }
 }

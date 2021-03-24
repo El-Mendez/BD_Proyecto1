@@ -26,10 +26,10 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "bootstrap": "^4.6.0",
     "css-loader": "^5.1.2",
     "file-loader": "^6.2.0",
-    "pg": "^8.5.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-card-flip": "^1.1.0",
