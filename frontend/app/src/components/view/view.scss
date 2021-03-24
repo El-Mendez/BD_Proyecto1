@@ -3,12 +3,11 @@
   height: 212px;
   align-items: center;
   padding: 5px;
-  background-color: $gray;
-  transition-duration: 0.5s;
-  transition-property: background-color;
+  background-color: #181818;
+  transition:background-color .3s ease;
   cursor: pointer;
   &:hover{
-    background-color: $light-gray;
+    background-color: #282828;
   }
 }
 
@@ -73,18 +72,5 @@ h1{
 
 .month-br{
   border-right: solid 2px #323232;
-}
-
-.player-fixed{
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10000;
-}
-
-.songs-views{
-  height: 85vh;
-  overflow: auto;
 }
 
