@@ -1,67 +1,11 @@
-
-const Parser = require('../utils/QueryParser');
 const pool = require('../credentials');
 
 const getSongs = async (req, res) => {
-    const {song_name, song_id, artist_id, song_state, artist_name, genero_id, genero_nombre} = req.body;
-
-    const parser = new Parser("select c.* from canciones c");
-    parser.databaseConditionals([
-        {
-            variables: [
-                {
-                    name: "c.id_cancion",
-                    value: song_id,
-                },
-                {
-                    name: "c.nombre",
-                    value: song_name,
-                    forgiving: true
-
-                },
-                {
-                    name: "c.id_artista",
-                    value: artist_id
-                },
-                {
-                    name: "c.estado",
-                    value: song_state
-                }
-            ]
-        },
-        {
-            joinStatement: "inner join artista a on a.Id_artista = c.id_artista",
-            variables: [
-                {
-                    name: "a.nombre",
-                    value: artist_name,
-                    forgiving: true,
-                }
-            ]
-        },
-        {
-            joinStatement: "inner join genero_canciones gc on gc.id_canciones = c.id_cancion",
-            variables: [
-                {
-                    name: "gc.id_canciones",
-                    value: genero_id,
-                }
-            ]
-        },
-        {
-            joinStatement: "inner join genero_canciones gc2 on gc2.id_canciones = c.id_cancion inner join genero g on g.id_genero = gc2.id_genero",
-            variables: [
-                {
-                    name: "g.nombre",
-                    value: genero_nombre,
-                    forgiving: true
-                }
-            ]
-        },
-    ])
-
-    const response = await pool.query(parser.buildQuery(), parser.buildParameters())
-    res.status(200).json(response.rows)
+    const response = await pool.query(`
+        select c.id_cancion, link, a.id_artista, c.nombre as cancion_nombre, a.nombre as artista_nombre from canciones c
+           inner join artista a on a.id_artista = c.id_artista;
+    `)
+    res.status(200).json(response.rows);
 };
 
 module.exports = {
