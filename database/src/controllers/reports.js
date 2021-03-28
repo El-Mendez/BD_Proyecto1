@@ -1,6 +1,7 @@
 const pool = require('../credentials');
+
 // 1. Albums mas recientes de la semana
-const getAlbumsRecientes = async (req, res) => {
+const weeklyAlbums = async (req, res) => {
   const response = await pool.query(`
     select a.* 
     from albumes a 
@@ -10,7 +11,7 @@ const getAlbumsRecientes = async (req, res) => {
 };
 
 // 2. Artistas con popularidad creciente en los ultimos 3 meses
-const getArtistasCrecientes = async (req, res) => {
+const growingArtist = async (req, res) => {
   const response = await pool.query(`
       select mes1.artista, mes1.id_artista, mes1.cantidad AS mes_pasado, mes2.cantidad AS hace_2_meses, mes3.cantidad AS hace_3_meses
       from (
@@ -41,7 +42,7 @@ const getArtistasCrecientes = async (req, res) => {
 };
 
 // 3. Cantidad de nuevas suscripciones mensuales durante los últimos seis meses
-const getSuscripcionesActuales = async (req, res) => {
+const newSubscriptions = async (req, res) => {
   const response = await pool.query(`
     SELECT count(*)  
     FROM suscripcion s
@@ -51,49 +52,49 @@ const getSuscripcionesActuales = async (req, res) => {
 };
 
 // 4. Artista con mayor producción musical
-const getArtistaPopular = async (req, res) => {
+const topArtist = async (req, res) => {
   const response = await pool.query(`
-    select a.nombre, a.id_artista , count(*) as cantidad
+    select a.nombre, a.id_artista , count(*) as reproducciones
     from canciones c
         inner join artista a on c.id_artista = a.id_artista
     group by a.nombre, a.id_artista
-    order by cantidad desc limit 1;
+    order by reproducciones desc limit 1;
   `);
   res.status(200).json(response.rows);
 };
 
 // 5. 5 Géneros más populares
-const getGenerosPopulares = async (req, res) => {
+const topGenres = async (req, res) => {
   const response = await pool.query(`
-    select g.nombre, count(*) as cantidad 
+    select g.nombre, g.id_genero, count(*) as canciones 
     from genero_canciones gc
       inner join genero g on g.id_genero = gc.id_genero
-    group by g.nombre
-    order by cantidad desc
+    group by g.nombre, g.id_genero
+    order by canciones desc
     limit 5;
   `);
   res.status(200).json(response.rows);
 };
 
 // 6. 5 usuarios mas activos en la plataforma en el ultimo mes
-const getUsuariosActivos = async (req, res) => {
+const topActiveUsers = async (req, res) => {
   const response = await pool.query(`
-    select u.username, count (*) as cantidad
+    select u.username, count (*) as reproducciones
     from escucha_cancion ec
         inner join usuarios u on ec.id_usuario = u.username
     where ec.fecha > ((current_date - interval '1 month')::date -  extract(day from current_date - 1)::int)
         and ec.fecha < ((date_trunc('month', now()) + interval '1 month') - interval '1 day')::date
     group by u.username
-    order by cantidad desc limit 5
+    order by reproducciones desc limit 5
   `);
   res.status(200).json(response.rows);
 };
 
 module.exports = {
-  getAlbumsRecientes,
-  getSuscripcionesActuales,
-  getArtistaPopular,
-  getGenerosPopulares,
-  getUsuariosActivos,
-  getArtistasCrecientes,
+  weeklyAlbums,
+  growingArtist,
+  newSubscriptions,
+  topArtist,
+  topGenres,
+  topActiveUsers,
 };
