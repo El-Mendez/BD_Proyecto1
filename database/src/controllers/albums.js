@@ -1,30 +1,12 @@
 const pool = require('../credentials');
-const Parser = require('../utils/QueryParser');
 
 const getAlbums = async (req, res) => {
-    const { album_id, album_name } = req.body;
-
-    const parser = new Parser("select al.* from albumes al");
-    parser.databaseConditionals([
-        {
-            variables: [
-                {
-                    name: "al.id_album",
-                    value: album_id,
-                },
-                {
-                    name: "al.nombre",
-                    value: album_name,
-                    forgiving: true
-                },
-            ]
-        },
-    ])
-
-    const response = await pool.query(parser.buildQuery(), parser.buildParameters())
-    res.status(200).json(response.rows)
-}
+  const response = await pool.query(`
+    select * from albumes;
+  `);
+  res.status(200).json(response.rows);
+};
 
 module.exports = {
-    getAlbums
-}
+  getAlbums,
+};

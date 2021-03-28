@@ -5,7 +5,7 @@ const router = Router();
 const { createUser, logIn } = require('../controllers/usuarios');
 const { getSongs } = require('../controllers/songs');
 // const { searchArtist } = require('../controllers/artist');
-// const { getAlbums } = require('../controllers/albums');
+const { getAlbums } = require('../controllers/albums');
 // const { searchSubscription } = require('../controllers/subscriptionTiers')
 // const { getSubscription } = require('../controllers/subscription')
 // const { getGenres } = require('../controllers/genres')
@@ -22,7 +22,7 @@ router.get('/login', logIn);
 
 // router.get('/genres', getGenres)
 
-// router.get('/albums', getAlbums);
+router.get('/albums', getAlbums);
 
 router.get('/songs', getSongs);
 
