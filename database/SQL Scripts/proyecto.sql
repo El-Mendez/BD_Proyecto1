@@ -5,6 +5,7 @@ CREATE TABLE tipo_usuario (
     descripcion VARCHAR (100) NOT NULL
 );
 
+
 CREATE TABLE usuarios(
     username VARCHAR(150) NOT NULL PRIMARY KEY,
     contraseña VARCHAR(150) NOT NULL,
@@ -246,11 +247,11 @@ FROM genero g
  WHERE g.nombre ILIKE 'Pop%';
 
 -- Busqueda de album
-SELECT a.nombre, a2.nombre 
+SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes
 FROM albumes a
     INNER JOIN cancion_album ca on a.id_album = ca.id_album
-    INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
-    INNER JOIN artista a2 ON c.id_artista = a2.id_artista 
+    INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
+    INNER JOIN artista a2 ON c.id_artista = a2.id_artista
 WHERE a.nombre ILIKE 'Love Goes%';
 
 --Busqueda por cancion
@@ -260,7 +261,7 @@ FROM canciones c
     INNER JOIN genero_canciones gc ON c.id_cancion = gc.id_canciones
     INNER JOIN genero g ON g.id_genero = gc.id_genero
     INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
- WHERE c.nombre ILIKE 's%';
+ WHERE c.nombre ILIKE 'sauce%';
 
 -- Usuario sin suscripcion solo reproduce 3 tracks diarios /AGREGAR FECHA
 SELECT id_tipoUsuario FROM usuarios; -- Verifico el tipo de usuario
@@ -268,6 +269,8 @@ SELECT id_tipoUsuario FROM usuarios; -- Verifico el tipo de usuario
 SELECT SUM(ec.cantidad)
 FROM escucha_cancion ec
 WHERE id_usuario = 'Zara12' AND fecha = now();
+
+SELECT * FROM escucha_cancion WHERE id_usuario = 'Zara12';
 
 -- Update tipo de usuario (cuando el usuario se suscribe y cuenta con suscripcion activa)
 UPDATE usuarios SET id_tipoUsuario = 2 WHERE username = 'Zara12';
@@ -324,7 +327,9 @@ DELETE FROM artista WHERE nombre = 'Algo'; -- Entra el nombre del artista a elim
 --1 Albums mas recientes de la semana
 SELECT a.nombre
 FROM albumes a
-WHERE a.fecha_publicacion >= date_trunc('WEEK',now())::DATE;
+WHERE a.fecha_publicacion >= date_trunc('MONTH',now())::DATE;
+
+
 --2 Artistas con popularidad creciente en los ultimos 3 meses
 -- Canciones escuchadas hace 3 meses
 SELECT SUM(ec.cantidad) AS cantidad, a.nombre
@@ -350,21 +355,21 @@ FROM escucha_cancion ec
 
 -- Combinacion de los queries
 SELECT mes1.artista, mes1.cantidad AS mes_pasado, mes2.cantidad AS hace_2_meses, mes3.cantidad AS hace_3_meses
-	FROM (SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+	FROM (SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
 		WHERE fecha >= (current_date - interval '3 month')::date AND fecha < current_date - interval '2 month'
 		GROUP BY a.nombre) mes3
 	INNER JOIN (
-		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
 		WHERE fecha >= (current_date - interval '2 month')::date AND fecha < current_date - interval '1 month'
 		GROUP BY a.nombre) mes2 ON mes3.artista = mes2.artista
 	INNER JOIN (
-		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
@@ -372,13 +377,14 @@ SELECT mes1.artista, mes1.cantidad AS mes_pasado, mes2.cantidad AS hace_2_meses,
 		GROUP BY a.nombre) mes1 ON mes1.artista = mes2.artista AND mes1.artista = mes3.artista
 	WHERE mes1 > mes2 AND mes2 > mes3;
 
-
 -- Se comparan la cantidad de canciones escuchadas por mes
 --3. Cantidad de nuevas suscripciones mensuales durante los últimos seis meses
-SELECT s.fecha_inicio, current_date AS fecha_actual FROM suscripcion s
+SELECT count(*) FROM suscripcion s
     WHERE s.fecha_inicio > (current_date - 183) AND s.fecha_inicio < current_date
     GROUP BY fecha_inicio
-    ORDER BY fecha_inicio ASC ;
+    ORDER BY fecha_inicio ASC;
+
+
 --4. Artistas con mayor producción musical
 SELECT a.nombre , count(*) AS cantidad FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista
@@ -409,7 +415,7 @@ WHERE u.username ILIKE 'Zara12';
 -- Canciones agrupadas por generos
 SELECT nombre
 FROM genero; -- Se guardan todos los generos en un array
-SELECT c.nombre, a.nombre AS artista , g.nombre AS genero 
+SELECT c.nombre, a.nombre AS artista , g.nombre AS genero
 FROM genero g
     INNER JOIN genero_canciones gc on g.id_genero = gc.id_genero
     INNER JOIN canciones c on c.id_cancion = gc.id_canciones
@@ -468,5 +474,3 @@ VALUES
 SELECT link
 FROM canciones
 WHERE nombre ILIKE 'Algo';
-
-
