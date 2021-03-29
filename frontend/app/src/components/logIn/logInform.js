@@ -1,6 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
+import { createBrowserHistory as history } from 'history';
+
 
 
  export default function logInform (){
@@ -40,14 +42,13 @@ import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
     }
 
     const onSubmit = (data) =>{
-        console.log(data)
-        location.href='../../dashboard.html'
+      console.log(data)
+      console.log(history().location);
+      history().push('/dashboard');
+      history().go();
+      console.log(history().location);
     }
 
-    const handleClick = () => {
-        console.log('testing')
-
-    }
 
     return(
        <Fragment>
@@ -92,7 +93,7 @@ import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
                        {errors?.password?.message}
                    </small>
                    <button
-                       onSubmit={handleClick}
+                       onSubmit={onSubmit}
                        className={`btn logIn-btn my-3`}>
                        INICIAR SESIÓN
                    </button>

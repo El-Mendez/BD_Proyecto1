@@ -1,6 +1,9 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    devServer: {
+        historyApiFallback: true,
+    },
     entry: {
         index: "./app/src/index.js",
 
