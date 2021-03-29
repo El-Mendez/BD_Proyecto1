@@ -247,11 +247,11 @@ FROM genero g
  WHERE g.nombre ILIKE 'Pop%';
 
 -- Busqueda de album
-SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes 
+SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes
 FROM albumes a
     INNER JOIN cancion_album ca on a.id_album = ca.id_album
-    INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
-    INNER JOIN artista a2 ON c.id_artista = a2.id_artista 
+    INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
+    INNER JOIN artista a2 ON c.id_artista = a2.id_artista
 WHERE a.nombre ILIKE 'Love Goes%';
 
 --Busqueda por cancion
@@ -355,21 +355,21 @@ FROM escucha_cancion ec
 
 -- Combinacion de los queries
 SELECT mes1.artista, mes1.cantidad AS mes_pasado, mes2.cantidad AS hace_2_meses, mes3.cantidad AS hace_3_meses
-	FROM (SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+	FROM (SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
 		WHERE fecha >= (current_date - interval '3 month')::date AND fecha < current_date - interval '2 month'
 		GROUP BY a.nombre) mes3
 	INNER JOIN (
-		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
 		WHERE fecha >= (current_date - interval '2 month')::date AND fecha < current_date - interval '1 month'
 		GROUP BY a.nombre) mes2 ON mes3.artista = mes2.artista
 	INNER JOIN (
-		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista 
+		SELECT SUM(ec.cantidad) AS cantidad, a.nombre AS artista
 		FROM escucha_cancion ec
 		INNER JOIN canciones c ON ec.id_cancion = c.id_cancion
 		INNER JOIN artista a ON a.id_artista = c.id_artista
@@ -383,7 +383,7 @@ SELECT count(*) FROM suscripcion s
     WHERE s.fecha_inicio > (current_date - 183) AND s.fecha_inicio < current_date
     GROUP BY fecha_inicio
     ORDER BY fecha_inicio ASC;
-   
+
 
 --4. Artistas con mayor producción musical
 SELECT a.nombre , count(*) AS cantidad FROM canciones c
@@ -415,7 +415,7 @@ WHERE u.username ILIKE 'Zara12';
 -- Canciones agrupadas por generos
 SELECT nombre
 FROM genero; -- Se guardan todos los generos en un array
-SELECT c.nombre, a.nombre AS artista , g.nombre AS genero 
+SELECT c.nombre, a.nombre AS artista , g.nombre AS genero
 FROM genero g
     INNER JOIN genero_canciones gc on g.id_genero = gc.id_genero
     INNER JOIN canciones c on c.id_cancion = gc.id_canciones
