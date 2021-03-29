@@ -2,7 +2,7 @@ import  React, {useState, useEffect} from 'react';
 import SongItem from './songItem';
 import Axios from 'axios';
 
-export default function genderSongs(){
+export default function genderSongs(props){
 
     const get_song = 'http://3.135.234.254:3000/songs/';
     const [items, setItems] = useState([]);
@@ -23,24 +23,20 @@ export default function genderSongs(){
     },[setItems])
 
 
-
-    if (error) {
-        return <div>Error: {error.message}</div>;
-    } else {
-        return (
-            <div className={'ml-3 d-flex flex-wrap'}>
-                {
-                    items.map((item) => {
-                        return <SongItem
-                            key={item.id_cancion}
-                            s_name = {item.nombre}
-                            a_name = {item.id_artista}
-                        />
-                    })
-                }
-            </div>
-        );
-    }
+    return (
+        <div className={'ml-3 d-flex flex-wrap'}>
+            {
+                items.map((item) => {
+                    return <SongItem
+                        key={item.id_cancion}
+                        s_name = {item.nombre}
+                        a_name = {item.id_artista}
+                        songPlaying = {() => this.props.songPlaying(item)}
+                    />
+                })
+            }
+        </div>
+    );
 }
 
 
