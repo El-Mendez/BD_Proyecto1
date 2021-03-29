@@ -6,12 +6,12 @@ VALUES
 
 INSERT INTO usuarios
 VALUES
-('Zara12',crypt('noSequePoner', gen_salt('bf')),'Zaray','Corado','zaraylopez13@gmail.com',3),
-('El_Mendez',crypt('noSequePoner', gen_salt('bf')),'Pablo','Méndez','zaraylopez13@gmail.com',2),
-('Orlando13',crypt('noSequePoner1', gen_salt('bf')),'Orlando','Cabrera','zaraylopez13@gmail.com',2),
-('J_Traitor',crypt('noSequePoner2', gen_salt('bf')),'JJ','Hurtarte','zaraylopez13@gmail.com',2),
-('Ale_Mora',crypt('noSequePoner3', gen_salt('bf')),'Alejandro','Morales','zaraylopez13@gmail.com',2),
-('Osberto',crypt('noSequePoner4', gen_salt('bf')),'Osberto','Mejía','zaraylopez13@gmail.com',1);
+('Zara12',crypt('noSequePoner', gen_salt('bf')),'Zaray','Corado','zaraylopez1@gmail.com',3),
+('El_Mendez',crypt('noSequePoner', gen_salt('bf')),'Pablo','Méndez','zaraylopez2@gmail.com',2),
+('Orlando13',crypt('noSequePoner1', gen_salt('bf')),'Orlando','Cabrera','zaraylopez3@gmail.com',2),
+('J_Traitor',crypt('noSequePoner2', gen_salt('bf')),'JJ','Hurtarte','zaraylopez4@gmail.com',2),
+('Ale_Mora',crypt('noSequePoner3', gen_salt('bf')),'Alejandro','Morales','zaraylopez5@gmail.com',2),
+('Osberto',crypt('noSequePoner4', gen_salt('bf')),'Osberto','Mejía','zaraylopez6@gmail.com',1);
 
 INSERT INTO suscripcion(id_usuario, Fecha_inicio, Fecha_vencimiento)
 VALUES
@@ -49,12 +49,12 @@ VALUES
 ('Electrónica'),
 ('Samba');
 
-INSERT INTO albumes (nombre)
+INSERT INTO albumes (nombre, fecha_publicacion)
 VALUES
-('Love Goes'),
-('In The Lonely Hour'),
-('Man of the Woods'),
-('The Book of Love');
+('Love Goes', '10-30-2020'),
+('In The Lonely Hour', '05-26-2014'),
+('Man of the Woods', '02-02-2018'),
+('The Book of Love', '12-09-1997');
 
 INSERT INTO canciones (nombre, link, id_artista)
 VALUES
@@ -123,7 +123,6 @@ INSERT INTO cancion_album VALUES
 (40, 2),
 (41, 2),
 (42, 2),
-(43, 2),
 (1, 3),
 (2, 3),
 (3, 3),
@@ -150,12 +149,10 @@ INSERT INTO cancion_album VALUES
 
 INSERT INTO genero_canciones VALUES
 (2,36),
-(2,43),
 (5,1),
 (5,2),
 (5,12),
 (5,14),
-(5,43),
 (7,3),
 (7,4),
 (7,5),
@@ -187,10 +184,4 @@ INSERT INTO genero_canciones VALUES
 (7,38),
 (7,39),
 (7,40),
-(7,41),
-(7,43),
-(21,1),
-(21,2),
-(21,13),
-(21,15),
-(21,24);
+(7,41);
