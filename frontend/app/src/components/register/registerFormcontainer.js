@@ -1,8 +1,15 @@
 import React from 'react';
 import Registerform from "./registerForm";
 import logo from '../utils/zoaLogo.png'
+import history from '../history';
 
 export default function registerFormcontainer(){
+
+  const handleClick = () =>{
+    history.push('/');
+    history.go();
+  }
+
     return(
         <div className={'form-container d-flex flex-column mb-5'}>
             <img src={logo} className={'align-self-center w-50'}/>
@@ -14,7 +21,7 @@ export default function registerFormcontainer(){
                 <span className={'mr-3'}>
                    ¿Ya tienes cuenta?
                 </span>
-                <a href={'../../index.html'}>Iniciar Sesión</a>
+                <button onClick={handleClick}>Iniciar Sesión</button>
             </p>
         </div>
     )

@@ -1,11 +1,13 @@
 import React from 'react';
 import LogInform from "./logInform";
 import logo from '../utils/zoaLogo.png'
+import history from '../history';
 
 export default function logInformContainer(){
 
     const handleClick = () =>{
-        location.href='../../register.html'
+      history.push('/signUp');
+      history.go();
     }
         return(
             <div className={'form-container d-flex flex-column mt-5'}>
