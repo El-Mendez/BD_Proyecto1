@@ -1,4 +1,4 @@
-const pool = require('../credentials');
+const pool = require('../../credentials');
 
 const createUser = async (req, res) => {
   const {
