@@ -1,4 +1,4 @@
-const pool = require('../credentials');
+const pool = require('../../credentials');
 
 const getSongs = async (req, res) => {
   const response = await pool.query(`

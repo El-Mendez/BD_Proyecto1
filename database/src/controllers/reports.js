@@ -1,4 +1,4 @@
-const pool = require('../credentials');
+const pool = require('../../credentials');
 
 // 1. Albums mas recientes de la semana
 const weeklyAlbums = async (req, res) => {
