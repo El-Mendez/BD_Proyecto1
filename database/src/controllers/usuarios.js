@@ -32,7 +32,59 @@ const logIn = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const updateToArtist = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET id_tipoUsuario = 4 WHERE username = $1;
+          `,
+  [username]);
+
+  res.status(200).json(response.rows);
+};
+
+const updateToManager = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET id_tipoUsuario = 5 WHERE username = $1;
+          `,
+  [username]);
+
+  res.status(200).json(response.rows);
+};
+
+const getUserDescription = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  SELECT u.username, u.nombres, u.apellidos, u.correo, tu.descripcion, u.id_tipousuario
+    FROM usuarios u
+      INNER JOIN tipo_usuario tu ON u.id_tipoUsuario = tu.id_tipoUsuario
+    WHERE u.username ILIKE $1;
+          `,
+  [username]);
+
+  res.status(200).json(response.rows);
+};
+
+const getUserPlaylist = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  SELECT c.nombre
+    FROM usuario_playlist up
+      INNER JOIN playlist p ON up.id_usuario = p.id_playlist
+      INNER JOIN playlist_canciones pc ON pc.id_playlist = p.id_playlist
+      INNER JOIN canciones c  ON c.id_cancion = pc.id_canciones
+    WHERE  up.id_usuario like $1;;
+          `,
+  [username]);
+
+  res.status(200).json(response.rows);
+};
+
 module.exports = {
   createUser,
   logIn,
+  updateToArtist,
+  updateToManager,
+  getUserDescription,
+  getUserPlaylist,
 };

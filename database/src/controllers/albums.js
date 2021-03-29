@@ -7,6 +7,66 @@ const getAlbums = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const getAlbumByArtist = async (req, res) => {
+  const { nombre } = req.body;
+  const response = await pool.query(`
+  SELECT a2.nombre AS album, c.nombre AS cancion
+  FROM artista a
+    INNER JOIN canciones c on a.Id_artista = c.id_artista
+    INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
+    INNER JOIN albumes a2 on a2.id_album = ca.id_album
+  WHERE a.nombre ILIKE $1`,
+  [nombre]);
+
+  res.status(200).json(response.rows);
+};
+
+const getSpecificAlbum = async (req, res) => {
+  const { album } = req.body;
+  const response = await pool.query(`
+  SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes
+    FROM albumes a
+      INNER JOIN cancion_album ca on a.id_album = ca.id_album
+      INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
+      INNER JOIN artista a2 ON c.id_artista = a2.id_artista
+    WHERE a.nombre ILIKE $1`,
+  [album]);
+
+  res.status(200).json(response.rows);
+};
+
+const updateAlbumName = async (req, res) => {
+  const { oldName, newName } = req.body;
+  const response = await pool.query(`
+  UPDATE albumes SET nombre = $1 WHERE nombre = $2; `,
+  [newName, oldName]);
+
+  res.status(200).json(response.rows);
+};
+
+const updateAlbumDate = async (req, res) => {
+  const { date, name } = req.body;
+  const response = await pool.query(`
+  UPDATE albumes SET fecha_publicacion = '$1' WHERE nombre = $2;`,
+  [date, name]);
+
+  res.status(200).json(response.rows);
+};
+
+const deleteAlbum = async (req, res) => {
+  const { name } = req.body;
+  const response = await pool.query(`
+  DELETE FROM albumes WHERE nombre =$1;`,
+  [name]);
+
+  res.status(200).json(response.rows);
+};
+
 module.exports = {
   getAlbums,
+  getAlbumByArtist,
+  getSpecificAlbum,
+  updateAlbumName,
+  updateAlbumDate,
+  deleteAlbum,
 };
