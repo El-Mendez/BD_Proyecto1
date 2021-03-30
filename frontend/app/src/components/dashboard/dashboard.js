@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react';
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
 import TopBar from '../menuBar/topBar';
-import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import GenderSongs from '../mainView/genderSongs';
-import Search from '../mainView/search';
 
 const initialState = () =>{
   return{
@@ -35,7 +33,7 @@ export default class dashboard extends React.Component{
           </div>
           <div className={'player-container'}>
             <Player
-            videoId={"DLgzY8uL86U"}
+            videoId={"DLgzY8uL86U"} //Cuando paso el estate de link, no le da play
             name={this.state.song_name}
             artist={this.state.song_artist}/>
           </div>
