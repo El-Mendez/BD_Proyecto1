@@ -29,16 +29,3 @@
   grid-area: now-playing;
   z-index: 4;
 }
-
-.view-container{
-  grid-area: main-view;
-  height: 85vh;
-  overflow: auto;
-}
-
-#topBar-space{
-  position: sticky;
-  top: 0;
-  height: 60px;
-  background-color: #383838
-}

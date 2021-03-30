@@ -24,18 +24,21 @@ export default function genderSongs(props){
 
 
     return (
-        <div className={'ml-3 d-flex flex-wrap'}>
-            {
-                items.map((item) => {
-                    return <SongItem
+      <div>
+          <div className={'ml-3 d-flex flex-wrap'}>
+              {
+                  items.map((item) => {
+                      return <SongItem
                         key={item.id_cancion}
                         s_name = {item.nombre}
                         a_name = {item.id_artista}
                         songPlaying = {() => this.props.songPlaying(item)}
-                    />
-                })
-            }
-        </div>
+                      />
+                  })
+              }
+          </div>
+      </div>
+
     );
 }
 

@@ -1,22 +1,15 @@
 import React from 'react';
-import {BsPeopleCircle as I_user} from 'react-icons/bs';
+import {useRouteMatch} from 'react-router-dom';
+import UpgradeNav from './upgradeNav';
+import SearchNav from './searchNav';
 
 export default function topBar() {
+  const match = useRouteMatch("/dashboard")
+
     return(
         <div className={'top-bar'}>
-            <header className={'header-bar'}>
-
-                <button className={'btn upgrade-btn'}>
-                    PREMIUM
-                </button>
-
-                <button className={'btn user-btn ml-4'}>
-                    <span className={'i-user mr-2'}>
-                        <I_user/>
-                    </span>
-                     username
-                </button>
-
+            <header className={'header-bar ' + (match?'headerSearch-bar':'')}>
+              {match.isExact? <SearchNav/>:<SearchNav/>}
             </header>
         </div>
     );

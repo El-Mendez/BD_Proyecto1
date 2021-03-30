@@ -1,56 +1,32 @@
 import React, {useState} from 'react';
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
-import View from "../view/view";
 import TopBar from '../menuBar/topBar';
-import GenderSongs from "../view/genderSongs";
-//Tambien importar navbar
-import Report from '../report/report'
+import { Route, Switch, useRouteMatch } from 'react-router-dom';
+import GenderSongs from '../mainView/genderSongs';
+import Search from '../mainView/search';
 
-export default class dashboard extends React.Component{
+export default function dashboard(){
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            nombre: '',
-            link: '',
-            artist: 0
-        }
-    }
+        let match = useRouteMatch();
 
-    render(){
+
         return(
             <div id={'main-container'}>
                 <div className={'dash-container'}>
-                    <SideBar/>
-                    <TopBar/>
-
+                    <SideBar />
+                    <TopBar />
                     <div className={'view-container'}>
                         <div id={'topBar-space'}></div>
-                        <GenderSongs
-                            songPlaying = {(item) => this.songPlaying(item)}
-                        />
+                       <Search/>
                     </div>
-
                     <div className={'player-container'}>
-                        <Player
-                            videoId={this.state.link}
-                            name={this.state.nombre}
-                            artist={this.state.artist}/>
+                        <Player/>
                     </div>
                 </div>
             </div>
 
         );
-    }
-
-    songPlaying (item) {
-        this.setState({
-            nombre: item.nombre,
-            link: item.link,
-            artist: item.id_artista
-        })
-    }
 
 }
 
