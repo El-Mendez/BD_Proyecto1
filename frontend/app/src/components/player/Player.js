@@ -51,6 +51,7 @@ export default class Player extends React.Component {
     }
 
     handlePlay() {
+        console.log(this.props.videoId)
         try {
             if (this.state.isPaused) {
                 this.player.play();

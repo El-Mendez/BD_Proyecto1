@@ -4,6 +4,8 @@ import Axios from 'axios';
 
 export default function genderSongs(props){
 
+    const songProps = props;
+
     const get_song = 'http://3.135.234.254:3000/songs/';
     const [items, setItems] = useState([]);
     const [error, setError] = useState(null);
@@ -30,9 +32,9 @@ export default function genderSongs(props){
                   items.map((item) => {
                       return <SongItem
                         key={item.id_cancion}
-                        s_name = {item.nombre}
-                        a_name = {item.id_artista}
-                        songPlaying = {() => this.props.songPlaying(item)}
+                        s_name = {item.cancion_nombre}
+                        a_name = {item.artista_nombre}
+                        songPlaying = {() => songProps.songPlaying(item)}
                       />
                   })
               }
