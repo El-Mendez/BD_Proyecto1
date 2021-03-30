@@ -21,6 +21,49 @@ Content-Type: application/json
 	"contrasena": "ejemplo123"
 }
 
+# SpecificArtist
+POST http://{{host}}/SpecificArtist
+Content-Type: application/json
+
+{
+	"nombre": "Sam Smith"
+}
+
+# songByGenre
+POST http://{{host}}/songByArtist
+Content-Type: application/json
+
+{
+	"genero": "pop"
+}
+
+# songByArtist
+POST http://{{host}}/songByArtist
+Content-Type: application/json
+
+{
+	"nombre": "Sam Smith"
+}
+# SpecificAlbum
+POST http://{{host}}/specificAlbum
+Content-Type: application/json
+{
+	"album": "Love Goes"
+}
+
+# SpecificSong
+POST http://{{host}}/specificSong
+Content-Type: application/json
+{
+	"nombre": "sauce"
+}
+# CreatPlayList
+POST http://{{host}}/createPlaylist
+Content-Type: application/json
+{
+	"nombre": "Nose"
+}
+
 ###
 # Obtener todos los artistas
 GET http://{{host}}/artists
