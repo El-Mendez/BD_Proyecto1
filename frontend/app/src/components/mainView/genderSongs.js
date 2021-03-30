@@ -4,6 +4,8 @@ import Axios from 'axios';
 
 export default function genderSongs(props){
 
+    const songProps = props;
+
     const get_song = 'http://3.135.234.254:3000/songs/';
     const [items, setItems] = useState([]);
     const [error, setError] = useState(null);
@@ -24,18 +26,21 @@ export default function genderSongs(props){
 
 
     return (
-        <div className={'ml-3 d-flex flex-wrap'}>
-            {
-                items.map((item) => {
-                    return <SongItem
+      <div>
+          <div className={'ml-3 d-flex flex-wrap'}>
+              {
+                  items.map((item) => {
+                      return <SongItem
                         key={item.id_cancion}
-                        s_name = {item.nombre}
-                        a_name = {item.id_artista}
-                        songPlaying = {() => this.props.songPlaying(item)}
-                    />
-                })
-            }
-        </div>
+                        s_name = {item.cancion_nombre}
+                        a_name = {item.artista_nombre}
+                        songPlaying = {() => songProps.songPlaying(item)}
+                      />
+                  })
+              }
+          </div>
+      </div>
+
     );
 }
 

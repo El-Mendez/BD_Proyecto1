@@ -1,5 +1,6 @@
 import React from "react";
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
+import { Link, useRouteMatch } from 'react-router-dom';
 import logo from '../utils/zoabl.svg'
 import {BsHouse as I_house,
     BsSearch as I_search,
@@ -7,8 +8,10 @@ import {BsHouse as I_house,
     BsPlusSquareFill as I_newPlaylist} from 'react-icons/bs';
 
 
-export default class sideBar extends React.Component{
-    render(){
+export default function sideBar(){
+
+    let {url} = useRouteMatch();
+
         return(
             <ProSidebar>
                 <SidebarHeader className={'d-flex justify-content-center'}>
@@ -17,17 +20,21 @@ export default class sideBar extends React.Component{
                 <SidebarContent>
                     <Menu>
                         <MenuItem>
-                            <p className={'sidebar-menuItem'}>
-                                <span className={'mr-3'}><I_house/></span>
-                                Home
-                            </p>
+                            <Link to={{url}}>
+                                <p className={'sidebar-menuItem'}>
+                                    <span className={'mr-3'}><I_house/></span>
+                                    Home
+                                </p>
+                            </Link>
                         </MenuItem>
 
                         <MenuItem>
-                            <p className={'sidebar-menuItem'}>
-                                <span className={'mr-3'}><I_search/></span>
-                                Search
-                            </p>
+                            <Link to={`${url}/search`}>
+                                <p className={'sidebar-menuItem'}>
+                                    <span className={'mr-3'}><I_search/></span>
+                                    Search
+                                </p>
+                            </Link>
                         </MenuItem>
 
                         <MenuItem>
@@ -55,5 +62,4 @@ export default class sideBar extends React.Component{
                 </SidebarFooter>
             </ProSidebar>
         );
-    }
 }

@@ -21,6 +21,10 @@ header{
   justify-content: flex-end;
 }
 
+.headerSearch-bar{
+  justify-content: flex-start;
+}
+
 
 .upgrade-btn{
   font-size: 12px;
@@ -53,3 +57,30 @@ header{
 .i-user{
   font-size: 20px;
 }
+
+.view-container{
+  grid-area: main-view;
+  height: 85vh;
+  overflow: auto;
+}
+
+#topBar-space{
+  position: sticky;
+  top: 0;
+  height: 60px;
+  background-color: #383838
+}
+
+.search-input{
+  color: #000;
+  padding: 6px 48px;
+  height: 40px;
+  width: 100%;
+  border: 0;
+  border-radius: 500px;
+  text-overflow: ellipsis;
+  &:focus{
+    outline:none;
+  }
+}
+
