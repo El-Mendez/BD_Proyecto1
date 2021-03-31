@@ -4,12 +4,12 @@ import UpgradeNav from './upgradeNav';
 import SearchNav from './searchNav';
 
 export default function topBar() {
-  const match = useRouteMatch("/")
+  const match = useRouteMatch("/home")
 
     return(
         <div className={'top-bar'}>
             <header className={'header-bar ' + (match?'headerSearch-bar':'')}>
-              {match.isExact? <SearchNav/>:<SearchNav/>}
+              {match.isExact? <UpgradeNav/>:<SearchNav/>}
             </header>
         </div>
     );

@@ -38,7 +38,7 @@ import Axios from 'axios';
          if(data.length === 1){
            console.log('just testing')
            console.log(history().location);
-           history().push('/');
+           history().push('/home');
            history().go();
            console.log(history().location);
          }else{

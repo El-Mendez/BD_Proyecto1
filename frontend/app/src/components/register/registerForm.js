@@ -5,6 +5,7 @@ import {BsPerson as I_person} from 'react-icons/bs';
 import {BsLock as I_lock} from 'react-icons/bs';
 import {BsEnvelope as I_envelope} from 'react-icons/bs';
 
+//ADD DEFENSIVE PROGRAMMING TO THE REGISTER BUTTON IN CASE DE USERNAME ALREADY EXIST
 
 export default function registerForm (){
 

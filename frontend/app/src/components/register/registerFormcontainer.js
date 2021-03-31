@@ -3,6 +3,9 @@ import Registerform from "./registerForm";
 import logo from '../utils/zoaLogo.png'
 import history from '../history';
 
+//ADD STYLE TO THE LOG IN BUTTON OR CHANGE IT FOR AN H ELEMENT
+
+
 export default function registerFormcontainer(){
 
   const handleClick = () =>{

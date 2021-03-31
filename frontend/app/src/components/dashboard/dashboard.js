@@ -1,27 +1,39 @@
 import React, {useState, useEffect} from 'react';
+import {
+  Switch,
+  Route,
+  useParams,
+  useRouteMatch
+} from "react-router-dom";
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
 import TopBar from '../menuBar/topBar';
 import HomeView from '../mainView/homeView';
 import Artist from '../artist/artis';
 
-const initialState = () =>{
-  return{
+
+export default function dashboard() {
+
+  const [song, setSong] = useState({
     song_link: '',
     song_name: '',
     song_artist: ''
-  };
-};
+  })
 
-export default class dashboard extends React.Component{
+  let {path} = useRouteMatch();
 
-  constructor(props) {
-    super(props);
-    this.state = initialState();
-  }
+  // const songPlaying = (a_song) =>{
+  //   if(a_song != undefined){
+  //     setSong({
+  //       ...song,
+  //       song_link: a_song.link,
+  //       song_name: a_song.cancion_nombre,
+  //       song_artist: a_song.artista_nombre,
+  //     })
+  //   }
+  // };
 
-  render(){
-    console.log(this.state.song_name)
+    //console.log(this.state.song_name)
     return(
       <div id={'main-container'}>
         <div className={'dash-container'}>
@@ -29,32 +41,30 @@ export default class dashboard extends React.Component{
           <TopBar />
           <div className={'view-container'}>
             <div id={'topBar-space'}></div>
-              {/*<HomeView*/}
-              {/*songPlaying = {(song) => this.songPlaying(song)}/>*/}
-              {/*<Report/>*/}
-              <Artist/>
+            <Switch>
+              <Route path={`${path}/report`}>
+                {/*<Report/>*/}
+              </Route>
+              <Route path={`${path}/playlist`}>
+               <h2>Playlists</h2>
+              </Route>
+              <Route path={`${path}/search`}>
+                <Artist/>
+              </Route>
+              <Route exact paht={path}>
+                <HomeView
+                  songPlaying = {(song) => this.songPlaying(song)}/>
+              </Route>
+            </Switch>
           </div>
           <div className={'player-container'}>
             <Player
-            videoId={"DLgzY8uL86U"} //Cuando paso el estate de link, no le da play
-            name={this.state.song_name}
-            artist={this.state.song_artist}/>
+            videoId={"DLgzY8uL86U"} />
           </div>
         </div>
       </div>
 
     );
-  }
-
-  songPlaying(song){
-    if(song != undefined){
-      this.setState({
-        song_link: song.link,
-        song_name: song.cancion_nombre,
-        song_artist: song.artista_nombre,
-      })
-    }
-  };
 
 }
 
