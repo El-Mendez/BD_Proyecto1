@@ -1,19 +1,19 @@
-.report-song-card{
-  width: 160px;
-  height: 212px;
+.item-card{
+  flex: 1;
+  width: 100%;
+  padding: 16px;
+  position: relative;
   align-items: center;
-  padding: 5px;
   background-color: #181818;
-  transition:background-color .3s ease;
   cursor: pointer;
+  border-radius: 4px;
+  isolation: isolate;
+  transition: background-color .3s ease;
   &:hover{
     background-color: #282828;
   }
 }
 
-.card-img-top{
-  width: 95%;
-}
 .card-text{
   color: #bababa;
   font-size: 14px;
@@ -73,5 +73,49 @@ h1{
 
 .month-br{
   border-right: solid 2px #323232;
+}
+
+.home-container{
+  display: grid;
+  grid-gap: 24px;
+  padding: 24px 16px 0px;
+  margin: 0;
+  max-width: 1955px;
+}
+
+.section-container{
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+  min-width: 100%;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.songs-container{
+  --minimumColumnWidth: 180px;
+  overflow-y: hidden;
+  //grid-auto-rows: 0;
+  grid-template-rows: 1fr;
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
+}
+
+.image-container{
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.image-shadow{
+  width: 100%;
+  position: relative;
+  background-color: #333;
+  box-shadow: 0 8px 24px #00000080;
+}
+
+.image-top{
+  width: 100%;
+  border-radius: 2px;
 }
 

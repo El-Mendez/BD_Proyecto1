@@ -1,5 +1,5 @@
 import React from 'react';
-import GenderSongs from './genderSongs';
+import HomeView from './homeView';
 import Search from './search'
 import {BrowserRouter as Router,
   Route,
@@ -14,7 +14,7 @@ export default function view(){
   return (
     <Router>
       <Switch>
-        <Route path={path} exact component={GenderSongs}/>
+        <Route path={path} exact component={HomeView}/>
         <Route path={`${path}/search`} exact component={Search}/>
       </Switch>
     </Router>

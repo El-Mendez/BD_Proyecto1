@@ -12,7 +12,7 @@ export default class MainRoutes extends React.Component {
         <Switch>
           <Route path="/logIn" exact component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
-          <Route path="/dashboard" exact component={Dashboard}/>
+          <Route path="/" exact component={Dashboard}/>
         </Switch>
       </Router>
     );

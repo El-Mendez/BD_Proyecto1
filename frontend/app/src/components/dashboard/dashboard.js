@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
 import TopBar from '../menuBar/topBar';
-import GenderSongs from '../mainView/genderSongs';
+import HomeView from '../mainView/homeView';
+import Artist from '../artist/artis';
 
 const initialState = () =>{
   return{
@@ -28,8 +29,10 @@ export default class dashboard extends React.Component{
           <TopBar />
           <div className={'view-container'}>
             <div id={'topBar-space'}></div>
-            <GenderSongs
-              songPlaying = {(song) => this.songPlaying(song)}/>
+              {/*<HomeView*/}
+              {/*songPlaying = {(song) => this.songPlaying(song)}/>*/}
+              {/*<Report/>*/}
+              <Artist/>
           </div>
           <div className={'player-container'}>
             <Player
