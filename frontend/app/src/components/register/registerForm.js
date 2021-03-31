@@ -8,8 +8,7 @@ import {BsEnvelope as I_envelope} from 'react-icons/bs';
 
 export default function registerForm (){
 
-    const post_user = 'http://3.135.234.254:3000/users/';
-    const get_song = 'http://3.135.234.254:3000/songs/';
+    const post_user = 'http://3.135.234.254:3000/createUser/';
 
     //Hook-Form validation
     const {register, errors, handleSubmit} = useForm({mode: 'onChange'});
@@ -75,8 +74,7 @@ export default function registerForm (){
     const onSubmit = (data) =>{
         console.log(data)
         //location.href='../../dashboard.html'
-        //postMessage(registerData.email,registerData.username, registerData.password, registerData.user_name, registerData.lastname);
-        getSong();
+        postMessage(registerData.email,registerData.username, registerData.password, registerData.user_name, registerData.lastname);
     }
 
     const handleClick = () => {

@@ -4,7 +4,7 @@ import UpgradeNav from './upgradeNav';
 import SearchNav from './searchNav';
 
 export default function topBar() {
-  const match = useRouteMatch("/dashboard")
+  const match = useRouteMatch("/")
 
     return(
         <div className={'top-bar'}>

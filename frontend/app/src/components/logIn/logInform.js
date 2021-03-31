@@ -1,25 +1,56 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
 import { createBrowserHistory as history } from 'history';
+import Axios from 'axios';
 
 
 
  export default function logInform (){
+   //Api
+   const get_user = 'http://3.135.234.254:3000/login/'
 
-     //Hook-Form validation
-     const {register, errors, handleSubmit} = useForm({mode: 'onChange'});
+   //Hook-Form validation
+   const {register, errors, handleSubmit} = useForm({mode: 'onChange'});
 
-     //State variables
-     const [data, setData] = useState({
-         username:'',
-         password:''
-     })
+   //State variables
+   const [data, setData] = useState({
+       username:'',
+       password:''
+   })
 
-     const [filled, setFilled] = useState({
-         username: false,
-         password: false
-     });
+   const [filled, setFilled] = useState({
+       username: false,
+       password: false
+   });
+
+   function getUser(){
+     console.log("Loading...");
+     const fetchData = async (username, contrasena) => {
+       try {
+         const { data } = await Axios.post(get_user,
+           {
+               username,
+               contrasena
+           }
+         );
+         console.log('data '+ data.length);
+         if(data.length === 1){
+           console.log('just testing')
+           console.log(history().location);
+           history().push('/');
+           history().go();
+           console.log(history().location);
+         }else{
+           alert('Usuario o contraseña incorrectos');
+         }
+       } catch (error) {
+         console.log(error);
+       }
+     };
+     fetchData(data.username, data.password);
+   };
+
 
     const handleInputChange = (e) =>{
          console.log(e.target.value);
@@ -41,12 +72,8 @@ import { createBrowserHistory as history } from 'history';
          }
     }
 
-    const onSubmit = (data) =>{
-      console.log(data)
-      console.log(history().location);
-      history().push('/dashboard');
-      history().go();
-      console.log(history().location);
+    const onSubmit = () =>{
+      getUser();
     }
 
 
