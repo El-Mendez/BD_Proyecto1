@@ -20,7 +20,7 @@ export default function sideBar(){
                 <SidebarContent>
                     <Menu>
                         <MenuItem>
-                            <Link to={{url}}>
+                            <Link to={'/home'}>
                                 <p className={'sidebar-menuItem'}>
                                     <span className={'mr-3'}><I_house/></span>
                                     Home
@@ -45,10 +45,12 @@ export default function sideBar(){
                         </MenuItem>
 
                         <MenuItem>
-                            <p className={'sidebar-menuItem'}>
-                                <span className={'mr-3'}><I_newPlaylist/></span>
-                                Crear Playlist
-                            </p>
+                            <Link to={`${url}/playlist`}>
+                                <p className={'sidebar-menuItem'}>
+                                    <span className={'mr-3'}><I_newPlaylist/></span>
+                                    Crear Playlist
+                                </p>
+                            </Link>
                         </MenuItem>
 
                     </Menu>
