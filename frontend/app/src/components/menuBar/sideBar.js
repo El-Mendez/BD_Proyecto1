@@ -1,7 +1,7 @@
 import React from "react";
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
 import { Link, useRouteMatch } from 'react-router-dom';
-import logo from '../utils/zoabl.svg'
+import logo from '../../assets/zoabl.svg'
 import {BsHouse as I_house,
     BsSearch as I_search,
     BsGrid1X2Fill as I_library,
@@ -38,10 +38,12 @@ export default function sideBar(){
                         </MenuItem>
 
                         <MenuItem>
-                            <p className={'sidebar-menuItem'}>
-                                <span className={'mr-3'}><I_library/></span>
-                                Library
-                            </p>
+                            <Link to={`${url}/report`}>
+                                <p className={'sidebar-menuItem'}>
+                                    <span className={'mr-3'}><I_library/></span>
+                                    Library
+                                </p>
+                            </Link>
                         </MenuItem>
 
                         <MenuItem>

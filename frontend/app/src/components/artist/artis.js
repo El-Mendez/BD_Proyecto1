@@ -1,6 +1,6 @@
 import React from 'react';
-import Albums from './albums';
-import Songs from './songs';
+import AlbumsArtist from './albumsArtist';
+import SongsArtist from './songsArtist';
 
 export default function Artist(){
   return(
@@ -9,8 +9,8 @@ export default function Artist(){
           ARTIST NAME
         </h1>
       <div className={"home-container"}>
-        <Songs/>
-        <Albums/>
+        <SongsArtist/>
+        <AlbumsArtist/>
       </div>
     </div>
   );

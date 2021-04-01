@@ -1,5 +1,5 @@
 import React from 'react';
-import image from "../utils/badLiar.jpg";
+import image from "../../../assets/badLiar.jpg";
 
 export default class AlbumItem extends React.Component{
   render(){

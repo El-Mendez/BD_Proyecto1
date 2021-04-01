@@ -1,18 +1,22 @@
+//SONGS ON THE ARTIST PROFILE, ONLY RETURNS THE SONG NAME
+
 import React from 'react';
-import {BsPlayFill as I_play} from'react-icons/bs'
-import test from '../utils/badLiar.jpg'
-export default function SongItem(){
+import test from '../../../assets/badLiar.jpg'
+
+export default function SongItem(props){
+  const songData = props;
+
   return(
     <div>
       <div className="song-container text-secondary">
-        <div className="play">
+        <div className="index">
           <span className={"font-size m-0 p-0"}>
-            <I_play/>
+            {songData.song_index}
           </span>
         </div>
         <div className={"songs-details text-secondary"}>
           <img src={test} alt="Test" width={"40px"} className={"mr-3"}/>
-          <p className="m-0 p-0">Song Title</p>
+          <p className="m-0 p-0">{songData.song_title}</p>
         </div>
       </div>
     </div>

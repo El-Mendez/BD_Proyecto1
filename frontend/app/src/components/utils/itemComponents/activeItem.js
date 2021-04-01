@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class monthItemreport extends React.Component{
+export default class activeItem extends React.Component{
     render() {
         return (
             <div>

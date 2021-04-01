@@ -1,7 +1,7 @@
 import React from 'react';
-import AlbumItem from './albumItem'
+import AlbumItem from '../utils/itemComponents/albumItem'
 
-export default function Albums(){
+export default function AlbumsArtist(){
   return(
       <section className={'section-container'}>
           <div id="discography" className="section-title text-secondary">

@@ -1,7 +1,7 @@
 import React from 'react';
-import image from "../utils/badLiar.jpg";
+import image from "../../../assets/badLiar.jpg";
 
-export default class songItem extends React.Component{
+export default class songItemcard extends React.Component{
     render(){
         return(
             <div className="item-card card" onClick={this.props.songPlaying}>

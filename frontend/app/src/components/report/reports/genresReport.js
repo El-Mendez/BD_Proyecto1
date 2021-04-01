@@ -1,5 +1,5 @@
 import React from 'react';
-import GenreItemreport from "./genreItemreport";
+import GenreItemreport from "../../utils/itemComponents/genreItem";
 
 export default class genresReport extends React.Component{
     render() {

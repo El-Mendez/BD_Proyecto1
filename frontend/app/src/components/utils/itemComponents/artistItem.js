@@ -1,6 +1,6 @@
 import React from 'react';
 
-import test from '../../utils/badLiar.jpg'
+import test from '../../../assets/badLiar.jpg'
 
 export default class artistItem extends React.Component {
     render() {

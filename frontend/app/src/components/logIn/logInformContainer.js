@@ -1,6 +1,6 @@
 import React from 'react';
 import LogInform from "./logInform";
-import logo from '../utils/zoaLogo.png'
+import logo from '../../assets/zoaLogo.png'
 import history from '../history';
 
 export default function logInformContainer(){
