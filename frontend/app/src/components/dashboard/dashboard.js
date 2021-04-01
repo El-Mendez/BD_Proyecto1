@@ -42,6 +42,9 @@ export default function dashboard() {
           <div className={'view-container'}>
             <div id={'topBar-space'}></div>
             <Switch>
+              <Route path={`${path}/user`}>
+                {/*Rendirzar elemento de config user*/}
+              </Route>
               <Route path={`${path}/report`}>
                 {/*<Report/>*/}
               </Route>
