@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
 
-export default function searchFunction(search) {
+export default function searchFunction(api, search, container, parametro) {
 
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong'
-  const get_songs = 'http://3.135.234.254:3000/songs/';
-
-  var lSongs = [];
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try{
-        const response = await Axios.get(get_songs);
-        lSongs = response.data
-      }catch (e){
-        setError(e);
-        console.log(e)
+    console.log("Loading...");
+    const fetchData = async (parametro) => {
+      try {
+        const { data } = await Axios.post(api,
+          {
+            param: param + '%'
+          }
+        );
+        container = data;
+      } catch (error) {
+        console.log(error);
       }
     };
-    fetchData();
-  },[lSongs])
+    fetchData(search);
 
-  return lSongs;
 }

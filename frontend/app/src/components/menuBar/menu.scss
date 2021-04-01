@@ -2,11 +2,10 @@
   height: 60px;
   z-index: 2;
   grid-area: main-view;
-  background-color: #535353;
+  background-color: #1d1d1d;
   background-image: linear-gradient(rgba(0,0,0,.6),#282828);
   transition: background 1s ease;
-  //background-color: #282828;
-  //opacity: 0;
+  opacity: 0.8;
 }
 
 header{
@@ -68,7 +67,9 @@ header{
   position: sticky;
   top: 0;
   height: 60px;
-  background-color: #383838
+  background-color: #383838;
+  z-index: 5;
+
 }
 
 .search-input{

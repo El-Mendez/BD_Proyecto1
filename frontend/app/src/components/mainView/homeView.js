@@ -1,6 +1,7 @@
 import  React, {useState, useEffect} from 'react';
 import SongItem from './songItem';
 import Axios from 'axios';
+import HomeBar from '../menuBar/homeBar'
 
 export default function HomeView(props){
   const songProps = props;
@@ -24,26 +25,31 @@ export default function HomeView(props){
 
 
   return(
-    <section>
-      <div className={'home-container'}>
-        <section className={'section-container'}>
-          <div id="songs-genre">
-            Música general
-          </div>
-          <div id="songs" className="songs-container">
-            {
-              items.map((item) => {
+    <div className={'view-container'}>
+      <div id={'topBar-space'}>
+       <HomeBar/>
+      </div>
+      <section>
+        <div className={'home-container'}>
+          <section className={'section-container'}>
+            <div id="songs-genre">
+              Música general
+            </div>
+            <div id="songs" className="songs-container">
+              {
+                items.map((item) => {
                   return <SongItem
                     key={item.id_cancion}
                     s_name = {item.cancion_nombre}
                     a_name = {item.artista_nombre}
                     songPlaying = {() => songProps.songPlaying(item)}
                   />
-              })
-            }
-          </div>
-        </section>
-      </div>
-    </section>
+                })
+              }
+            </div>
+          </section>
+        </div>
+      </section>
+    </div>
   );
 }
