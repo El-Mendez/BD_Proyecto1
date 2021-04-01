@@ -9,7 +9,6 @@ import Player from "../player/Player";
 import TopBar from '../menuBar/topBar';
 import HomeView from '../mainView/homeView';
 import Artist from '../artist/artis';
-//import User from '../user/user';
 
 
 export default function dashboard() {
