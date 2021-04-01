@@ -10,7 +10,7 @@ export default function UpgradeNav(){
       <button className={'btn upgrade-btn'}>
         PREMIUM
       </button>
-      <button className={'btn user-btn ml-4'} onClick={handleClick}>
+      <button className={'btn user-btn ml-4'} >
         <span className={'i-user mr-2'}>
             <I_user/>
         </span>
