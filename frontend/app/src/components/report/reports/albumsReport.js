@@ -1,5 +1,5 @@
 import React from 'react';
-import AlbumItem from './albumItemreport'
+import AlbumItem from '../../utils/itemComponents/albumItem'
 
 export default function AlbumsReport(props){
   const sAlbums = props;

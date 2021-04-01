@@ -1,6 +1,6 @@
 import React from 'react';
-import ArtistItem from '../../report/artistReport/artistItem'
-import Artist from '../../artist/artis';
+import ArtistItem from '../../utils/itemComponents/artistItem'
+
 
 export default function SearchArtist(props){
   const sArtists = props;

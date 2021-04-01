@@ -1,7 +1,7 @@
 import React from 'react';
-import SongItem from './songItem'
+import SongItem from '../utils/itemComponents/songItem'
 
-export default function Songs(){
+export default function SongsArtist(){
   return(
       <section className={'section-container'}>
         <div id="discography" className="section-title text-secondary">

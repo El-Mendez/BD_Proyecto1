@@ -1,10 +1,5 @@
 import React from 'react';
-import ReportItem from './reportItem'
-import ArtistReport from './artistReport/artistReport'
-import UsersReport from "./userReport/usersReport";
-import GenresReport from "./genresReport/genresReport";
-import AlbumsReport from "./albumsReport/albumsReport";
-import MonthsReport from "./month_subsReport/monthsReport";
+import ReportItem from '../utils/itemComponents/reportItem'
 
 export default class report extends React.Component{
     render() {
@@ -31,11 +26,6 @@ export default class report extends React.Component{
                         title={'Usuarios'}
                         description={'Usuarios más activos'}/>
                 </div>
-                <ArtistReport/>
-                <UsersReport/>
-                <GenresReport/>
-                <AlbumsReport/>
-                <MonthsReport/>
             </div>
 
         );

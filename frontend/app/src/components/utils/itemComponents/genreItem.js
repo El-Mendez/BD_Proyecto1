@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class genreItemreport extends React.Component{
+export default class genreItem extends React.Component{
     render() {
         return(
             <div className="card genre-card genre-bg">

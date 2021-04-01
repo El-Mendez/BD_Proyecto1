@@ -1,13 +1,13 @@
 @import "variables";
 @import "../../../node_modules/bootstrap/scss/bootstrap";
 @import '../../../node_modules/react-pro-sidebar/dist/scss/styles';
-@import '../components/report/report';
-@import '../components/utils/utils';
 @import '../components/logIn/logIn';
 @import '../components/mainView/view';
 @import '../components/dashboard/dashboard.scss';
 @import '../components/menuBar/menu.scss';
 @import '../components/artist/artist.scss';
+@import '../components/utils/utils';
+
 body {
   background-color: #535353;
   background-image: linear-gradient(rgba(0,0,0,.6),#121212);
@@ -15,12 +15,10 @@ body {
 
 }
 
-
 .form-container{
   margin-top: 2rem;
   width: 450px;
 }
-
 
 a{
   color: $color-dark;

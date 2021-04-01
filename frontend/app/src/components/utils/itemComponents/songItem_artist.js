@@ -1,13 +1,14 @@
+// SONGS ON A SEARCH, RETURNS THE SONG NAME AND THE ARTIST
+
 import React from 'react';
-import test from './badLiar.jpg'
+import test from '../../../assets/badLiar.jpg'
 
-
-export default function Song(props){
+export default function SongItem_artist(props){
   const songData = props;
   return(
     <div>
       <div className="song-container text-secondary">
-        <div className="play">
+        <div className="index">
           <span className={"font-size m-0 p-0"}>
             {songData.song_index}
           </span>

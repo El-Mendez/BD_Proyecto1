@@ -7,7 +7,8 @@ import {
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
 import HomeView from '../mainView/homeView';
-import Search from '../mainView/search/search'
+import Search from '../mainView/search/search';
+import Report from '../report/report'
 
 
 export default function dashboard() {
@@ -39,7 +40,7 @@ export default function dashboard() {
           <SideBar />
             <Switch>
               <Route path={`${path}/report`}>
-                {/*<Report/>*/}
+                <Report/>
               </Route>
               <Route path={`${path}/playlist`}>
                <h2>Playlists</h2>

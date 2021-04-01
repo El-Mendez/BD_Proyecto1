@@ -1,5 +1,5 @@
 import React from 'react';
-import UserItemreport from "./userItemreport";
+import UserItemreport from "../../utils/itemComponents/userItemreport";
 
 export default class usersReport extends React.Component{
     render() {

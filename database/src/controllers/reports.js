@@ -1,6 +1,6 @@
 const pool = require('../../credentials');
 
-// 1. Albums mas recientes de la semana
+// 1. AlbumsArtist mas recientes de la semana
 const weeklyAlbums = async (req, res) => {
   const response = await pool.query(`
     select a.* 

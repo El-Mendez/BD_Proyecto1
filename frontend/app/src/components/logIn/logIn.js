@@ -1,6 +1,6 @@
 import React from 'react';
 import LogInformContainer from "./logInformContainer";
-import test from '../utils/badLiar.jpg'
+import test from '../../assets/badLiar.jpg'
 
 export default class logIn extends React.Component{
     render(){

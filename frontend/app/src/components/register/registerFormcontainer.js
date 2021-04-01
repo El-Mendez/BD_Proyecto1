@@ -1,6 +1,6 @@
 import React from 'react';
 import Registerform from "./registerForm";
-import logo from '../utils/zoaLogo.png'
+import logo from '../../assets/zoaLogo.png'
 import history from '../history';
 
 //ADD STYLE TO THE LOG IN BUTTON OR CHANGE IT FOR AN H ELEMENT

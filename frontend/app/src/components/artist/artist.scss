@@ -12,36 +12,4 @@
   text-transform: none;
 }
 
-.song-container{
-  grid-template-columns: [index] 16px [first] 4fr;
-   height: 56px;
-   border: 1px solid transparent;
-   border-radius: 4px;
-   position: relative;
-   display: grid;
-   padding: 0 16px;
-   grid-gap: 16px;
-  &:hover{
-    background-color: #ffffff1a;
-  }
-}
-
-.play{
-  display: flex;
-  align-items: center;
-}
-
-.font-size{
-  font-size: 1.45rem;
-}
-
-.songs-details{
-  display: flex;
-  align-items: center;
-}
-
-.img-size{
-  width: 40px;
-  height: 40px;
-}
 

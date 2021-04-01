@@ -1,5 +1,5 @@
 import React from 'react';
-import AlbumItem from '../../artist/albumItem'
+import AlbumItem from '../../utils/itemComponents/albumItem'
 
 export default function SearchAlbums(props){
   const sAlbums = props;

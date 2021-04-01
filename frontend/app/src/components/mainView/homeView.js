@@ -1,5 +1,5 @@
 import  React, {useState, useEffect} from 'react';
-import SongItem from './songItem';
+import SongItem from '../utils/itemComponents/songItemcard';
 import Axios from 'axios';
 import HomeBar from '../menuBar/homeBar'
 

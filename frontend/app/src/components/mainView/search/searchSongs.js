@@ -1,5 +1,5 @@
 import React from 'react';
-import Song from '../../utils/song'
+import SongItem_artist from '../../utils/itemComponents/songItem_artist'
 
 export default function SearchSongs(props){
 
@@ -16,7 +16,7 @@ export default function SearchSongs(props){
       <div id="songs">
         {
           sSongs.lsongs.map((song) => (
-            <Song
+            <SongItem_artist
               key={song.id}
               song_index={song.id}
               song_t={song.cancion}

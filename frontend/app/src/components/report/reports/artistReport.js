@@ -1,5 +1,5 @@
 import React from 'react';
-import ArtistItem from "./artistItem";
+import ArtistItem from "../../utils/itemComponents/artistItem";
 
 export default class artistReport extends React.Component{
     render() {
