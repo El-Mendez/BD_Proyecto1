@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   Switch,
   Route,
-  useParams,
   useRouteMatch
 } from "react-router-dom";
 import SideBar from "../menuBar/sideBar";
@@ -22,18 +21,17 @@ export default function dashboard() {
 
   let {path} = useRouteMatch();
 
-  // const songPlaying = (a_song) =>{
-  //   if(a_song != undefined){
-  //     setSong({
-  //       ...song,
-  //       song_link: a_song.link,
-  //       song_name: a_song.cancion_nombre,
-  //       song_artist: a_song.artista_nombre,
-  //     })
-  //   }
-  // };
+  const songPlaying = (a_song) =>{
+    if(a_song != undefined){
+      setSong({
+        ...song,
+        song_link: a_song.link,
+        song_name: a_song.cancion_nombre,
+        song_artist: a_song.artista_nombre,
+      })
+    }
+  };
 
-    //console.log(this.state.song_name)
     return(
       <div id={'main-container'}>
         <div className={'dash-container'}>
@@ -53,13 +51,15 @@ export default function dashboard() {
               </Route>
               <Route exact paht={path}>
                 <HomeView
-                  songPlaying = {(song) => this.songPlaying(song)}/>
+                  songPlaying = {(song) => songPlaying(song)}/>
               </Route>
             </Switch>
           </div>
           <div className={'player-container'}>
             <Player
-            videoId={"DLgzY8uL86U"} />
+            videoId={song.song_link}//Cuando paso el estate de link, no le da play
+            name={song.song_name}
+            artist={song.song_artist}/>
           </div>
         </div>
       </div>
