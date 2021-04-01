@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeView from './homeView';
-import Search from './search'
+import Search from './search/search'
 import {BrowserRouter as Router,
   Route,
   Switch,

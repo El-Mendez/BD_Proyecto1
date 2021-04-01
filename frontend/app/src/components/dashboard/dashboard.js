@@ -6,9 +6,8 @@ import {
 } from "react-router-dom";
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
-import TopBar from '../menuBar/topBar';
 import HomeView from '../mainView/homeView';
-import Artist from '../artist/artis';
+import Search from '../mainView/search/search'
 
 
 export default function dashboard() {
@@ -38,9 +37,6 @@ export default function dashboard() {
       <div id={'main-container'}>
         <div className={'dash-container'}>
           <SideBar />
-          <TopBar />
-          <div className={'view-container'}>
-            <div id={'topBar-space'}></div>
             <Switch>
               <Route path={`${path}/report`}>
                 {/*<Report/>*/}
@@ -49,14 +45,13 @@ export default function dashboard() {
                <h2>Playlists</h2>
               </Route>
               <Route path={`${path}/search`}>
-                <Artist/>
+                <Search/>
               </Route>
               <Route exact paht={path}>
                 <HomeView
                   songPlaying = {(song) => songPlaying(song)}/>
               </Route>
             </Switch>
-          </div>
           <div className={'player-container'}>
             <Player
             videoId={song.song_link}//Cuando paso el estate de link, no le da play

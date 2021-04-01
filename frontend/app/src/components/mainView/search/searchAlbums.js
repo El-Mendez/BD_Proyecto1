@@ -1,13 +1,13 @@
 import React from 'react';
-import AlbumItem from './albumItemreport'
+import AlbumItem from '../../artist/albumItem'
 
-export default function AlbumsReport(props){
+export default function SearchAlbums(props){
   const sAlbums = props;
   return(
     <section className={'section-container'}>
       <div id="discography" className="section-title text-secondary">
         <h2 className="title">
-          Álbumes
+          Álbumes más recientes de la última semana
         </h2>
         <div>Ver mas</div>
       </div>
