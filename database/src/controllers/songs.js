@@ -9,7 +9,6 @@ const getSongs = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 const getLinkSong = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
