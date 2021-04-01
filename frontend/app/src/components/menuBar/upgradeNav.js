@@ -5,12 +5,20 @@ import { createBrowserHistory as history } from 'history';
 export default function UpgradeNav(){
 
 
+  const handleClick = () =>{
+    console.log('just testing')
+    console.log(history().location);
+    history().push('/user');
+    history().go();
+    console.log(history().location);
+  }
+  
   return(
     <div>
       <button className={'btn upgrade-btn'}>
         PREMIUM
       </button>
-      <button className={'btn user-btn ml-4'} >
+      <button className={'btn user-btn ml-4'} onClick={handleClick}>
         <span className={'i-user mr-2'}>
             <I_user/>
         </span>
