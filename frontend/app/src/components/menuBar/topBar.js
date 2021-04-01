@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRouteMatch} from 'react-router-dom';
 import UpgradeNav from './upgradeNav';
-import SearchNav from './searchNav';
+import {searchNav as SearchNav} from './searchNav';
 
 export default function topBar() {
   const match = useRouteMatch("/home")

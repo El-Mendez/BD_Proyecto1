@@ -9,7 +9,6 @@ export default function HomeView(props){
   const [items, setItems] = useState([]);
   const [error, setError] = useState(null);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try{

@@ -57,7 +57,7 @@ export default function dashboard() {
           </div>
           <div className={'player-container'}>
             <Player
-            videoId={"DLgzY8uL86U"}//Cuando paso el estate de link, no le da play
+            videoId={song.song_link}//Cuando paso el estate de link, no le da play
             name={song.song_name}
             artist={song.song_artist}/>
           </div>
