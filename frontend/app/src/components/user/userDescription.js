@@ -1,28 +1,47 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import {
+    Switch,
+    Route,
+    useRouteMatch
+  } from "react-router-dom";
 import Axios from 'axios';
 import Vista from './view'
-import userView from './userView'
+import Info from './userInfo'
+import Cambio from './cambioDatos'
 import './user.scss';
 
-export default class userDescriptor extends React.Component {
-    render() {
-        return (
-            <div className = "container"> 
-                <div className="row position">    
-                    <Vista
-                    desc = {this.props.desc}
-                    />
-                    <div className="col info_Usuario"> 
-                        <div className="asd">
-                            <div className="row">Nombres : {this.props.nombres}</div>
-                            <div className="row">Apellidos: {this.props.apellidos}</div>
-                            <div className="row">Nombre de usuario: {this.props.username}</div>
-                            <div className="row">Correo: {this.props.correo}</div>
-                            <div className="row">Tipo de cuenta: {this.props.desc}</div>
-                        </div>
-                    </div>
-                </div>
+export default function userDescriptor (props) {
+    let {path} = useRouteMatch();
+    const data = props
+    return (
+        <div className = "container"> 
+            <div className="row position">  
+            <Vista/>
+            <Switch>
+                <Route path={`${path}/cambiar_datos`}>
+                    <Cambio/>
+                </Route>
+                <Route path={`${path}`}>
+                    <Info
+                    username = {data.username}
+                    nombres = {data.nombres}
+                    apellidos = {data.apellidos}
+                    desc = {data.desc}
+                    correo = {data.correo}/>
+                </Route>
+          </Switch>  
             </div>
-            )
-    }
+        </div>
+        )
 }
+    {/* <Vista
+    desc = {this.props.desc}
+    />
+    <div className="col info_Usuario"> 
+        <Info
+        username = {this.props.username}
+        nombres = {this.props.nombres}
+        apellidos = {this.props.apellidos}
+        desc = {this.props.desc}
+        correo = {this.props.correo}/>
+    </div> */}
