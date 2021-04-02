@@ -42,6 +42,16 @@ const updateToArtist = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const updateData = async (req, res) => {
+  const { nombres, apellidos, username } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET nombres = $1, apellidos = $2 WHERE username = $3;
+          `,
+  [nombres, apellidos, username]);
+
+  res.status(200).json(response.rows);
+};
+
 const updateToManager = async (req, res) => {
   const { username } = req.body;
   const response = await pool.query(`
@@ -87,4 +97,5 @@ module.exports = {
   updateToManager,
   getUserDescription,
   getUserPlaylist,
+  updateData,
 };
