@@ -17,7 +17,7 @@ export default function logInformContainer(){
                <LogInform/>
                <span className={'divider'}/>
                <h5 className={'text-center mb-0 mt-3'}>¿No tienes una cuenta?</h5>
-                <button onClick={handleClick} className={`btn signIn-btn my-3`}>
+                <button onClick={handleClick} className={'btn btn-zoa border-btn my-3'}>
                     REGÍSTRATE
                 </button>
             </div>
