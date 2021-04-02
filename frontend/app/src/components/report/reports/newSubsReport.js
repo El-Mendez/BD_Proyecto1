@@ -19,7 +19,7 @@ export default function newSubsReport() {
             Nuevos suscriptores en los últimos 6 meses
           </h2>
         </div>
-        <div id="albums" className="songs-container">
+        <div id="albums" className="d-flex flex-wrap justify-content-between">
           {
             newSubs.map((sub) => {
               const index = newSubs.indexOf(sub)

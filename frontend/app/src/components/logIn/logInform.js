@@ -1,6 +1,5 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
 import { createBrowserHistory as history } from 'history';
 import Axios from 'axios';
 
@@ -81,7 +80,7 @@ import Axios from 'axios';
        <Fragment>
            <form onSubmit={handleSubmit(onSubmit)} >
                <div className={'position-relative mt-2'}>
-                   <input className={"input " + (filled.username? 'is-filled':' ')}
+                   <input className={'input ' + (filled.username? 'is-filled':' ')}
                           type={'text'}
                           name={'username'}
                           onChange={handleInputChange}
@@ -121,7 +120,7 @@ import Axios from 'axios';
                    </small>
                    <button
                        onSubmit={onSubmit}
-                       className={`btn logIn-btn my-3`}>
+                       className={'btn btn-zoa purple-btn my-3 w-50'}>
                        INICIAR SESIÓN
                    </button>
                </div>

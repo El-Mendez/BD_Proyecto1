@@ -1,6 +1,6 @@
 @import "variables";
-@import "../../../node_modules/bootstrap/scss/bootstrap";
-@import '../../../node_modules/react-pro-sidebar/dist/scss/styles';
+@import "~bootstrap/scss/bootstrap";
+@import '~react-pro-sidebar/dist/scss/styles';
 @import '../components/utils/utils';
 @import '../components/logIn/logIn';
 @import '../components/mainView/view';
@@ -21,10 +21,14 @@ body {
   width: 450px;
 }
 
-a{
+.a-button{
   color: $color-dark;
   text-decoration: underline;
+  cursor: pointer;
   &:hover{
     color: $color-medium
   }
 }
+
+
+

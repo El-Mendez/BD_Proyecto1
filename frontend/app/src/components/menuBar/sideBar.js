@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
 import { Link, useRouteMatch } from 'react-router-dom';
 import logo from '../../assets/zoabl.svg'
@@ -6,11 +6,14 @@ import {BsHouse as I_house,
     BsSearch as I_search,
     BsGrid1X2Fill as I_library,
     BsPlusSquareFill as I_newPlaylist} from 'react-icons/bs';
+import CreatePlaylist from '../playlist/createPlaylist';
 
 
 export default function sideBar(){
 
     let {url} = useRouteMatch();
+    const [modalShow, setModalShow] = React.useState(false);
+
 
         return(
             <ProSidebar>
@@ -47,14 +50,15 @@ export default function sideBar(){
                         </MenuItem>
 
                         <MenuItem>
-                            <Link to={`${url}/playlist`}>
-                                <p className={'sidebar-menuItem'}>
+                                <p className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
                                     <span className={'mr-3'}><I_newPlaylist/></span>
                                     Crear Playlist
                                 </p>
-                            </Link>
+                            <CreatePlaylist
+                              show={modalShow}
+                              onHide={() => setModalShow(false)}
+                            />
                         </MenuItem>
-
                     </Menu>
                 </SidebarContent>
 

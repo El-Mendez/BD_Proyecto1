@@ -1,0 +1,19 @@
+.fondo {
+  width: 100vmin;
+  height: 100vmin;
+}
+
+.texto {
+  width: 100vmin;
+  height: 100vmin;
+}
+
+.texto div {
+  color: white;
+}
+
+.opciones {
+  width: 125px;
+  height: 125px;
+  background-color:darkgray;
+}

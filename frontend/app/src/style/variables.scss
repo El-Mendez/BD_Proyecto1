@@ -8,6 +8,7 @@ $primary: #1D1D1DF2;
 $gray: #323232;
 $light-gray: #838383;
 $secondary: #EEEEEE;
+$secondary-light: #F4EEED94;
 //"primary": #202225, #f4eeed
 $theme-colors: (
         "primary": #1D1D1DF2,
@@ -20,3 +21,7 @@ $color-dark: #3F51B5;
 $color-medium: #5C6BC0;
 $color-light: #9FA8dA;
 $primary-light: #1D1D1DCC;
+$modal-content-bg: $secondary;
+$modal-content-color: $primary;
+$modal-content-border-color: $secondary;
+$modal-header-border-color: $secondary;
