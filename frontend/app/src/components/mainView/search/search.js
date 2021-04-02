@@ -107,7 +107,7 @@ export default function searchNav() {
                        placeholder={"Artist, songs or albums"}
                        onChange={handleInputChange}
                 />
-                <button className={'btn upgrade-btn ml-4'} onClick={onClick}>
+                <button className={'btn-zoa upgrade-btn ml-4'} onClick={onClick}>
                   BUSCAR
                 </button>
               </div>
