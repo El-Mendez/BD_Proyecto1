@@ -8,13 +8,13 @@ export default class activeItem extends React.Component{
                     <div className="row g-0">
                         <div className="col month-br">
                             <div className={'card-body'}>
-                                <h2>Month</h2>
+                                <h2>{this.props.month}</h2>
                             </div>
 
                         </div>
                         <div className="col">
                             <div className="card-body">
-                               <h3>135</h3>
+                               <h3>{this.props.quantity}</h3>
                             </div>
                         </div>
                     </div>

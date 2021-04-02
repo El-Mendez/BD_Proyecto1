@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AlbumItem from '../../utils/itemComponents/albumItem'
+import reportRequest from '../../utils/reportsRequest';
 
-export default function AlbumsReport(props){
-  const sAlbums = props;
+export default function AlbumsReport(){
+  const get = 'http://3.135.234.254:3000/reports/weeklyAlbums';
+  const [albums, setAlbums] = useState([]);
+
+  //Request the weekly most recent albums
+  reportRequest(get, setAlbums);
+
   return(
     <section className={'section-container'}>
-      <div id="discography" className="section-title text-secondary">
+      <div className="section-title text-secondary">
         <h2 className="title">
-          Álbumes
+          Álbumes más recientes de la última semana
         </h2>
-        <div>Ver mas</div>
       </div>
       <div id="albums" className="songs-container">
         {
-          sAlbums.lalbums.map((album) => (
+          albums.map((album) => (
             <AlbumItem
               key={album.id}
               a_name={album.albumes}
