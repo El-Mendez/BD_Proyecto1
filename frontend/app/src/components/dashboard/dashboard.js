@@ -45,7 +45,8 @@ export default function dashboard() {
                 <EditPlaylist/>
               </Route>
               <Route path={`${path}/report`}>
-                <Report/>
+                {/*<Report/>*/}
+                <EditPlaylist/>
               </Route>
               <Route path={`${path}/playlist`}>
                <h2>Playlists</h2>
