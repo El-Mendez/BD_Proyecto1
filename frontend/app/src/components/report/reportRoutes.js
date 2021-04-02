@@ -4,7 +4,7 @@ import ArtistReport from './reports/artistReport'
 import UsersReport from "./reports/usersReport";
 import GenresReport from "./reports/genresReport";
 import AlbumsReport from "./reports/albumsReport";
-import MonthsReport from "./reports/monthsReport";
+import MonthsReport from "./reports/newSubsReport";
 
 
 export default function ReportRoute(){

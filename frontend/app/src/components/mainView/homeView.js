@@ -8,7 +8,6 @@ export default function HomeView(props){
 
   const get_song = 'http://3.135.234.254:3000/songs/';
   const [items, setItems] = useState([]);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,7 +15,6 @@ export default function HomeView(props){
         const response = await Axios.get(get_song);
         setItems(response.data);
       }catch (e){
-        setError(e);
         console.log(e)
       }
     };
