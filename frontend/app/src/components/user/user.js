@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useEffect} from 'react';
 import { useRouteMatch } from "react-router-dom";
 import Axios from 'axios';
-import Description from './userDescription';
+import Esqueleto from './userDescription';
 import './user.scss';
 
 
@@ -25,7 +25,7 @@ export default function user (){
         fetchData();
       },[setData])
         return(
-            <Description
+            <Esqueleto
             username = {data.username}
             nombres = {data.nombres}
             apellidos = {data.apellidos}

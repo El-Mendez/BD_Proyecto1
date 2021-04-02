@@ -13,7 +13,6 @@
 .opciones {
     background-color:rgb(218, 218, 218);
     margin-left: 5vmin;
-    margin-right: -0.5vmin;
     border-radius: 1vmin;
     div {
         color:black;
@@ -29,8 +28,8 @@
     text-align: center;
     background-color:#1d1d1d;
     div {
+        margin-top: 2vmin;
         cursor:default;
-        margin-left: 0.5vmin;
     }
 }
 
@@ -41,10 +40,14 @@
         margin-right: auto;
         margin-top: 1vmin;
         &:hover{
-            text-decoration: none;
             cursor: pointer;
             background-color:#ffffff;
             border-radius: 1vmin;            
         }
     }
+}
+
+.usuario{
+    width: 75px; 
+    height: 75px;
 }
