@@ -22,6 +22,7 @@ export default function sideBar(){
                 </SidebarHeader>
                 <SidebarContent>
                     <Menu>
+                        {/* HOME */}
                         <MenuItem>
                             <Link to={'/home'}>
                                 <p className={'sidebar-menuItem'}>
@@ -30,7 +31,7 @@ export default function sideBar(){
                                 </p>
                             </Link>
                         </MenuItem>
-
+                        {/* SEARCH */}
                         <MenuItem>
                             <Link to={`${url}/search`}>
                                 <p className={'sidebar-menuItem'}>
@@ -39,7 +40,7 @@ export default function sideBar(){
                                 </p>
                             </Link>
                         </MenuItem>
-
+                        {/* LIBRARY */}
                         <MenuItem>
                             <Link to={`${url}/report`}>
                                 <p className={'sidebar-menuItem'}>
@@ -48,7 +49,7 @@ export default function sideBar(){
                                 </p>
                             </Link>
                         </MenuItem>
-
+                        {/* CREATE PLAYLIST */}
                         <MenuItem>
                                 <p className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
                                     <span className={'mr-3'}><I_newPlaylist/></span>
