@@ -3,7 +3,6 @@ import React from 'react';
 export default class activeItem extends React.Component{
     render() {
         return (
-            <div>
                 <div className="card mb-3">
                     <div className="row g-0">
                         <div className="col month-br">
@@ -19,7 +18,6 @@ export default class activeItem extends React.Component{
                         </div>
                     </div>
                 </div>
-            </div>
         );
     }
 }

@@ -19,7 +19,7 @@ export default function genresReport() {
             Géneros más populares
           </h2>
         </div>
-        <div id="growingArtists" className="songs-container">
+        <div id="growingArtists" className="d-flex flex-wrap justify-content-between">
           {
             topGenres.map((genres) => {
               const index = topGenres.indexOf(genres)

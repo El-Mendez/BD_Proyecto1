@@ -24,7 +24,7 @@ export default function registerFormcontainer(){
                 <span className={'mr-3'}>
                    ¿Ya tienes cuenta?
                 </span>
-                <button onClick={handleClick}>Iniciar Sesión</button>
+                <a className='a-button' onClick={handleClick}>Iniciar Sesión</a>
             </p>
         </div>
     )

@@ -1,6 +1,5 @@
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
-import {BsFillExclamationCircleFill as Exclamation_icon} from 'react-icons/bs';
 import {BsPerson as I_person} from 'react-icons/bs';
 import {BsLock as I_lock} from 'react-icons/bs';
 import {BsEnvelope as I_envelope} from 'react-icons/bs';
@@ -210,7 +209,7 @@ export default function registerForm (){
                     </small>
                 </div>
                 {/*REGISTER BUTTON*/}
-                <button onSubmit={onSubmit} className={`btn logIn-btn my-3`}>REGISTRARTE</button>
+                <button onSubmit={onSubmit} className={`btn btn-zoa purple-btn my-3 w-100`}>REGISTRARTE</button>
             </form>
         </Fragment>
     );

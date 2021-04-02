@@ -9,6 +9,8 @@ import Player from "../player/Player";
 import HomeView from '../mainView/homeView';
 import Search from '../mainView/search/search';
 import Report from '../report/report'
+import CreatePlaylist from '../playlist/createPlaylist';
+import EditPlaylist from '../playlist/editPlaylist';
 
 
 export default function dashboard() {
@@ -39,11 +41,15 @@ export default function dashboard() {
         <div className={'dash-container'}>
           <SideBar />
             <Switch>
+              <Route path={`${path}/editPlaylist`}>
+                <EditPlaylist/>
+              </Route>
               <Route path={`${path}/report`}>
                 <Report/>
               </Route>
               <Route path={`${path}/playlist`}>
                <h2>Playlists</h2>
+                <CreatePlaylist/>
               </Route>
               <Route path={`${path}/search`}>
                 <Search/>

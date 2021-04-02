@@ -1,8 +1,11 @@
 import React from 'react';
 import { BsPeopleCircle as I_user } from 'react-icons/bs';
 import { createBrowserHistory as history } from 'history';
+import Upgrade from './upgrade';
 
 export default function homeBar() {
+
+  const [modalShow, setModalShow] = React.useState(false);
 
   const handleClick = () =>{
     console.log('just testing')
@@ -16,10 +19,14 @@ export default function homeBar() {
         <div className={'top-bar'}>
             <header className={'header-bar'}>
               <div>
-                <button className={'btn upgrade-btn'}>
+                <button className={'btn btn-zoa upgrade-btn'} onClick={() => setModalShow(true)}>
                   PREMIUM
                 </button>
-                <button className={'btn user-btn ml-4'} onClick={handleClick}>
+                <Upgrade
+                  show={modalShow}
+                  onHide={() => setModalShow(false)}
+                />
+                <button className={'btn btn-zoa user-btn ml-4'} onClick={handleClick}>
                   <span className={'i-user mr-2'}>
                     <I_user/>
                   </span>
