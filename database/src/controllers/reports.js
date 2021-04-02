@@ -44,9 +44,10 @@ const growingArtist = async (req, res) => {
 // 3. Cantidad de nuevas suscripciones mensuales durante los últimos seis meses
 const newSubscriptions = async (req, res) => {
   const response = await pool.query(`
-    SELECT count(*)  
+    SELECT to_char(s.fecha_inicio, 'MON') as mes, count(*)
     FROM suscripcion s
-    WHERE s.fecha_inicio > (current_date - 183) AND s.fecha_inicio < current_date;
+    WHERE s.fecha_inicio > (current_date - 183) AND s.fecha_inicio < current_date
+    GROUP BY s.fecha_inicio;
   `);
   res.status(200).json(response.rows);
 };

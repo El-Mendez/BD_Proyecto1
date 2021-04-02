@@ -100,7 +100,7 @@ GET http://{{host}}/reports/growingArtists
 Accept: application/json
 
 ###
-# La cantidad de nuevas suscripciones mensuales en los últimos tres meses
+# La cantidad de nuevas suscripciones mensuales en los últimos seis meses
 GET http://{{host}}/reports/newSubscriptions
 Accept: application/json
 
