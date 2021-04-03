@@ -90,6 +90,17 @@ const getUserPlaylist = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const addSubscription = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  INSERT INTO suscripcion (id_usuario, Fecha_inicio)
+    VALUES ($1,current_date);`, [username]);
+
+  res.status(200).json(response.rows);
+};
+
+
+
 module.exports = {
   createUser,
   logIn,
@@ -98,4 +109,5 @@ module.exports = {
   getUserDescription,
   getUserPlaylist,
   updateData,
+  addSubscription,
 };

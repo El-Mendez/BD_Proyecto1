@@ -10,6 +10,7 @@ const {
   getUserDescription,
   getUserPlaylist,
   updateData,
+  addSubscription,
 } = require('../controllers/usuarios');
 // Queries songs
 const {
@@ -72,6 +73,7 @@ router.post('/updatesToManager', updateToManager);
 router.post('/getUserDescription', getUserDescription);
 router.post('/getUserPlaylist', getUserPlaylist);
 router.post('/updateData', updateData);
+router.post('/addSubscription', addSubscription);
 // --------------------Queries artist--------------------------
 router.get('/artists', getArtists);
 router.post('/SpecificArtist', getSpecificArtist);
