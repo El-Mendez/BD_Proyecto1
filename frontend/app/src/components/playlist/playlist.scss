@@ -122,3 +122,19 @@
     outline: none;
   }
 }
+
+.library-container{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-height: 224px;
+}
+
+.library-info{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+  padding: 16px;
+  color: #fff;
+}

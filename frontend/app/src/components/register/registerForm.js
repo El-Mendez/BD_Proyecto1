@@ -1,8 +1,10 @@
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
+import Axios from 'axios';
 import {BsPerson as I_person} from 'react-icons/bs';
 import {BsLock as I_lock} from 'react-icons/bs';
 import {BsEnvelope as I_envelope} from 'react-icons/bs';
+import history from '../history';
 
 //ADD DEFENSIVE PROGRAMMING TO THE REGISTER BUTTON IN CASE DE USERNAME ALREADY EXIST
 
@@ -50,31 +52,32 @@ export default function registerForm (){
         }
     }
 
-     function postMessage(email, username, password, nombres, apellidos){
-        const data ={
-            username: username,
-            contrasena: password,
-            nombres: nombres,
-            apellidos: apellidos,
-            correo: email,
-            id_tipoUsuario: 1
-        };
-
-         fetch(post_user, {
-             method: 'POST', // or 'PUT'
-             body: JSON.stringify(data), // data can be `string` or {object}!
-             headers:{
-                 'Content-Type': 'application/json'
-             }
-         }).then(res => res.json())
-             .catch(error => console.error('Error:', error))
-             .then(response => console.log('Success:', response));
-    }
+    const createUser = () =>{
+        const fetchData = async () =>{
+            try{
+                const { data } = await Axios.post(post_user,
+                  {
+                      username: registerData.username,
+                      contrasena: registerData.password,
+                      nombres: registerData.user_name,
+                      apellidos: registerData.lastname,
+                      correo: registerData.email,
+                      id_tipoUsuario: 1
+                  }
+                );
+                history.push(`/home/${username}`);
+                history.go();
+            } catch (error){
+                console.log(error)
+                alert("Usuario o correo ya existente. Prueba con un correo o un usuario distinto")
+            }
+        }
+        fetchData();
+    };
 
     const onSubmit = (data) =>{
         console.log(data)
-        //location.href='../../dashboard.html'
-        postMessage(registerData.email,registerData.username, registerData.password, registerData.user_name, registerData.lastname);
+        createUser();
     }
 
     const handleClick = () => {

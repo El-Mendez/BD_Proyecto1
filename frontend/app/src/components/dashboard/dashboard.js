@@ -13,6 +13,7 @@ import Report from '../report/report'
 import CreatePlaylist from '../playlist/createPlaylist';
 import EditPlaylist from '../playlist/editPlaylist';
 import Artist from '../artist/artis';
+import Library from '../playlist/library';
 
 
 export default function dashboard() {
@@ -47,12 +48,17 @@ export default function dashboard() {
               <Route  path={`${path}/search/artists/:artist`}>
                 <Artist/>
               </Route>
-              <Route path={`${path}/editPlaylist`}>
+              <Route path={`${path}/library/editPlaylist/:playlist`}>
+                <EditPlaylist/>
+              </Route>
+              <Route path={`${path}/editPlaylist/:playlist`}>
                 <EditPlaylist/>
               </Route>
               <Route path={`${path}/report`}>
                 <Report/>
-                {/*<EditPlaylist/>*/}
+              </Route>
+              <Route path={`${path}/library`}>
+                <Library/>
               </Route>
               <Route path={`${path}/playlist`}>
                <h2>Playlists</h2>

@@ -222,6 +222,19 @@ h1{
   align-items: center;
 }
 
+.library-item{
+  position: relative;
+  height: 80px;
+  background-color: hsla(0,0%,100%,.1);
+  border-radius: 4px;
+  transition: background-color .3s ease;
+  &:hover{
+    background: hsla(0,0%,100%,.2);
+    backdrop-filter: blur(60px);
+  }
+}
+
+
 
 
 

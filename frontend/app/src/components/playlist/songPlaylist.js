@@ -1,10 +1,61 @@
 import React from 'react';
 import test from '../../assets/badLiar.jpg'
 
+//ADD SONG TO A PLAYLIST
+//DELETE SONG OF A PLAYLIST
+
+//MISSING: CONFIGURE THE API AND THE PARAMETERS IN THE REQUEST
+
 export default function SongItem_artist(props){
   const songData = props;
+
+  const add_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const delete_song = 'http://3.135.234.254:3000/getSpecificSong';
+
+  //ADD SONGS
+  function addSong(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(add_song,
+          {
+            nombre: search + '%',
+            playlist: songData.playlist_name
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  function deleteSong(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(delete_song,
+          {
+            nombre: search + '%',
+            playlist: songData.playlist_name
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  const handleClick = () =>{
+    if(songData.option === 1){
+      addSong();
+    }else{
+      deleteSong();
+    }
+  }
+
+
   return(
-      <div className="row-title-grid pSong-grid text-secondary">
+      <div className="row-title-grid pSong-grid text-secondary mt-2">
         {/* INDEX */}
         <div className={"pR_title justify-self-end"}>
           <small>{songData.song_index}</small>
@@ -21,8 +72,8 @@ export default function SongItem_artist(props){
         <div className={"pR_title justify-self-star"}>
           <small>{songData.song_album}</small>
         </div>
-        {/* ADD O DELETE */}
-        <div className={"pR_title justify-self-end"}>
+        {/* ADD OR DELETE */}
+        <div className={"pR_title justify-self-end cursor"} onClick={handleClick}>
           <span>
             {songData.I_options}
           </span>

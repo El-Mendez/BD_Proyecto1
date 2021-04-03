@@ -21,7 +21,7 @@ export default function SongsArtist(props){
       }
     };
     fetchData();
-  })
+  }, [setSongs])
 
 
   return(

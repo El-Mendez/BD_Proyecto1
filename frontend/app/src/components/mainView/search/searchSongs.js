@@ -15,14 +15,17 @@ export default function SearchSongs(props){
       </div>
       <div id="songs">
         {
-          sSongs.lsongs.map((song) => (
-            <SongItem_artist
-              key={song.id}
-              song_index={song.id}
-              song_t={song.cancion}
-              song_a={song.artista}
-            />
-          ))
+          sSongs.lsongs.map((song) => {
+            const index = sSongs.lsongs.indexOf(song);
+            return(
+              <SongItem_artist
+                key={index}
+                song_index={index + 1}
+                song_t={song.cancion}
+                song_a={song.artista}
+              />
+            );
+          })
         }
       </div>
     </section>

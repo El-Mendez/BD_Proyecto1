@@ -19,7 +19,6 @@ export default function searchNav() {
 
   //Search songs
   function getSong(){
-    console.log("Loading...");
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get_song,
@@ -41,7 +40,6 @@ export default function searchNav() {
   };
   //Search album
   function getAlbum(){
-    console.log("Loading...");
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get_album,
@@ -59,7 +57,6 @@ export default function searchNav() {
   };
   //Search artist
   function getArtist(){
-    console.log("Loading...");
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get_artist,
@@ -89,6 +86,9 @@ export default function searchNav() {
       getArtist();
     }else{
       alert('Ingrese algo para buscar')
+      setLartists([]);
+      setLalbumns([]);
+      setLsongs([]);
     }
 
   }
@@ -114,24 +114,30 @@ export default function searchNav() {
             </header>
           </div>
         </div>
-        <section>
-          <div className="home-container">
-            <SearchSongs
-              lsongs={lsongs}/>
-          </div>
-        </section>
-        <section>
-          <div className="home-container">
-            <SearchAlbums
-              lalbums={lalbums}/>
-          </div>
-        </section>
-        <section>
-          <div className="home-container">
-            <SearchArtist
-              lartists={lartists}/>
-          </div>
-        </section>
+        {
+          (lsongs.length>0)? <section>
+            <div className="home-container">
+              <SearchSongs
+                lsongs={lsongs}/>
+            </div>
+          </section> : ''
+        }
+        {
+          (lalbums.length>0)? <section>
+            <div className="home-container">
+              <SearchAlbums
+                lalbums={lalbums}/>
+            </div>
+          </section> : ''
+        }
+        {
+          (lartists.length>0)? <section>
+            <div className="home-container">
+              <SearchArtist
+                lartists={lartists}/>
+            </div>
+          </section> : ''
+        }
       </div>
   );
 }
