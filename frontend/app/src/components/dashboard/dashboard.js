@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {
   Switch,
   Route,
-  useRouteMatch
+  useRouteMatch,
+  useParams
 } from "react-router-dom";
 import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
@@ -22,6 +23,7 @@ export default function dashboard() {
   })
 
   let {path} = useRouteMatch();
+  let { user } = useParams();
 
   const songPlaying = (a_song) =>{
     if(a_song != undefined){
@@ -45,8 +47,8 @@ export default function dashboard() {
                 <EditPlaylist/>
               </Route>
               <Route path={`${path}/report`}>
-                {/*<Report/>*/}
-                <EditPlaylist/>
+                <Report/>
+                {/*<EditPlaylist/>*/}
               </Route>
               <Route path={`${path}/playlist`}>
                <h2>Playlists</h2>
@@ -55,9 +57,11 @@ export default function dashboard() {
               <Route path={`${path}/search`}>
                 <Search/>
               </Route>
-              <Route exact paht={path}>
+              <Route exact paht={`/home/${user}`} children={
                 <HomeView
                   songPlaying = {(song) => songPlaying(song)}/>
+              }>
+
               </Route>
             </Switch>
           <div className={'player-container'}>

@@ -1,5 +1,6 @@
 import  React, {useState, useEffect} from 'react';
 import SongItem from '../utils/itemComponents/songItemcard';
+import { useParams } from'react-router-dom';
 import Axios from 'axios';
 import HomeBar from '../menuBar/homeBar'
 
@@ -8,6 +9,8 @@ export default function HomeView(props){
 
   const get_song = 'http://3.135.234.254:3000/songs/';
   const [items, setItems] = useState([]);
+
+  let { user } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,7 +28,8 @@ export default function HomeView(props){
   return(
     <div className={'view-container'}>
       <div id={'topBar-space'}>
-       <HomeBar/>
+       <HomeBar
+       user_name={user}/>
       </div>
       <section>
         <div className={'home-container'}>

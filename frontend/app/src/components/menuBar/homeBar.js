@@ -1,16 +1,19 @@
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import { BsPeopleCircle as I_user } from 'react-icons/bs';
 import { createBrowserHistory as history } from 'history';
 import Upgrade from './upgrade';
 
-export default function homeBar() {
+export default function homeBar(props) {
 
+  const username = props;
   const [modalShow, setModalShow] = React.useState(false);
+  let { user } = useParams();
 
   const handleClick = () =>{
     console.log('just testing')
     console.log(history().location);
-    history().push('/user');
+    history().push(`/user/${user}`);
     history().go();
     console.log(history().location);
   }
@@ -30,7 +33,7 @@ export default function homeBar() {
                   <span className={'i-user mr-2'}>
                     <I_user/>
                   </span>
-                  username
+                  {username.user_name}
                 </button>
               </div>
             </header>
