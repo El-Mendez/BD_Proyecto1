@@ -14,12 +14,15 @@ export default function SearchArtist(props){
       </div>
       <div id="albums" className="songs-container">
         {
-          sArtists.lartists.map((artist) => (
-            <ArtistItem
-              key={artist.id}
-              userName={artist.nombre}
-            />
-          ))
+          sArtists.lartists.map((artist) => {
+            const index = sArtists.lartists.indexOf(artist);
+            return(
+              <ArtistItem
+                key={index}
+                userName={artist.nombre}
+              />
+            );
+        })
         }
       </div>
     </section>

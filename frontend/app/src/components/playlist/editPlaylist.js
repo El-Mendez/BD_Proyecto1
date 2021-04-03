@@ -1,11 +1,72 @@
-import React from 'react';
-import image from '../../assets/badLiar.jpg'
+import React, {useEffect} from 'react';
+import image from '../../assets/badLiar.jpg';
+import Axios from 'axios';
 import SongItem from './songPlaylist';
 import {BsTrash as I_delete,
   BsPlus as I_add,
   BsSearch as I_search} from 'react-icons/bs';
+import { useParams } from 'react-router-dom';
+
+// MISSING:
+// -QUERY TO RETURN THE ACTUAL SONGS ON THE PLAYLIST
+// -QUERY TO COUNT THE SONGS ON THE PLAYLIST
 
 export default function EditPlaylist(){
+  let { playlist } = useParams();
+  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const get_playlistSongs = 'http://3.135.234.254:3000/getSpecificSong';
+
+  const [search, setSearch] = React.useState('');
+  const [lsongs, setLsongs] = React.useState([]);
+  const [playlistSongs, setPlaylistSongs] = React.useState([]);
+
+  //SONGS ON THE PLAYLIST
+  useEffect(() =>{
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_playlistSongs,
+          {
+            playlist: playlist
+          }
+        );
+        setPlaylistSongs(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  })
+
+  //Search songs
+  function getSong(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_song,
+          {
+            nombre: search + '%'
+          }
+        );
+        console.log(data)
+        setLsongs(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  const handleInputChange = (e) =>{
+    setSearch(e.target.value);
+  }
+
+  const onClick = () =>{
+    if(search !== ''){
+      getSong();
+    }else{
+      alert('Ingrese el nombre de la canción para buscar')
+    }
+  }
+
   return(
     <section className={'overflow-auto'}>
       <div className={'playlist-container'}>
@@ -23,7 +84,7 @@ export default function EditPlaylist(){
         </div>
         <div className="_pD1">
           <h6>PLAYLIST</h6>
-          <h2>Playlist Name</h2>
+          <h2>{playlist}</h2>
           <p>Username • 10 canciones</p>
         </div>
       </div>
@@ -50,13 +111,23 @@ export default function EditPlaylist(){
                 </div>
                 <section className={'mb-4'}>
                   <div id="songs">
-                    <SongItem
-                      song_index={1}
-                      song_t={"Nose"}
-                      song_a={"Saber"}
-                      song_album={"Love Goes"}
-                      I_options={<I_delete/>}
-                    />
+                    {
+                      playlistSongs.map((song) => {
+                        const index = playlistSongs.indexOf(song);
+                        return(
+                          <SongItem
+                            key={index}
+                            song_index={index + 1}
+                            song_t={song.nombre}
+                            song_a={song.artista}
+                            song_album={song.album}
+                            I_options={<I_delete/>}
+                            option={0}
+                            playlist_name={playlist}
+                          />
+                        );
+                      })
+                    }
                   </div>
                 </section>
               </div>
@@ -73,9 +144,10 @@ export default function EditPlaylist(){
                      type={"text"}
                      maxLength={"80"}
                      name={'search'}
-                     placeholder={"Nombre de la cancion"}/>
+                     placeholder={"Nombre de la cancion"}
+                     onChange={handleInputChange}/>
             </div>
-            <button className={'btn upgrade-btn ml-4'}>
+            <button className={'btn upgrade-btn ml-4'} onClick={onClick}>
               BUSCAR
             </button>
           </div>
@@ -83,13 +155,23 @@ export default function EditPlaylist(){
         {/* CANCIONES ENCONTRADAS */}
         <section className={'my-4'}>
           <div id="songs">
-            <SongItem
-              song_index={1}
-              song_t={"Nose"}
-              song_a={"Saber"}
-              song_album={"Love Goes"}
-              I_options={<I_add/>}
-            />
+            {
+              lsongs.map((song) => {
+                const index = lsongs.indexOf(song)
+                return(
+                  <SongItem
+                    key={index}
+                    song_index={index + 1}
+                    song_t={song.cancion}
+                    song_a={song.artista}
+                    song_album={"Love Goes"}
+                    I_options={<I_add/>}
+                    option={1}
+                    playlist_name={playlist}
+                  />
+                );
+              })
+            }
           </div>
         </section>
       </section>

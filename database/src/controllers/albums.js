@@ -7,15 +7,17 @@ const getAlbums = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+// Modificada para que devuelve el año del album
 const getAlbumByArtist = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT a2.nombre AS album, c.nombre AS cancion
+  SELECT a2.nombre AS album, to_char(a2.fecha_publicacion, 'YYYY') as year
   FROM artista a
     INNER JOIN canciones c on a.Id_artista = c.id_artista
     INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
     INNER JOIN albumes a2 on a2.id_album = ca.id_album
-  WHERE a.nombre ILIKE $1`,
+WHERE a.nombre ILIKE $1
+GROUP BY a2.nombre, year`,
   [nombre]);
 
   res.status(200).json(response.rows);

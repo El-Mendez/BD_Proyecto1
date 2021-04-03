@@ -71,7 +71,7 @@ export default function sideBar(){
                         {/* LIBRARY */}
                         {
                             premium? <MenuItem>
-                                <Link to={`${url}/Library`}>
+                                <Link to={`${url}/library`}>
                                     <p className={'sidebar-menuItem'}>
                                         <span className={'mr-3'}><I_library/></span>
                                         Library

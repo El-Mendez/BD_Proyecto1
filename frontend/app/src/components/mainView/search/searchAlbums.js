@@ -13,13 +13,16 @@ export default function SearchAlbums(props){
       </div>
       <div id="albums" className="songs-container">
         {
-          sAlbums.lalbums.map((album) => (
-            <AlbumItem
-              key={album.id}
-              a_name={album.albumes}
-              a_date={album.artista}
-            />
-          ))
+          sAlbums.lalbums.map((album) => {
+           const index = sAlbums.lalbums.indexOf(album)
+           return(
+             <AlbumItem
+               key={index}
+               a_name={album.albumes}
+               a_date={album.artista}
+             />
+           );
+          })
         }
       </div>
     </section>
