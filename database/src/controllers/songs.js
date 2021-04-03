@@ -76,19 +76,23 @@ WHERE c.nombre ILIKE $1;`,
 
 
 const songOff = async (req, res) => {
-  const { nombre } = req.body;
+  const { estado, cancion, artista } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET estado = false WHERE nombre = $1;`,
-  [nombre]);
+  UPDATE canciones SET estado = $1 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+    INNER JOIN artista a ON c.id_artista = a.id_artista 
+    WHERE c.nombre = $2 AND a.nombre = $3);`,
+  [estado, cancion, artista]);
 
   res.status(200).json(response.rows);
 };
 
 const updateSongName = async (req, res) => {
-  const { nombre } = req.body;
+  const { newName, oldName, artist } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET nombre = 'Algo' WHERE nombre = $1;`,
-  [nombre]);
+  UPDATE canciones SET nombre = $1 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+    INNER JOIN artista a ON c.id_artista = a.id_artista 
+    WHERE c.nombre = $2 AND a.nombre = $3);`,
+  [newName, oldName, artist]);
 
   res.status(200).json(response.rows);
 };
@@ -103,10 +107,12 @@ const updateSongLink = async (req, res) => {
 };
 
 const deleteSong = async (req, res) => {
-  const { nombre } = req.body;
+  const { cancion, artista } = req.body;
   const response = await pool.query(`
-  DELETE FROM canciones WHERE nombre = $1; `,
-  [nombre]);
+  DELETE FROM canciones WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+    INNER JOIN artista a ON c.id_artista = a.id_artista 
+    WHERE c.nombre = $1 AND a.nombre = $2)`,
+  [cancion, artista]);
 
   res.status(200).json(response.rows);
 };
