@@ -57,7 +57,7 @@ export default function dashboard() {
               <Route path={`${path}/search`}>
                 <Search/>
               </Route>
-              <Route exact paht={`/home/${user}`} children={
+              <Route exact paht={{path}} children={
                 <HomeView
                   songPlaying = {(song) => songPlaying(song)}/>
               }>
