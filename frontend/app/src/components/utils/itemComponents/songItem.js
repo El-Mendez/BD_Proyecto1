@@ -9,7 +9,7 @@ export default function SongItem(props){
   return(
     <div>
       <div className="song-container text-secondary">
-        <div className="index">
+        <div className="pR_title justify-self-end">
           <span className={"font-size m-0 p-0"}>
             {songData.song_index}
           </span>
@@ -17,6 +17,9 @@ export default function SongItem(props){
         <div className={"songs-details text-secondary"}>
           <img src={test} alt="Test" width={"40px"} className={"mr-3"}/>
           <p className="m-0 p-0">{songData.song_title}</p>
+        </div>
+        <div className={"pR_title"}>
+          <small>•••</small>
         </div>
       </div>
     </div>

@@ -16,7 +16,9 @@ export default function userDescriptor (props) {
     return (
         <div className = "container"> 
             <div className="row position">  
-            <Vista/>
+            <Vista
+            desc = {data.desc}
+            />
             <Switch>
                 <Route path={`${path}/cambiar_datos`}>
                     <Cambio/>

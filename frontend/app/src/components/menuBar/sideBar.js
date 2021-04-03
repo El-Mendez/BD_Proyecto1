@@ -1,19 +1,46 @@
-import React, { useState } from "react";
-import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
+import React, { useState, useEffect } from "react";
+import { ProSidebar, Menu, MenuItem, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
 import { Link, useRouteMatch, useParams} from 'react-router-dom';
+import Axios from 'axios';
 import logo from '../../assets/zoabl.svg'
 import {BsHouse as I_house,
     BsSearch as I_search,
     BsGrid1X2Fill as I_library,
-    BsPlusSquareFill as I_newPlaylist} from 'react-icons/bs';
+    BsPlusSquareFill as I_newPlaylist,
+    BsClipboardData as I_report} from 'react-icons/bs';
 import CreatePlaylist from '../playlist/createPlaylist';
 
 
 export default function sideBar(){
 
     let {url} = useRouteMatch();
-     let { user } = useParams();
+    let { user } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
+
+    const get_user = 'http://3.135.234.254:3000/getUserDescription'
+    const [admin, setAdmin] = useState(false);
+    const [premium, setPremium] = useState(false);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try{
+                const { data } = await Axios.post(get_user,
+                  {
+                    username: user
+                })
+                if (data[0].descripcion === 'Admin'){
+                    setAdmin(true);
+                    setPremium (true);
+                }else if(data[0].descripcion === 'Premium'){
+                    setPremium(true);
+                }
+            }catch (e){
+                console.log(e)
+            }
+        };
+        fetchData();
+    })
+
 
 
         return(
@@ -42,25 +69,41 @@ export default function sideBar(){
                             </Link>
                         </MenuItem>
                         {/* LIBRARY */}
-                        <MenuItem>
-                            <Link to={`${url}/report`}>
-                                <p className={'sidebar-menuItem'}>
-                                    <span className={'mr-3'}><I_library/></span>
-                                    Library
-                                </p>
-                            </Link>
-                        </MenuItem>
+                        {
+                            premium? <MenuItem>
+                                <Link to={`${url}/Library`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'mr-3'}><I_library/></span>
+                                        Library
+                                    </p>
+                                </Link>
+                            </MenuItem> : ''
+                        }
                         {/* CREATE PLAYLIST */}
-                        <MenuItem>
+                        {
+                            premium? <MenuItem>
                                 <p className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
                                     <span className={'mr-3'}><I_newPlaylist/></span>
                                     Crear Playlist
                                 </p>
-                            <CreatePlaylist
-                              show={modalShow}
-                              onHide={() => setModalShow(false)}
-                            />
-                        </MenuItem>
+                                <CreatePlaylist
+                                  show={modalShow}
+                                  onHide={() => setModalShow(false)}
+                                />
+                            </MenuItem> : ''
+                        }
+                        {/* REPORTS */}
+                        {
+                            admin? <MenuItem>
+                                <Link to={`${url}/report`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'mr-3'}><I_report/></span>
+                                        Reportes
+                                    </p>
+                                </Link>
+
+                            </MenuItem> : ''
+                        }
                     </Menu>
                 </SidebarContent>
 
