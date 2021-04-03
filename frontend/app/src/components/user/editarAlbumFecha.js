@@ -20,13 +20,12 @@ export default function editAlbum (props){
     return(
         <Modal
       {...props}
-      size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Ingrese los datos del artista que desea eliminar
+          Ingrese los datos del album
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -36,11 +35,22 @@ export default function editAlbum (props){
                  name={'name'}
                  onChange={handleInputChange}
           />
-          <label className={'label'}>Nombre del artista</label>
+          <label className={'label'}>Nombre del album</label>
+        </div>
+      <div className={'position-relative mt-2'}>
+          <input className={"input " + (filled? 'is-filled':' ')}
+                 type={'text'}
+                 name={'name'}
+                 onChange={handleInputChange}
+          />
+          <label className={'label'}>Artista</label>
+        </div>
+      <div className={'position-relative mt-2 fecha'}>
+          <input type = "date"/>
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <Button className={"btn-zoa border-btn mb-2"} >Eliminar</Button>
+      <Button className={"btn-zoa border-btn mb-2"} >Enviar</Button>
       <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>
