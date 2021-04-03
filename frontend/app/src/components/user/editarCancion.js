@@ -2,22 +2,48 @@ import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import EditSong from './editarCancionModal'
+import DeleteSong from './eliminarCancion'
+import StateSong from './editarCancionEstado'
 
-export default function editAlbum (props){
+export default function editSong (){
+    
+    const [modalShowName, setModalShowNameSong] = React.useState(false);
+    const [modalDelete, setModalDeleteSong] = React.useState(false);
+    const [modalState, setModalState] = React.useState(false);
+
     return (
         <div className="col info_Usuario"> 
             <div className="asd">
                 <div className="row editArtist">
                 <p>Activa o desactiva una canción de la base de datos</p>
-                <Button variant="dark" >Activar/Desactivar canción</Button>
+                <Button variant="dark" onClick={() => setModalState(true)}>
+                    Activar/Desactivar canción
+                </Button>
+                <StateSong 
+                        show={modalState}
+                        onHide={() => setModalState(false)}
+                    />
                 </div>
                 <div className="row editArtist">
                 <p>Cambia el nombre de una canción de la base de datos</p>
-                <Button variant="dark" >Cambiar nombre a una canción  </Button>
+                <Button variant="dark" onClick={() => setModalShowNameSong(true)}>
+                    Cambiar nombre a una canción  
+                </Button>
+                <EditSong 
+                        show={modalShowName}
+                        onHide={() => setModalShowNameSong(false)}
+                    />
                 </div>
                 <div className="row editArtist">
                 <p>Elimina una canción de la base de datos (Precaución: esta acción no puede disolverse)</p>
-                <Button variant="dark" >Eliminar una canción</Button>
+                <Button variant="dark" onClick={() => setModalDeleteSong(true)}>
+                    Eliminar una canción
+                    </Button>
+                    <DeleteSong 
+                        show={modalDelete}
+                        onHide={() => setModalDeleteSong(false)}
+                    />
                 </div>
             </div>
         </div>
