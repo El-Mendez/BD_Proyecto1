@@ -6,17 +6,10 @@ import {BsFillPersonFill as I_person, BsCardText as I_info,
         BsHouse as I_house,} from 'react-icons/bs';
 import logo from '../../assets/user.svg'
 import './user.scss';
-import EditSong from './editarCancion'
-import EditAlbum from './editarAlbumModal.js'
-import EditArtist from './editarArtista'
-import DeleteSong from './eliminarCancion'
-import DeleteArtist from './eliminarArtista'
 
 export default function userView () {
     let {url} = useRouteMatch();
     let { user } = useParams();
-    const [modalShow, setModalShow] = React.useState(false);
-    const [modalShowSong, setModalShowSong] = React.useState(false);
 
         return (
             <ProSidebar>

@@ -28,7 +28,7 @@ export default function editSong (){
                 <div className="row editArtist">
                 <p>Cambia el nombre de una canción de la base de datos</p>
                 <Button variant="dark" onClick={() => setModalShowNameSong(true)}>
-                    Cambiar nombre a una canción  
+                    Cambiar nombre de una canción  
                 </Button>
                 <EditSong 
                         show={modalShowName}
