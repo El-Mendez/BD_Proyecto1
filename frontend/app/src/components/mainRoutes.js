@@ -6,17 +6,15 @@ import User from "./user/user";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 
 
-export default class MainRoutes extends React.Component {
-  render() {
+export default function MainRoutes() {
     return(
       <Router>
         <Switch>
           <Route exact path="/" component={LogIn}/>
           <Route path="/signUp" component={SignUp}/>
-          <Route path="/home" component={Dashboard}/>
-          <Route path="/user/:id" component={User}/>
+          <Route path="/home/:user" component={Dashboard}/>
+          <Route path="/user/:user" component={User}/>
         </Switch>
       </Router>
     );
-  }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useParams} from 'react-router-dom';
 import logo from '../../assets/zoabl.svg'
 import {BsHouse as I_house,
     BsSearch as I_search,
@@ -12,6 +12,7 @@ import CreatePlaylist from '../playlist/createPlaylist';
 export default function sideBar(){
 
     let {url} = useRouteMatch();
+     let { user } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
 
 
@@ -24,7 +25,7 @@ export default function sideBar(){
                     <Menu>
                         {/* HOME */}
                         <MenuItem>
-                            <Link to={'/home'}>
+                            <Link to={`/home/${user}`}>
                                 <p className={'sidebar-menuItem'}>
                                     <span className={'mr-3'}><I_house/></span>
                                     Home

@@ -2,6 +2,7 @@ import React, {Fragment, useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import { createBrowserHistory as history } from 'history';
 import Axios from 'axios';
+import user from '../user/user';
 
 
 
@@ -37,7 +38,7 @@ import Axios from 'axios';
          if(data.length === 1){
            console.log('just testing')
            console.log(history().location);
-           history().push('/home');
+           history().push(`/home/${username}`);
            history().go();
            console.log(history().location);
          }else{
