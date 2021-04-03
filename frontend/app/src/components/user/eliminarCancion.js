@@ -36,10 +36,12 @@ export default function deleteSong (props){
                            onChange={handleInputChange}
                 />
                 <label className={'label'}>Nombre de la cancion</label>
+            </Modal.Body>
+            <Modal.Body>
                 <input className={"input " + (filled? 'is-filled':' ')}
-                       type={'text'}
-                       name={'name'}
-                       onChange={handleInputChange}
+                           type={'text'}
+                           name={'name'}
+                           onChange={handleInputChange}
                 />
                 <label className={'label'}>Nombre del artista</label>
             </Modal.Body>

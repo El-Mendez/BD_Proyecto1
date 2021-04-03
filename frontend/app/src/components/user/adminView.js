@@ -5,7 +5,7 @@ import {BsFillPersonFill as I_person, BsCardText as I_info, BsPencil as I_pencil
 import logo from '../../assets/user.svg'
 import './user.scss';
 import EditSong from './editarCancion'
-import EditAlbum from './editarAlbum.js'
+import EditAlbum from './editarAlbumModal.js'
 import EditArtist from './editarArtista'
 import DeleteSong from './eliminarCancion'
 import DeleteArtist from './eliminarArtista'
@@ -43,24 +43,6 @@ export default function userView () {
                                 <Link to={`${url}/editar_artista`}></Link>
                                     Editar artista
                             </MenuItem>
-                            <MenuItem icon={<I_pencil />}>
-                            <div className={'sidebar-menuItem'} onClick={() => setModalShowSong(true)}>
-                                    Eliminar canción
-                                </div>
-                                <DeleteSong
-                                    show={modalShowSong}
-                                    onHide={() => setModalShowSong(false)}
-                                />
-                            </MenuItem>
-                            <MenuItem icon={<I_pencil />}>
-                            <div className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
-                                    Editar Album
-                                </div>
-                                <EditAlbum
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)}
-                                />
-                            </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
@@ -68,4 +50,23 @@ export default function userView () {
             )
         }
         {/* <Link to={`${url}/eliminar_artista`}></Link>
-            Eliminar artista */}
+    Eliminar artista */}
+    
+    {/* <MenuItem icon={<I_pencil />}>
+    <div className={'sidebar-menuItem'} onClick={() => setModalShowSong(true)}>
+            Eliminar canción
+        </div>
+        <DeleteSong
+            show={modalShowSong}
+            onHide={() => setModalShowSong(false)}
+        />
+    </MenuItem>
+    <MenuItem icon={<I_pencil />}>
+    <div className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
+            Editar Album
+        </div>
+        <EditAlbum
+            show={modalShow}
+            onHide={() => setModalShow(false)}
+        />
+    </MenuItem> */}
