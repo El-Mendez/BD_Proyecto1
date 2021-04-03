@@ -36,15 +36,18 @@ export default function deleteSong (props){
                            onChange={handleInputChange}
                 />
                 <label className={'label'}>Nombre de la cancion</label>
+            </Modal.Body>
+            <Modal.Body>
                 <input className={"input " + (filled? 'is-filled':' ')}
-                       type={'text'}
-                       name={'name'}
-                       onChange={handleInputChange}
+                           type={'text'}
+                           name={'name'}
+                           onChange={handleInputChange}
                 />
                 <label className={'label'}>Nombre del artista</label>
             </Modal.Body>
             <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
+              <Button className={"btn-zoa border-btn mb-2"} >Eliminar canción</Button>
+              <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
             </Modal.Footer>
         </Modal>
 

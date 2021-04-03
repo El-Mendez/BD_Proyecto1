@@ -8,6 +8,9 @@ import Axios from 'axios';
 import Vista from './view'
 import Info from './userInfo'
 import Cambio from './cambioDatos'
+import EditSong from './editarCancion'
+import EditAlbum from './editarAlbum.js'
+import EditArtist from './editarArtista'
 import './user.scss';
 
 export default function userDescriptor (props) {
@@ -22,6 +25,15 @@ export default function userDescriptor (props) {
             <Switch>
                 <Route path={`${path}/cambiar_datos`}>
                     <Cambio/>
+                </Route>
+                <Route path={`${path}/editar_cancion`}>
+                    <EditSong/>
+                </Route>
+                <Route path={`${path}/editar_album`}>
+                    <EditAlbum/>
+                </Route>
+                <Route path={`${path}/editar_artista`}>
+                    <EditArtist/>
                 </Route>
                 <Route path={`${path}`}>
                     <Info

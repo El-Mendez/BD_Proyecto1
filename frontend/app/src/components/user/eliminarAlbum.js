@@ -25,9 +25,9 @@ export default function editAlbum (props){
       centered
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Ingrese los datos del artista que desea eliminar
-        </Modal.Title>
+      <Modal.Title id="contained-modal-title-vcenter">
+                Ingrese los datos del album que desea eliminar
+              </Modal.Title>
       </Modal.Header>
       <Modal.Body>
       <div className={'position-relative mt-2'}>
@@ -36,7 +36,17 @@ export default function editAlbum (props){
                  name={'name'}
                  onChange={handleInputChange}
           />
-          <label className={'label'}>Nombre del artista</label>
+          <label className={'label'}>Nombre del Album</label>
+        </div>
+      </Modal.Body>
+      <Modal.Body>
+      <div className={'position-relative mt-2'}>
+          <input className={"input " + (filled? 'is-filled':' ')}
+                 type={'text'}
+                 name={'name'}
+                 onChange={handleInputChange}
+          />
+          <label className={'label'}>Nombre del Artista</label>
         </div>
       </Modal.Body>
       <Modal.Footer>

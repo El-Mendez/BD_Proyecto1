@@ -2,46 +2,51 @@ import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useRouteMatch } from 'react-router-dom';
-import history from '../history';
+import EditAlbum from './editarAlbumModal'
+import DeleteAlbum from './eliminarAlbum'
+import DateAlbum from './editarAlbumFecha'
+
 export default function editAlbum (props){
-    const [filled, setFilled] = React.useState(false);
 
-    const handleInputChange = (e) =>{
-        console.log(e.target.value);
-        //setPlaylistName(e.target.value);
-        if(e.target.value !==''){
-          setFilled(true);
-        }else{
-          setFilled(false);
-        }
-      }
+    const [modalShowNameAlbum, setModalShowNameAlbum] = React.useState(false);
+    const [modalDeleteAlbum, setModalDeleteAlbum] = React.useState(false);
+    const [modalDateAlbum, setModalDate] = React.useState(false);
 
-    return(
-        <Modal
-      {...props}
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Ingrese los datos del album
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-      <div className={'position-relative mt-2'}>
-          <input className={"input " + (filled? 'is-filled':' ')}
-                 type={'text'}
-                 name={'name'}
-                 onChange={handleInputChange}
-          />
-          <label className={'label'}>Nombre de playlist</label>
+    return (
+        <div className="col info_Usuario"> 
+            <div className="asd">
+                <div className="row editArtist">
+                <p>Cambia el nombre de un album de la base de datos</p>
+                <Button variant="dark" onClick={() => setModalShowNameAlbum(true)}>
+                    Cambiar el nombre de un album  
+                </Button>
+                <EditAlbum 
+                        show={modalShowNameAlbum}
+                        onHide={() => setModalShowNameAlbum(false)}
+                    />
+                </div>
+                <div className="row editArtist">
+                <p>Cambia la fecha de publicación de un album de la base de datos</p>
+                <Button variant="dark" onClick={() => setModalDate(true)}>
+                    Cambiar la fecha de un album
+                </Button>
+                <DateAlbum 
+                        show={modalDateAlbum}
+                        onHide={() => setModalDate(false)}
+                    />
+                </div>
+                <div className="row editArtist">
+                <p>Elimina un album de la base de datos (Precaución: esta acción no puede disolverse)</p>
+                <Button variant="dark" onClick={() => setModalDeleteAlbum(true)}>
+                    Eliminar un album
+                </Button>
+                <DeleteAlbum 
+                        show={modalDeleteAlbum}
+                        onHide={() => setModalDeleteAlbum(false)}
+                    />
+                </div>
+            </div>
         </div>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button onClick={props.onHide}>Cerrar</Button>
-      </Modal.Footer>
-    </Modal>
+        )
 
-    );
 }
