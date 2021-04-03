@@ -13,6 +13,7 @@ import DeleteArtist from './eliminarArtista'
 export default function userView () {
     let {url} = useRouteMatch();
     const [modalShow, setModalShow] = React.useState(false);
+    const [modalShowSong, setModalShowSong] = React.useState(false);
 
         return (
             <ProSidebar>
@@ -43,12 +44,12 @@ export default function userView () {
                                     Editar artista
                             </MenuItem>
                             <MenuItem icon={<I_pencil />}>
-                            <div className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
+                            <div className={'sidebar-menuItem'} onClick={() => setModalShowSong(true)}>
                                     Eliminar canción
                                 </div>
                                 <DeleteSong
-                                    show={modalShow}
-                                    onHide={() => setModalShow(false)}
+                                    show={modalShowSong}
+                                    onHide={() => setModalShowSong(false)}
                                 />
                             </MenuItem>
                             <MenuItem icon={<I_pencil />}>
@@ -59,7 +60,7 @@ export default function userView () {
                                     show={modalShow}
                                     onHide={() => setModalShow(false)}
                                 />
-                            </MenuItem>                         
+                            </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>

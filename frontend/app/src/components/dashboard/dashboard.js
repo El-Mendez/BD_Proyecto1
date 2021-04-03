@@ -12,6 +12,7 @@ import Search from '../mainView/search/search';
 import Report from '../report/report'
 import CreatePlaylist from '../playlist/createPlaylist';
 import EditPlaylist from '../playlist/editPlaylist';
+import Artist from '../artist/artis';
 
 
 export default function dashboard() {
@@ -23,7 +24,7 @@ export default function dashboard() {
   })
 
   let {path} = useRouteMatch();
-  let { user } = useParams();
+
 
   const songPlaying = (a_song) =>{
     if(a_song != undefined){
@@ -43,6 +44,9 @@ export default function dashboard() {
         <div className={'dash-container'}>
           <SideBar />
             <Switch>
+              <Route  path={`${path}/search/artists/:artist`}>
+                <Artist/>
+              </Route>
               <Route path={`${path}/editPlaylist`}>
                 <EditPlaylist/>
               </Route>

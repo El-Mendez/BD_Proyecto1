@@ -2,7 +2,6 @@ import React, {Fragment, useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import { createBrowserHistory as history } from 'history';
 import Axios from 'axios';
-import user from '../user/user';
 
 
 

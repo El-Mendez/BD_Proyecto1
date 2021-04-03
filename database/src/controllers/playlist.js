@@ -1,3 +1,5 @@
+import user from '../../../frontend/app/src/components/user/user';
+
 const pool = require('../../credentials');
 
 const getPlaylists = async (req, res) => {
@@ -31,8 +33,22 @@ const getPlaylistByUsername = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+// Añadir una playlist a un usuario
+const addUserPlaylist = async (req, res) => {
+  const { username, playlist_name } = req.body;
+  const response = await pool.query(`
+    INSERT INTO usuario_playlist
+    SELECT $1 as usuario, p.id_playlist
+    FROM playlist p
+    WHERE p.nombre ILIKE $2;`, [username, playlist_name]);
+
+  res.status(200).json(response.rows);
+};
+
+
 module.exports = {
   getPlaylists,
   createPlaylist,
   getPlaylistByUsername,
+  addUserPlaylist,
 };
