@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
-import {BsFillPersonFill as I_person, BsCardText as I_info, BsPencil as I_pencil, BsCollectionFill as I_edition} from 'react-icons/bs';
+import {BsFillPersonFill as I_person, BsCardText as I_info, 
+        BsPencil as I_pencil, BsCollectionFill as I_edition,
+        BsHouse as I_house,} from 'react-icons/bs';
 import logo from '../../assets/user.svg'
 import './user.scss';
 import EditSong from './editarCancion'
@@ -12,6 +14,7 @@ import DeleteArtist from './eliminarArtista'
 
 export default function userView () {
     let {url} = useRouteMatch();
+    let { user } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
     const [modalShowSong, setModalShowSong] = React.useState(false);
 
@@ -31,21 +34,30 @@ export default function userView () {
                                 Cambiar datos
                         </MenuItem>
                         <SubMenu title="Edicion de datos" icon = {<I_edition />}>
-                            <MenuItem icon={<I_pencil />}>
+                            <MenuItem>
                                 <Link to={`${url}/editar_cancion`}></Link>
                                     Editar canción
                             </MenuItem>
-                            <MenuItem icon={<I_pencil />}>
+                            <MenuItem>
                                 <Link to={`${url}/editar_album`}></Link>
                                     Editar album
                             </MenuItem>
-                            <MenuItem icon={<I_pencil />}>
+                            <MenuItem>
                                 <Link to={`${url}/editar_artista`}></Link>
                                     Editar artista
                             </MenuItem>
                         </SubMenu>
                     </Menu>
                 </SidebarContent>
+                <SidebarFooter>
+                    <Menu iconShape="circle">
+                        <MenuItem icon={<I_house />}>
+                            <Link to={`/home/${user}`}>
+                                Home
+                            </Link>
+                        </MenuItem>
+                    </Menu>
+                </SidebarFooter>
             </ProSidebar>
             )
         }
