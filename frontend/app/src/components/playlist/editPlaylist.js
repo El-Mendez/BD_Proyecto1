@@ -7,9 +7,6 @@ import {BsTrash as I_delete,
   BsSearch as I_search} from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 
-// MISSING:
-// -QUERY TO RETURN THE ACTUAL SONGS ON THE PLAYLIST
-// -QUERY TO COUNT THE SONGS ON THE PLAYLIST
 
 export default function EditPlaylist(){
   let { playlist } = useParams();
@@ -23,8 +20,7 @@ export default function EditPlaylist(){
   const [playlistSongs, setPlaylistSongs] = React.useState([]);
   const [details, setDetails] = React.useState({
     id:0,
-    user: '',
-    canciones:0
+    user: ''
   });
 
   //SONGS ON THE PLAYLIST
@@ -38,19 +34,51 @@ export default function EditPlaylist(){
             nombre: playlist
           }
         );
-        console.log('que pex')
-        console.log(data)
         setDetails({
           id: data[0].id_playlist,
           user: data[0].username,
-          canciones: data[0].canciones
         })
       } catch (error) {
         console.log(error);
-        console.log('st happen')
       }
     };
 
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_playlistSongs,
+          {
+            nombre: playlist
+          }
+        );
+        setPlaylistSongs(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchPlaylist();
+    fetchData();
+  },[setDetails],[setPlaylistSongs])
+
+  //Search songs
+  function getSong(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_song,
+          {
+            nombre: search + '%'
+          }
+        );
+        console.log('just Testing')
+        console.log(data)
+        setLsongs(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  function actualizarPlaylist(){
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get_playlistSongs,
@@ -64,27 +92,8 @@ export default function EditPlaylist(){
         console.log(error);
       }
     };
-    fetchPlaylist();
     fetchData();
-  })
-
-  //Search songs
-  function getSong(){
-    const fetchData = async () => {
-      try {
-        const { data } = await Axios.post(get_song,
-          {
-            nombre: search + '%'
-          }
-        );
-        console.log(data)
-        setLsongs(data)
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  };
+  }
 
   const handleInputChange = (e) =>{
     setSearch(e.target.value);
@@ -116,7 +125,7 @@ export default function EditPlaylist(){
         <div className="_pD1">
           <h6>PLAYLIST</h6>
           <h2>{playlist}</h2>
-          <p>{details.user} • {details.canciones} canciones</p>
+          <p>{details.user} • {playlistSongs.length} canciones</p>
         </div>
       </div>
       {/* ACTUAL SONGS */}
@@ -151,13 +160,14 @@ export default function EditPlaylist(){
                             song_index={index + 1}
                             song_t={song.cancion}
                             song_a={song.artista}
-                            song_album={'Love Goes'}
+                            song_album={song.album}
                             I_options={<I_delete/>}
                             option={0}
-                            playlist_name={playlist}
-                          />
-                        );
-                      })
+                            playlist_id={details.id}
+                            actualizacion={() => actualizarPlaylist()}/>
+                          );
+                        }
+                      )
                     }
                   </div>
                 </section>
@@ -195,13 +205,15 @@ export default function EditPlaylist(){
                     song_index={index + 1}
                     song_t={song.cancion}
                     song_a={song.artista}
-                    song_album={"Love Goes"}
+                    song_album={song.album}
                     I_options={<I_add/>}
                     option={1}
-                    playlist_name={playlist}
-                  />
-                );
-              })
+                    playlist_id={details.id}
+                    actualizacion={() => actualizarPlaylist()}
+                    />
+                  );
+                }
+              )
             }
           </div>
         </section>

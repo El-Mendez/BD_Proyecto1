@@ -13,11 +13,11 @@ const getPlaylists = async (req, res) => {
 const getSpecificPlaylist = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT up.id_playlist, up.id_usuario as username
+  SELECT up.id_playlist, up.id_usuario as username, nombre as playlist
     FROM playlist
     INNER JOIN usuario_playlist up on playlist.id_playlist = up.id_playlist
   WHERE nombre ILIKE $1
-  GROUP BY up.id_playlist, up.id_usuario`, [nombre]);
+  GROUP BY up.id_playlist, up.id_usuario, nombre;`, [nombre]);
 
   res.status(200).json(response.rows);
 };
