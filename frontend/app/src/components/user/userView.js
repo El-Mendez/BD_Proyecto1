@@ -1,11 +1,13 @@
 import React from 'react';
-import { Link, useRouteMatch } from 'react-router-dom';
+import { Link, useRouteMatch, useParams } from 'react-router-dom';
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, SidebarContent } from 'react-pro-sidebar';
-import {BsFillPersonFill as I_person, BsCardText as I_info, BsPencil as I_pencil} from 'react-icons/bs';
+import {BsFillPersonFill as I_person, BsCardText as I_info, BsPencil as I_pencil, BsCollectionFill,
+        BsHouse as I_house} from 'react-icons/bs';
 import logo from '../../assets/user.svg'
 import './user.scss';
 export default function userDescriptor () {
     let {url} = useRouteMatch();
+    let { user } = useParams();
         return (
             <ProSidebar>
                 <SidebarHeader className={'d-flex justify-content-center'}>
@@ -23,6 +25,15 @@ export default function userDescriptor () {
                         </MenuItem>
                     </Menu>
                 </SidebarContent>
+                <SidebarFooter>
+                    <Menu iconShape="circle">
+                        <MenuItem icon={<I_house />}>
+                            <Link to={`/home/${user}`}>
+                                Home
+                            </Link>
+                        </MenuItem>
+                    </Menu>
+                </SidebarFooter>
             </ProSidebar>
             )
 }

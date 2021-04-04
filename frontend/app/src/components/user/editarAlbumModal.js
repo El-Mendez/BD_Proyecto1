@@ -4,18 +4,64 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useRouteMatch } from 'react-router-dom';
 import history from '../history';
+import Axios from 'axios';
 export default function editAlbum (props){
     const [filled, setFilled] = React.useState(false);
 
-    const handleInputChange = (e) =>{
-        console.log(e.target.value);
-        //setPlaylistName(e.target.value);
-        if(e.target.value !==''){
-          setFilled(true);
-        }else{
-          setFilled(false);
-        }
+    const post_album = 'http://3.135.234.254:3000/changeAlbumName/';
+    let newName = "";
+    let oldName = "";
+    let artista = "";
+
+    const handleOldName = (e) =>{
+      console.log(e.target.value);
+      oldName = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
       }
+    }
+  const handleNewName = (e) =>{
+      console.log(e.target.value);
+      newName = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
+      }
+    }
+  const handleArtist = (e) =>{
+      console.log(e.target.value);
+      artista = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
+      }
+    }
+    const onSubmit = () =>{
+      changeAlbumName();
+  }
+  
+    const changeAlbumName = () =>{
+      const fetchData = async () =>{
+          try{
+              const { data } = await Axios.post(post_album,
+                {
+                  newName:  newName,
+                  oldName: oldName,
+                  artist: artista
+                }
+              );
+              alert("Cambio del artista realizado")
+          } catch (error){
+              console.log(error)
+              alert("Usuario o correo ya existente. Prueba con un correo o un usuario distinto")
+          }
+      }
+      fetchData();
+  };
 
     return(
         <Modal
@@ -33,7 +79,7 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleOldName}
           />
           <label className={'label'}>Nombre del album</label>
         </div>
@@ -43,7 +89,7 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleArtist}
           />
           <label className={'label'}>Nombre del artista</label>
         </div>
@@ -53,13 +99,13 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleNewName}
           />
           <label className={'label'}>Nuevo nombre para el album</label>
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <Button className={"btn-zoa border-btn mb-2"} >Enviar</Button>
+      <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit}>Enviar</Button>
       <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>

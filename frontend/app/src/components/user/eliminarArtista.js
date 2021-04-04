@@ -3,19 +3,43 @@ import {useForm} from 'react-hook-form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useRouteMatch } from 'react-router-dom';
+import Axios from 'axios';
 import history from '../history';
 export default function editAlbum (props){
     const [filled, setFilled] = React.useState(false);
+    const post_artist = 'http://3.135.234.254:3000/deleteArtist/';
+    let artistName = ''
 
     const handleInputChange = (e) =>{
         console.log(e.target.value);
-        //setPlaylistName(e.target.value);
+        artistName = e.target.value
         if(e.target.value !==''){
           setFilled(true);
         }else{
           setFilled(false);
         }
       }
+      
+      const onSubmit = () =>{
+        deleteArtist();
+    }
+
+    const deleteArtist = () =>{
+      const fetchData = async () =>{
+          try{
+              const { data } = await Axios.post(post_artist,
+                {
+                    nombre: artistName
+                }
+              );
+              alert("Cambio del artista realizado")
+          } catch (error){
+              console.log(error)
+              alert("Usuario o correo ya existente. Prueba con un correo o un usuario distinto")
+          }
+      }
+      fetchData();
+  };
 
     return(
         <Modal
@@ -40,7 +64,7 @@ export default function editAlbum (props){
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <Button className={"btn-zoa border-btn mb-2"} >Eliminar</Button>
+      <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit} >Eliminar</Button>
       <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>
