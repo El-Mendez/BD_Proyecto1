@@ -14,18 +14,18 @@ import { useParams } from 'react-router-dom';
 export default function EditPlaylist(){
   let { playlist } = useParams();
   const get_song = 'http://3.135.234.254:3000/getSpecificSong';
-  const get_playlistSongs = 'http://3.135.234.254:3000/getSpecificSong';
+  const get_playlistSongs = 'http://3.135.234.254:3000/playlistSongs';
   const get_playlist = 'http://3.135.234.254:3000/getSpecificPlaylist';
 
 
   const [search, setSearch] = React.useState('');
   const [lsongs, setLsongs] = React.useState([]);
+  const [playlistSongs, setPlaylistSongs] = React.useState([]);
   const [details, setDetails] = React.useState({
     id:0,
     user: '',
     canciones:0
   });
-  const [playlistSongs, setPlaylistSongs] = React.useState([]);
 
   //SONGS ON THE PLAYLIST
   useEffect(() =>{
@@ -51,20 +51,20 @@ export default function EditPlaylist(){
       }
     };
 
-    // const fetchData = async () => {
-    //   try {
-    //     const { data } = await Axios.post(get_playlistSongs,
-    //       {
-    //         playlist: playlist
-    //       }
-    //     );
-    //     setPlaylistSongs(data)
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // };
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_playlistSongs,
+          {
+            playlist: playlist
+          }
+        );
+        setPlaylistSongs(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchPlaylist();
-    //fetchData();
+    fetchData();
   })
 
   //Search songs
@@ -148,9 +148,9 @@ export default function EditPlaylist(){
                           <SongItem
                             key={index}
                             song_index={index + 1}
-                            song_t={song.nombre}
+                            song_t={song.cancion}
                             song_a={song.artista}
-                            song_album={song.album}
+                            song_album={'Love Goes'}
                             I_options={<I_delete/>}
                             option={0}
                             playlist_name={playlist}
