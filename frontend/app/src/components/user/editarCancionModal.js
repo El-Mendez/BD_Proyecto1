@@ -2,20 +2,65 @@ import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import Axios from 'axios';
 import { useRouteMatch } from 'react-router-dom';
 import history from '../history';
 export default function editAlbum (props){
     const [filled, setFilled] = React.useState(false);
+    const post_song = 'http://3.135.234.254:3000/changeSongName/';
+    let newName = "";
+    let oldName = "";
+    let artista = "";
 
-    const handleInputChange = (e) =>{
-        console.log(e.target.value);
-        //setPlaylistName(e.target.value);
-        if(e.target.value !==''){
-          setFilled(true);
-        }else{
-          setFilled(false);
-        }
+    const handleOldName = (e) =>{
+      console.log(e.target.value);
+      oldName = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
       }
+    }
+  const handleNewName = (e) =>{
+      console.log(e.target.value);
+      newName = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
+      }
+    }
+  const handleArtista = (e) =>{
+      console.log(e.target.value);
+      artista = e.target.value;
+      if(e.target.value !==''){
+        setFilled(true);
+      }else{
+        setFilled(false);
+      }
+    }
+    const onSubmit = () =>{
+      changeSongName();
+  }
+
+  const changeSongName = () =>{
+    const fetchData = async () =>{
+        try{
+            const { data } = await Axios.post(post_song,
+              {
+                newName:  newName,
+                oldName: oldName,
+                artist: artista
+              }
+            );
+            alert("Cambio de la cancion realizado")
+        } catch (error){
+            console.log(error)
+            alert("Datos incorrectos, recuerde introducer valores exactos")
+        }
+    }
+    fetchData();
+};
 
     return(
         <Modal
@@ -33,7 +78,7 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleOldName}
           />
           <label className={'label'}>Nombre de la canción</label>
         </div>
@@ -43,7 +88,7 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleArtista}
           />
           <label className={'label'}>Artista</label>
         </div>
@@ -53,13 +98,13 @@ export default function editAlbum (props){
           <input className={"input " + (filled? 'is-filled':' ')}
                  type={'text'}
                  name={'name'}
-                 onChange={handleInputChange}
+                 onChange={handleNewName}
           />
           <label className={'label'}>Nuevo nombre</label>
         </div>
       </Modal.Body>
       <Modal.Footer>
-      <Button className={"btn-zoa border-btn mb-2"} >Enviar</Button>
+      <Button className={"btn-zoa border-btn mb-2"}onClick={onSubmit} >Enviar</Button>
       <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
       </Modal.Footer>
     </Modal>
