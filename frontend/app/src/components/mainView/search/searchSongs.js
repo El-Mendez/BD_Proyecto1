@@ -17,12 +17,13 @@ export default function SearchSongs(props){
           sSongs.lsongs.map((song) => {
             const index = sSongs.lsongs.indexOf(song);
             return(
+              song.estado?
               <SongItem_artist
                 key={index}
                 song_index={index + 1}
                 song_t={song.cancion}
                 song_a={song.artista}
-              />
+              /> : ''
             );
           })
         }

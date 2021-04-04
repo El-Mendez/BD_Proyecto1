@@ -35,17 +35,19 @@ export default function HomeView(props){
         <div className={'home-container'}>
           <section className={'section-container'}>
             <div id="songs-genre">
-              Música general
+              <h4 className={"text-secondary"}> ◆ Zoa Music ◆ </h4>
             </div>
             <div id="songs" className="songs-container">
               {
                 items.map((item) => {
-                  return <SongItem
+                  return (
+                    item.estado? <SongItem
                     key={item.id_cancion}
                     s_name = {item.cancion_nombre}
                     a_name = {item.artista_nombre}
                     songPlaying = {() => songProps.songPlaying(item)}
-                  />
+                  /> : ''
+                  );
                 })
               }
             </div>

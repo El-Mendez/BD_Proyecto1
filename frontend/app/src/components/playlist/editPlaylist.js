@@ -200,6 +200,7 @@ export default function EditPlaylist(){
               lsongs.map((song) => {
                 const index = lsongs.indexOf(song)
                 return(
+                  song.estado?
                   <SongItem
                     key={index}
                     song_index={index + 1}
@@ -210,7 +211,7 @@ export default function EditPlaylist(){
                     option={1}
                     playlist_id={details.id}
                     actualizacion={() => actualizarPlaylist()}
-                    />
+                    /> : ''
                   );
                 }
               )
