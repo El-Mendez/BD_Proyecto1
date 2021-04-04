@@ -67,6 +67,10 @@ const {
   topGenres,
   topActiveUsers,
 } = require('../controllers/reports');
+// Queries para el stream
+const {
+  streamSong,
+} = require('../controllers/stream');
 // --------------------Queries usuarios--------------------------
 router.post('/createUser', createUser);
 router.post('/login', logIn);
@@ -119,5 +123,6 @@ router.get('/reports/newSubscriptions', newSubscriptions);
 router.get('/reports/topArtist', topArtist);
 router.get('/reports/topGenres', topGenres);
 router.get('/reports/topActiveUsers', topActiveUsers);
-
+// --------------------Stream Song--------------------------
+router.post('/stream', streamSong);
 module.exports = router;
