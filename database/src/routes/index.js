@@ -84,7 +84,7 @@ router.post('/updateArtistName', updateArtistName);
 router.post('/deleteArtist', deleteArtist);
 // --------------------Queries genres--------------------------
 router.get('/genres', getGenres);
-router.get('/getSpecificGenre', getSpecificGenre);
+router.post('/getSpecificGenre', getSpecificGenre);
 // --------------------Queries albums--------------------------
 router.get('/albums', getAlbums);
 router.post('/getAlbumByArtist', getAlbumByArtist);

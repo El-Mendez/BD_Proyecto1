@@ -10,7 +10,6 @@ export default function SearchArtist(props){
         <h2 className="title">
           Artistas
         </h2>
-        <div>Ver mas</div>
       </div>
       <div id="albums" className="songs-container">
         {

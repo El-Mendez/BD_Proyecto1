@@ -62,6 +62,9 @@ export default function dashboard() {
               <Route  path={`${path}/search/artists/:artist`}>
                 <Artist/>
               </Route>
+              <Route path={`${path}/search/editPlaylist/:playlist`}>
+                <EditPlaylist/>
+              </Route>
               <Route path={`${path}/library/editPlaylist/:playlist`}>
                 <EditPlaylist/>
               </Route>

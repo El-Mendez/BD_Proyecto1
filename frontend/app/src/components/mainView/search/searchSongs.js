@@ -11,7 +11,6 @@ export default function SearchSongs(props){
         <h2 className="title">
           Canciones
         </h2>
-        <div>Ver mas</div>
       </div>
       <div id="songs">
         {
