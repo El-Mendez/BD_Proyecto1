@@ -13,6 +13,7 @@ export default class Player extends React.Component {
             volume: 100,
             songLength: 0,
             currentTime: 0,
+            unplayed: true,
         }
 
         this.handlePlay = this.handlePlay.bind(this);
@@ -28,7 +29,7 @@ export default class Player extends React.Component {
             controls: false,
             keyboard: false,
             volume: this.state.volume,
-            currentTime: 0
+            currentTime: 0,
         });
 
         this.player.load(this.props.videoId);
@@ -46,15 +47,26 @@ export default class Player extends React.Component {
         });
 
         this.player.on('unstarted', () => {
+            console.log(this.player.getDuration())
             this.setState({songLength: this.player.getDuration()})
         })
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.videoId !== this.props.videoId){
+            this.player.load(this.props.videoId);
+            this.setState({unplayed: true})
+        }
+    }
+
     handlePlay() {
-        console.log(this.props.videoId)
         try {
             if (this.state.isPaused) {
                 this.player.play();
+
+                if (this.state.unplayed){
+                    this.setState({unplayed: false, songLength: this.player.getDuration()})
+                }
             } else  {
                 this.player.pause();
             }
