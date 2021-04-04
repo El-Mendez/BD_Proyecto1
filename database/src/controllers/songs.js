@@ -49,7 +49,7 @@ const getSongByGenre = async (req, res) => {
 const getSongsByAlbum = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT c.nombre, a2.nombre
+  SELECT c.nombre, a2.nombre as artista
   FROM cancion_album
     INNER JOIN canciones c on c.id_cancion = cancion_album.id_canciones
     INNER JOIN artista a2 on a2.Id_artista = c.id_artista

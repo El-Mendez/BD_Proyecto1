@@ -2,9 +2,6 @@ import React, {useEffect} from 'react';
 import image from '../../assets/badLiar.jpg';
 import Axios from 'axios';
 import SongItem from '../utils/itemComponents/songItem_artist';
-import {BsTrash as I_delete,
-  BsPlus as I_add,
-  BsSearch as I_search} from 'react-icons/bs';
 import { useParams } from 'react-router-dom';
 
 // MISSING:
@@ -14,28 +11,26 @@ import { useParams } from 'react-router-dom';
 export default function EditPlaylist(){
 
   let { album } = useParams();
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
-  const get_playlistSongs = 'http://3.135.234.254:3000/getSpecificSong';
+  const get = 'http://3.135.234.254:3000/getSongsByAlbum';
 
   const [songs, setSongs] = React.useState([]);
-  const [playlistSongs, setPlaylistSongs] = React.useState([]);
 
-  //SONGS ON THE PLAYLIST
+  //SONGS ON THE ALBUM
   useEffect(() =>{
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get_playlistSongs,
+        const { data } = await Axios.post(get,
           {
-            playlist: playlist
+            nombre: album
           }
         );
-        setPlaylistSongs(data)
+        setSongs(data)
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
-  })
+  },[setSongs])
 
 
   return(
@@ -79,28 +74,19 @@ export default function EditPlaylist(){
             </div>
             <section className={'mb-4'}>
               <div id="songs">
-                <SongItem
-                song_index={1}
-                song_t={"Something"}
-                song_a={"Io"}
-                />
-                {/*{*/}
-                {/*  playlistSongs.map((song) => {*/}
-                {/*    const index = playlistSongs.indexOf(song);*/}
-                {/*    return(*/}
-                {/*      <SongItem*/}
-                {/*        key={index}*/}
-                {/*        song_index={index + 1}*/}
-                {/*        song_t={song.nombre}*/}
-                {/*        song_a={song.artista}*/}
-                {/*        song_album={song.album}*/}
-                {/*        I_options={<I_delete/>}*/}
-                {/*        option={0}*/}
-                {/*        playlist_name={playlist}*/}
-                {/*      />*/}
-                {/*    );*/}
-                {/*  })*/}
-                {/*}*/}
+                {
+                  songs.map((song) => {
+                    const index = songs.indexOf(song);
+                    return(
+                      <SongItem
+                        key={index}
+                        song_index={index + 1}
+                        song_t={song.nombre}
+                        song_a={"Io"}
+                      />
+                    );
+                  })
+                }
               </div>
             </section>
           </div>
