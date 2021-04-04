@@ -86,11 +86,13 @@ const deletePlaylistSong = async (req, res) => {
 const playlistSongs = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT c.nombre as cancion, a.nombre as artista
+  SELECT c.nombre as cancion, a.nombre as artista, a2.nombre as album
   FROM playlist p
     INNER JOIN playlist_canciones pc on p.id_playlist = pc.id_playlist
     INNER JOIN canciones c on c.id_cancion = pc.id_canciones
     INNER JOIN artista a on a.Id_artista = c.id_artista
+    INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
+    INNER JOIN albumes a2 on a2.id_album = ca.id_album
   WHERE p.nombre ILIKE $1;`, [nombre]);
 
   res.status(200).json(response.rows);

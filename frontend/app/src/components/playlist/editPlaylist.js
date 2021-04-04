@@ -55,9 +55,10 @@ export default function EditPlaylist(){
       try {
         const { data } = await Axios.post(get_playlistSongs,
           {
-            playlist: playlist
+            nombre: playlist
           }
         );
+        console.log(data);
         setPlaylistSongs(data)
       } catch (error) {
         console.log(error);
