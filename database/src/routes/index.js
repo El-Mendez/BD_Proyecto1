@@ -11,6 +11,7 @@ const {
   getUserPlaylist,
   updateData,
   addSubscription,
+  updateToPremium,
 } = require('../controllers/usuarios');
 // Queries songs
 const {
@@ -70,6 +71,7 @@ router.post('/createUser', createUser);
 router.post('/login', logIn);
 router.post('/updatesToArtist', updateToArtist);
 router.post('/updatesToManager', updateToManager);
+router.post('/updateToPremium', updateToPremium);
 router.post('/getUserDescription', getUserDescription);
 router.post('/getUserPlaylist', getUserPlaylist);
 router.post('/updateData', updateData);

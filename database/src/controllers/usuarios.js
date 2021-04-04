@@ -99,6 +99,14 @@ const addSubscription = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const updateToPremium = async (req, res) => {
+  const { username } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET id_tipoUsuario = 2 WHERE username = $1;`, [username]);
+
+  res.status(200).json(response.rows);
+};
+
 
 
 module.exports = {
@@ -110,4 +118,5 @@ module.exports = {
   getUserPlaylist,
   updateData,
   addSubscription,
+  updateToPremium
 };
