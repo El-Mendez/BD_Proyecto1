@@ -15,7 +15,7 @@ export default function SearchGenres(props){
           sGenres.lgenres.map((genre) => {
             const index = sGenres.lgenres.indexOf(genre)
             return(
-              <Genre
+              <GenreItem
                 key={index}
                 genre={genre.nombre}
               />
