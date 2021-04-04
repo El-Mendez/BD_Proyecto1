@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react';
 import image from '../../assets/badLiar.jpg';
 import Axios from 'axios';
-import SongItem from '../utils/itemComponents/songItem_artist';
+import SongItem from '../utils/itemComponents/songItem_nI';
 import { useParams } from 'react-router-dom';
 
-// MISSING:
-// -QUERY TO RETURN THE ACTUAL SONGS ON THE PLAYLIST
-// -QUERY TO COUNT THE SONGS ON THE PLAYLIST
 
-export default function EditPlaylist(){
+export default function AlbumSongs(){
 
   let { album } = useParams();
   const get = 'http://3.135.234.254:3000/getSongsByAlbum';
