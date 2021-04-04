@@ -15,26 +15,56 @@ export default function EditPlaylist(){
   let { playlist } = useParams();
   const get_song = 'http://3.135.234.254:3000/getSpecificSong';
   const get_playlistSongs = 'http://3.135.234.254:3000/getSpecificSong';
+  const get_playlist = 'http://3.135.234.254:3000/getSpecificPlaylist';
+
 
   const [search, setSearch] = React.useState('');
   const [lsongs, setLsongs] = React.useState([]);
+  const [details, setDetails] = React.useState({
+    id:0,
+    user: '',
+    canciones:0
+  });
   const [playlistSongs, setPlaylistSongs] = React.useState([]);
 
   //SONGS ON THE PLAYLIST
   useEffect(() =>{
-    const fetchData = async () => {
+    console.log('Loading...')
+    const fetchPlaylist = async () => {
       try {
-        const { data } = await Axios.post(get_playlistSongs,
+        console.log('testing')
+        const { data } = await Axios.post(get_playlist,
           {
-            playlist: playlist
+            nombre: playlist
           }
         );
-        setPlaylistSongs(data)
+        console.log('que pex')
+        console.log(data)
+        setDetails({
+          id: data[0].id_playlist,
+          user: data[0].username,
+          canciones: data[0].canciones
+        })
       } catch (error) {
         console.log(error);
+        console.log('st happen')
       }
     };
-    fetchData();
+
+    // const fetchData = async () => {
+    //   try {
+    //     const { data } = await Axios.post(get_playlistSongs,
+    //       {
+    //         playlist: playlist
+    //       }
+    //     );
+    //     setPlaylistSongs(data)
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // };
+    fetchPlaylist();
+    //fetchData();
   })
 
   //Search songs
@@ -85,7 +115,7 @@ export default function EditPlaylist(){
         <div className="_pD1">
           <h6>PLAYLIST</h6>
           <h2>{playlist}</h2>
-          <p>Username • 10 canciones</p>
+          <p>{details.user} • {details.canciones} canciones</p>
         </div>
       </div>
       {/* ACTUAL SONGS */}

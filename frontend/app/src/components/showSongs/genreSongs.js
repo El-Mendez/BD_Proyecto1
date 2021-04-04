@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
 import image from '../../assets/badLiar.jpg';
 import Axios from 'axios';
-import SongItem from '../utils/itemComponents/songItem_artist';
+import SongItem from '../utils/itemComponents/songItem_nI';
 import { useParams } from 'react-router-dom';
-
 
 export default function AlbumSongs(){
 
-  let { album } = useParams();
-  const get = 'http://3.135.234.254:3000/getSongsByAlbum';
+  let { genre } = useParams();
+  const get_songs = 'http://3.135.234.254:3000/getSongByGenre';
 
   const [songs, setSongs] = React.useState([]);
 
@@ -16,12 +15,12 @@ export default function AlbumSongs(){
   useEffect(() =>{
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get,
+        const { data } = await Axios.post(get_songs,
           {
-            nombre: album
+            genero: genre
           }
         );
-        setSongs(data)
+        setSongs(data);
       } catch (error) {
         console.log(error);
       }
@@ -46,12 +45,12 @@ export default function AlbumSongs(){
 
         </div>
         <div className="_pD1">
-          <h6>ALBUM</h6>
-          <h2>{album}</h2>
-          <p>Username • 10 canciones</p>
+          <h6>GÉNERO</h6>
+          <h2>{genre}</h2>
+          <p>• {songs.length} canciones •</p>
         </div>
       </div>
-      {/* ACTUAL SONGS */}
+      {/* GENRE SONGS */}
       <div className={'container-fluid'}>
         <div className="contentSpacing">
           <div id={"actualSongs"} >
@@ -63,10 +62,6 @@ export default function AlbumSongs(){
                 <div className={"pR_title justify-self-star"}>
                   <small>TITLE</small>
                 </div>
-                <div className={"pR_title justify-self-end"}>
-                  <small>▴▵▴</small>
-                </div>
-
               </div>
             </div>
             <section className={'mb-4'}>
@@ -78,8 +73,8 @@ export default function AlbumSongs(){
                       <SongItem
                         key={index}
                         song_index={index + 1}
-                        song_t={song.nombre}
-                        song_a={"Io"}
+                        song_t={song.cancion}
+                        song_a={song.artista}
                       />
                     );
                   })

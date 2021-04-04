@@ -8,25 +8,46 @@ import { useParams } from 'react-router-dom';
 export default function AlbumSongs(){
 
   let { album } = useParams();
-  const get = 'http://3.135.234.254:3000/getSongsByAlbum';
+  const get_songs = 'http://3.135.234.254:3000/getSongsByAlbum';
+  const get_album = 'http://3.135.234.254:3000/getSpecificAlbum';
+
 
   const [songs, setSongs] = React.useState([]);
+  const [details, setDetails] = React.useState({
+    artista: ''
+  });
 
   //SONGS ON THE ALBUM
   useEffect(() =>{
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get,
+        const { data } = await Axios.post(get_songs,
           {
             nombre: album
           }
         );
-        setSongs(data)
+        setSongs(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    const fetchDataAlbum = async () => {
+      try {
+        const { data } = await Axios.post(get_album,
+          {
+            album: album
+          }
+        );
+        console.log(data)
+        setDetails({
+          artista: data[0].artista
+        })
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
+    fetchDataAlbum();
   },[setSongs])
 
 
@@ -48,7 +69,7 @@ export default function AlbumSongs(){
         <div className="_pD1">
           <h6>ALBUM</h6>
           <h2>{album}</h2>
-          <p>Username • 10 canciones</p>
+          <p>{details.artista} • {songs.length} canciones</p>
         </div>
       </div>
       {/* ACTUAL SONGS */}
@@ -63,10 +84,6 @@ export default function AlbumSongs(){
                 <div className={"pR_title justify-self-star"}>
                   <small>TITLE</small>
                 </div>
-                <div className={"pR_title justify-self-end"}>
-                  <small>▴▵▴</small>
-                </div>
-
               </div>
             </div>
             <section className={'mb-4'}>
@@ -79,7 +96,7 @@ export default function AlbumSongs(){
                         key={index}
                         song_index={index + 1}
                         song_t={song.nombre}
-                        song_a={"Io"}
+                        song_a={details.artista}
                       />
                     );
                   })

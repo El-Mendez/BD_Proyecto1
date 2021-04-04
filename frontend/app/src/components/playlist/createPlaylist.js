@@ -1,14 +1,16 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useRouteMatch } from 'react-router-dom';
+import { useRouteMatch, useParams } from 'react-router-dom';
 import history from '../history';
 import Axios from 'axios';
 
 export default function CreatePlaylist(props) {
 
   const post = 'http://3.135.234.254:3000/createPlaylist'
+  const add_user = 'http://3.135.234.254:3000/addUserPlaylist'
   let { url } = useRouteMatch();
+  let { user } = useParams();
 
   //State variables
   const [playlistName, setPlaylistName] = React.useState('');
@@ -20,6 +22,23 @@ export default function CreatePlaylist(props) {
         const { data } = await Axios.post(post,
           {
             nombre: playlistName
+          }
+        );
+        console.log("todo fine")
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+
+  function addUser(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(add_user,
+          {
+            username: user,
+            playlist_name: playlistName
           }
         );
         console.log("todo fine")
@@ -45,14 +64,12 @@ export default function CreatePlaylist(props) {
 
   const handleClick = ()=>{
     if(playlistName !== ''){
-      console.log('vamo a crear la playlist')
       postPlaylist();
+      addUser();
       setTimeout(()=>{
-        console.log('just testing')
         console.log(history.location);
-        history.push(`${url}/editPlaylist`);
+        history.push(`${url}/editPlaylist/${playlistName}`);
         history.go();
-        console.log(history.location);
       },300)
     }else{
       alert('Indica un nombre para tu playlist')

@@ -26,7 +26,7 @@ GROUP BY a2.nombre, year`,
 const getSpecificAlbum = async (req, res) => {
   const { album } = req.body;
   const response = await pool.query(`
-  SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes, count(*)
+  SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes, count(*) as quantity
     FROM albumes a
       INNER JOIN cancion_album ca on a.id_album = ca.id_album
       INNER JOIN canciones c ON c.id_cancion = ca.id_canciones

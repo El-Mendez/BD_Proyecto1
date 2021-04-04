@@ -2,7 +2,7 @@ const pool = require('../../credentials');
 
 const getSongs = async (req, res) => {
   const response = await pool.query(`
-        select c.id_cancion, link, a.id_artista, c.nombre as cancion_nombre, c.estado, a.nombre as artista_nombre 
+        select c.id_cancion, link, a.id_artista, c.nombre as cancion_nombre, c.estado, a.nombre as artista_nombre, c.estado 
         from canciones c
            inner join artista a on a.id_artista = c.id_artista;
     `);

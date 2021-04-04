@@ -13,7 +13,7 @@ const getPlaylists = async (req, res) => {
 const getSpecificPlaylist = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT up.id_playlist, nombre, up.id_usuario as username, COUNT(*) AS canciones
+  SELECT up.id_playlist, nombre, up.id_usuario as username
   FROM playlist
     INNER JOIN usuario_playlist up on playlist.id_playlist = up.id_playlist
   WHERE nombre ILIKE $1
@@ -83,6 +83,19 @@ const deletePlaylistSong = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const playlistSongs = async (req, res) => {
+  const { nombre } = req.body;
+  const response = await pool.query(`
+  SELECT c.nombre as cancion, a.nombre as artista
+  FROM playlist p
+    INNER JOIN playlist_canciones pc on p.id_playlist = pc.id_playlist
+    INNER JOIN canciones c on c.id_cancion = pc.id_canciones
+    INNER JOIN artista a on a.Id_artista = c.id_artista
+  WHERE p.nombre ILIKE $1;`, [nombre]);
+
+  res.status(200).json(response.rows);
+};
+
 
 module.exports = {
   getPlaylists,
@@ -91,5 +104,6 @@ module.exports = {
   getSpecificPlaylist,
   addUserPlaylist,
   addPlaylistSong,
-  deletePlaylistSong
+  deletePlaylistSong,
+  playlistSongs,
 };
