@@ -53,7 +53,7 @@ const updateAlbumName = async (req, res) => {
 const updateAlbumDate = async (req, res) => {
   const { date, album, artista } = req.body;
   const response = await pool.query(`
-  UPDATE albumes SET fecha_publicacion = '$1' WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
+  UPDATE albumes SET fecha_publicacion = $1 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
     INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
     INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
     INNER JOIN artista a ON a.id_artista = c.id_artista
