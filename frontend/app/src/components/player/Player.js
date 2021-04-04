@@ -47,7 +47,6 @@ export default class Player extends React.Component {
         });
 
         this.player.on('unstarted', () => {
-            console.log(this.player.getDuration())
             this.setState({songLength: this.player.getDuration()})
         })
     }
