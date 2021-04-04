@@ -4,17 +4,23 @@ import Axios from 'axios';
 import SearchSongs from './searchSongs';
 import SearchAlbums from './searchAlbums';
 import SearchArtist from './searchArtist';
+import SearchPlaylist from './searchPlaylist';
+import SearchGenres from './searchGenre';
 
 export default function searchNav() {
 
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong'
-  const get_artist = 'http://3.135.234.254:3000/SpecificArtist'
-  const get_album = 'http://3.135.234.254:3000/getSpecificAlbum'
+  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const get_artist = 'http://3.135.234.254:3000/SpecificArtist';
+  const get_album = 'http://3.135.234.254:3000/getSpecificAlbum';
+  const get_playlist = 'http://3.135.234.254:3000/getSpecificPlaylist';
+  const get_genre = 'http://3.135.234.254:3000/getSpecificGenre';
 
   const [search, setSearch] = useState('');
   const [lsongs, setLsongs] = useState([]);
   const [lalbums, setLalbumns] = useState([]);
   const [lartists, setLartists] = useState([]);
+  const [lplaylists, setLplaylists] = useState([]);
+  const [lgenres, setLgenres] = useState([]);
 
 
   //Search songs
@@ -27,11 +33,6 @@ export default function searchNav() {
           }
         );
         setLsongs(data)
-        setLsongs( (state) => {
-          console.log(state); //
-
-          return state;
-        });
       } catch (error) {
         console.log(error);
       }
@@ -47,7 +48,6 @@ export default function searchNav() {
             album: search + '%'
           }
         );
-        console.log(data)
         setLalbumns(data)
       } catch (error) {
         console.log(error);
@@ -64,8 +64,39 @@ export default function searchNav() {
             nombre: search + '%'
           }
         );
-        console.log(data)
         setLartists(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+  //Search playlist
+  function getPlaylists(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_playlist,
+          {
+            nombre: search + '%'
+          }
+        );
+        setLplaylists(data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  };
+  //Search genre
+  function getGenres(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(get_genre,
+          {
+            genre: search + '%'
+          }
+        );
+        setLgenres(data)
       } catch (error) {
         console.log(error);
       }
@@ -84,6 +115,8 @@ export default function searchNav() {
       getSong();
       getAlbum();
       getArtist();
+      getPlaylists();
+      getGenres();
     }else{
       alert('Ingrese algo para buscar')
       setLartists([]);
@@ -135,6 +168,22 @@ export default function searchNav() {
             <div className="home-container">
               <SearchArtist
                 lartists={lartists}/>
+            </div>
+          </section> : ''
+        }
+        {
+          (lplaylists.length>0)? <section>
+            <div className="home-container">
+              <SearchPlaylist
+                lplaylists={lplaylists}/>
+            </div>
+          </section> : ''
+        }
+        {
+          (lgenres.length>0)? <section>
+            <div className="home-container">
+              <SearchGenres
+                lgenres={lgenres}/>
             </div>
           </section> : ''
         }

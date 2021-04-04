@@ -14,7 +14,6 @@ const getSpecificGenre = async (req, res) => {
   SELECT nombre
   FROM genero
   WHERE nombre ILIKE $1;`, [genre]);
-
   res.status(200).json(response.rows);
 };
 

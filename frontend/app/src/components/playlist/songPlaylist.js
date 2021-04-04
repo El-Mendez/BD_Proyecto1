@@ -1,5 +1,6 @@
 import React from 'react';
 import test from '../../assets/badLiar.jpg'
+import Axios from 'axios';
 
 //ADD SONG TO A PLAYLIST
 //DELETE SONG OF A PLAYLIST
@@ -9,8 +10,8 @@ import test from '../../assets/badLiar.jpg'
 export default function SongItem_artist(props){
   const songData = props;
 
-  const add_song = 'http://3.135.234.254:3000/getSpecificSong';
-  const delete_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const add_song = 'http://3.135.234.254:3000/addPlaylistSong';
+  const delete_song = 'http://3.135.234.254:3000/deletePlaylistSong';
 
   //ADD SONGS
   function addSong(){
@@ -18,8 +19,8 @@ export default function SongItem_artist(props){
       try {
         const { data } = await Axios.post(add_song,
           {
-            nombre: search + '%',
-            playlist: songData.playlist_name
+            playlist_id: songData.playlist_id,
+            cancion: songData.song_t
           }
         );
       } catch (error) {
@@ -34,8 +35,8 @@ export default function SongItem_artist(props){
       try {
         const { data } = await Axios.post(delete_song,
           {
-            nombre: search + '%',
-            playlist: songData.playlist_name
+            playlist_id: songData.playlist_id,
+            cancion: songData.song_t
           }
         );
       } catch (error) {
@@ -48,8 +49,15 @@ export default function SongItem_artist(props){
   const handleClick = () =>{
     if(songData.option === 1){
       addSong();
+      setTimeout(() => {
+        songData.actualizacion();
+      },200)
     }else{
       deleteSong();
+      setTimeout(()=>{
+        songData.actualizacion();
+      },200)
+
     }
   }
 

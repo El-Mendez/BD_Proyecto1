@@ -56,6 +56,7 @@ const {
   addUserPlaylist,
   addPlaylistSong,
   deletePlaylistSong,
+  playlistSongs,
 } = require('../controllers/playlist');
 // Queries reports
 const {
@@ -83,7 +84,7 @@ router.post('/updateArtistName', updateArtistName);
 router.post('/deleteArtist', deleteArtist);
 // --------------------Queries genres--------------------------
 router.get('/genres', getGenres);
-router.get('/getSpecificGenre', getSpecificGenre);
+router.post('/getSpecificGenre', getSpecificGenre);
 // --------------------Queries albums--------------------------
 router.get('/albums', getAlbums);
 router.post('/getAlbumByArtist', getAlbumByArtist);
@@ -110,6 +111,7 @@ router.post('/addUserPlaylist', addUserPlaylist);
 router.post('/getSpecificPlaylist', getSpecificPlaylist);
 router.post('/addPlaylistSong', addPlaylistSong);
 router.post('/deletePlaylistSong', deletePlaylistSong);
+router.post('/playlistSongs', playlistSongs);
 // --------------------Queries reports--------------------------
 router.get('/reports/weeklyAlbums', weeklyAlbums);
 router.get('/reports/growingArtists', growingArtist);

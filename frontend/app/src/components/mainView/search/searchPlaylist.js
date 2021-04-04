@@ -1,27 +1,26 @@
 import React from 'react';
-import ArtistItem from '../../utils/itemComponents/artistItem'
+import PlaylistItem from '../../utils/itemComponents/playlistItem';
 
-
-export default function SearchArtist(props){
-  const sArtists = props;
+export default function SearchPlaylist(props){
+  const sPlaylists = props;
   return(
     <section className={'section-container'}>
       <div id="discography" className="section-title text-secondary">
         <h2 className="title">
-          Artistas
+          Playlists
         </h2>
       </div>
       <div id="albums" className="songs-container">
         {
-          sArtists.lartists.map((artist) => {
-            const index = sArtists.lartists.indexOf(artist);
+          sPlaylists.lplaylists.map((playlist) => {
+            const index = sPlaylists.lplaylists.indexOf(playlist)
             return(
-              <ArtistItem
+              <PlaylistItem
                 key={index}
-                userName={artist.nombre}
+                name={playlist.playlist}
               />
             );
-        })
+          })
         }
       </div>
     </section>

@@ -108,7 +108,6 @@ const updateToPremium = async (req, res) => {
 };
 
 
-
 module.exports = {
   createUser,
   logIn,

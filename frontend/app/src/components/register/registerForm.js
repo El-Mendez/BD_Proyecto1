@@ -33,7 +33,6 @@ export default function registerForm (){
     });
 
     const handleInputChange = (e) =>{
-        console.log(e.target.value);
         setRegisterdata({
             ...registerData,
             [e.target.name]:e.target.value,
@@ -61,11 +60,10 @@ export default function registerForm (){
                       contrasena: registerData.password,
                       nombres: registerData.user_name,
                       apellidos: registerData.lastname,
-                      correo: registerData.email,
-                      id_tipoUsuario: 1
+                      correo: registerData.email
                   }
                 );
-                history.push(`/home/${username}`);
+                history.push(`/home/${registerData.username}`);
                 history.go();
             } catch (error){
                 console.log(error)

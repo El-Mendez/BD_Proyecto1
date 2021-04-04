@@ -7,9 +7,8 @@ export default function SearchAlbums(props){
     <section className={'section-container'}>
       <div id="discography" className="section-title text-secondary">
         <h2 className="title">
-          Álbumes más recientes de la última semana
+          Álbumes
         </h2>
-        <div>Ver mas</div>
       </div>
       <div id="albums" className="songs-container">
         {

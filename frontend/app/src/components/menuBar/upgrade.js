@@ -1,13 +1,13 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useRouteMatch } from 'react-router-dom';
-import history from '../history';
+import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
 export default function Upgrade(props) {
-
-  //const post = 'http://3.135.234.254:3000/createPlaylist' //missing
+  let { user } = useParams();
+  const post = 'http://3.135.234.254:3000/addSubscription'
+  const update = 'http://3.135.234.254:3000/updateToPremium'
 
   //State variables
   const [data, setData] = React.useState({
@@ -17,21 +17,36 @@ export default function Upgrade(props) {
   });
   const [filled, setFilled] = React.useState(false);
 
-  // function postPlaylist(){
-  //   const fetchData = async () => {
-  //     try {
-  //       const { data } = await Axios.post(post,
-  //         {
-  //           nombre: playlistName
-  //         }
-  //       );
-  //       console.log("todo fine")
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // };
+  function addSubscription(){
+    const fetchData = async () => {
+      try {
+        const { data } = await Axios.post(post,
+          {
+            username: user
+          }
+        );
+        console.log("todo fine")
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const fetchUpdate = async () => {
+      try {
+        const { data } = await Axios.post(update,
+          {
+            username: user
+          }
+        );
+        console.log("todo fine")
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+    fetchUpdate();
+  };
 
 
   const handleInputChange = (e) =>{
@@ -47,9 +62,10 @@ export default function Upgrade(props) {
     }
   }
 
-  const handleClick = ()=>{
+  const handleClick = () => {
     if(data.tarjeta !== '' && data.vencimiento !== '' && data.seguridad !== ''){
-      console.log('vamo a crear la playlist')
+      props.onHide
+      addSubscription();
     }else{
       alert('Llena todos los campos para completar tu solicitud')
     }
@@ -69,7 +85,7 @@ export default function Upgrade(props) {
         Datos de pago
         <div className={'position-relative mt-2'}>
           <input className={"input " + (filled? 'is-filled':' ')}
-                 type={'text'}
+                 type={'number'}
                  name={'tarjeta'}
                  onChange={handleInputChange}
           />
