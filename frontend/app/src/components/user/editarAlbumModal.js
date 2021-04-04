@@ -54,10 +54,10 @@ export default function editAlbum (props){
                   artist: artista
                 }
               );
-              alert("Cambio del artista realizado")
+              alert("Cambio del album hecho")
           } catch (error){
               console.log(error)
-              alert("Usuario o correo ya existente. Prueba con un correo o un usuario distinto")
+              alert("Datos incorrectos, recuerde introducer valores exactos")
           }
       }
       fetchData();
