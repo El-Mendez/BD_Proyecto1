@@ -1,4 +1,4 @@
-import user from '../../../frontend/app/src/components/user/user';
+//import user from '../../../frontend/app/src/components/user/user';
 
 const pool = require('../../credentials');
 
