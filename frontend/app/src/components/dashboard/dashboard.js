@@ -14,6 +14,7 @@ import CreatePlaylist from '../playlist/createPlaylist';
 import EditPlaylist from '../playlist/editPlaylist';
 import Artist from '../artist/artis';
 import Library from '../playlist/library';
+import AlbumSongs from '../showSongs/albumSongs'
 
 
 export default function dashboard() {
@@ -45,6 +46,12 @@ export default function dashboard() {
         <div className={'dash-container'}>
           <SideBar />
             <Switch>
+              <Route  path={`${path}/search/artists/:artist/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/search/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
               <Route  path={`${path}/search/artists/:artist`}>
                 <Artist/>
               </Route>

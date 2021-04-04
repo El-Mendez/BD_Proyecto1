@@ -16,7 +16,8 @@ const getSpecificPlaylist = async (req, res) => {
   SELECT up.id_playlist, nombre, up.id_usuario as username, COUNT(*) AS canciones
   FROM playlist
     INNER JOIN usuario_playlist up on playlist.id_playlist = up.id_playlist
-  WHERE nombre ILIKE $1;`, [nombre]);
+  WHERE nombre ILIKE $1
+  GROUP BY up.id_playlist, up.id_usuario;`, [nombre]);
 
   res.status(200).json(response.rows);
 };
