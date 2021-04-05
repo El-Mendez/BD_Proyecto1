@@ -11,13 +11,13 @@ export default class userDescriptor extends React.Component{
             return (
                 <AdminView/>
             )
-        }else if (this.props.desc === 'Freemium' || this.props.desc === 'Premium'){
-            return (
-                <UserView/>
-                )
         }else if (this.props.desc === 'Artista' || this.props.desc === 'Manager'){
             return (
                 <Artist/>
+            )
+        }else{
+            return (
+              <UserView/>
             )
         }
     }
