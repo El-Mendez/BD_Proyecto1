@@ -15,7 +15,7 @@ export default class userDescriptor extends React.Component{
             return (
                 <UserView/>
                 )
-        }else{
+        }else if (this.props.desc === 'Artista' || this.props.desc === 'Manager'){
             return (
                 <Artist/>
             )
