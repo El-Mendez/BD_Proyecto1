@@ -22,10 +22,6 @@ export default function userView () {
                             <Link to={`${url}`}></Link>
                                 Datos generales
                         </MenuItem>
-                        <MenuItem icon={<I_pencil />}>
-                            <Link to={`${url}/cambiar_datos`}></Link>
-                                Cambiar datos
-                        </MenuItem>
                         <SubMenu title="Edicion de datos" icon = {<I_edition />}>
                             <MenuItem>
                                 <Link to={`${url}/añadir_cancion`}></Link>

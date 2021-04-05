@@ -16,7 +16,6 @@ import './user.scss';
 
 export default function userDescriptor (props) {
     let {path} = useRouteMatch();
-    const [modalAddSong, setModalAddSong] = React.useState(false);
     const data = props
     return (
         <div className = "container"> 
@@ -25,9 +24,6 @@ export default function userDescriptor (props) {
             desc = {data.desc}
             />
             <Switch>
-                <Route path={`${path}/cambiar_datos`}>
-                    <Cambio/>
-                </Route>
                 <Route path={`${path}/editar_cancion`}>
                     <EditSong/>
                 </Route>

@@ -14,10 +14,6 @@ export default function userDescriptor () {
                 </SidebarHeader>
                 <SidebarContent>
                     <Menu iconShape="circle">
-                        <MenuItem icon={<I_info />}>
-                            <Link to={`${url}`}></Link>
-                                Datos generales
-                        </MenuItem>
                         <MenuItem icon={<I_pencil />}>
                             <Link to={`${url}/cambiar_datos`}></Link>
                                 Cambiar datos
