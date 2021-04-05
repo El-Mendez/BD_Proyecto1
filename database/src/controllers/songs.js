@@ -76,7 +76,6 @@ const getSpecificSong = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 const songOff = async (req, res) => {
   const { estado, cancion, artista } = req.body;
   const response = await pool.query(`
@@ -121,7 +120,7 @@ const deleteSong = async (req, res) => {
 const addSong = async (req, res) => {
   const { cancion, link, artista } = req.body;
   const response = await pool.query(`
-  INSERT INTO canciones VALUES ($1,$2, (SELECT a.id_artista FROM artista a WHERE a.nombre = $3));`,
+  INSERT INTO canciones (nombre, link, id_artista) VALUES ($1,$2, (SELECT a.id_artista FROM artista a WHERE a.nombre ILIKE $3));`,
   [cancion, link, artista]);
 
   res.status(200).json(response.rows);
