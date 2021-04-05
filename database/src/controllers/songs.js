@@ -130,8 +130,6 @@ const addSong = async (req, res) => {
       error: 'Could not create new song.',
     });
   });
-
-  res.status(200).json(response.rows);
 };
 
 module.exports = {
