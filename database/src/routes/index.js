@@ -25,6 +25,7 @@ const {
   deleteSong,
   getSongsByAlbum,
   getLinkSong,
+  addSong,
 } = require('../controllers/songs');
 // Queries artist
 const {
@@ -107,6 +108,7 @@ router.post('/changeSongLink', updateSongLink);
 router.post('/deleteSong', deleteSong);
 router.post('/getSongsByAlbum', getSongsByAlbum);
 router.post('/getLinkSong', getLinkSong);
+router.post('/addSong', addSong);
 // --------------------Queries playlist--------------------------
 router.get('/playlists', getPlaylists);
 router.post('/createPlaylist', createPlaylist);
