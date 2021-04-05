@@ -56,11 +56,26 @@ export default function dashboard() {
               <Route  path={`${path}/search/genres/:genre`}>
                 <GenreSongs/>
               </Route>
+              <Route  path={`${path}/report/recentAlbums/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/biggerArtists/artists/:artist/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/famousArtists/artists/:artist/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
               <Route  path={`${path}/search/artists/:artist/albums/:album`}>
                 <AlbumSongs/>
               </Route>
               <Route  path={`${path}/search/albums/:album`}>
                 <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/famousArtists/artists/:artist`}>
+                <Artist/>
+              </Route>
+              <Route  path={`${path}/report/biggerArtists/artists/:artist`}>
+                <Artist/>
               </Route>
               <Route  path={`${path}/search/artists/:artist`}>
                 <Artist/>
