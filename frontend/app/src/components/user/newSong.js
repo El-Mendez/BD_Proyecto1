@@ -12,7 +12,7 @@ export default function editSong (props){
         <div className="col info_Usuario"> 
             <div className="asd">
                 <div className="row editArtist">
-                <p>Sube una nueva cancion que hayas subido a Youtube con anteoridad
+                <p>Sube una nueva cancion que hayas subido a Youtube con anterioridad
                 </p>
                 <Button variant="dark" onClick={() => setModalSong(true)}>
                     Añadir nueva cancion 
