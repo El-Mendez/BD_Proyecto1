@@ -27,7 +27,7 @@ Ctrl + C
 pkill -f node
 sudo kill -9 `sudo lsof -t -i:3000`
 ```
-ojo, para correr el backend se necesita credential.js que no está públicamente en el retp.
+ojo, para correr el backend se necesita credential.js que no está públicamente en el repo.
 
 ---
 ## Colores
