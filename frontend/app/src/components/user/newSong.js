@@ -10,6 +10,7 @@ export default function editSong (props){
     
     const [modalSong, setModalSong] = React.useState(false);
     const [modalAlbum, setModalAlbum] = React.useState(false);
+    const [modalAlbumSong, setModalAlbumSong] = React.useState(false);
 
     return (
         <div className="col info_Usuario"> 
@@ -40,13 +41,13 @@ export default function editSong (props){
                 <div className="row editArtist">
                 <p>Añadele tus canciones a los albums que ya has creado
                 </p>
-                <Button variant="dark" onClick={() => setModalAlbum(true)}>
+                <Button variant="dark" onClick={() => setModalAlbumSong(true)}>
                     Añadir cancion a un album
                 </Button>
                 <AddSongAlbum 
                         username ={props.username}
-                        show={modalAlbum}
-                        onHide={() => setModalAlbum(false)}
+                        show={modalAlbumSong}
+                        onHide={() => setModalAlbumSong(false)}
                     />
                 </div>
             </div>

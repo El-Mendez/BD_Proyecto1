@@ -18,7 +18,6 @@ export default function user (){
             })
             setData(response.data[0]);
           }catch (e){
-            setError(e);
             console.log(e)
           }
         };

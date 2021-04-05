@@ -4,10 +4,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
 
-export default function addSong (props){
+export default function addSongAlbum (props){
 
     const [filled, setFilled] = React.useState(false);
-    const post_album = 'http://3.135.234.254:3000/addAlbum/';
+    const post_album = 'http://3.135.234.254:3000/addSongAlbum/';
     let song = "";
     let album_name = "";
 
