@@ -9,7 +9,7 @@ export default function addSong (props){
     const [filled, setFilled] = React.useState(false);
     const post_song = 'http://3.135.234.254:3000/addSong/';
     let nombre = "";
-    let link = "";
+    let id_link = "";
 
     const handleName = (e) =>{
       console.log(e.target.value);
@@ -22,7 +22,7 @@ export default function addSong (props){
     }
   const handleLink = (e) =>{
       console.log(e.target.value);
-      link = e.target.value;
+      id_link = e.target.value;
       if(e.target.value !==''){
         setFilled(true);
       }else{
@@ -38,7 +38,7 @@ export default function addSong (props){
             const { data } = await Axios.post(post_song,
               {
                 cancion: nombre,
-                link: link,
+                link: id_link,
                 artista: props.username,
               }
             );
