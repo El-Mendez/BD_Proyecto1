@@ -42,6 +42,8 @@ const {
   updateAlbumName,
   updateAlbumDate,
   deleteAlbum,
+  addAlbum,
+  addSongAlbum,
 } = require('../controllers/albums');
 // Queries genres
 const {
@@ -97,6 +99,8 @@ router.post('/getSpecificAlbum', getSpecificAlbum);
 router.post('/changeAlbumName', updateAlbumName);
 router.post('/changeAlbumDate', updateAlbumDate);
 router.post('/deleteAlbum', deleteAlbum);
+router.post('/addAlbum', addAlbum);
+router.post('/addSongAlbum', addSongAlbum);
 // --------------------Queries songs--------------------------
 router.get('/songs', getSongs);
 router.post('/songByArtist', getSongByArtist);

@@ -29,7 +29,7 @@ export default function userView () {
                         <SubMenu title="Edicion de datos" icon = {<I_edition />}>
                             <MenuItem>
                                 <Link to={`${url}/añadir_cancion`}></Link>
-                                    Añadir cancion
+                                    Añadir
                             </MenuItem>
                         </SubMenu>
                     </Menu>

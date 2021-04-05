@@ -3,10 +3,13 @@ import {useForm} from 'react-hook-form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import NewSong from './newSongModal'
+import NewAlbum from './newAlbumModal'
+import AddSongAlbum from './addSongAlbum'
 
 export default function editSong (props){
     
     const [modalSong, setModalSong] = React.useState(false);
+    const [modalAlbum, setModalAlbum] = React.useState(false);
 
     return (
         <div className="col info_Usuario"> 
@@ -21,6 +24,29 @@ export default function editSong (props){
                         username ={props.username}
                         show={modalSong}
                         onHide={() => setModalSong(false)}
+                    />
+                </div>
+                <div className="row editArtist">
+                <p>Sube un nuevo album a la aplicacion (Recuerda que debes añadirle por lo menos una cancion)   
+                </p>
+                <Button variant="dark" onClick={() => setModalAlbum(true)}>
+                    Añadir nuevo album
+                </Button>
+                <NewAlbum 
+                        show={modalAlbum}
+                        onHide={() => setModalAlbum(false)}
+                    />
+                </div>
+                <div className="row editArtist">
+                <p>Añadele tus canciones a los albums que ya has creado
+                </p>
+                <Button variant="dark" onClick={() => setModalAlbum(true)}>
+                    Añadir cancion a un album
+                </Button>
+                <AddSongAlbum 
+                        username ={props.username}
+                        show={modalAlbum}
+                        onHide={() => setModalAlbum(false)}
                     />
                 </div>
             </div>
