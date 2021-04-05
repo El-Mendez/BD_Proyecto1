@@ -23,9 +23,11 @@ export default function artistReport(){
                     return(
                       <ArtistItem
                         key={index}
-                        userName = {artist.nombre}/>
+                        userName = {artist.artista}
+                        details = {artist.mes_pasado + ' → ' + artist.hace_2_meses + ' → ' + artist.hace_3_meses}/>
                     );
-                  })
+                  }
+                )
               }
           </div>
       </section>

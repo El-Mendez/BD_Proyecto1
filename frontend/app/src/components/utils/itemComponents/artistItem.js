@@ -15,7 +15,8 @@ export default function artistItem(props) {
     return(
         <div className={'thumbnail-col cursor'} onClick={handleClick}>
             <img src={test} className={'rounded-circle thumbnail-artist'}/>
-            <h6 className={'text-center text-secondary'}>{artist.userName}</h6>
+            <h6 className={'text-center text-secondary mb-0'}>{artist.userName}</h6>
+            <p className={'text-secondary text-center p-0'}>{artist.details}</p>
         </div>
     );
 }
