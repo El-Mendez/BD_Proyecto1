@@ -44,7 +44,7 @@ export default function deleteSong (props){
             alert("Se ha eliminado la cancion")
         } catch (error){
             console.log(error)
-            alert("Datos incorrectos, recuerde introducer valores exactos")
+            alert("Datos incorrectos, recuerde introducir valores exactos")
         }
     }
     fetchData();

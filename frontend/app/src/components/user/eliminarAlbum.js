@@ -45,7 +45,7 @@ export default function editAlbum (props){
             alert("Se ha eliminado el album")
         } catch (error){
             console.log(error)
-            alert("Datos incorrectos, recuerde introducer valores exactos")
+            alert("Datos incorrectos, recuerde introducir valores exactos")
         }
     }
     fetchData();
