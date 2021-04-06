@@ -1,8 +1,10 @@
 import React, {Fragment, useState} from 'react';
 import {useForm} from 'react-hook-form';
-export default function registerForm (){
+export default function registerForm (props){
 
     const post_user = 'http://3.135.234.254:3000/updateData';
+    let nuevoNombre = "";
+    let nuevoApellido = "";
 
     //Hook-Form validation
     const {register, errors, handleSubmit} = useForm({mode: 'onChange'});
@@ -18,13 +20,9 @@ export default function registerForm (){
         lastname: false
     });
 
-    const handleInputChange = (e) =>{
+    const handleInputName= (e) =>{
         console.log(e.target.value);
-        setchangeData({
-            ...changeData,
-            [e.target.name]:e.target.value,
-        })
-
+        nuevoNombre = e.target.value
         if(e.target.value != ''){
             setRegisterfilled({
                 ...registerFilled,
@@ -37,49 +35,45 @@ export default function registerForm (){
             });
         }
     }
-
-     function updateData(nombres, apellidos, username, ){
-         try{
-             const data ={
-                 nombres: nombres,
-                 apellidos: apellidos,
-                 username: username, 
-             };
-     
-              fetch(post_user, {
-                  method: 'POST', // or 'PUT'
-                  body: JSON.stringify(data), // data can be `string` or {object}!
-                  headers:{
-                      'Content-Type': 'application/json'
-                  }
-              }).then(res => res.json())
-                  .catch(error => console.error('Error:', error))
-                  .then(response => console.log('Success:', response));
-         }catch(e){
-             alert ('Ha ocurrido un fallo')
-         }
-    }
-
-    const onSubmit = (data) =>{
-        //console.log(data)
-        try{
-            updateData(changeData.user_name, changeData.lastname, 'Osberto');
-        }catch(e){
-            alert ('Ha ocurrido un fallo')
+    const handleInputLastName= (e) =>{
+        console.log(e.target.value);
+        nuevoApellido = e.target.value
+        if(e.target.value != ''){
+            setRegisterfilled({
+                ...registerFilled,
+                [e.target.name]: true
+            });
+        }else{
+            setRegisterfilled({
+                ...registerFilled,
+                [e.target.name]: false
+            });
         }
-        console.log(changeData.user_name, changeData.lastname);
+    }
+    
+    const onSubmit = () =>{
+        updateData();
+    }
+     function updateData(){
+        console.log (nuevoNombre, nuevoApellido, props.username)
+        const fetchData = async () =>{
+            try{
+                const { data } = await Axios.post(post_user,
+                  {
+                    nombres: nuevoNombre,
+                    apellidos: nuevoApellido,
+                    username: props.username, 
+                  }
+                );
+                alert("Cambio de datos realizado")
+            } catch (error){
+                console.log(error)
+                alert("Datos incorrectos, recuerde introducir valores exactos")
+            }
+        }
     }
 
-    const handleClick = () => {
-        console.log('testing')
 
-    }
-
-    function getSong (){
-        fetch(get_song)
-            .then(response => response.json())
-            .then(data => console.log(data));
-    }
 
     return(
         <Fragment>
@@ -90,7 +84,7 @@ export default function registerForm (){
                     <input className={"input " + (registerFilled.user_name? 'is-filled':' ')}
                            type={'text'}
                            name={'user_name'}
-                           onChange={handleInputChange}
+                           onChange={handleInputName}
                            ref={
                                register({
                                    required:{
@@ -111,7 +105,7 @@ export default function registerForm (){
                     <input className={"input " + (registerFilled.lastname? 'is-filled':' ')}
                            type={'text'}
                            name={'lastname'}
-                           onChange={handleInputChange}
+                           onChange={handleInputLastName}
                            ref={
                                register({
                                    required:{

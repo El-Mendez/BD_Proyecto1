@@ -85,7 +85,7 @@ const addAlbum = async (req, res) => {
   res.status(200).json(response.rows);
 };
 const addSongAlbum = async (req, res) => {
-  const { cancion,album } = req.body;
+  const { cancion, album } = req.body;
   const response = await pool.query(`
   INSERT INTO cancion_album VALUES ((SELECT c.id_cancion FROM canciones c WHERE c.nombre = $1),
   (SELECT a2.id_album FROM albumes a2 WHERE a2.nombre = $2));`,

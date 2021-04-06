@@ -12,14 +12,6 @@ export default function userDescriptor () {
                 <SidebarHeader className={'d-flex justify-content-center'}>
                     <img src={logo} className = 'usuario'></img>
                 </SidebarHeader>
-                <SidebarContent>
-                    <Menu iconShape="circle">
-                        <MenuItem icon={<I_pencil />}>
-                            <Link to={`${url}/cambiar_datos`}></Link>
-                                Cambiar datos
-                        </MenuItem>
-                    </Menu>
-                </SidebarContent>
                 <SidebarFooter>
                     <Menu iconShape="circle">
                         <MenuItem icon={<I_house />}>
