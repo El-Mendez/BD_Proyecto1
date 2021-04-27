@@ -1,0 +1,25 @@
+.section-title{
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.title{
+  flex-grow: 1;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28px;
+  text-transform: none;
+}
+
+.grid-container{
+  --minimumColumnWidth: 165px;
+  overflow-y: hidden;
+  //grid-auto-rows: 0; tengo que revisar para que lo separe por secciones
+  grid-template-rows: 1fr;
+  display: grid;
+  grid-gap: 24px;
+  grid-template-columns: repeat(auto-fill,minmax(var(--minimumColumnWidth),1fr));
+}
+
+

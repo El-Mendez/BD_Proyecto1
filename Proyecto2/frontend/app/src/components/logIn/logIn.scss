@@ -1,0 +1,23 @@
+.purple-btn{
+  background-color: $color-dark;
+  border: none;
+  color: $secondary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color: $color-light;
+    color: #FFF;
+  }
+}
+
+.border-btn{
+  background-color: transparent;
+  color: $primary;
+  border: solid 1px $primary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color:$primary;
+    color: $secondary;
+  }
+}

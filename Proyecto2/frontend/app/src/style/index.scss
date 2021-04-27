@@ -1,0 +1,39 @@
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
+@import '~react-pro-sidebar/dist/scss/styles';
+@import '../components/utils/utils';
+@import '../components/logIn/logIn';
+@import '../components/mainView/view';
+@import '../components/dashboard/dashboard.scss';
+@import '../components/menuBar/menu.scss';
+@import '../components/artist/artist.scss';
+@import '../components/playlist/playlist.scss';
+
+
+body {
+  background-color: #535353;
+  background-image: linear-gradient(rgba(0,0,0,.6),#121212);
+  transition: background 1s ease;
+
+}
+
+.form-container{
+  margin-top: 2rem;
+  width: 450px;
+}
+
+.a-button{
+  color: $color-dark;
+  text-decoration: underline;
+  cursor: pointer;
+  &:hover{
+    color: $color-medium
+  }
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+
+

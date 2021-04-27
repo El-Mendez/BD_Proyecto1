@@ -1,0 +1,83 @@
+.top-bar{
+  height: 60px;
+  z-index: 2;
+  grid-area: main-view;
+  background-color: #1d1d1d;
+  background-image: linear-gradient(rgba(0,0,0,.6),#282828);
+  transition: background 1s ease;
+  opacity: 0.8;
+}
+
+.header-bar{
+  height: 60px;
+  padding: 16px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.headerSearch-bar{
+  justify-content: flex-start;
+}
+
+
+.upgrade-btn{
+  font-size: 12px;
+  background-color: #000000b3;
+  color: $secondary;
+  border: solid 2px #ffffffb3;
+  padding: 8px 34px;
+  transition: all 33ms cubic-bezier(.3,0,0,1);
+  &:hover{
+    transform: scale(1.04);
+    background-color: #000;
+    border-color: #fff;
+    color: $secondary;
+  }
+}
+
+.user-btn{
+  font-size: 12px;
+  background-color: #000000b3;
+  color: $secondary;
+  padding: 6px 12px;
+  transition: all 33ms cubic-bezier(.3,0,0,1);
+  &:hover{
+    background-color: #181818;
+    color: $secondary;
+  }
+
+}
+
+.i-user{
+  font-size: 20px;
+}
+
+.view-container{
+  grid-area: main-view;
+  height: 85vh;
+  overflow: auto;
+}
+
+#topBar-space{
+  position: sticky;
+  top: 0;
+  height: 60px;
+  background-color: #383838;
+  z-index: 5;
+
+}
+
+.search-input{
+  color: #000;
+  padding: 6px 48px;
+  height: 40px;
+  width: 100%;
+  border: 0;
+  border-radius: 500px;
+  text-overflow: ellipsis;
+  &:focus{
+    outline:none;
+  }
+}
+

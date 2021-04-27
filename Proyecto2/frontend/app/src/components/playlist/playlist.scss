@@ -1,0 +1,140 @@
+.playlist-container{
+  max-height: 500px;
+  min-height: 340px;
+  height: 30vh;
+  color: #fff;
+  position: relative;
+  padding: 0 32px 24px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+}
+
+.playlist-block{
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.playlist-bg{
+  background: linear-gradient(transparent,#00000080);
+}
+
+.degraded-container{
+  background: #d8d0c0;
+  background-image: linear-gradient(rgba(0,0,0,.6),#121212);
+  isolation: isolate;
+}
+
+._pI1{
+  align-self: flex-end;
+  width: 192px;
+  min-width: 192px;
+  height: 192px;
+  margin-inline-end: 24px;
+}
+
+._pI2{
+  position: relative;
+  display: flex;
+  height: inherit;
+}
+
+.playlist-image{
+  box-shadow: 0 4px 60px #00000080;
+}
+
+._pD1{
+  flex: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+  z-index: 1;
+}
+
+.contentSpacing{
+  padding: 0 16px;
+  margin: 0;
+  max-width: 1955px;
+}
+
+#actualSongs{
+  outline: 0;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.row-title{
+  //position: sticky;
+  top: 60px;
+  z-index: 2;
+  box-sizing: content-box;
+  border-bottom: 1px solid transparent;
+  height: 36px;
+  margin: 0 -16px 8px;
+  padding: 0 16px;
+}
+
+.row-title-grid{
+  grid-template-columns: [index] 16px [first] 4fr [var1] 2fr [last] minmax(120px,1fr);
+  height: 100%;
+  color: #b3b3b3;
+  border-bottom: 1px solid hsla(0,0%,100%,.1);
+}
+
+.pSong-grid{
+  display: grid;
+  padding: 0 16px;
+  grid-gap: 16px;
+}
+
+.justify-self-end{
+  justify-self: end;
+}
+
+.justify-self-star{
+  justify-self: start;
+}
+
+.pR_title{
+  display: flex;
+  align-items: center;
+}
+
+.search-songs{
+  padding: 24px 25px;
+  justify-content: space-between;
+}
+
+.sP-search{
+  color: #ffffffb3;
+  background: transparent;
+  padding: 6px 5px;
+  height: 40px;
+  width: 100%;
+  border: 0;
+  text-overflow: ellipsis;
+  &:focus{
+    outline: none;
+  }
+}
+
+.library-container{
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  min-height: 224px;
+}
+
+.library-info{
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+  padding: 16px;
+  color: #fff;
+}

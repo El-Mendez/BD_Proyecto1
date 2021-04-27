@@ -1,0 +1,122 @@
+.fondo{
+    width: 100vmin;
+    height: 100vmin;
+}
+.container{
+    width: 100vmin;
+    height: 100vmin;
+    div{
+        color:white;
+    }
+}
+
+.opciones {
+    background-color:rgb(218, 218, 218);
+    margin-left: 5vmin;
+    border-radius: 1vmin;
+    div {
+        color:black;
+    }
+}
+
+.position {
+    height: 50vmin; 
+    margin-top: 10vmin;
+}
+
+.info_Usuario{
+    text-align: center;
+    background-color:#1d1d1d;
+    div {
+        margin-top: 2vmin;
+        cursor:default;
+    }
+}
+
+.texto_opciones{
+    div{
+        display: flex;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1vmin;
+        &:hover{
+            cursor: pointer;
+            background-color:#ffffff;
+            border-radius: 1vmin;            
+        }
+    }
+}
+
+.usuario{
+    width: 75px; 
+    height: 75px;
+}
+
+.form{
+    background-color: #1d1d1d;
+}
+
+.botonEnviar{
+    text-align: left;
+}
+
+.editArtist{
+    margin-left: 5px;
+    margin-top: 5px;
+    p{
+        text-align: left;
+    }
+}
+
+
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: right;
+}
+
+.box select {
+    background-color: #fffbfb;
+    color: white;
+    padding: 12px;
+    width: 250px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+    color: black;
+}
+
+.box::before {
+    content: "\f13a";
+    font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+}
+
+.box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+    padding: 30px;
+    color: black;
+}
+
+.fecha{
+    text-align: right;
+}

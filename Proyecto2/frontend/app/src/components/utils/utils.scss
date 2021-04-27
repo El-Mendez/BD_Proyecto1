@@ -1,0 +1,240 @@
+.label{
+  color: $primary;
+  display: block;
+  font-size: 17px;
+  left: 20px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transform: translateY(75%);
+  transition-duration: .15s;
+  transition-property: font-size,transform;
+}
+
+.input{
+  background-clip: padding-box;
+  background-color: #fff;
+  border: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  display: block;
+  font-size: 17px;
+  line-height: 1.41;
+  padding: 30px 20px 5px;
+  width: 100%;
+  transition-duration: .15s;
+  transition-property: box-shadow;
+  &:focus{
+    box-shadow: 0 20px 20px 0 #0000001C;
+    outline:0px;
+    +.label{
+      font-size: 14px;
+      transform: translateY(50%);
+    }
+  }
+  &.is-filled{
+    +.label{
+      font-size: 14px;
+      transform: translateY(50%);
+    }
+  }
+}
+
+.logo{
+  margin-top: -25px;
+  margin-bottom: -25px;
+}
+
+.sidebar-menuItem{
+  font-size: 20px;
+}
+
+
+.btn-zoa{
+  border-radius: 500px;
+  //width: 100%; //agregar en cada boton
+  line-height: 1;
+  padding: 14.5px;
+  transform: translate3d(0px,0px,0px);
+  transition-duration: 33ms;
+  transition-property: background-color, transform;
+}
+
+.divider{
+  display: table;
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 2px;
+  margin: 0px auto 1em;
+  color: rgb(117, 117, 117);
+  position: relative;
+  text-align: center;
+  width: 95%;
+  &:before, &:after{
+    border-top: 1px solid rgb(189, 189, 189);
+    content: "";
+    display: table-cell;
+    position: relative;
+    top: 0.8em;
+    width: 45%;
+  }
+}
+
+#song-artist{
+  font-size: 16px;
+  margin: -10px 0px 0px;
+}
+
+.report-card{
+  width: 187px;
+  height: 245px;
+  align-items: center;
+  padding: 9px;
+  background-color: $gray;
+  transition-duration: 0.5s;
+  transition-property: background-color;
+  cursor: pointer;
+  &:hover{
+    background-color: $light-gray;
+  }
+}
+
+.item-card{
+  flex: 1;
+  width: 100%;
+  padding: 16px;
+  position: relative;
+  align-items: center;
+  background-color: #181818;
+  cursor: pointer;
+  border-radius: 4px;
+  isolation: isolate;
+  transition: background-color .3s ease;
+  &:hover{
+    background-color: #282828;
+  }
+}
+
+.card-text{
+  color: #bababa;
+  font-size: 14px;
+}
+
+.card-song-title{
+  font-weight: 545;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: -5px;
+}
+
+
+.thumbnail-col {
+  box-sizing: border-box;
+  margin-left: 24px;
+  margin-top: 24px;
+  position: relative;
+  width: 162px;
+}
+
+.thumbnail-artist{
+  width: 162px;
+}
+
+.thumbnail-user{
+  width: 80px;
+}
+
+.genre-bg{
+  background-color: #9fa8da;
+}
+
+h1{
+  cursor: default;
+}
+
+.genre-card{
+  width: 250px;
+  height: 170px;
+  &:hover{
+    h1{
+      transition-duration: 0.5s;
+      transition-property: font-size;
+      font-size: 4.5rem;
+    }
+  }
+}
+
+.album-card{
+  width: 250px;
+  height: 335px;
+  background-color: transparent;
+  border: none;
+}
+
+.month-br{
+  border-right: solid 2px #323232;
+}
+
+.image-container{
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.image-shadow{
+  width: 100%;
+  position: relative;
+  background-color: #333;
+  box-shadow: 0 8px 24px #00000080;
+}
+
+.image-top{
+  width: 100%;
+  border-radius: 2px;
+}
+
+.song-container{
+  grid-template-columns: [index] 16px [first] 4fr [last] 45px;
+  height: 56px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  position: relative;
+  display: grid;
+  padding: 0 16px;
+  grid-gap: 16px;
+  &:hover{
+    background-color: #ffffff1a;
+  }
+}
+
+.index{
+  display: flex;
+  align-items: center;
+}
+
+.font-size{
+  font-size: 1.45rem;
+}
+
+.songs-details{
+  display: flex;
+  align-items: center;
+}
+
+.library-item{
+  position: relative;
+  height: 80px;
+  background-color: hsla(0,0%,100%,.1);
+  border-radius: 4px;
+  transition: background-color .3s ease;
+  &:hover{
+    background: hsla(0,0%,100%,.2);
+    backdrop-filter: blur(60px);
+  }
+}
+
+
+
+
+
