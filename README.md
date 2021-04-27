@@ -1,4 +1,4 @@
-# Proyecto 1 de Base de Datos
+# Proyecto 2 de Base de Datos
 ***
 Consiste en realizar una plataforma de música
 
