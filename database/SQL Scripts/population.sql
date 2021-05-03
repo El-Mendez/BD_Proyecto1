@@ -14,7 +14,7 @@ VALUES
 ('Ale_Mora',crypt('noSequePoner3', gen_salt('bf')),'Alejandro','Morales','zaraylopez5@gmail.com',2),
 ('Osberto',crypt('noSequePoner4', gen_salt('bf')),'Osberto','Mejía','zaraylopez6@gmail.com',1);
 
-INSERT INTO suscripcion(id_usuario, Fecha_inicio, Fecha_vencimiento)
+INSERT INTO suscripcion(id_usuario, fecha_inicio, fecha_vencimiento)
 VALUES
 ('El_Mendez','02-02-2020','05-02-2020'),
 ('Orlando13','02-15-2020','05-15-2020'),

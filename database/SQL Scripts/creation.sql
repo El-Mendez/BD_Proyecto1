@@ -6,6 +6,30 @@ CREATE TABLE tipo_usuario
     descripcion    VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE manager
+(
+    id_manager SERIAL PRIMARY KEY,
+    nombre     VARCHAR(150) NOT NULL
+);
+
+CREATE TABLE artista
+(
+    id_artista SERIAL PRIMARY KEY,
+    nombre     VARCHAR(50) NOT NULL,
+    id_manager INT,
+    activado   BOOLEAN NOT NULL DEFAULT TRUE,
+
+    CONSTRAINT fk_id_manager
+        FOREIGN KEY (id_manager)
+        REFERENCES manager(id_manager)
+);
+
+CREATE TABLE monitores
+(
+    id_monitor SERIAL PRIMARY KEY,
+    nombre     VARCHAR(150) NOT NULL
+);
+
 CREATE TABLE usuarios
 (
     username       VARCHAR(150) NOT NULL PRIMARY KEY,
@@ -29,31 +53,6 @@ CREATE TABLE usuarios
     CONSTRAINT fk_id_artista
         FOREIGN KEY (id_artista)
         REFERENCES artista(id_artista)
-);
-
-CREATE TABLE manager
-(
-    id_manager SERIAL PRIMARY KEY,
-    nombre     VARCHAR(150) NOT NULL
-);
-
-CREATE TABLE artista
-(
-    id_artista SERIAL PRIMARY KEY,
-    nombre     VARCHAR(50) NOT NULL,
-    id_manager INT,
-    activado   BOOLEAN NOT NULL DEFAULT TRUE,
-
-    CONSTRAINT fk_id_manager
-        FOREIGN KEY (id_manager)
-        REFERENCES manager(id_manager)
-);
-
-CREATE TABLE monitores
-(
-    id_monitor SERIAL,
-    nombre     VARCHAR(150) NOT NULL,
-    PRIMARY KEY (id_monitor, nombre)
 );
 
 CREATE TABLE tareas (
