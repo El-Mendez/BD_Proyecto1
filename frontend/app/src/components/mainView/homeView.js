@@ -44,6 +44,7 @@ export default function HomeView(props){
                     item.estado? <SongItem
                     key={item.id_cancion}
                     s_name = {item.cancion_nombre}
+                    s_link = {item.link}
                     a_name = {item.artista_nombre}
                     songPlaying = {() => songProps.songPlaying(item)}
                   /> : ''
