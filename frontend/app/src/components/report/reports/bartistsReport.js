@@ -25,7 +25,8 @@ export default function artistReport(){
             return(
                 <ArtistItem
                 key={index}
-                userName = {artist.nombre}/>
+                userName = {artist.nombre}
+                details={artist.canciones + ' canciones'}/>
             );
           })
         }

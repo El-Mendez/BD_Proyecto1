@@ -107,7 +107,6 @@ const updateToPremium = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 module.exports = {
   createUser,
   logIn,
@@ -117,5 +116,5 @@ module.exports = {
   getUserPlaylist,
   updateData,
   addSubscription,
-  updateToPremium
+  updateToPremium,
 };

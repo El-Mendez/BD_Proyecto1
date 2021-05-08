@@ -7,7 +7,7 @@ export default class songItemcard extends React.Component{
             <div className="item-card card" onClick={this.props.songPlaying}>
               <div className="image-container">
                 <div className="image-shadow">
-                  <img src={image} className="image-top" alt="TEST"/>
+                  <img  src={`https://img.youtube.com/vi/${this.props.s_link}/maxresdefault.jpg`} className="image-top" alt="TEST" />
                 </div>
               </div>
               <div className="card-body p-1 mt-1 text-secondary w-100">

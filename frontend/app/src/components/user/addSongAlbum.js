@@ -4,25 +4,25 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
 
-export default function deleteSong (props){
+export default function addSongAlbum (props){
 
     const [filled, setFilled] = React.useState(false);
-    const post_song = 'http://3.135.234.254:3000/deleteSong/';
-    let nombre = "";
-    let artista = "";
+    const post_album = 'http://3.135.234.254:3000/addSongAlbum/';
+    let song = "";
+    let album_name = "";
 
-    const handleName = (e) =>{
+    const handleNameSong = (e) =>{
       console.log(e.target.value);
-      nombre = e.target.value;
+      song = e.target.value;
       if(e.target.value !==''){
         setFilled(true);
       }else{
         setFilled(false);
       }
     }
-  const handleArtist = (e) =>{
+    const handleNameAlbum = (e) =>{
       console.log(e.target.value);
-      artista = e.target.value;
+      album_name = e.target.value;
       if(e.target.value !==''){
         setFilled(true);
       }else{
@@ -30,15 +30,15 @@ export default function deleteSong (props){
       }
     }
     const onSubmit = () =>{
-      deleteSong();
+      addSongAlbum();
   }
-  const deleteSong = () =>{
+  const addSongAlbum = () =>{
     const fetchData = async () =>{
         try{
-            const { data } = await Axios.post(post_song,
+            const { data } = await Axios.post(post_album,
               {
-                cancion:  nombre,
-                artista: artista,
+                cancion: song,
+                album: album_name,
               }
             );
             alert("Se ha eliminado la cancion")
@@ -59,14 +59,14 @@ export default function deleteSong (props){
         >
             <Modal.Header closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
-                Ingrese los datos de la cancion que desea eliminar
+                Ingrese los datos del album que desea agregar
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <input className={"input " + (filled? 'is-filled':' ')}
                            type={'text'}
                            name={'name'}
-                           onChange={handleName}
+                           onChange={handleNameSong}
                 />
                 <label className={'label'}>Nombre de la cancion</label>
             </Modal.Body>
@@ -74,12 +74,12 @@ export default function deleteSong (props){
                 <input className={"input " + (filled? 'is-filled':' ')}
                            type={'text'}
                            name={'name'}
-                           onChange={handleArtist}
+                           onChange={handleNameAlbum}
                 />
-                <label className={'label'}>Nombre del artista</label>
+                <label className={'label'}>Nombre del album</label>
             </Modal.Body>
             <Modal.Footer>
-              <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit}>Eliminar canción</Button>
+              <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit}>Enviar</Button>
               <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
             </Modal.Footer>
         </Modal>

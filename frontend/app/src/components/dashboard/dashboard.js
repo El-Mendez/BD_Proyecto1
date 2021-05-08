@@ -19,8 +19,10 @@ import GenreSongs from '../showSongs/genreSongs';
 
 
 export default function dashboard() {
+  let { user } = useParams();
 
   const [song, setSong] = useState({
+    song_id:null,
     song_link: '',
     song_name: '',
     song_artist: ''
@@ -33,6 +35,7 @@ export default function dashboard() {
     if(a_song != undefined){
       setSong({
         ...song,
+        song_id: a_song.id_cancion,
         song_link: a_song.link,
         song_name: a_song.cancion_nombre,
         song_artist: a_song.artista_nombre,
@@ -53,11 +56,26 @@ export default function dashboard() {
               <Route  path={`${path}/search/genres/:genre`}>
                 <GenreSongs/>
               </Route>
+              <Route  path={`${path}/report/recentAlbums/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/biggerArtists/artists/:artist/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/famousArtists/artists/:artist/albums/:album`}>
+                <AlbumSongs/>
+              </Route>
               <Route  path={`${path}/search/artists/:artist/albums/:album`}>
                 <AlbumSongs/>
               </Route>
               <Route  path={`${path}/search/albums/:album`}>
                 <AlbumSongs/>
+              </Route>
+              <Route  path={`${path}/report/famousArtists/artists/:artist`}>
+                <Artist/>
+              </Route>
+              <Route  path={`${path}/report/biggerArtists/artists/:artist`}>
+                <Artist/>
               </Route>
               <Route  path={`${path}/search/artists/:artist`}>
                 <Artist/>
@@ -95,7 +113,9 @@ export default function dashboard() {
             <Player
             videoId={song.song_link}//Cuando paso el estate de link, no le da play
             name={song.song_name}
-            artist={song.song_artist}/>
+            artist={song.song_artist}
+            song_id={song.song_id}
+            username={user}/>{/* Usuario que está actualmente loggeado */}
           </div>
         </div>
       </div>

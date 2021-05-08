@@ -47,7 +47,7 @@ const newSubscriptions = async (req, res) => {
     SELECT to_char(s.fecha_inicio, 'MON') as mes, count(*)
     FROM suscripcion s
     WHERE s.fecha_inicio > (current_date - 183) AND s.fecha_inicio < current_date
-    GROUP BY s.fecha_inicio;
+    GROUP BY mes;
   `);
   res.status(200).json(response.rows);
 };

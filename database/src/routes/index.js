@@ -25,6 +25,7 @@ const {
   deleteSong,
   getSongsByAlbum,
   getLinkSong,
+  addSong,
 } = require('../controllers/songs');
 // Queries artist
 const {
@@ -41,6 +42,8 @@ const {
   updateAlbumName,
   updateAlbumDate,
   deleteAlbum,
+  addAlbum,
+  addSongAlbum,
 } = require('../controllers/albums');
 // Queries genres
 const {
@@ -67,6 +70,10 @@ const {
   topGenres,
   topActiveUsers,
 } = require('../controllers/reports');
+// Queries para el stream
+const {
+  streamSong,
+} = require('../controllers/stream');
 // --------------------Queries usuarios--------------------------
 router.post('/createUser', createUser);
 router.post('/login', logIn);
@@ -92,6 +99,8 @@ router.post('/getSpecificAlbum', getSpecificAlbum);
 router.post('/changeAlbumName', updateAlbumName);
 router.post('/changeAlbumDate', updateAlbumDate);
 router.post('/deleteAlbum', deleteAlbum);
+router.post('/addAlbum', addAlbum);
+router.post('/addSongAlbum', addSongAlbum);
 // --------------------Queries songs--------------------------
 router.get('/songs', getSongs);
 router.post('/songByArtist', getSongByArtist);
@@ -103,6 +112,7 @@ router.post('/changeSongLink', updateSongLink);
 router.post('/deleteSong', deleteSong);
 router.post('/getSongsByAlbum', getSongsByAlbum);
 router.post('/getLinkSong', getLinkSong);
+router.post('/addSong', addSong);
 // --------------------Queries playlist--------------------------
 router.get('/playlists', getPlaylists);
 router.post('/createPlaylist', createPlaylist);
@@ -119,5 +129,6 @@ router.get('/reports/newSubscriptions', newSubscriptions);
 router.get('/reports/topArtist', topArtist);
 router.get('/reports/topGenres', topGenres);
 router.get('/reports/topActiveUsers', topActiveUsers);
-
+// --------------------Stream Song--------------------------
+router.post('/stream', streamSong);
 module.exports = router;

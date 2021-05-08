@@ -76,7 +76,6 @@ const getSpecificSong = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 const songOff = async (req, res) => {
   const { estado, cancion, artista } = req.body;
   const response = await pool.query(`
@@ -118,6 +117,20 @@ const deleteSong = async (req, res) => {
 
   res.status(200).json(response.rows);
 };
+const addSong = async (req, res) => {
+  const { cancion, link, artista } = req.body;
+  const response = await pool.query(`
+  INSERT INTO canciones (nombre, link, id_artista) VALUES ($1,$2, (SELECT a.id_artista FROM artista a WHERE a.nombre ILIKE $3));`,
+  [cancion, link, artista]).then(() => {
+    res.status(201).json({
+      status: 'correct',
+    });
+  }).catch(() => {
+    res.status(500).json({
+      error: 'Could not create new song.',
+    });
+  });
+};
 
 module.exports = {
   getSongs,
@@ -130,4 +143,5 @@ module.exports = {
   deleteSong,
   getSongsByAlbum,
   getLinkSong,
+  addSong,
 };

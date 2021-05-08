@@ -11,6 +11,7 @@ import Cambio from './cambioDatos'
 import EditSong from './editarCancion'
 import EditAlbum from './editarAlbum.js'
 import EditArtist from './editarArtista'
+import AddArtist from './newSong'
 import './user.scss';
 
 export default function userDescriptor (props) {
@@ -23,9 +24,6 @@ export default function userDescriptor (props) {
             desc = {data.desc}
             />
             <Switch>
-                <Route path={`${path}/cambiar_datos`}>
-                    <Cambio/>
-                </Route>
                 <Route path={`${path}/editar_cancion`}>
                     <EditSong/>
                 </Route>
@@ -34,6 +32,11 @@ export default function userDescriptor (props) {
                 </Route>
                 <Route path={`${path}/editar_artista`}>
                     <EditArtist/>
+                </Route>
+                <Route path={`${path}/añadir_cancion`}>
+                    <AddArtist
+                    username = {data.username}
+                    />
                 </Route>
                 <Route path={`${path}`}>
                     <Info
@@ -48,14 +51,4 @@ export default function userDescriptor (props) {
         </div>
         )
 }
-    {/* <Vista
-    desc = {this.props.desc}
-    />
-    <div className="col info_Usuario"> 
-        <Info
-        username = {this.props.username}
-        nombres = {this.props.nombres}
-        apellidos = {this.props.apellidos}
-        desc = {this.props.desc}
-        correo = {this.props.correo}/>
-    </div> */}
+    

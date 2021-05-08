@@ -76,6 +76,24 @@ const deleteAlbum = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const addAlbum = async (req, res) => {
+  const { album } = req.body;
+  const response = await pool.query(`
+  INSERT INTO albumes (nombre, fecha_publicacion) VALUES ($1, CURRENT_Date);`,
+  [album]);
+
+  res.status(200).json(response.rows);
+};
+const addSongAlbum = async (req, res) => {
+  const { cancion, album } = req.body;
+  const response = await pool.query(`
+  INSERT INTO cancion_album VALUES ((SELECT c.id_cancion FROM canciones c WHERE c.nombre = $1),
+  (SELECT a2.id_album FROM albumes a2 WHERE a2.nombre = $2));`,
+  [cancion, album]);
+
+  res.status(200).json(response.rows);
+};
+
 module.exports = {
   getAlbums,
   getAlbumByArtist,
@@ -83,4 +101,6 @@ module.exports = {
   updateAlbumName,
   updateAlbumDate,
   deleteAlbum,
+  addAlbum,
+  addSongAlbum,
 };

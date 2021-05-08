@@ -16,6 +16,7 @@ export default function SongsArtist(props){
           }
         );
         setSongs(data)
+        console.log(data)
       } catch (error) {
         console.log(error);
       }
@@ -38,7 +39,7 @@ export default function SongsArtist(props){
               return(
                 <SongItem
                 key={index}
-                song_index={index}
+                song_index={index + 1}
                 song_title={song.nombre}
                 />
               );

@@ -4,12 +4,12 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
 
-export default function deleteSong (props){
+export default function addSong (props){
 
     const [filled, setFilled] = React.useState(false);
-    const post_song = 'http://3.135.234.254:3000/deleteSong/';
+    const post_song = 'http://3.135.234.254:3000/addSong/';
     let nombre = "";
-    let artista = "";
+    let id_link = "";
 
     const handleName = (e) =>{
       console.log(e.target.value);
@@ -20,9 +20,9 @@ export default function deleteSong (props){
         setFilled(false);
       }
     }
-  const handleArtist = (e) =>{
+  const handleLink = (e) =>{
       console.log(e.target.value);
-      artista = e.target.value;
+      id_link = e.target.value;
       if(e.target.value !==''){
         setFilled(true);
       }else{
@@ -30,15 +30,16 @@ export default function deleteSong (props){
       }
     }
     const onSubmit = () =>{
-      deleteSong();
+      addSong();
   }
-  const deleteSong = () =>{
+  const addSong = () =>{
     const fetchData = async () =>{
         try{
             const { data } = await Axios.post(post_song,
               {
-                cancion:  nombre,
-                artista: artista,
+                cancion: nombre,
+                link: id_link,
+                artista: props.username,
               }
             );
             alert("Se ha eliminado la cancion")
@@ -74,12 +75,12 @@ export default function deleteSong (props){
                 <input className={"input " + (filled? 'is-filled':' ')}
                            type={'text'}
                            name={'name'}
-                           onChange={handleArtist}
+                           onChange={handleLink}
                 />
-                <label className={'label'}>Nombre del artista</label>
+                <label className={'label'}>Id de Youtube</label>
             </Modal.Body>
             <Modal.Footer>
-              <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit}>Eliminar canción</Button>
+              <Button className={"btn-zoa border-btn mb-2"} onClick={onSubmit}>Enviar</Button>
               <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
             </Modal.Footer>
         </Modal>

@@ -262,3 +262,171 @@ VALUES
 SELECT link
 FROM canciones
 WHERE nombre ILIKE 'Algo';
+
+-- NUEVOS REPORTES
+-- TOTAL DE REPRODUCCIONES POR SEMANA
+-- QUERY
+-- AJUSTAR PARA QUE EL USUARIO PUEDA INGRESAR LA FECHA EN ESPAÑOL
+SELECT COUNT(*)
+FROM stream
+WHERE fecha BETWEEN ('4-01-2021') AND (CAST('4-01-2021' AS DATE) + CAST('7 days' AS INTERVAL));
+-- Stored procedure
+CREATE OR REPLACE function weekly_streams(date)
+RETURNS NUMERIC AS
+    $BODY$
+    BEGIN
+       RETURN
+        (SELECT COUNT(*)
+        FROM stream
+        WHERE fecha BETWEEN $1 AND (CAST($1 AS DATE) + CAST('7 days' AS INTERVAL)));
+
+        EXCEPTION
+            WHEN sqlstate '22007' THEN
+                RAISE EXCEPTION 'El mes %, es incorrecto',$1;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT *
+FROM weekly_streams('04-01-2021');
+
+-- N ARTISTAS CON LAS MAYORES REPRODUCCIONES
+-- QUERY
+SELECT a.nombre, count(*) AS reproducciones FROM stream s
+	INNER JOIN canciones c ON c.id_cancion = s.id_cancion
+	INNER JOIN artista a ON a.id_artista = c.id_artista
+	WHERE s.fecha BETWEEN ('4-01-2020') AND (CAST('4-01-2020' AS DATE) + CAST('7 days' AS INTERVAL))
+	GROUP BY a.nombre
+	ORDER BY reproducciones DESC LIMIT 2;
+-- Stored Procedure
+CREATE OR REPLACE function best_artists(date, integer)
+RETURNS TABLE (artista varchar, reproducciones bigint) AS
+    $BODY$
+    BEGIN
+       RETURN QUERY
+        SELECT a.nombre, count(*)
+            FROM stream s
+	        INNER JOIN canciones c ON c.id_cancion = s.id_cancion
+	        INNER JOIN artista a ON a.id_artista = c.id_artista
+	        WHERE s.fecha BETWEEN ($1) AND (CAST($1 AS DATE) + CAST('7 days' AS INTERVAL))
+	        GROUP BY a.nombre
+	        ORDER BY COUNT(*) DESC
+            LIMIT $2;
+
+        EXCEPTION
+            WHEN sqlstate '22007' THEN
+                RAISE EXCEPTION 'El mes %, es incorrecto',$1;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT *
+FROM best_artists('04-01-2021', 1);
+
+-- TOTAL DE REPRODUCCIONES POR GENERO
+-- N CANCIONES CON MAS REPRODUCCIONES PARA UN ARTISTA M
+
+
+
+
+-- TAREAS DE MONITORES
+-- MODIFICANDO INFORMACION DE UN TRACK O ALBUM
+CREATE OR REPLACE FUNCTION modificarCancionArtista(artista integer, id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE canciones SET id_artista = artista WHERE id_cancion = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION modificarCancionLink(link TEXT, id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE canciones SET link = link WHERE id_cancion = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION modificarCancionName(nombre TEXT, id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE canciones SET nombre = nombre WHERE id_cancion = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION modificarAlbumName(nombre TEXT, id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE albumes SET nombre = nombre WHERE id_album = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION modificarAlbumDate(fecha date, id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE albumes SET fecha_publicacion = fecha WHERE id_album = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+--DESACTIVANDO TRACKS O ALBUMES
+CREATE OR REPLACE FUNCTION desactivateSong(id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE canciones SET estado = FALSE WHERE id_cancion = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+CREATE OR REPLACE FUNCTION desactivateAlbum(id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE albumes SET activado = FALSE WHERE id_album = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+
+
+--DESACTIVANDO USUARIOS SIN SUSCRIPCION
+-- Query de búsqueda de usuarios sin suscripción
+SELECT username from usuario where tipo¡
+CREATE OR REPLACE FUNCTION desactivateUser(id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE usuarios SET activo = FALSE WHERE username = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+
+-- ELIMINANDO SUSCRIPCION DE UN USUARIO
+-- Query de búsqueda de usuarios con suscipción
+CREATE OR REPLACE FUNCTION desactivateSuscriptionUser(id integer)  RETURNS void AS $$
+    BEGIN
+		UPDATE usuarios SET id_tipoUsuario = 1 WHERE username = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+-- DESACTIVANDO USUARIOS COMO ARTISTAS (CONSULTA A DIANA)
+CREATE OR REPLACE FUNCTION desactivateArtistUser(artist TEXT)  RETURNS void AS $$
+    BEGIN
+		UPDATE artista SET activado = FALSE WHERE nombre = artist;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+-- Asociar un usuario existente a un perfiles de monitoreo
+CREATE OR REPLACE FUNCTION userMonitor(id TEXT, tipo INT)  RETURNS void AS $$
+    BEGIN
+		UPDATE usuarios SET id_monitor = tipo WHERE username = id;
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;

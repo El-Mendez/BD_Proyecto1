@@ -16,15 +16,15 @@ export default function usersReport() {
     10 usuarios más activos en el último mes
   </h2>
 </div>
-<div id="activeUsers" className="songs-container">
+<div id="activeUsers">
   {
     activeUsers.map((user) => {
       const index = activeUsers.indexOf(user)
       return (
         <UserItemreport
           key={index}
-          username={user.nombre}
-          type={user.id_tipoUsuario}
+          username={user.username}
+          type={user.reproducciones}
         />
       );
     })

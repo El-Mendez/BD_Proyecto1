@@ -23,6 +23,7 @@ export default function SearchSongs(props){
                 song_index={index + 1}
                 song_t={song.cancion}
                 song_a={song.artista}
+                song_link={song.link}
               /> : ''
             );
           })

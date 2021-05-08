@@ -24,16 +24,8 @@ export default function userView () {
                         </MenuItem>
                         <SubMenu title="Edicion de datos" icon = {<I_edition />}>
                             <MenuItem>
-                                <Link to={`${url}/editar_cancion`}></Link>
-                                    Editar canción
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_album`}></Link>
-                                    Editar album
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_artista`}></Link>
-                                    Editar artista
+                                <Link to={`${url}/añadir_cancion`}></Link>
+                                    Añadir
                             </MenuItem>
                         </SubMenu>
                     </Menu>
@@ -50,24 +42,3 @@ export default function userView () {
             </ProSidebar>
             )
         }
-        {/* <Link to={`${url}/eliminar_artista`}></Link>
-    Eliminar artista */}
-    
-    {/* <MenuItem icon={<I_pencil />}>
-    <div className={'sidebar-menuItem'} onClick={() => setModalShowSong(true)}>
-            Eliminar canción
-        </div>
-        <DeleteSong
-            show={modalShowSong}
-            onHide={() => setModalShowSong(false)}
-        />
-    </MenuItem>
-    <MenuItem icon={<I_pencil />}>
-    <div className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
-            Editar Album
-        </div>
-        <EditAlbum
-            show={modalShow}
-            onHide={() => setModalShow(false)}
-        />
-    </MenuItem> */}

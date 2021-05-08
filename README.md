@@ -1,6 +1,8 @@
-# Proyecto 1 de Base de Datos
+# Proyecto 2 de Base de Datos
 ***
 Consiste en realizar una plataforma de música
+
+## Frontend
 ```bash
 # Instalar las dependencias
 npm install
@@ -12,7 +14,20 @@ npm run start
 # Genera los archivos "compilados" en el /dist
 npm run build
 ```
+## Backend
+```bash
+# Instalar las dependencias
+npm install
 
+# Corre el proyecto en localhost:3000 con nodemon
+npm run test-run
+
+# Para parar nodemon
+Ctrl + C
+pkill -f node
+sudo kill -9 `sudo lsof -t -i:3000`
+```
+ojo, para correr el backend se necesita credential.js que no está públicamente en el repo.
 
 ---
 ## Colores
