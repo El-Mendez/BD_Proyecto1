@@ -4,12 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import EditAlbum from './editarAlbumModal'
 import DeleteAlbum from './eliminarAlbum'
+import StateAlbum from './editarAlbumEstado'
 import DateAlbum from './editarAlbumFecha'
 
 export default function editAlbum (props){
 
     const [modalShowNameAlbum, setModalShowNameAlbum] = React.useState(false);
     const [modalDeleteAlbum, setModalDeleteAlbum] = React.useState(false);
+    const [modalStateAlbum, setModalStateAlbum] = React.useState(false);
     const [modalDateAlbum, setModalDate] = React.useState(false);
 
     return (
@@ -33,6 +35,16 @@ export default function editAlbum (props){
                 <DateAlbum 
                         show={modalDateAlbum}
                         onHide={() => setModalDate(false)}
+                    />
+                </div>
+                <div className="row editArtist">
+                <p>Activar/Desactivar un Album (sus canciones se desactivaran)</p>
+                <Button variant="dark" onClick={() => setModalStateAlbum(true)}>
+                    Activar/Desactivar un album
+                </Button>
+                <StateAlbum 
+                        show={modalStateAlbum}
+                        onHide={() => setModalStateAlbum(false)}
                     />
                 </div>
                 <div className="row editArtist">

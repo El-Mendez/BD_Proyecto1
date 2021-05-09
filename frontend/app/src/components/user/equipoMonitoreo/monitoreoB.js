@@ -4,10 +4,10 @@ import { ProSidebar, Menu, MenuItem, SubMenu, SidebarFooter, SidebarHeader, Side
 import {BsFillPersonFill as I_person, BsCardText as I_info, 
         BsPencil as I_pencil, BsCollectionFill as I_edition,
         BsHouse as I_house,} from 'react-icons/bs';
-import logo from '../../assets/user.svg'
-import './user.scss';
+import logo from '../../../assets/user.svg'
+import '../user.scss';
 
-export default function userView () {
+export default function monitorB () {
     let {url} = useRouteMatch();
     let { user } = useParams();
 
@@ -22,18 +22,10 @@ export default function userView () {
                             <Link to={`${url}`}></Link>
                                 Datos generales
                         </MenuItem>
-                        <SubMenu title="Edicion de datos" icon = {<I_edition />}>
+                        <SubMenu title="Monitor B" icon = {<I_edition />}>
                             <MenuItem>
-                                <Link to={`${url}/editar_cancion`}></Link>
-                                    Editar canción
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_album`}></Link>
-                                    Editar album
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_artista`}></Link>
-                                    Editar artista
+                                <Link to={`${url}/editar_usuarios`}></Link>
+                                    Usuarios
                             </MenuItem>
                         </SubMenu>
                     </Menu>

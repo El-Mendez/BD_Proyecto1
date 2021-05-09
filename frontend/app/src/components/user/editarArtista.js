@@ -4,11 +4,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import EditArtist from './editarArtistaModal'
 import DeleteArtist from './eliminarArtista'
+import StateArtist from './editarArtistaEstado'
 
 export default function editAlbum (){
 
     const [modalShowName, setModalShowName] = React.useState(false);
     const [modalDelete, setModalDelete] = React.useState(false);
+    const [modalState, setModalState] = React.useState(false);
 
     return (
         <div className="col info_Usuario"> 
@@ -22,6 +24,14 @@ export default function editAlbum (){
                         show={modalShowName}
                         onHide={() => setModalShowName(false)}
                     />
+                </div>
+                <div className="row editArtist">
+                <p>Desactivar Artista (sus canciones y albumes se desactivaran)</p>
+                <Button variant="dark"  onClick={() => setModalState(true)}>Activar/Desactivar artista</Button>
+                    <StateArtist 
+                            show={modalState}
+                            onHide={() => setModalState(false)}
+                        />
                 </div>
                 <div className="row editArtist">
                 <p>Elimina un artista de la base de datos (Precaución: esta acción no puede disolverse)</p>
