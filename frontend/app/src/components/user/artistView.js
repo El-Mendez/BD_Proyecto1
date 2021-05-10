@@ -22,6 +22,10 @@ export default function userView () {
                             <Link to={`${url}`}></Link>
                                 Datos generales
                         </MenuItem>
+                        <MenuItem icon={<I_info />}>
+                            <Link to={`${url}/profit`}></Link>
+                                Ganancias
+                        </MenuItem>
                         <SubMenu title="Edicion de datos" icon = {<I_edition />}>
                             <MenuItem>
                                 <Link to={`${url}/añadir_cancion`}></Link>

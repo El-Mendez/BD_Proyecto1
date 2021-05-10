@@ -32,7 +32,7 @@ export default function sideBar(){
                 if (data[0].descripcion === 'Admin'){
                     setAdmin(true);
                     setPremium (true);
-                }else if(data[0].descripcion === 'Premium'){
+                }else if(data[0].descripcion === 'Premium' ){
                     setPremium(true);
                 }
             }catch (e){

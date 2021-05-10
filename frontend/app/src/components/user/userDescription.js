@@ -13,6 +13,8 @@ import EditAlbum from './editarAlbum.js'
 import EditArtist from './editarArtista'
 import AddArtist from './newSong'
 import EditUser from './editarUsuarios'
+import Profit from './profit/profit'
+
 import './user.scss';
 
 export default function userDescriptor (props) {
@@ -41,6 +43,11 @@ export default function userDescriptor (props) {
                 </Route>
                 <Route path={`${path}/editar_usuarios`}>
                     <EditUser
+                    username = {data.username}
+                    />
+                </Route>
+                <Route path={`${path}/profit`}>
+                    <Profit
                     username = {data.username}
                     />
                 </Route>
