@@ -7,7 +7,8 @@ import {BsHouse as I_house,
     BsSearch as I_search,
     BsGrid1X2Fill as I_library,
     BsPlusSquareFill as I_newPlaylist,
-    BsClipboardData as I_report} from 'react-icons/bs';
+    BsClipboardData as I_report,
+    BsPencil as I_pencil} from 'react-icons/bs';
 import CreatePlaylist from '../playlist/createPlaylist';
 
 
@@ -92,6 +93,17 @@ export default function sideBar(){
                                 />
                             </MenuItem> : ''
                         }
+                        {/* EDITION */}
+                        {
+                            admin? <MenuItem>
+                                <Link to={`${url}/edition`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'mr-3'}><I_pencil/></span>
+                                        Edición
+                                    </p>
+                                </Link>
+                            </MenuItem> : ''
+                        }
                         {/* REPORTS */}
                         {
                             admin? <MenuItem>
@@ -105,6 +117,7 @@ export default function sideBar(){
                             </MenuItem> : ''
                         }
                     </Menu>
+
                 </SidebarContent>
 
                 <SidebarFooter>

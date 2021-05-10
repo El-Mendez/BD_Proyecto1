@@ -16,6 +16,7 @@ import Artist from '../artist/artis';
 import Library from '../playlist/library';
 import AlbumSongs from '../showSongs/albumSongs';
 import GenreSongs from '../showSongs/genreSongs';
+import Editing from '../editing/editing';
 
 
 export default function dashboard() {
@@ -50,6 +51,9 @@ export default function dashboard() {
         <div className={'dash-container'}>
           <SideBar />
             <Switch>
+              <Route  path={`${path}/edition`}>
+                <Editing/>
+              </Route>
               <Route  path={`${path}/report/popularGenres/genres/:genre`}>
                 <GenreSongs/>
               </Route>

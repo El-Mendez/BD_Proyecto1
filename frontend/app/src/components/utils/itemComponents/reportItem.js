@@ -13,7 +13,7 @@ export default function reportItem(props){
     }
 
     return(
-        <div className="report-card card m-2" onClick={handleClick}>
+        <div className="report-card card m-2" onClick={prop.click? handleClick: prop.redirect}>
             <div className="image-container">
                 <div className="image-shadow">
                     <img src={prop.image} className="image-top" alt="TEST"/>
