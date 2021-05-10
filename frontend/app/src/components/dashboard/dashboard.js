@@ -9,7 +9,7 @@ import SideBar from "../menuBar/sideBar";
 import Player from "../player/Player";
 import HomeView from '../mainView/homeView';
 import Search from '../mainView/search/search';
-import Report from '../report/report'
+import Report from '../report/report';
 import CreatePlaylist from '../playlist/createPlaylist';
 import EditPlaylist from '../playlist/editPlaylist';
 import Artist from '../artist/artis';

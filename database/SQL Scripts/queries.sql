@@ -6,7 +6,6 @@ VALUES ('El_Pepe', crypt('$2', gen_salt('bf')), 'Orlando', 'Orlanda', 'orlando.o
 SELECT * FROM usuarios u WHERE
         u.username like 'Zara12' AND
         contraseña = crypt('noSequePoner', contraseña);
-
 -- Busqueda por artista
 SELECT a.nombre
 FROM artista a
@@ -323,9 +322,85 @@ LANGUAGE 'plpgsql';
 SELECT *
 FROM best_artists('04-01-2021', 1);
 
--- TOTAL DE REPRODUCCIONES POR GENERO
--- N CANCIONES CON MAS REPRODUCCIONES PARA UN ARTISTA M
+-- TOTAL DE REPRODUCCIONES POR GENERO DADO UN RANGO DE FECHA
+CREATE OR REPLACE FUNCTION genre_stream(desde DATE, hasta DATE)
+RETURNS table(genero varchar(50), id_genero int, quantity bigint) AS
+$$
+    SELECT g.nombre, r.id_genero, r.quantity
+    FROM genero g
+        INNER JOIN (
+            select gc.id_genero, count(*) as quantity
+            FROM stream s
+                INNER JOIN genero_canciones gc on gc.id_canciones = s.id_cancion       --INNER JOIN genero_canciones
+            WHERE fecha BETWEEN (desde) AND (hasta)
+            GROUP BY gc.id_genero
+        ) r on g.id_genero = r.id_genero;
+$$ LANGUAGE 'sql';
 
+SELECT *
+FROM genre_stream('05-03-2021', '05-05-2021');
+
+-- N CANCIONES CON MAS REPRODUCCIONES PARA UN ARTISTA M
+CREATE OR REPLACE function artist_songs(varchar, integer)
+RETURNS TABLE (cancion varchar, reproducciones bigint) AS
+    $BODY$
+    BEGIN
+       RETURN QUERY
+        SELECT c.nombre as cancion, COUNT(*) as reproducciones
+        FROM stream
+            INNER JOIN canciones c on c.id_cancion = stream.id_cancion
+            INNER JOIN artista a on a.id_artista = c.id_artista
+        WHERE a.nombre = $1
+        GROUP BY cancion
+        ORDER BY reproducciones DESC
+        LIMIT $2;
+
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT *
+FROM artist_songs('Sam Smith', 2);
+
+-- COMISIONES PARA ARTISTAS
+CREATE OR REPLACE FUNCTION calculate_revenue(artista varchar(50))
+RETURNS table(id_artista int, nombre varchar(50), revenue float) AS
+$$
+    SELECT c.id_artista, a.nombre, count(*) * 0.15
+    FROM stream s
+        INNER JOIN canciones c on c.id_cancion = s.id_cancion
+        INNER JOIN artista a on a.id_artista = c.id_artista
+        WHERE date_part('month', current_date) = date_part('month', s.fecha)
+           AND date_part('year', current_date) = date_part('year', s.fecha)
+        GROUP BY c.id_artista, a.nombre
+$$ LANGUAGE 'sql';
+
+-- BITACORA
+CREATE OR REPLACE FUNCTION record(varchar)
+RETURNS TRIGGER AS
+$BODY$
+BEGIN
+        IF INSERTING THEN
+            INSERT INTO bitacora
+            VALUES (current_date, $1, 'INSERTÓ',  )
+        ELSEIF UPDATING THEN
+            INSERT INTO bitacora
+            VALUES (current_date, 'PEPITO', 'ACTUALIZÓ' )
+        ELSE
+            INSERT INTO bitacora
+            VALUES (current_date, 'PEPITO', 'ELIMINÓ' )
+        END IF;
+END;
+$BODY$
+LANGUAGE 'plpgsql'
+;
+
+CREATE TRIGGER save_record
+
+AFTER INSERT OR UPDATE OR DELETE
+ON usuarios, artistas, canciones
+FOR EACH ROW
+EXECUTE PROCEDURE record('Pepito');
 
 
 

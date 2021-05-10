@@ -196,3 +196,18 @@ CREATE TABLE stream
         FOREIGN KEY (id_usuario)
             REFERENCES usuarios (username) ON DELETE CASCADE
 );
+
+CREATE TABLE bitacora
+(
+    fecha DATE              NOT NULL,
+    username VARCHAR(150)   NOT NULL,
+    operacion VARCHAR(100)  NOT NULL,
+    tabla VARCHAR(100)      NOT NULL,
+    elemento VARCHAR(100)   NOT NULL,
+
+    PRIMARY KEY (*),
+
+    CONSTRAINT fk_username
+        FOREIGN KEY (username)
+        REFERENCES usuarios(username)
+);
