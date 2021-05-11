@@ -1,6 +1,6 @@
 import React from 'react';
 import Axios from 'axios';
-import SongItem from '../playlist/songPlaylist';
+import SongItem from './songsEdititem';
 import { BsPlus as I_add,
   BsSearch as I_search} from 'react-icons/bs';
 
@@ -80,9 +80,6 @@ export default function SongsEdit(){
                         song_a={song.artista}
                         song_album={song.album}
                         I_options={<I_add/>}
-                        option={1}
-                        playlist_id={details.id}
-                        actualizacion={() => actualizarPlaylist()}
                       /> : ''
                   );
                 }

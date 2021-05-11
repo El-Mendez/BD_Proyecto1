@@ -4,8 +4,8 @@ import SongItem from '../playlist/songPlaylist';
 import { BsPlus as I_add,
   BsSearch as I_search,
   BsThreeDotsVertical as I_menu} from 'react-icons/bs';
-import EditingItem from '../utils/itemComponents/editingItem';
-
+import EditingItem from './songsEdititem';
+import 'bootstrap/dist/js/bootstrap';
 
 export default function AlbumsEdit(){
   const get_song = 'http://3.135.234.254:3000/getSpecificSong';
@@ -99,9 +99,6 @@ export default function AlbumsEdit(){
           song_a={"Alguien"}
           song_album={"quien sabe"}
           I_options={<I_menu/>}
-          option={1}
-          playlist_id={'Detalles'}
-          actualizacion={() => actualizarPlaylist()}
         />
       </section>
     </section>
