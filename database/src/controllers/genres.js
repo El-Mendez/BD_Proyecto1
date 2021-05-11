@@ -17,7 +17,6 @@ const getSpecificGenre = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
-
 module.exports = {
   getGenres,
   getSpecificGenre,

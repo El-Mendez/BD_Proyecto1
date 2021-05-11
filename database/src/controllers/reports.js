@@ -91,6 +91,84 @@ const topActiveUsers = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+// 7. Reproducciones por semana
+const weeklyStreams = async (req, res) => {
+  const { date } = req.body;
+  const response = await pool.query(`
+    select * from weekly_streams($1)  
+  `, [date])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Invalid date' });
+    });
+};
+
+// 8. Artistas con más reproducciones en fecha
+const bestArtist = async (req, res) => {
+  const { date, quantity } = req.body;
+  const response = await pool.query(`
+    select * from best_artists($1, $2)  
+  `, [date, quantity])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Invalid date' });
+    });
+};
+
+// 9. Reproducciones por género
+const genreStream = async (req, res) => {
+  const { from, to } = req.bodyUsed;
+  const response = await pool.query(`
+    select * from genre_stream($1, $2); 
+  `, [from, to])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Invalid date' });
+    });
+};
+
+// 10. Canciones con más reproducciones de un artista
+const topArtistSongs = async (req, res) => {
+  const { artistName, quantity } = req.body;
+  const response = await pool.query(`
+    select * from artist_songs($1, $2);  
+  `, [artistName, quantity])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Invalid date' });
+    });
+};
+
+const modifyAlbumSong = async (req, res) => {
+  const {
+    option,
+    change,
+    id,
+    name,
+    link,
+    fecha,
+    artistId,
+  } = req.body;
+
+  await pool.query(`
+    modificar_album_cancion($1, $2, $3, $4, $5, $6, $7);
+  `, [option, change, id, name, link, fecha, artistId])
+    .then(() => {
+      res.status(200).json({ status: 'correct' });
+    })
+    .catch(() => {
+      res.status(500).json({ status: 'bad request' });
+    });
+};
+
 module.exports = {
   weeklyAlbums,
   growingArtist,
@@ -98,4 +176,11 @@ module.exports = {
   topArtist,
   topGenres,
   topActiveUsers,
+
+  weeklyStreams,
+  bestArtist,
+  genreStream,
+  topArtistSongs,
+  modifyAlbumSong,
+
 };

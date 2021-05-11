@@ -69,6 +69,11 @@ const {
   topArtist,
   topGenres,
   topActiveUsers,
+  weeklyStreams,
+  bestArtist,
+  genreStream,
+  topArtistSongs,
+  modifyAlbumSong,
 } = require('../controllers/reports');
 // Queries para el stream
 const {
@@ -129,6 +134,13 @@ router.get('/reports/newSubscriptions', newSubscriptions);
 router.get('/reports/topArtist', topArtist);
 router.get('/reports/topGenres', topGenres);
 router.get('/reports/topActiveUsers', topActiveUsers);
+
+router.post('reports/weeklyStreams', weeklyStreams);
+router.post('reports/bestArtist', bestArtist);
+router.post('reports/genreStreams', genreStream);
+router.post('reports/topArtistSongs', topArtistSongs);
+router.post('reports/modifyAlbumSong', modifyAlbumSong);
+
 // --------------------Stream Song--------------------------
 router.post('/stream', streamSong);
 module.exports = router;

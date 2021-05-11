@@ -801,7 +801,7 @@ FROM artist_songs('Sam Smith', 2);
 
 
 -- Tareas de monitores
-CREATE OR REPLACE FUNCTION modificarAlbumCancion(opcion integer, cambio integer, id integer, nombre TEXT, link TEXT, fecha date, artista integer)  RETURNS void AS $$
+CREATE OR REPLACE FUNCTION modificar_album_cancion(opcion integer, cambio integer, id integer, nombre TEXT, link TEXT, fecha date, artista integer)  RETURNS void AS $$
     IF opcion = 1 THEN
     		IF cambio = 1 THEN
     			UPDATE canciones SET nombre = nombre WHERE id_cancion = id;
@@ -824,8 +824,3 @@ CREATE OR REPLACE FUNCTION modificarAlbumCancion(opcion integer, cambio integer,
     	END IF;
     END;
 $$ LANGUAGE plpgsql;
-SELECT modificarAlbumCancion(1, 1, 2, 'Probando', NULL, NULL, NULL); --nombre cancion
-SELECT modificarAlbumCancion(1, 2, 2, NULL, 'nuevoLink', NULL, NULL); --link cancion
-SELECT modificarAlbumCancion(1, 3, 2, NULL, NULL, NULL, 3); --artista cancion
-SELECT modificarAlbumCancion(2, 4, 10, 'Probando', NULL, NULL, NULL); --nombre album
-SELECT modificarAlbumCancion(2, 5, 10, NULL, NULL, '2020-05-30', NULL); --fecha album
