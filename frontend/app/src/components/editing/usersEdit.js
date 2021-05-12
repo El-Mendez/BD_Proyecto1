@@ -86,6 +86,7 @@ export default function UsersEdit(){
                         key={index}
                         index={index + 1}
                         title={user.nombre}
+                        details={user.tipo}
                         info={user.username}
                         usertype={tipoUsuario(user.tipo)}
                         icon={<I_menu/>}

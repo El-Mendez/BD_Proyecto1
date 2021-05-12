@@ -20,6 +20,7 @@ export default function EditUserItem(props){
       <div className={"pR_title text-secondary"}>
         <div>
           <p className="m-0 p-0">{data.title}</p>
+          <p className={"p-0"} id="song-artist">{data.details}</p>
         </div>
       </div>
       {/* SONG ALBUM */}
@@ -51,7 +52,7 @@ export default function EditUserItem(props){
         onHide={() => setModalShow(false)}
         header = {data.header_des}
         details = {data.details_des}
-        identifier = {data.title}
+        identifier = {data.info}
         option = "Desactivar"
         icon = {<DesIcon/>}
         request = "http://3.135.234.254:3000/deactivateUser"
@@ -62,7 +63,7 @@ export default function EditUserItem(props){
         onHide={() => setModal1Show(false)}
         header = {data.header_el}
         details ={data.details_el}
-        identifier = {data.title}
+        identifier = {data.info}
         option = "Eliminar"
         icon = {<ElIcon/>}
         request = "http://3.135.234.254:3000/deleteSubscription"

@@ -8,7 +8,8 @@ import {BsHouse as I_house,
     BsGrid1X2Fill as I_library,
     BsPlusSquareFill as I_newPlaylist,
     BsClipboardData as I_report,
-    BsPencil as I_pencil} from 'react-icons/bs';
+    BsPencil as I_pencil,
+    BsFilm as I_record} from 'react-icons/bs';
 import CreatePlaylist from '../playlist/createPlaylist';
 
 
@@ -55,7 +56,7 @@ export default function sideBar(){
                         <MenuItem>
                             <Link to={`/home/${user}`}>
                                 <p className={'sidebar-menuItem'}>
-                                    <span className={'mr-3'}><I_house/></span>
+                                    <span className={'me-3'}><I_house/></span>
                                     Home
                                 </p>
                             </Link>
@@ -64,7 +65,7 @@ export default function sideBar(){
                         <MenuItem>
                             <Link to={`${url}/search`}>
                                 <p className={'sidebar-menuItem'}>
-                                    <span className={'mr-3'}><I_search/></span>
+                                    <span className={'me-3'}><I_search/></span>
                                     Search
                                 </p>
                             </Link>
@@ -74,7 +75,7 @@ export default function sideBar(){
                             premium? <MenuItem>
                                 <Link to={`${url}/library`}>
                                     <p className={'sidebar-menuItem'}>
-                                        <span className={'mr-3'}><I_library/></span>
+                                        <span className={'me-3'}><I_library/></span>
                                         Library
                                     </p>
                                 </Link>
@@ -84,7 +85,7 @@ export default function sideBar(){
                         {
                             premium? <MenuItem>
                                 <p className={'sidebar-menuItem'} onClick={() => setModalShow(true)}>
-                                    <span className={'mr-3'}><I_newPlaylist/></span>
+                                    <span className={'me-3'}><I_newPlaylist/></span>
                                     Crear Playlist
                                 </p>
                                 <CreatePlaylist
@@ -98,7 +99,7 @@ export default function sideBar(){
                             admin? <MenuItem>
                                 <Link to={`${url}/edition`}>
                                     <p className={'sidebar-menuItem'}>
-                                        <span className={'mr-3'}><I_pencil/></span>
+                                        <span className={'me-3'}><I_pencil/></span>
                                         Edición
                                     </p>
                                 </Link>
@@ -109,7 +110,7 @@ export default function sideBar(){
                             admin? <MenuItem>
                                 <Link to={`${url}/report`}>
                                     <p className={'sidebar-menuItem'}>
-                                        <span className={'mr-3'}><I_report/></span>
+                                        <span className={'me-3'}><I_report/></span>
                                         Reportes
                                     </p>
                                 </Link>
@@ -120,7 +121,7 @@ export default function sideBar(){
                             admin? <MenuItem>
                                 <Link to={`${url}/bitacora`}>
                                     <p className={'sidebar-menuItem'}>
-                                        <span className={'mr-3'}><I_report/></span>
+                                        <span className={'me-3'}><I_record/></span>
                                         Bitacora
                                     </p>
                                 </Link>
