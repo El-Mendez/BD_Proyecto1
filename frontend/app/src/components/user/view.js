@@ -12,7 +12,7 @@ export default class userDescriptor extends React.Component{
         if (this.props.desc === 'Admin')
         {
             return (
-                <MonitorB/>
+                <AdminView/>
             )
         }else if (this.props.desc === 'Artista' || this.props.desc === 'Manager'){
             return (

@@ -65,7 +65,7 @@ const updateToManager = async (req, res) => {
 const getUserDescription = async (req, res) => {
   const { username } = req.body;
   const response = await pool.query(`
-  SELECT u.username, u.nombres, u.apellidos, u.correo, tu.descripcion, u.id_tipousuario
+  SELECT u.username, u.nombres, u.apellidos, u.correo, tu.descripcion, u.id_tipousuario, u.id_monitor, u.activo 
     FROM usuarios u
       INNER JOIN tipo_usuario tu ON u.id_tipoUsuario = tu.id_tipoUsuario
     WHERE u.username ILIKE $1;
