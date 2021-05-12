@@ -139,12 +139,7 @@ const topArtistSongs = async (req, res) => {
   const response = await pool.query(`
     select * from artist_songs($1, $2);  
   `, [artistName, quantity])
-    .then(() => {
       res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Invalid date' });
-    });
 };
 
 const modifyAlbumSong = async (req, res) => {
