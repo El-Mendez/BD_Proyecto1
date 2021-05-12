@@ -12,7 +12,7 @@ export default function changesDatabase(props) {
     const fetchData = async () => {
       try{
         const response = await Axios.get(get)
-        setData(response.data);
+        setData(response.data[0]);
         console.log(data.username)
       }catch (e){
         console.log(e)

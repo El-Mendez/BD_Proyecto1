@@ -14,9 +14,7 @@ export default function InputModal(props) {
   const [name, setName] = React.useState('');
 
   function updateName(){
-    console.log(props.details)
-    console.log(props.identifier)
-    console.log(name)
+
     console.log(user)
     const fetchData = async () => {
       try {

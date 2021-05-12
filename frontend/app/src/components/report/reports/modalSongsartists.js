@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useRouteMatch } from 'react-router-dom';
@@ -7,8 +7,9 @@ import Axios from 'axios';
 
 export default function ModalSongsArtists(props) {
 
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Cambiar por la generación del reporte
+  const get = 'http://3.135.234.254:3000/reports/topArtistSongs'; //Cambiar por la generación del reporte
   let { url } = useRouteMatch();
+  const [result, setResult] = useState([])
 
   //State variables
   const [data, setData] = React.useState({
@@ -23,15 +24,17 @@ export default function ModalSongsArtists(props) {
 
   function generateReport(){
     const fetchData = async () => {
-      try {
-        const { data } = await Axios.post(post,
-          {
-            date: reportDate
-          }
-        );
-        console.log("todo fine")
-      } catch (error) {
-        console.log(error);
+      try{
+        const response = await Axios.get(get, 
+            {
+                artistName:  data.artist,
+                quantity: data.limit,
+              }
+        )
+        setResult(response.data);
+        console.log(data.username)
+      }catch (e){
+        console.log(e)
       }
     };
     fetchData();

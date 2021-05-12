@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {Fragment, useState, useEffect} from 'react';
 import NewReportsItem from '../../utils/itemComponents/newReportsitem';
 import RangeDate from './modalArtist';
 
 export default function WeeklyStreams(){
 
   const [modalShow, setModalShow] = React.useState(false);
-
+  const [data, setData] = useState([])
   const [wStreams, setWStreams] = React.useState({
     start: '',
     end: '',
@@ -20,6 +20,7 @@ export default function WeeklyStreams(){
     })
   };
 
+
   return(
     <section className={'section-container'}>
       <div className="section-title text-secondary">
@@ -31,13 +32,20 @@ export default function WeeklyStreams(){
           show={modalShow}
           onHide={() => setModalShow(false)}
           updateData = {(start, end, stream) => updateData(start, end, stream)}
+          setData = {(data) => setData(data)}
         />
       </div>
-        <NewReportsItem
-        start={wStreams.start}
-        end={wStreams.end}
-        streams={wStreams.streams}
-        />
+        {
+            data.map((user) => {
+            data.indexOf(user)
+            return (
+              <NewReportsItem
+                streams={user.artista}
+                quantity={user.reproducciones}
+              />
+      );
+    })
+  }
     </section>
   );
 }

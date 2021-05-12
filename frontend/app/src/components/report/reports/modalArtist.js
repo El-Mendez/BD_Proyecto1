@@ -7,7 +7,7 @@ import Axios from 'axios';
 
 export default function ModalArtist(props) {
 
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Cambiar por la generación del reporte
+  const post = 'http://3.135.234.254:3000/reports/bestArtist' //Cambiar por la generación del reporte
   let { url } = useRouteMatch();
 
   //State variables
@@ -24,12 +24,19 @@ export default function ModalArtist(props) {
 
   function generateReport(){
     const fetchData = async () => {
+      console.log(data.startDate)
+      console.log(data.endDate)
+      console.log(data.limit)
       try {
-        const { data } = await Axios.post(post,
+        const response = await Axios.post(post,
           {
-            date: reportDate
+            dateB: data.startDate,
+            dateF: data.endDate,
+            quantity: data.limit,
           }
         );
+        props.setData(response.data);
+        console.log(response.data[0].reproducciones)
         console.log("todo fine")
       } catch (error) {
         console.log(error);
@@ -110,7 +117,7 @@ export default function ModalArtist(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
-        <Button className={'purple-btn mb-2'} >Generar reporte</Button>
+        <Button className={'purple-btn mb-2'} onClick={generateReport} >Generar reporte</Button>
       </Modal.Footer>
     </Modal>
   );
