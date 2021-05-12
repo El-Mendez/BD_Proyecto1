@@ -1,5 +1,5 @@
 import React from 'react';
-import NewReportsItem from '../../utils/itemComponents/newReportsitem';
+import WeeklyReportItem from '../../utils/itemComponents/weeklyReportItem';
 import RangeDate from './rangeDate';
 
 export default function WeeklyStreams(){
@@ -26,14 +26,14 @@ export default function WeeklyStreams(){
         <h2 className="title">
           Reproducciones por semana
         </h2>
-        <button className={"border-btn mb-2"} onClick={() => setModalShow(true)}>Ingresar fecha</button>
+        <button className={"border-btn-reports mb-2"} onClick={() => setModalShow(true)}>Ingresar fecha</button>
         <RangeDate
           show={modalShow}
           onHide={() => setModalShow(false)}
           updateData = {(start, end, stream) => updateData(start, end, stream)}
         />
       </div>
-        <NewReportsItem
+        <WeeklyReportItem
         start={wStreams.start}
         end={wStreams.end}
         streams={wStreams.streams}

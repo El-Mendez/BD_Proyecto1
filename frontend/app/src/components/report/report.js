@@ -17,6 +17,7 @@ import RangeDate from './reports/rangeDate';
 import ModalArtist from './reports/modalArtist';
 import ModalSongsArtists from './reports/modalSongsartists';
 import WeeklyStreams from './reports/weeklyStreams';
+import GenreStreams from './reports/genreStreams';
 
 export default function Report(){
   let {path, url} = useRouteMatch();
@@ -95,12 +96,8 @@ export default function Report(){
             image={activeUsers}
             title={'Géneros más escuchados'}
             description={'Total de reproducciones por género'}
-            redirect={() => setModal2Show(true)}
-            click={false}
-          />
-          <RangeDate
-            show={modal2Show}
-            onHide={() => setModal2Show(false)}
+            redirect={`${url}/genreStreams`}
+            click={true}
           />
           <ReportItem
             image={activeUsers}
@@ -119,6 +116,9 @@ export default function Report(){
       <section className={'section-container home-container'}>
             <div id="songs">
               <Switch>
+                <Route  path={`${path}/genreStreams`}>
+                  <GenreStreams/>
+                </Route>
                 <Route  path={`${path}/weeklyStreams`}>
                   <WeeklyStreams/>
                 </Route>

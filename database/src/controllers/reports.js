@@ -119,13 +119,9 @@ const genreStream = async (req, res) => {
   const { from, to } = req.bodyUsed;
   const response = await pool.query(`
     select * from genre_stream($1, $2); 
-  `, [from, to])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Invalid date' });
-    });
+  `, [from, to]);
+  
+  res.status(200).json(response.rows);
 };
 
 // 10. Canciones con más reproducciones de un artista

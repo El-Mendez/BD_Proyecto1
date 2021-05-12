@@ -3,14 +3,17 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
 
-export default function RangeDate(props) {
+export default function BetweenDates(props) {
 
-  const post = 'http://3.135.234.254:3000/reports/weeklyStreams' //Cambiar por la generación del reporte
+  const post = 'http://3.135.234.254:3000/reports/genreStreams'
 
   //State variables
-  let result = 0;
-  const [reportDate, setReportDate] = React.useState(new Date());
+  const [reportDate, setReportDate] = React.useState({
+    start: new Date(),
+    end: new Date(),
+  });
   const [filled, setFilled] = React.useState(false);
+  const [result, setResult] = React.useState([]);
 
 
   function generateReport(){
@@ -18,11 +21,12 @@ export default function RangeDate(props) {
       try {
         const { data } = await Axios.post(post,
           {
-            date: reportDate
+            from: reportDate.start,
+            to: reportDate.end
           }
         );
-        console.log(data[0].weekly_streams);
-        result = data[0].weekly_streams;
+        console.log(data);
+        setResult(data);
       } catch (error) {
         console.log(error);
       }
@@ -31,8 +35,10 @@ export default function RangeDate(props) {
   };
 
   const handleInputChange = (e) =>{
-    console.log(e.target.value);
-    setReportDate(e.target.value);
+    setReportDate({
+      ...reportDate,
+      [e.target.name]: e.target.value
+    });
     if(e.target.value !==''){
       setFilled(true);
     }else{
@@ -44,13 +50,12 @@ export default function RangeDate(props) {
     if(reportDate !== ''){
       generateReport();
       setTimeout(()=>{
-        var end = new Date();
-        end.setDate(new Date(reportDate).getDate() + 7);
-        props.updateData(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-0" + end.getDate())) ,result);
+        props.updateData(reportDate.start.toString(), reportDate.end.toString() ,result);
+        props.updateData(reportDate.start.toString(), reportDate.end.toString() ,result);
         props.onHide();
       },300)
     }else{
-      alert('Indica la fecha de inicio para el reporte')
+      alert('Indica el rango de fechas para el reporte')
     }
   }
 
@@ -70,10 +75,18 @@ export default function RangeDate(props) {
         <div className={'position-relative mt-2'}>
           <input className={"input " + (filled? 'is-filled':' ')}
                  type="date"
-                 name="name"
+                 name="start"
                  onChange={handleInputChange}
           />
           <label className={'label'}>Reporte desde</label>
+        </div>
+        <div className={'position-relative mt-2'}>
+          <input className={"input " + (filled? 'is-filled':' ')}
+                 type="date"
+                 name="end"
+                 onChange={handleInputChange}
+          />
+          <label className={'label'}>Hasta</label>
         </div>
       </Modal.Body>
       <Modal.Footer>

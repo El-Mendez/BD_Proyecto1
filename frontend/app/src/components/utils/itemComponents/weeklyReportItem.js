@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function NewReportsItem (props){
+export default function WeeklyReportItem (props){
     return(
       <div className={'d-flex my-4 border-bottom text-secondary pb-2 align-items-center'}>
         <div className={'ms-2'}>

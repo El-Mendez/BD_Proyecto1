@@ -234,6 +234,18 @@ h1{
   }
 }
 
+.border-btn-reports{
+  background-color: transparent;
+  color: $secondary;
+  border: solid 1px $secondary;
+  margin-bottom: 18px;
+  &:hover{
+    transform: scale(1.04);
+    background-color:$secondary;
+    color: $primary;
+  }
+}
+
 
 
 
