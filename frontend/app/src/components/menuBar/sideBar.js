@@ -19,9 +19,23 @@ export default function sideBar(){
     let { user } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
 
-    const get_user = 'http://3.135.234.254:3000/getUserDescription'
+    const get_user = 'http://3.135.234.254:3000/getUserDescription';
+    const get_tasks = 'http://3.135.234.254:3000//getSpecificTaskMonitor';
     const [admin, setAdmin] = useState(false);
     const [premium, setPremium] = useState(false);
+    const [tasks, setTasks] = useState({
+        first: false,
+        second: false,
+        third: false,
+        fourth: false,
+        fifth: false,
+        sixth: false,
+        seventh: false,
+        eighth: false,
+    })
+
+    let id_monitor = null;
+    let monitor = false;
 
     useEffect(() => {
         const fetchData = async () => {
@@ -30,6 +44,7 @@ export default function sideBar(){
                   {
                     username: user
                 })
+                id_monitor = data[0].id_monitor;
                 if (data[0].descripcion === 'Admin'){
                     setAdmin(true);
                     setPremium (true);
@@ -41,7 +56,64 @@ export default function sideBar(){
             }
         };
         fetchData();
+
+        if(id_monitor !== null){
+            monitor = true;
+            const fetchTasks = async () => {
+                try{
+                    const { data } = await Axios.post(get_tasks,
+                      {
+                          id_monitor: id_monitor
+                      })
+                    if(data.includes(1)){
+                        setTasks({
+                            ...tasks,
+                            first: true,
+                        })
+                    }else if(data.includes(2)){
+                        setTasks({
+                            ...tasks,
+                            second: true,
+                        })
+                    }else if(data.includes(3)){
+                        setTasks({
+                            ...tasks,
+                            third: true,
+                        })
+                    }else if(data.includes(4)){
+                        setTasks({
+                            ...tasks,
+                            fourth: true,
+                        })
+                    }else if(data.includes(5)){
+                        setTasks({
+                            ...tasks,
+                            fifth: true,
+                        })
+                    }else if(data.includes(6)){
+                        setTasks({
+                            ...tasks,
+                            sixth: true,
+                        })
+                    }else if(data.includes(7)){
+                        setTasks({
+                            ...tasks,
+                            seventh: true,
+                        })
+                    }else if(data.includes(8)){
+                        setTasks({
+                            ...tasks,
+                            eighth: true,
+                        })
+                    }
+                }catch (e){
+                    console.log(e)
+                }
+            };
+            fetchTasks();
+        }
     })
+
 
 
 
@@ -103,7 +175,16 @@ export default function sideBar(){
                                         Edición
                                     </p>
                                 </Link>
-                            </MenuItem> : ''
+                            </MenuItem> :
+                              monitor? <MenuItem>
+                                <Link to={`${url}/edition`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'me-3'}><I_pencil/></span>
+                                        Edición
+                                    </p>
+                                </Link>
+                            </MenuItem>:
+                              ''
                         }
                         {/* REPORTS */}
                         {
@@ -114,19 +195,34 @@ export default function sideBar(){
                                         Reportes
                                     </p>
                                 </Link>
-
-                            </MenuItem> : ''
+                            </MenuItem> : tasks.seventh? <MenuItem>
+                                <Link to={`${url}/report`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'me-3'}><I_report/></span>
+                                        Reportes
+                                    </p>
+                                </Link>
+                            </MenuItem>:
+                              ''
                         }
                         {
                             admin? <MenuItem>
                                 <Link to={`${url}/bitacora`}>
                                     <p className={'sidebar-menuItem'}>
                                         <span className={'me-3'}><I_record/></span>
-                                        Bitacora
+                                        Bitácora
                                     </p>
                                 </Link>
-
-                            </MenuItem> : ''
+                            </MenuItem> :
+                              tasks.eighth? <MenuItem>
+                                <Link to={`${url}/bitacora`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'me-3'}><I_record/></span>
+                                        Bitácora
+                                    </p>
+                                </Link>
+                            </MenuItem>:
+                                ''
                         }
                     </Menu>
 

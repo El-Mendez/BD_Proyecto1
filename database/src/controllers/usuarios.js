@@ -174,12 +174,9 @@ const getSpecificTaskMonitor = async (req, res) => {
   SELECT mt.id_tarea FROM monitor_tarea mt 
     INNER JOIN monitores m ON mt.id_monitor = m.id_monitor
   WHERE m.id_monitor = $1;`, [id_monitor]);
-  
+
   res.status(200).json(response.rows);
 };
-
-
-
 
 
 module.exports = {
