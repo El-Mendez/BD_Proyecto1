@@ -56,7 +56,7 @@ export default function EditUserItem(props){
         icon = {<DesIcon/>}
         request = "http://3.135.234.254:3000/deactivateUser"
       />
-      {/* Eliminar álbum */}
+      {/* Eliminar */}
       <ConfirmModal
         show={modal1Show}
         onHide={() => setModal1Show(false)}

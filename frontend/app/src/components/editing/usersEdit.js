@@ -6,9 +6,11 @@ import EditUserItem from './items/editUseritem';
 
 
 export default function UsersEdit(){
-  const get_song = 'http://3.135.234.254:3000/getSpecificUser';
+  const get = 'http://3.135.234.254:3000/getSpecificUser';
 
-  const [search, setSearch] = React.useState('');
+  const [search, setSearch] = React.useState({
+    look: ''
+  });
   const [users, setUsers] = React.useState([]);
 
 
@@ -16,9 +18,9 @@ export default function UsersEdit(){
   function getUsers(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get_song,
+        const { data } = await Axios.post(get,
           {
-            nombre: search + '%'
+            nombre: search.look + '%'
           }
         );
         console.log(data)
@@ -32,10 +34,14 @@ export default function UsersEdit(){
 
 
   const handleInputChange = (e) =>{
-    setSearch(e.target.value);
+    setSearch({
+      look: e.target.value,
+    });
   }
+
   const onClick = () =>{
-    if(search !== ''){
+    console.log('halp');
+    if(search.look !== ' '){
       getUsers();
     }else{
       alert('Ingrese el nombre de la canción para buscar')

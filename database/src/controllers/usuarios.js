@@ -117,6 +117,7 @@ const getSpecificUser = async (req, res) => {
     FROM usuarios
         INNER JOIN tipo_usuario tu on tu.id_tipousuario = usuarios.id_tipousuario
     WHERE username ILIKE $1;`, [nombre]);
+
   res.status(200).json(response.rows);
 };
 
@@ -124,26 +125,18 @@ const deactivateUser = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;`,
-    [identifier, modifier])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Bad request' });
-    });
+    [identifier, modifier]);
+
+  res.status(200).json(response.rows);
 };
 
 const deleteSubscription = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
     UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;`,
-    [identifier, modifier])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Bad request' });
-    });
+    [identifier, modifier]);
+  
+  res.status(200).json(response.rows);
 };
 
 const monitorProfile = async (req, res) => {
