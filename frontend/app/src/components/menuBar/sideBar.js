@@ -15,12 +15,12 @@ import CreatePlaylist from '../playlist/createPlaylist';
 
 export default function sideBar(){
 
-    let {url} = useRouteMatch();
+    let { url } = useRouteMatch();
     let { user } = useParams();
     const [modalShow, setModalShow] = React.useState(false);
 
     const get_user = 'http://3.135.234.254:3000/getUserDescription';
-    const get_tasks = 'http://3.135.234.254:3000//getSpecificTaskMonitor';
+    const get_tasks = 'http://3.135.234.254:3000/getSpecificTaskMonitor';
     const [admin, setAdmin] = useState(false);
     const [premium, setPremium] = useState(false);
     const [tasks, setTasks] = useState({
@@ -34,8 +34,10 @@ export default function sideBar(){
         eighth: false,
     })
 
+    const [monitor, setMonitor] = useState(false);
+
     let id_monitor = null;
-    let monitor = false;
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,6 +47,7 @@ export default function sideBar(){
                     username: user
                 })
                 id_monitor = data[0].id_monitor;
+                console.log(id_monitor)
                 if (data[0].descripcion === 'Admin'){
                     setAdmin(true);
                     setPremium (true);
@@ -54,53 +57,54 @@ export default function sideBar(){
             }catch (e){
                 console.log(e)
             }
-        };
-        fetchData();
 
         if(id_monitor !== null){
-            monitor = true;
-            const fetchTasks = async () => {
+            setMonitor(true);
+            console.log(monitor)
                 try{
                     const { data } = await Axios.post(get_tasks,
                       {
                           id_monitor: id_monitor
                       })
-                    if(data.includes(1)){
+                    console.log(data.some(item => item.id_tarea === 2));
+                    console.log(data);
+                    if(data.some(item => item.id_tarea === 1)){
                         setTasks({
                             ...tasks,
                             first: true,
                         })
-                    }else if(data.includes(2)){
+                    }else if(data.some(item => item.id_tarea === 2)){
+                        console.log('help')
                         setTasks({
                             ...tasks,
                             second: true,
                         })
-                    }else if(data.includes(3)){
+                    }else if(data.some(item => item.id_tarea === 3)){
                         setTasks({
                             ...tasks,
                             third: true,
                         })
-                    }else if(data.includes(4)){
+                    }else if(data.some(item => item.id_tarea === 4)){
                         setTasks({
                             ...tasks,
                             fourth: true,
                         })
-                    }else if(data.includes(5)){
+                    }else if(data.some(item => item.id_tarea === 5)){
                         setTasks({
                             ...tasks,
                             fifth: true,
                         })
-                    }else if(data.includes(6)){
+                    }else if(data.some(item => item.id_tarea === 6)){
                         setTasks({
                             ...tasks,
                             sixth: true,
                         })
-                    }else if(data.includes(7)){
+                    }else if(data.some(item => item.id_tarea === 7)){
                         setTasks({
                             ...tasks,
                             seventh: true,
                         })
-                    }else if(data.includes(8)){
+                    }else if(data.some(item => item.id_tarea === 8)){
                         setTasks({
                             ...tasks,
                             eighth: true,
@@ -109,14 +113,13 @@ export default function sideBar(){
                 }catch (e){
                     console.log(e)
                 }
+
             };
-            fetchTasks();
-        }
+        };
+        fetchData();
     })
 
-
-
-
+    
         return(
             <ProSidebar>
                 <SidebarHeader className={'d-flex justify-content-center'}>
@@ -184,7 +187,7 @@ export default function sideBar(){
                                     </p>
                                 </Link>
                             </MenuItem>:
-                              ''
+                                ''
                         }
                         {/* REPORTS */}
                         {
