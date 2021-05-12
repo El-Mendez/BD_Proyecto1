@@ -33,14 +33,6 @@ export default function editAlbum (){
                             onHide={() => setModalState(false)}
                         />
                 </div>
-                <div className="row editArtist">
-                <p>Elimina un artista de la base de datos (Precaución: esta acción no puede disolverse)</p>
-                <Button variant="dark"  onClick={() => setModalDelete(true)}>Eliminar a un artista</Button>
-                    <DeleteArtist 
-                            show={modalDelete}
-                            onHide={() => setModalDelete(false)}
-                        />
-                </div>
             </div>
         </div>
         )

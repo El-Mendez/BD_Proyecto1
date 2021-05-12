@@ -7,10 +7,11 @@ import { useRouteMatch } from 'react-router-dom';
 import history from '../history';
 export default function editLinkSong (props){
     const [filled, setFilled] = React.useState(false);
-    const post_song = 'http://3.135.234.254:3000/sonsdgOf/';
+    const post_song = 'http://3.135.234.254:3000/changeSongLink/';
     let nombre = "";
     let artista = "";
     let id_song = "";
+    const userId = useRouteMatch ('/user/:id')
 
     const handleNombre = (e) =>{
         console.log(e.target.value);
@@ -51,7 +52,8 @@ export default function editLinkSong (props){
                 {
                   estado:  estado,
                   cancion: nombre,
-                  artista: artista
+                  artista: artista,
+                  modifier: userId.params.id,
                 }
               );
               alert("Cambio de la cancion realizado")

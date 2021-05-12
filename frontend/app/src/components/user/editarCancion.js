@@ -28,16 +28,6 @@ export default function editSong (){
                     />
                 </div>
                 <div className="row editArtist">
-                <p>Cambia el nombre de una canción de la base de datos</p>
-                <Button variant="dark" onClick={() => setModalShowNameSong(true)}>
-                    Cambiar nombre de una canción  
-                </Button>
-                <EditSong 
-                        show={modalShowName}
-                        onHide={() => setModalShowNameSong(false)}
-                    />
-                </div>
-                <div className="row editArtist">
                 <p>Cambiar el link de una canción de la base de datos</p>
                 <Button variant="dark" onClick={() => setModalLink(true)}>
                     Cambiar Link de una canción
@@ -45,16 +35,6 @@ export default function editSong (){
                 <LinkSong 
                         show={modalLink}
                         onHide={() => setModalLink(false)}
-                    />
-                </div>
-                <div className="row editArtist">
-                <p>Elimina una canción de la base de datos (Precaución: esta acción no puede disolverse)</p>
-                <Button variant="dark" onClick={() => setModalDeleteSong(true)}>
-                    Eliminar una canción
-                    </Button>
-                    <DeleteSong 
-                        show={modalDelete}
-                        onHide={() => setModalDeleteSong(false)}
                     />
                 </div>
             </div>

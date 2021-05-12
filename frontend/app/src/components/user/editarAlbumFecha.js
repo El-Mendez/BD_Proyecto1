@@ -11,6 +11,7 @@ export default function editAlbum (props){
     let nombre = "";
     let artista = "";
     let date = "";
+    const userId = useRouteMatch ('/user/:id')
 
     const handleName = (e) =>{
       console.log(e.target.value);
@@ -50,7 +51,8 @@ export default function editAlbum (props){
               {
                 date:  date,
                 album: nombre,
-                artista: artista
+                artista: artista,
+                modificador: userId.params.id,
               }
             );
             alert("Cambio del album hecho")
@@ -61,6 +63,7 @@ export default function editAlbum (props){
     }
     fetchData();
 };
+
 
 
     return(

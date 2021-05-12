@@ -18,16 +18,6 @@ export default function editAlbum (props){
         <div className="col info_Usuario"> 
             <div className="asd">
                 <div className="row editArtist">
-                <p>Cambia el nombre de un album de la base de datos</p>
-                <Button variant="dark" onClick={() => setModalShowNameAlbum(true)}>
-                    Cambiar el nombre de un album  
-                </Button>
-                <EditAlbum 
-                        show={modalShowNameAlbum}
-                        onHide={() => setModalShowNameAlbum(false)}
-                    />
-                </div>
-                <div className="row editArtist">
                 <p>Cambia la fecha de publicación de un album de la base de datos</p>
                 <Button variant="dark" onClick={() => setModalDate(true)}>
                     Cambiar la fecha de un album
@@ -45,16 +35,6 @@ export default function editAlbum (props){
                 <StateAlbum 
                         show={modalStateAlbum}
                         onHide={() => setModalStateAlbum(false)}
-                    />
-                </div>
-                <div className="row editArtist">
-                <p>Elimina un album de la base de datos (Precaución: esta acción no puede disolverse)</p>
-                <Button variant="dark" onClick={() => setModalDeleteAlbum(true)}>
-                    Eliminar un album
-                </Button>
-                <DeleteAlbum 
-                        show={modalDeleteAlbum}
-                        onHide={() => setModalDeleteAlbum(false)}
                     />
                 </div>
             </div>
