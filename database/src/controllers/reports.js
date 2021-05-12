@@ -102,10 +102,10 @@ const weeklyStreams = async (req, res) => {
 
 // 8. Artistas con más reproducciones en fecha
 const bestArtist = async (req, res) => {
-  const { date, quantity } = req.body;
+  const { dateB,dateF, quantity } = req.body;
   const response = await pool.query(`
-    select * from best_artists($1, $2)  
-  `, [date, quantity])
+  SELECT * FROM best_artists($1,$2,$3);  
+  `, [dateB, dateF, quantity])
     .then(() => {
       res.status(200).json(response.rows);
     })

@@ -294,28 +294,26 @@ FROM weekly_streams('04-01-2021');
 SELECT a.nombre, count(*) AS reproducciones FROM stream s
 	INNER JOIN canciones c ON c.id_cancion = s.id_cancion
 	INNER JOIN artista a ON a.id_artista = c.id_artista
-	WHERE s.fecha BETWEEN ('4-01-2020') AND (CAST('4-01-2020' AS DATE) + CAST('7 days' AS INTERVAL))
+	WHERE s.fecha BETWEEN ('3-05-2021') AND ('11-05-2021')
 	GROUP BY a.nombre
 	ORDER BY reproducciones DESC LIMIT 2;
 -- Stored Procedure
-CREATE OR REPLACE function best_artists(date, integer)
+CREATE OR REPLACE function best_artists(date, date, integer)
 RETURNS TABLE (artista varchar, reproducciones bigint) AS
     $BODY$
     BEGIN
        RETURN QUERY
-        SELECT a.nombre, count(*)
-            FROM stream s
-	        INNER JOIN canciones c ON c.id_cancion = s.id_cancion
-	        INNER JOIN artista a ON a.id_artista = c.id_artista
-	        WHERE s.fecha BETWEEN ($1) AND (CAST($1 AS DATE) + CAST('7 days' AS INTERVAL))
-	        GROUP BY a.nombre
-	        ORDER BY COUNT(*) DESC
-            LIMIT $2;
-
+        SELECT a.nombre, count(*) AS reproducciones FROM stream s
+		      INNER JOIN canciones c ON c.id_cancion = s.id_cancion
+				INNER JOIN artista a ON a.id_artista = c.id_artista
+				WHERE s.fecha BETWEEN ($1) AND ($2)
+				GROUP BY a.nombre
+				ORDER BY reproducciones DESC
+            LIMIT $3;
         EXCEPTION
             WHEN sqlstate '22007' THEN
                 RAISE EXCEPTION 'El mes %, es incorrecto',$1;
-    END;
+                 END;
     $BODY$
 LANGUAGE 'plpgsql';
 
@@ -519,3 +517,16 @@ $$
            AND a.nombre = artista
         GROUP BY c.id_artista, a.nombre
 $$ LANGUAGE 'sql';
+
+
+CREATE OR REPLACE FUNCTION tareas_monitor(monitor varchar(50), tarea int)  RETURNS void AS $$
+    BEGIN
+		INSERT INTO monitor_tarea VALUES ((SELECT id_monitor FROM monitores m2 WHERE nombre = monitor), tarea);
+		IF NOT FOUND THEN
+        RAISE EXCEPTION 'Error';
+    	END IF;
+    END;
+$$ LANGUAGE plpgsql;
+
+SELECT m.nombre, mt.id_tarea FROM monitor_tarea mt 
+	INNER JOIN monitores m ON mt.id_monitor = m.id_monitor ;
