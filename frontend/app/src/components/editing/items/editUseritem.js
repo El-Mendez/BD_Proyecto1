@@ -17,8 +17,7 @@ export default function EditUserItem(props){
   useEffect(()=>{
     const fetchData = async () => {
       try {
-        const { response } = await Axios.get(get_monitors);
-        console.log(response.data)
+        const response = await Axios.get(get_monitors);
         setMonitors(response.data);
       } catch (error) {
         console.log(error);

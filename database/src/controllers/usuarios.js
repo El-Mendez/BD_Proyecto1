@@ -143,13 +143,9 @@ const monitorProfile = async (req, res) => {
   const { identifier, monitor, modifier } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modificador = $3 WHERE username = $1`,
-    [identifier, monitor, modifier])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Bad request' });
-    });
+    [identifier, monitor, modifier]);
+
+  res.status(200).json(response.rows);
 };
 
 const addMonitor = async (req, res) => {

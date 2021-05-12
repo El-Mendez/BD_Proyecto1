@@ -59,7 +59,7 @@ export default function MonitorModal(props) {
       </Modal.Body>
       <Modal.Footer className="mt-2">
         <Button className={"border-btn mb-2"} onClick={info.onHide}>Cancelar</Button>
-        <Button className={'purple-btn mb-2'} onClick={()=>{addMonitor(); info.onHide()}}>{info.option}</Button>
+        <Button className={'purple-btn mb-2'} onClick={()=>{addMonitor()}}>{info.option}</Button>
       </Modal.Footer>
     </Modal>
   );
