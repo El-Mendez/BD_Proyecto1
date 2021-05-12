@@ -23,7 +23,6 @@ export default function UsersEdit(){
             nombre: search.look + '%'
           }
         );
-        console.log(data)
         setUsers(data)
       } catch (error) {
         console.log(error);
@@ -40,7 +39,6 @@ export default function UsersEdit(){
   }
 
   const onClick = () =>{
-    console.log('halp');
     if(search.look !== ' '){
       getUsers();
     }else{

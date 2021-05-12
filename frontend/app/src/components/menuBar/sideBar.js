@@ -24,12 +24,6 @@ export default function sideBar(){
     const [admin, setAdmin] = useState(false);
     const [premium, setPremium] = useState(false);
     const [tasks, setTasks] = useState({
-        first: false,
-        second: false,
-        third: false,
-        fourth: false,
-        fifth: false,
-        sixth: false,
         seventh: false,
         eighth: false,
     })
@@ -64,37 +58,7 @@ export default function sideBar(){
                       {
                           id_monitor: id_monitor
                       })
-                    if(data.some(item => item.id_tarea === 1)){
-                        setTasks({
-                            ...tasks,
-                            first: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 2)){
-                        setTasks({
-                            ...tasks,
-                            second: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 3)){
-                        setTasks({
-                            ...tasks,
-                            third: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 4)){
-                        setTasks({
-                            ...tasks,
-                            fourth: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 5)){
-                        setTasks({
-                            ...tasks,
-                            fifth: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 6)){
-                        setTasks({
-                            ...tasks,
-                            sixth: true,
-                        })
-                    }if(data.some(item => item.id_tarea === 7)){
+                  if(data.some(item => item.id_tarea === 7)){
                         setTasks({
                             ...tasks,
                             seventh: true,

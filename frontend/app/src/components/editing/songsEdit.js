@@ -79,6 +79,7 @@ export default function SongsEdit(){
                         details={song.artista}
                         info={song.album}
                         icon={<I_menu/>}
+                        artista={false}
                         header_el={"Eliminación de canción"}
                         details_el={"¿Estas seguro que deseas eliminar la canción?"}
                         header_des={"Desactivación de canción"}

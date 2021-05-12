@@ -8,7 +8,7 @@ import Axios from 'axios';
 export default function MonitorModal(props) {
   const info = props;
   const post = 'http://3.135.234.254:3000/monitorProfile'
-  let { user } = useParams;
+  let { user } = useParams();
   let monitorUsuario = 'Mr';
 
   function addMonitor(){

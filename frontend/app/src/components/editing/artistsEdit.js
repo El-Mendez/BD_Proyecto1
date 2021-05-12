@@ -70,8 +70,8 @@ export default function ArtistsEdit(){
             {
               artists.map((artist) => {
                   const index = artists.indexOf(artist)
-                  return(
-                    artist.estado?
+                  return (
+                    artist.estado ?
                       <EditingItem
                         key={index}
                         index={index + 1}
@@ -83,7 +83,7 @@ export default function ArtistsEdit(){
                         details_el={"¿Estas seguro que deseas eliminar al artista?"}
                         header_des={"Desactivación de canción"}
                         details_des={"¿Estas seguro que deseas desactivar al artista?"}
-                        artist = {'true'}
+                        artista={true}
                         des_request="http://3.135.234.254:3000/deactivateArtist"
                         del_request="http://3.135.234.254:3000/deleteArtist"
                       /> : ''

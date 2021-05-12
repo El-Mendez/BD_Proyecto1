@@ -78,6 +78,7 @@ export default function AlbumsEdit(){
                         details={album.artista}
                         info={'álbum'}
                         icon={<I_menu/>}
+                        artista ={false}
                         header_el={"Eliminación de álbum"}
                         details_el={"¿Estas seguro que deseas eliminar el álbum?"}
                         header_des={"Desactivación de álbum"}
