@@ -31,21 +31,21 @@ export default function GenreStreams(){
         <BetweenDates
           show={modalShow}
           onHide={() => setModalShow(false)}
-          updateData = {(start, end, data) => updateData(data)}
+          updateData = {(start, end, data) => updateData(start, end, data)}
         />
       </div>
-      {
-        wStreams.map((item)=> {
-          return(
-            <GenreStreamItem
-              start={date.start}
-              end={date.end}
-              genre={item.genero}
-              streams={item.reproducciones}
-            />
-          );
-        })
-      }
+      {/*{*/}
+      {/*  wStreams.map((item)=> {*/}
+      {/*    return(*/}
+      {/*      <GenreStreamItem*/}
+      {/*        start={date.start}*/}
+      {/*        end={date.end}*/}
+      {/*        genre={item.genero}*/}
+      {/*        streams={item.reproducciones}*/}
+      {/*      />*/}
+      {/*    );*/}
+      {/*  })*/}
+      {/*}*/}
     </section>
   );
 }

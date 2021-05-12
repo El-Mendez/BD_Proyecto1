@@ -12,11 +12,17 @@ export default function BetweenDates(props) {
     start: new Date(),
     end: new Date(),
   });
-  const [filled, setFilled] = React.useState(false);
+  const [filled, setFilled] = React.useState({
+    start: false,
+    end: false,
+  });
+
   const [result, setResult] = React.useState([]);
 
 
   function generateReport(){
+    console.log(reportDate.start)
+    console.log(reportDate.end)
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(post,
@@ -25,6 +31,7 @@ export default function BetweenDates(props) {
             to: reportDate.end
           }
         );
+        console.log('shit');
         console.log(data);
         setResult(data);
       } catch (error) {
@@ -40,9 +47,9 @@ export default function BetweenDates(props) {
       [e.target.name]: e.target.value
     });
     if(e.target.value !==''){
-      setFilled(true);
+      setFilled({[e.target.name]: true});
     }else{
-      setFilled(false);
+      setFilled({[e.target.name]: false});
     }
   }
 
@@ -73,7 +80,7 @@ export default function BetweenDates(props) {
       </Modal.Header>
       <Modal.Body>
         <div className={'position-relative mt-2'}>
-          <input className={"input " + (filled? 'is-filled':' ')}
+          <input className={"input " + (filled.start? 'is-filled':' ')}
                  type="date"
                  name="start"
                  onChange={handleInputChange}
@@ -81,7 +88,7 @@ export default function BetweenDates(props) {
           <label className={'label'}>Reporte desde</label>
         </div>
         <div className={'position-relative mt-2'}>
-          <input className={"input " + (filled? 'is-filled':' ')}
+          <input className={"input " + (filled.end? 'is-filled':' ')}
                  type="date"
                  name="end"
                  onChange={handleInputChange}

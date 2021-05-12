@@ -113,9 +113,8 @@ const bestArtist = async (req, res) => {
 const genreStream = async (req, res) => {
   const { from, to } = req.bodyUsed;
   const response = await pool.query(`
-    select * from genre_stream($1, $2); 
-  `, [from, to]);
-  
+    select * from genre_stream($1, $2);`, [from, to]);
+
   res.status(200).json(response.rows);
 };
 

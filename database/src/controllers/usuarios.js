@@ -169,12 +169,12 @@ const monitorTask = async (req, res) => {
 };
 
 const getSpecificTaskMonitor = async (req, res) => {
-  const { monitor } = req.body;
+  const { id_monitor } = req.body;
   const response = await pool.query(`
-  SELECT m.nombre, mt.id_tarea FROM monitor_tarea mt 
-	INNER JOIN monitores m ON mt.id_monitor = m.id_monitor 
-	WHERE m.nombre = $1;`,
-    [monitor, tarea]);
+  SELECT mt.id_tarea FROM monitor_tarea mt 
+    INNER JOIN monitores m ON mt.id_monitor = m.id_monitor
+  WHERE m.id_monitor = $1;`, [id_monitor]);
+  
   res.status(200).json(response.rows);
 };
 
