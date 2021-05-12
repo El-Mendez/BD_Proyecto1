@@ -63,11 +63,9 @@ WHERE a.nombre ILIKE $1;`,
 const getSpecificSong = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT c.nombre AS cancion, a.nombre AS artista, g.nombre AS genero, a2.nombre as album, c.estado
+  SELECT c.nombre AS cancion, a.nombre AS artista, a2.nombre as album, c.estado
     FROM canciones c
          INNER JOIN artista a ON c.id_artista = a.Id_artista
-         INNER JOIN genero_canciones gc ON c.id_cancion = gc.id_canciones
-         INNER JOIN genero g ON g.id_genero = gc.id_genero
          INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
          INNER JOIN albumes a2 on a2.id_album = ca.id_album
     WHERE c.nombre ILIKE $1;`,
