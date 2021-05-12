@@ -10,6 +10,7 @@ export default function MonitorModal(props) {
   const post = 'http://3.135.234.254:3000/createPlaylist' //Pasar por props
   const get_monitors = 'http://3.135.234.254:3000/createPlaylist';
   let { user } = useParams;
+  let monitorUsuario = 'Mr';
 
   //State variables
   const [monitors, setMonitors] = React.useState([]);
@@ -21,6 +22,7 @@ export default function MonitorModal(props) {
           {
             identifier: data.identifier,
             modifier: user,
+            monitor: monitorUsuario,
           }
         );
         alert('Se ha asociado el perfil correctamente');
@@ -30,6 +32,11 @@ export default function MonitorModal(props) {
     };
     fetchData();
   };
+
+  const handleEstado = (e) =>{
+    console.log(e.target.value);
+    monitorUsuario = e.target.value;
+  }
 
   useEffect(()=>{
       const fetchData = async () => {
@@ -64,7 +71,7 @@ export default function MonitorModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <select>
+        <select onChange={handleEstado}>
           {
             monitors.map((monitor) => {
               return(
