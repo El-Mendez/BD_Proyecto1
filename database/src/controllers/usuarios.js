@@ -25,7 +25,7 @@ const logIn = async (req, res) => {
   const response = await pool.query(`
     select u.username, u.nombres, u.apellidos, u.correo, u.id_tipousuario from usuarios u 
         where u.username like $1
-          and u.contrasena = crypt($2, u.contrasena)
+          and u.contrasena = crypt($2, u.contrasena) and activo = true
           `,
   [username, contrasena]);
 
