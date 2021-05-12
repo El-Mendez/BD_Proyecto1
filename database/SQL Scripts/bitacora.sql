@@ -263,6 +263,7 @@ DROP FUNCTION delete_album(varchar, varchar);
 
 -- CANCIÓN
 -- Parámetros 1 → modificador, 2 → canción
+
 CREATE OR REPLACE function delete_song(varchar, varchar)
 RETURNS VOID AS
     $BODY$
@@ -279,3 +280,24 @@ RETURNS VOID AS
 LANGUAGE 'plpgsql';
 
 SELECT delete_song('Zara12','Savoiur');
+
+
+-- ELIMINACIÓN DE CANCIÓN DE PLAYLIST
+
+CREATE OR REPLACE function delete_playlist_song(numeric, varchar, varchar)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        song_id numeric;
+    BEGIN
+        SELECT id_cancion into song_id
+        FROM canciones
+        WHERE nombre = $2;
+        UPDATE playlist_canciones SET modificador = $3 WHERE  id_playlist = $1;
+        DELETE FROM playlist_canciones
+        WHERE id_playlist = $1 AND id_canciones = song_id;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT delete_playlist_song(id_playlist, cancion, modifier);

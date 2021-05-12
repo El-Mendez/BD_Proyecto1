@@ -23,12 +23,12 @@ const getSpecificPlaylist = async (req, res) => {
 };
 
 const createPlaylist = async (req, res) => {
-  const { nombre } = req.body;
+  const { nombre, modifier } = req.body;
   const response = await pool.query(`
-  INSERT INTO playlist (nombre)
+  INSERT INTO playlist (nombre, modificador)
     VALUES
-    ($1);`,
-  [nombre]);
+    ($1, $2);`,
+  [nombre, modifier]);
 
   res.status(200).json(response.rows);
 };
@@ -60,25 +60,21 @@ const addUserPlaylist = async (req, res) => {
 
 // AÑADIR CANCIÓN A UNA PLAYLIST
 const addPlaylistSong = async (req, res) => {
-  const { playlist_id, cancion } = req.body;
+  const { playlist_id, cancion, modifier } = req.body;
   const response = await pool.query(`
     INSERT INTO playlist_canciones
-    SELECT $1 as id_playlist, c.id_cancion
+    SELECT $1 as id_playlist, c.id_cancion, $2 as modificador
     FROM canciones c
-    WHERE c.nombre ILIKE $2;`, [playlist_id, cancion]);
+    WHERE c.nombre ILIKE $2;`, [playlist_id, cancion, modifier]);
 
   res.status(200).json(response.rows);
 };
 
-// ELIMINAR CANCION DE UNA PLAYLIST
+// ELIMINAR CANCIÓN DE UNA PLAYLIST
 const deletePlaylistSong = async (req, res) => {
-  const { playlist_id, cancion } = req.body;
+  const { playlist_id, cancion, modifier } = req.body;
   const response = await pool.query(`
-    DELETE FROM playlist_canciones
-    WHERE id_playlist = $1 AND id_canciones = (
-    SELECT c.id_cancion
-    FROM canciones c
-    WHERE c.nombre ILIKE $2);`, [playlist_id, cancion]);
+    SELECT delete_playlist_song($1, $2, $3);`, [playlist_id, cancion, modifier]);
 
   res.status(200).json(response.rows);
 };
