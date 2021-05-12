@@ -88,7 +88,7 @@ const songOff = async (req, res) => {
 const updateSongName = async (req, res) => {
   const { newName, oldName, artist, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET nombre = $1, modifier = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+  UPDATE canciones SET nombre = $1, modificador = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $2 AND a.nombre = $3);`,
   [newName, oldName, artist, modifier]);

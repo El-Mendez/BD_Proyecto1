@@ -149,7 +149,7 @@ const deleteSubscription = async (req, res) => {
 const monitorProfile = async (req, res) => {
   const { identifier, monitor, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modifier = $3 WHERE username = $1`,
+  UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modificador = $3 WHERE username = $1`,
     [identifier, monitor, modifier])
     .then(() => {
       res.status(200).json(response.rows);
