@@ -159,6 +159,32 @@ const monitorProfile = async (req, res) => {
     });
 };
 
+const addMonitor = async (req, res) => {
+  const { monitor } = req.body;
+  const response = await pool.query(`
+  INSERT INTO monitores (nombre) VALUES ($1);`,
+    [monitor, tarea])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
+const monitorTask = async (req, res) => {
+  const { monitor, tarea } = req.body;
+  const response = await pool.query(`
+  SELECT tareas_monitor ($1, $2);`,
+    [monitor, tarea])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
 
 
 module.exports = {
@@ -175,4 +201,6 @@ module.exports = {
   deactivateUser,
   deleteSubscription,
   monitorProfile,
+  monitorTask,
+  addMonitor,
 };

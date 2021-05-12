@@ -19,11 +19,10 @@ const getSpecificArtist = async (req, res) => {
 };
 
 const updateArtistName = async (req, res) => {
-  const { newName, oldName } = req.body;
+  const { newName, oldName, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE artista SET nombre = $1 WHERE nombre = $2;`,
-  [newName, oldName]);
-
+  UPDATE artista SET nombre = $1, modificador = $3 WHERE nombre = $2;`,
+  [newName, oldName, modifier]);
   res.status(200).json(response.rows);
 };
 
