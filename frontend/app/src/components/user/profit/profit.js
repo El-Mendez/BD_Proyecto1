@@ -1,6 +1,25 @@
 import React, {Fragment, useState, useEffect} from 'react';
+import Axios from 'axios';
+import { useRouteMatch } from "react-router-dom";
 
 export default function artistProfit (props) {
+  const get_user = 'http://3.135.234.254:3000/revenueArtist'
+    const [data, setData] = useState([])
+    const userId = useRouteMatch ('/user/:id')
+    useEffect(() => {
+        const fetchData = async () => {
+          try{
+            const response = await Axios.post(get_user, {
+                nombre: userId.params.id
+            })
+            setData(response.data[0]);
+          }catch (e){
+            console.log(e)
+          }
+        };
+        fetchData();
+      },[setData])
+
     return (
         <div className="col info_Usuario"> 
             <div className="asd">
@@ -11,23 +30,23 @@ export default function artistProfit (props) {
                 </div>
                 <div className="row textoProfit">
                   <h5>
-                    {props.username}
+                    {data.nombre}
                   </h5>
                 </div>
                 <div className="row textoProfit">
-                  <h7>
+                  <h6>
                     Ingresos por reproducción: 0.15$
-                  </h7>
+                  </h6>
                 </div>
                 <div className="row textoProfit">
-                  <h7>
-                    Total de reproducciones: pez
-                  </h7>
+                  <h6>
+                    Total de reproducciones: {data.revenue/0.15}
+                  </h6>
                 </div>
                 <div className="row textoProfit">
-                  <h7>
-                    Comisión total = pez^2
-                  </h7>
+                  <h6>
+                    Comisión total = {data.revenue} $
+                  </h6>
                 </div>
             </div>
         </div>
