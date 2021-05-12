@@ -15,8 +15,8 @@ export default function SongItem(props){
           </span>
         </div>
         <div className={"songs-details text-secondary"}>
-          <img src={test} alt="Test" width={"40px"} className={"mr-3"}/>
-          <p className="m-0 p-0">{songData.song_title}</p>
+          <img src={`https://img.youtube.com/vi/${props.song_link}/maxresdefault.jpg`} alt="Test" width={"70px"} className={"mr-3"}/>
+          <p className=" ms-3 m-0 p-0">{songData.song_title}</p>
         </div>
         <div className={"pR_title"}>
           <small>•••</small>

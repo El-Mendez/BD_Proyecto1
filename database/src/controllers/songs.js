@@ -23,7 +23,7 @@ const getLinkSong = async (req, res) => {
 const getSongByArtist = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT c.nombre
+  SELECT c.nombre, c.link
     FROM artista a
     INNER JOIN canciones c on a.Id_artista = c.id_artista
     WHERE a.nombre = $1;`,
@@ -63,7 +63,7 @@ WHERE a.nombre ILIKE $1;`,
 const getSpecificSong = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT c.nombre AS cancion, a.nombre AS artista, a2.nombre as album, c.estado
+  SELECT c.nombre AS cancion, a.nombre AS artista, a2.nombre as album, c.estado, c.link as link
     FROM canciones c
          INNER JOIN artista a ON c.id_artista = a.Id_artista
          INNER JOIN cancion_album ca on c.id_cancion = ca.id_canciones
@@ -108,7 +108,7 @@ const updateSongLink = async (req, res) => {
 const deleteSong = async (req, res) => {
   const { modifier, identifier } = req.body;
   const response = await pool.query(`
-  SELECT delete_song($1.$2)`,
+  SELECT delete_song($1, $2)`,
   [modifier, identifier]);
 
   res.status(200).json(response.rows);

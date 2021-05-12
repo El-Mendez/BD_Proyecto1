@@ -4,15 +4,20 @@ import test from "../../../assets/badLiar.jpg";
 export default class userItemreport extends React.Component{
     render() {
         return(
-            <div className={'d-flex my-4 border-bottom text-secondary pb-2 align-items-center'}>
-                <div className={'ml-3'}>
-                    <p className={'text-secondary mb-auto'}>Modificador: {this.props.username}</p>
-                    <p className={'text-secondary mb-auto'}>Operación: {this.props.operacion}</p>
-                    <p className={'text-secondary mb-auto'}>Identificador de registro: {this.props.elemento}</p>
-                    <p className={'text-secondary mb-auto'}>Fecha: {this.props.fecha}</p>
-                </div>
-                {/*<p className={'text-secondary-light'}>04/03/2021</p>*/}
-            </div>
+          <div className={"row-title-record mt-4 mb-4 pSong-grid"}>
+              <div className={"pR_title justify-self-star"}>
+                  <small>{this.props.username}</small>
+              </div>
+              <div className={"pR_title justify-self-star"}>
+                  <small>{this.props.operacion}</small>
+              </div>
+              <div className={"pR_title justify-self-star"}>
+                  <small>{this.props.elemento}</small>
+              </div>
+              <div className={"pR_title justify-self-start"}>
+                  <small>{this.props.fecha}</small>
+              </div>
+          </div>
         );
     }
 }

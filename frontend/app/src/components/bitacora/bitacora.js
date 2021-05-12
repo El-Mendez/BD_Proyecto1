@@ -78,7 +78,7 @@ export default function bitacora (props) {
               <Switch>
                 <Route  path={`${path}/changesPlaylist`}>
                   <ChangesDatabase
-                  title='Playlist'
+                  title='Playlist y  Playlist_canciones'
                   request='http://3.135.234.254:3000/getChangesPlaylist'
                   />
                 </Route>
@@ -98,6 +98,6 @@ export default function bitacora (props) {
       {/* Presentación de reportes */}
     </div>
         )
-    
+
 }
 

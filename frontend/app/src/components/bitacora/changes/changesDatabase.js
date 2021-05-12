@@ -11,7 +11,6 @@ export default function changesDatabase(props) {
     const fetchData = async () => {
       try{
         const response = await Axios.get(get)
-        console.log(response.data);
         setData(response.data);
       }catch (e){
         console.log(e)
@@ -27,6 +26,22 @@ export default function changesDatabase(props) {
     Cambios en {props.title}
   </h2>
 </div>
+  <div className={"row-title"}>
+    <div className={"row-title-record mt-2 pSong-grid"}>
+      <div className={"pR_title justify-self-star"}>
+        <h5>Modificador</h5>
+      </div>
+      <div className={"pR_title justify-self-star"}>
+        <h5>Operación</h5>
+      </div>
+      <div className={"pR_title justify-self-star"}>
+        <h5>Registro afectado</h5>
+      </div>
+      <div className={"pR_title justify-self-start"}>
+        <h5>Fecha</h5>
+      </div>
+    </div>
+  </div>
 <div id="activeUsers">
   {
     data.map((user) => {

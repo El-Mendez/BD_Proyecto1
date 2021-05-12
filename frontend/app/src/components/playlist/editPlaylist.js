@@ -146,7 +146,6 @@ export default function EditPlaylist(){
                         <div className={"pR_title justify-self-end"}>
                           <small>•••</small>
                         </div>
-
                     </div>
                 </div>
                 <section className={'mb-4'}>

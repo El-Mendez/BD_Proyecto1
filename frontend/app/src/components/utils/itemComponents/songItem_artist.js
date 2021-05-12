@@ -14,10 +14,10 @@ export default function SongItem_artist(props){
           </span>
         </div>
         <div className={"songs-details text-secondary"}>
-          <img src={`https://img.youtube.com/vi/${this.props.song_link}/maxresdefault.jpg`} alt="Test" width={"45px"} className={"mr-3"}/>
+          <img src={`https://img.youtube.com/vi/${props.song_link}/maxresdefault.jpg`} alt="Test" width={"70px"} className={"mr-3"}/>
           <div>
-            <p className="m-0 p-0">{songData.song_t}</p>
-            <p className={"p-0"} id="song-artist">{songData.song_a}</p>
+            <p className="ms-3 m-0 p-0">{songData.song_t}</p>
+            <p className={" ms-3 p-0"} id="song-artist">{songData.song_a}</p>
           </div>
         </div>
       </div>
