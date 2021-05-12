@@ -33,8 +33,15 @@ const getSpecificAlbum = async (req, res) => {
       INNER JOIN artista a2 ON c.id_artista = a2.id_artista
     WHERE a.nombre ILIKE $1
   GROUP BY a2.nombre, a.nombre;`,
-  [album]);
-  res.status(200).json(response.rows);
+  [album]).then(() => {
+    res.status(201).json({
+      status: 'correct',
+    });
+  }).catch(() => {
+    res.status(500).json({
+      error: 'Bad request',
+    });
+  });
 };
 
 const updateAlbumName = async (req, res) => {

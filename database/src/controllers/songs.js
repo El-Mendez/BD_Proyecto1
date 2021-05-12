@@ -77,12 +77,12 @@ const getSpecificSong = async (req, res) => {
 };
 
 const songOff = async (req, res) => {
-  const { cancion, modifier } = req.body;
+  const { estado, cancion, artista, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET estado = false, modifier = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+  UPDATE canciones SET estado = $1, modifier = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $2 AND a.nombre = $3);`,
-  [cancion, modifier]);
+  [estado, cancion, artista, modifier]);
 
   res.status(200).json(response.rows);
 };
@@ -130,6 +130,16 @@ const addSong = async (req, res) => {
   });
 };
 
+const deactivateSong = async (req, res) => {
+  const { cancion, modifier } = req.body;
+  const response = await pool.query(`
+  UPDATE canciones SET estado = false, modifier = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+    INNER JOIN artista a ON c.id_artista = a.id_artista 
+    WHERE c.nombre = $1);`,
+    [cancion, modifier]);
+  res.status(200).json(response.rows);
+};
+
 module.exports = {
   getSongs,
   getSongByArtist,
@@ -142,4 +152,5 @@ module.exports = {
   getSongsByAlbum,
   getLinkSong,
   addSong,
+  deactivateSong,
 };

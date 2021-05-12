@@ -5,20 +5,22 @@ import { BsSearch as I_search,
 import EditingItem from './items/editItem';
 
 export default function AlbumsEdit(){
-  const get = 'http://3.135.234.254:3000/getSpecificSong';
+  const get = 'http://3.135.234.254:3000/getSpecificAlbum';
 
   const [search, setSearch] = React.useState('');
   const [albums, setAlbums] = React.useState([]);
 
   //Search albums
   function getAlbums(){
+    console.log('aaaa');
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get,
           {
-            nombre: search + '%'
+            album: search + '%'
           }
         );
+        console.log('help');
         console.log(data)
         setAlbums(data)
       } catch (error) {
@@ -32,7 +34,9 @@ export default function AlbumsEdit(){
   const handleInputChange = (e) =>{
     setSearch(e.target.value);
   }
+
   const onClick = () =>{
+    console.log('wtf');
     if(search !== ''){
       getAlbums();
     }else{
@@ -56,7 +60,7 @@ export default function AlbumsEdit(){
                      placeholder={"Nombre de la canción"}
                      onChange={handleInputChange}/>
             </div>
-            <button className={'btn upgrade-btn ml-4'} onClick={onClick}>
+            <button className={'btn upgrade-btn ms-4'} onClick={onClick}>
               BUSCAR
             </button>
           </div>
@@ -89,18 +93,6 @@ export default function AlbumsEdit(){
             }
           </div>
         </section>
-        <EditingItem
-          key={1}
-          index={1}
-          title={'Algo'}
-          details={"Alguien"}
-          info={'álbum'}
-          icon={<I_menu/>}
-          header_el={"Eliminación de álbum"}
-          details_el={"¿Estas seguro que deseas eliminar el álbum?"}
-          header_des={"Desactivación de álbum"}
-          details_des={"¿Estas seguro que deseas desactivar el álbum?"}
-        />
       </section>
     </section>
   );
