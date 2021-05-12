@@ -106,12 +106,7 @@ const bestArtist = async (req, res) => {
   const response = await pool.query(`
   SELECT * FROM best_artists($1,$2,$3);  
   `, [dateB, dateF, quantity])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Invalid date' });
-    });
+    res.status(200).json(response.rows);
 };
 
 // 9. Reproducciones por género
