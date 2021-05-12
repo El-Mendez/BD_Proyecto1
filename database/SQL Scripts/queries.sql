@@ -530,3 +530,9 @@ $$ LANGUAGE plpgsql;
 
 SELECT m.nombre, mt.id_tarea FROM monitor_tarea mt 
 	INNER JOIN monitores m ON mt.id_monitor = m.id_monitor ;
+
+
+CREATE INDEX genre ON genero(id_genero);
+CREATE INDEX artis ON artista(id_artista);
+CREATE INDEX stream_date ON stream(fecha);
+CREATE INDEX song ON canciones(id_cancion);
