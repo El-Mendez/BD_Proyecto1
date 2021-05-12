@@ -240,7 +240,7 @@ LANGUAGE 'plpgsql';
 -- CANCIÓN
 -- Parámetros 1 → modificador, 2 → canción
 
-CREATE OR REPLACE function delete_album(varchar, varchar)
+CREATE OR REPLACE function delete_song(varchar, varchar)
 RETURNS VOID AS
     $BODY$
     DECLARE
