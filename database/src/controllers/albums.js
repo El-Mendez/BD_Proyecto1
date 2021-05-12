@@ -32,8 +32,9 @@ const getSpecificAlbum = async (req, res) => {
       INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
       INNER JOIN artista a2 ON c.id_artista = a2.id_artista
     WHERE a.nombre ILIKE $1
-  GROUP BY a2.nombre, a.nombre;`,
-  [album]).then(() => {
+  GROUP BY a2.nombre, a.nombre, a.activado;`,
+  [album])
+    .then(() => {
     res.status(201).json({
       status: 'correct',
     });
