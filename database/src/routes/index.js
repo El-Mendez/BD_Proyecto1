@@ -86,6 +86,7 @@ const {
   genreStream,
   topArtistSongs,
   modifyAlbumSong,
+  genreStream2,
 } = require('../controllers/reports');
 // Queries bitacora
 const {
@@ -178,6 +179,7 @@ router.post('/reports/bestArtist', bestArtist);
 router.post('/reports/genreStreams', genreStream);
 router.post('/reports/topArtistSongs', topArtistSongs);
 router.post('/reports/modifyAlbumSong', modifyAlbumSong);
+router.post('/reports/genreStream2', genreStream2);
 
 // --------------------Stream Song--------------------------
 router.post('/stream', streamSong);

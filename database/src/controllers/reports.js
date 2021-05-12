@@ -132,6 +132,19 @@ const genreStream = async (req, res) => {
 
   res.status(200).json(response.rows);
 };
+const genreStream2 = async (req, res) => {
+  const { from, to } = req.bodyUsed;
+  const response = await pool.query(`
+    SELECT g.nombre as genero, COUNT(*) as reproducciones
+        FROM stream s
+            INNER JOIN canciones c on c.id_cancion = s.id_cancion
+            INNER JOIN genero_canciones gc on c.id_cancion = gc.id_canciones
+            INNER JOIN genero g on g.id_genero = gc.id_genero
+        WHERE s.fecha BETWEEN $1 AND $2
+        GROUP BY genero;`, [from, to]);
+
+  res.status(200).json(response.rows);
+};
 
 // 10. Canciones con más reproducciones de un artista
 const topArtistSongs = async (req, res) => {
@@ -177,5 +190,6 @@ module.exports = {
   genreStream,
   topArtistSongs,
   modifyAlbumSong,
+  genreStream2,
 
 };
