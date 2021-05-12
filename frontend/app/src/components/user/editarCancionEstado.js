@@ -11,6 +11,7 @@ export default function editAlbum (props){
     let estado = true;
     let nombre = "";
     let artista = "";
+    const userId = useRouteMatch ('/user/:id')
 
     const handleEstado = (e) =>{
         console.log(e.target.value);
@@ -60,7 +61,8 @@ export default function editAlbum (props){
                 {
                   estado:  estado,
                   cancion: nombre,
-                  artista: artista
+                  artista: artista,
+                  modifier: userId.params.id,
                 }
               );
               alert("Cambio de la cancion realizado")

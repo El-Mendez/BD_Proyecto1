@@ -10,6 +10,7 @@ export default function editAlbum (props){
     const [filled, setFilled] = React.useState(false);
     let nuevoNombre = ''
     let viejoNombre = ''
+    const userId = useRouteMatch ('/user/:id')
 
     const handleOldName = (e) =>{
         console.log(e.target.value);
@@ -39,7 +40,8 @@ export default function editAlbum (props){
               const { data } = await Axios.post(post_artist,
                 {
                     newName: nuevoNombre,
-                    oldName: viejoNombre
+                    oldName: viejoNombre,
+                    modifier: userId.params.id,
                 }
               );
               alert("Cambio del artista realizado")
