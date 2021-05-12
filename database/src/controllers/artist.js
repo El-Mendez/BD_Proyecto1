@@ -10,7 +10,7 @@ const getArtists = async (req, res) => {
 const getSpecificArtist = async (req, res) => {
   const { nombre } = req.body;
   const response = await pool.query(`
-  SELECT a.nombre
+  SELECT a.nombre,  a.activado as estado
     FROM artista a
     WHERE a.nombre ILIKE $1;`,
   [nombre]);

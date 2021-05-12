@@ -7,7 +7,7 @@ import EditingItem from './items/editItem';
 
 
 export default function ArtistsEdit(){
-  const get = 'http://3.135.234.254:3000/getSpecificSong'; // getArtists
+  const get = 'http://3.135.234.254:3000/SpecificArtist'; // getArtists
 
   const [search, setSearch] = React.useState('');
   const [artists, setArtists] = React.useState([]);
@@ -91,19 +91,6 @@ export default function ArtistsEdit(){
             }
           </div>
         </section>
-        <EditingItem
-          key={1}
-          index={1}
-          title={'Algo'}
-          details={" "}
-          info={'artista'}
-          icon={<I_menu/>}
-          header_el={"Eliminación de artista"}
-          details_el={"¿Estas seguro que deseas eliminar al artista?"}
-          header_des={"Desactivación de canción"}
-          details_des={"¿Estas seguro que deseas desactivar al artista?"}
-          artist = {'true'}
-        />
       </section>
     </section>
   );

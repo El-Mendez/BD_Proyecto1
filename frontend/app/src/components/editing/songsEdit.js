@@ -90,18 +90,6 @@ export default function SongsEdit(){
             }
           </div>
         </section>
-        <EditingItem
-          key={1}
-          index={1}
-          title={'Algo'}
-          details={"Alguien"}
-          info={"quien sabe"}
-          icon={<I_menu/>}
-          header_el={"Eliminación de canción"}
-          details_el={"¿Estas seguro que deseas eliminar la canción?"}
-          header_des={"Desactivación de canción"}
-          details_des={"¿Estas seguro que deseas desactivar la canción?"}
-        />
       </section>
     </section>
   );

@@ -6,7 +6,7 @@ import EditUserItem from './items/editUseritem';
 
 
 export default function UsersEdit(){
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const get_song = 'http://3.135.234.254:3000/getSpecificUser';
 
   const [search, setSearch] = React.useState('');
   const [users, setUsers] = React.useState([]);
@@ -89,17 +89,6 @@ export default function UsersEdit(){
             }
           </div>
         </section>
-        <EditUserItem
-          key={1}
-          index={1}
-          title={'Algo'}
-          info={'usuario'}
-          icon={<I_menu/>}
-          header_el={"Eliminación de suscripción"}
-          details_el={"¿Estas seguro que deseas eliminar la suscripción?"}
-          header_des={"Desactivación de usuario"}
-          details_des={"¿Estas seguro que deseas desactivar al usuario?"}
-        />
       </section>
     </section>
   );
