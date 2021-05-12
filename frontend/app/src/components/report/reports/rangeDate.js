@@ -49,8 +49,7 @@ export default function RangeDate(props) {
       setTimeout(()=>{
         var end = new Date();
         end.setDate(new Date(reportDate).getDate() + 7);
-        props.updateData(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-" + end.getDate())) ,result);
-        props.updateData(reportDate.toString(), (reportDate.setDate(+7)) , result);
+        props.updateData(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-0" + end.getDate())) ,result);
         props.onHide();
       },300)
     }else{
