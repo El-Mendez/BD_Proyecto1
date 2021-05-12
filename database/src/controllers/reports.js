@@ -127,8 +127,8 @@ const genreStream = async (req, res) => {
             INNER JOIN canciones c on c.id_cancion = s.id_cancion
             INNER JOIN genero_canciones gc on c.id_cancion = gc.id_canciones
             INNER JOIN genero g on g.id_genero = gc.id_genero
-\t        WHERE s.fecha BETWEEN $1 AND $2
-\t        GROUP BY genero;`, [from, to]);
+        WHERE s.fecha BETWEEN $1 AND $2
+        GROUP BY genero;`, [from, to]);
 
   res.status(200).json(response.rows);
 };
