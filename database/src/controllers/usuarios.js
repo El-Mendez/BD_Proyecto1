@@ -163,7 +163,7 @@ const addMonitor = async (req, res) => {
   const { monitor } = req.body;
   const response = await pool.query(`
   INSERT INTO monitores (nombre) VALUES ($1);`,
-    [monitor, tarea])
+    [monitor])
     .then(() => {
       res.status(200).json(response.rows);
     })
