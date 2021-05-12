@@ -8,7 +8,7 @@ export default function EditUserItem(props){
 
   const [modalShow, setModalShow] = React.useState(false);
   const [modal1Show, setModal1Show] = React.useState(false);
-  const [monitorShow, setMonitorShow] = React.useState(false)
+  const [monitorShow, setMonitorShow] = React.useState(false);
 
   return(
     <div className="row-title-grid pSong-grid text-secondary mt-2">
@@ -36,21 +36,25 @@ export default function EditUserItem(props){
            </span>
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><button className="dropdown-item" onClick={() => setModalShow(true)}>Desactivar </button></li>
-            <li><button className="dropdown-item" onClick={() => setModal1Show(true)}>Eliminar suscripción </button></li>
+            {
+              data.usertype? <li><button className="dropdown-item" onClick={() => setModalShow(true)}>Desactivar </button></li> :
+                <li><button className="dropdown-item" onClick={() => setModal1Show(true)}>Eliminar suscripción </button></li>
+            }
             <li><button className="dropdown-item" onClick={() => setMonitorShow(true)}>Asociar a un perfil de monitoreo </button></li>
           </ul>
         </div>
       </div>
       {/*  Modals */}
-      {/* Desactivar álbum */}
+      {/* Desactivar  */}
       <ConfirmModal
         show={modalShow}
         onHide={() => setModalShow(false)}
         header = {data.header_des}
         details = {data.details_des}
+        identifier = {data.title}
         option = "Desactivar"
         icon = {<DesIcon/>}
+        request = "http://3.135.234.254:3000/deactivateUser"
       />
       {/* Eliminar álbum */}
       <ConfirmModal
@@ -58,8 +62,10 @@ export default function EditUserItem(props){
         onHide={() => setModal1Show(false)}
         header = {data.header_el}
         details ={data.details_el}
+        identifier = {data.title}
         option = "Eliminar"
         icon = {<ElIcon/>}
+        request = "http://3.135.234.254:3000/deleteSubscription"
       />
     {/* Perfil de monitoreo */}
       <MonitorModal

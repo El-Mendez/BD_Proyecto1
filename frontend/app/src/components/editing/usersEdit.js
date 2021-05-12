@@ -42,6 +42,11 @@ export default function UsersEdit(){
     }
   }
 
+  const tipoUsuario = (usertype) =>{
+    return usertype === 'Freemium';
+  };
+
+
   return(
     <section className={'overflow-auto'}>
       {/* SEARCH SONG FOR THE PLAYLIST */}
@@ -58,7 +63,7 @@ export default function UsersEdit(){
                      placeholder={"Nombre de la canción"}
                      onChange={handleInputChange}/>
             </div>
-            <button className={'btn upgrade-btn ml-4'} onClick={onClick}>
+            <button className={'btn upgrade-btn ms-4'} onClick={onClick}>
               BUSCAR
             </button>
           </div>
@@ -76,7 +81,7 @@ export default function UsersEdit(){
                         index={index + 1}
                         title={user.nombre}
                         info={user.username}
-                        usertype={user.tipo}
+                        usertype={tipoUsuario(user.tipo)}
                         icon={<I_menu/>}
                         header_el={"Eliminación de suscripción"}
                         details_el={"¿Estas seguro que deseas eliminar la suscripción?"}

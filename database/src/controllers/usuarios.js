@@ -116,7 +116,7 @@ const getSpecificUser = async (req, res) => {
     SELECT concat(nombres, ' ' ,apellidos) as nombre, username, tu.descripcion as tipo, activo as estado
     FROM usuarios
         INNER JOIN tipo_usuario tu on tu.id_tipousuario = usuarios.id_tipousuario
-    WHERE username ILIKE $1 and (usuarios.id_tipousuario = 1 or usuarios.id_tipousuario = 2);`, [nombre]);
+    WHERE username ILIKE $1;`, [nombre]);
   res.status(200).json(response.rows);
 };
 

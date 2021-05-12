@@ -6,8 +6,8 @@ import Axios from 'axios';
 
 
 export default function InputModal(props) {
-  const data = props;
-  let { user } = useParams;
+  const info = props;
+  let { user } = useParams();
 
   //State variables
   const [filled, setFilled] = React.useState(false);
@@ -16,13 +16,15 @@ export default function InputModal(props) {
   function updateName(){
     console.log(props.details)
     console.log(props.identifier)
+    console.log(name)
+    console.log(user)
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(props.request,
+        const { data } = await Axios.post("http://3.135.234.254:3000/changeSongName",
           {
             newName: name,
-            oldName: props.identifier,
-            artist: props.details,
+            oldName: info.identifier,
+            artist: info.details,
             modifier: user,
           }
         );
@@ -57,7 +59,7 @@ export default function InputModal(props) {
       <Modal.Header className="bg-purple-dark">
         <Modal.Title id="contained-modal-title-vcenter">
           <p className="modalHeader my-2">
-            {data.header}
+            {info.header}
           </p>
         </Modal.Title>
       </Modal.Header>
@@ -72,8 +74,8 @@ export default function InputModal(props) {
         </div>
       </Modal.Body>
       <Modal.Footer className="mt-2">
-        <Button className={"border-btn mb-2"} onClick={data.onHide}>Cancelar</Button>
-        <Button className={'purple-btn mb-2'} onClick={handleClick}>{data.option}</Button>
+        <Button className={"border-btn mb-2"} onClick={info.onHide}>Cancelar</Button>
+        <Button className={'purple-btn mb-2'} onClick={handleClick}>{info.option}</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -59,7 +59,7 @@ export default function ArtistsEdit(){
                      placeholder={"Nombre de la canción"}
                      onChange={handleInputChange}/>
             </div>
-            <button className={'btn upgrade-btn ml-4'} onClick={onClick}>
+            <button className={'btn upgrade-btn ms-4'} onClick={onClick}>
               BUSCAR
             </button>
           </div>
