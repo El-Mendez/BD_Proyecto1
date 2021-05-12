@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Changes from "../../utils/itemComponents/changesComponent";
 import Axios from 'axios';
-import reportRequest from '../../utils/reportsRequest';
 
 export default function changesDatabase(props) {
   const get =  props.request;
@@ -12,8 +11,8 @@ export default function changesDatabase(props) {
     const fetchData = async () => {
       try{
         const response = await Axios.get(get)
-        setData(response.data[0]);
-        console.log(data.username)
+        console.log(response.data);
+        setData(response.data);
       }catch (e){
         console.log(e)
       }
