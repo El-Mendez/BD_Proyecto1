@@ -27,10 +27,10 @@ const updateArtistName = async (req, res) => {
 };
 
 const deleteArtist = async (req, res) => {
-  const { modifier, nombre } = req.body;
+  const { modifier, identifier } = req.body;
   const response = await pool.query(`
   SELECT delete_artist($1, $2)`,
-  [modifier, nombre])
+  [modifier, identifier])
   .then(() => {
     res.status(200).json(response.rows);
   })
@@ -48,10 +48,10 @@ const revenueArtist = async (req, res) => {
 };
 
 const deactivateArtist = async (req, res) => {
-  const { modifier, nombre } = req.body;
+  const { modifier, identifier } = req.body;
   const response = await pool.query(`
   SELECT deactivate_artist($1, $2)`,
-    [modifier, nombre])
+    [modifier, identifier])
     .then(() => {
       res.status(200).json(response.rows);
     })

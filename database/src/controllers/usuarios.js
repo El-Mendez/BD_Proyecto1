@@ -121,10 +121,10 @@ const getSpecificUser = async (req, res) => {
 };
 
 const deactivateUser = async (req, res) => {
-  const { username, modifier } = req.body;
+  const { identifier, modifier } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;`,
-    [username, modifier])
+    [username, identifier])
     .then(() => {
       res.status(200).json(response.rows);
     })
@@ -134,10 +134,10 @@ const deactivateUser = async (req, res) => {
 };
 
 const deleteSubscription = async (req, res) => {
-  const { username, modifier } = req.body;
+  const { identifier, modifier } = req.body;
   const response = await pool.query(`
     UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;`,
-    [username, modifier])
+    [username, identifier])
     .then(() => {
       res.status(200).json(response.rows);
     })
@@ -147,10 +147,10 @@ const deleteSubscription = async (req, res) => {
 };
 
 const monitorProfile = async (req, res) => {
-  const { username, monitor, modifier } = req.body;
+  const { identifier, monitor, modifier } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modifier = $3 WHERE username = $1`,
-    [username, monitor, modifier])
+    [identifier, monitor, modifier])
     .then(() => {
       res.status(200).json(response.rows);
     })

@@ -83,6 +83,8 @@ export default function SongsEdit(){
                         details_el={"¿Estas seguro que deseas eliminar la canción?"}
                         header_des={"Desactivación de canción"}
                         details_des={"¿Estas seguro que deseas desactivar la canción?"}
+                        del_request="http://3.135.234.254:3000/deleteSong"
+                        des_request="http://3.135.234.254:3000/deactivateSong"
                       />: ''
                   );
                 }

@@ -12,15 +12,13 @@ export default function AlbumsEdit(){
 
   //Search albums
   function getAlbums(){
-    console.log('aaaa');
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get,
           {
-            album: search + '%'
+            nombre: search + '%'
           }
         );
-        console.log('help');
         console.log(data)
         setAlbums(data)
       } catch (error) {
@@ -76,7 +74,7 @@ export default function AlbumsEdit(){
                       <EditingItem
                         key={index}
                         index={index + 1}
-                        title={album.albumes}
+                        title={album.album}
                         details={album.artista}
                         info={'álbum'}
                         icon={<I_menu/>}
@@ -85,6 +83,8 @@ export default function AlbumsEdit(){
                         header_des={"Desactivación de álbum"}
                         details_des={"¿Estas seguro que deseas desactivar el álbum?"}
                         artist = {'false'}
+                        des_request = "http://3.135.234.254:3000/deactivateAlbum"
+                        del_request = "http://3.135.234.254:3000/deleteAlbum"
                       />
                       : ''
                   );

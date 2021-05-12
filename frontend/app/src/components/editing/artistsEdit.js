@@ -7,7 +7,7 @@ import EditingItem from './items/editItem';
 
 
 export default function ArtistsEdit(){
-  const get = 'http://3.135.234.254:3000/SpecificArtist'; // getArtists
+  const get = 'http://3.135.234.254:3000/SpecificArtist';
 
   const [search, setSearch] = React.useState('');
   const [artists, setArtists] = React.useState([]);
@@ -84,6 +84,8 @@ export default function ArtistsEdit(){
                         header_des={"Desactivación de canción"}
                         details_des={"¿Estas seguro que deseas desactivar al artista?"}
                         artist = {'true'}
+                        des_request="http://3.135.234.254:3000/deactivateArtist"
+                        del_request="http://3.135.234.254:3000/deleteArtist"
                       /> : ''
                   );
                 }

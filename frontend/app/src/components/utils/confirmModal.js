@@ -6,16 +6,16 @@ import Axios from 'axios';
 
 export default function ConfirmModal(props) {
   const data = props;
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Pasa por props
+  const post = data.request //Pasa por props
   let { user } = useParams();
 
   function sendQuery(){
     const fetchData = async () => {
       try {
-        const { } = await Axios.post(post,
+        const { } = await Axios.post(data.request,
           {
+            modifier: user,
             identifier: data.identifier,
-            modifier: user
           }
         );
         alert('Se ha efectuado la operación correctamente');
@@ -29,7 +29,6 @@ export default function ConfirmModal(props) {
 
   const handleClick = ()=>{
     sendQuery();
-    data.show = false;
   }
 
   return (

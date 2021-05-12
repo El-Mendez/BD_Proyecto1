@@ -108,10 +108,10 @@ const updateSongLink = async (req, res) => {
 };
 
 const deleteSong = async (req, res) => {
-  const { modifier, cancion } = req.body;
+  const { modifier, identifier } = req.body;
   const response = await pool.query(`
   SELECT delete_song($1.$2)`,
-  [modifier, cancion]);
+  [modifier, identifier]);
 
   res.status(200).json(response.rows);
 };
@@ -131,12 +131,12 @@ const addSong = async (req, res) => {
 };
 
 const deactivateSong = async (req, res) => {
-  const { cancion, modifier } = req.body;
+  const { identifier, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET estado = false, modifier = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+  UPDATE canciones SET estado = false, modificador = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $1);`,
-    [cancion, modifier]);
+    [identifier, modifier]);
   res.status(200).json(response.rows);
 };
 

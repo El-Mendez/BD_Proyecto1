@@ -64,15 +64,11 @@ const updateAlbumDate = async (req, res) => {
 };
 
 const deleteAlbum = async (req, res) => {
-  const { modifier, album } = req.body;
+  const { modifier, identifier } = req.body;
   const response = await pool.query(`
-    select * from delete_album($1,$2)`, [modifier, album])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Bad request' });
-    });
+    select * from delete_album($1,$2)`, [modifier, identifier]);
+
+  res.status(200).json(response.rows);
 };
 
 const addAlbum = async (req, res) => {
@@ -94,16 +90,12 @@ const addSongAlbum = async (req, res) => {
 };
 
 const deactivateAlbum = async (req, res) => {
-  const { modifier, album } = req.body;
+  const { modifier, identifier } = req.body;
   const response = await pool.query(`
     select * from deactivate_album($1,$2)  
-  `, [modifier, album])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Bad request' });
-    });
+  `, [modifier, identifier]);
+
+  res.status(200).json(response.rows);
 };
 
 module.exports = {

@@ -54,7 +54,7 @@ export default function EditItem(props){
         onHide={() => setInputModal(false)}
         header = {"Actualización de nombre"}
         option = "Actualizar"
-        identifier = {data.identifier}
+        identifier = {data.title}
       />
       {/* Desactivar álbum */}
       <ConfirmModal
@@ -64,7 +64,9 @@ export default function EditItem(props){
         details = {data.details_des}
         option = "Desactivar"
         icon = {<DesIcon/>}
-        identifier = {data.identifier}
+        identifier = {data.title}
+        request = {data.des_request}
+
       />
       {/* Eliminar álbum */}
       <ConfirmModal
@@ -74,7 +76,8 @@ export default function EditItem(props){
         details ={data.details_el}
         option = "Eliminar"
         icon = {<ElIcon/>}
-        identifier = {data.identifier}
+        identifier = {data.title}
+        request = {data.del_request}
       />
     </div>
   );
