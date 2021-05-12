@@ -1,11 +1,12 @@
-import React, {Fragment, useState, useEffect} from 'react';
-import NewReportsItem from '../../utils/itemComponents/newReportsitem';
-import RangeDate from './modalArtist';
+import React, {useState} from 'react';
+import WeeklyReportItem from '../../utils/itemComponents/reportBestSong';
+import RangeDate from './songArtistModal';
 
-export default function WeeklyStreams(){
+export default function BestSongs(){
 
   const [modalShow, setModalShow] = React.useState(false);
-  const [data, setData] = useState([])
+  const [result, setResult] = useState([])
+
   const [wStreams, setWStreams] = React.useState({
     start: '',
     end: '',
@@ -20,29 +21,27 @@ export default function WeeklyStreams(){
     })
   };
 
-
   return(
     <section className={'section-container'}>
       <div className="section-title text-secondary">
         <h2 className="title">
-          Los N mejores artistas del momento
+          Canciones más escuchadas de un artista
         </h2>
-        <button className={"border-btn-reports mb-2"} onClick={() => setModalShow(true)}>Ingresar datos</button>
+        <button className={"border-btn-reports mb-2"} onClick={() => setModalShow(true)}>Ingresar fecha</button>
         <RangeDate
           show={modalShow}
           onHide={() => setModalShow(false)}
           updateData = {(start, end, stream) => updateData(start, end, stream)}
-          setData = {(data) => setData(data)}
+          setResult = {(result) => setResult(result)}
         />
       </div>
-        {
-            data.map((user) => {
-            data.indexOf(user)
-            return (
-              <NewReportsItem
-                streams={user.artista}
-                quantity={user.reproducciones}
-              />
+      {
+        result.map((user) => {
+        result.indexOf(user)
+        return (
+            <WeeklyReportItem
+            result={user}
+            />
       );
     })
   }

@@ -19,6 +19,7 @@ import ModalSongsArtists from './reports/modalSongsartists';
 import WeeklyStreams from './reports/weeklyStreams';
 import GenreStreams from './reports/genreStreams';
 import BestArtist from './reports/bestArtist';
+import BestSongs from './reports/bestSongs';
 
 export default function Report(){
   let {path, url} = useRouteMatch();
@@ -104,8 +105,8 @@ export default function Report(){
             image={activeUsers}
             title={'Canciones más escuchadas'}
             description={'Canciones más escuchadas '}
-            redirect={() => setModal3Show(true)}
-            click={false}
+            redirect={`${url}/bestSongs`}
+            click={true}
           />
           <ModalSongsArtists
             show={modal3Show}
@@ -143,6 +144,9 @@ export default function Report(){
                 </Route>
                 <Route  path={`${path}/activeUsers`}>
                   <UsersReport/>
+                </Route>
+                <Route  path={`${path}/bestSongs`}>
+                  <BestSongs/>
                 </Route>
                 <Route  path={`${path}/report`} />
               </Switch>

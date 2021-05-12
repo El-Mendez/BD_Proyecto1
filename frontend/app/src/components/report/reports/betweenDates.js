@@ -20,26 +20,49 @@ export default function BetweenDates(props) {
   const [result, setResult] = React.useState([]);
 
 
-  function generateReport(){
+/*   function generateReport(){
+    const fetchData = async () => {
     console.log(reportDate.start)
     console.log(reportDate.end)
-    const fetchData = async () => {
       try {
-        const { data } = await Axios.post(post,
+        const response = await Axios.post(post,
           {
             from: reportDate.start,
             to: reportDate.end
           }
         );
-        console.log('shit');
-        console.log(data);
-        setResult(data);
+        console.log('asd');
+        console.log(response.data);
+        setResult(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }; */
+
+  function generateReport(){
+    const fetchData = async () => {
+    console.log(reportDate.start)
+    console.log(reportDate.end)
+    try {
+      const response = await Axios.post(post,
+        {
+          from: reportDate.start,
+          to: reportDate.end,
+        }
+        );
+        console.log('asd');
+        console.log(response.data);
+        setResult(response.data);
+        console.log("todo fine")
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   };
+
 
   const handleInputChange = (e) =>{
     setReportDate({
@@ -98,7 +121,7 @@ export default function BetweenDates(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
-        <Button className={'purple-btn mb-2'} onClick={handleClick}>Generar reporte</Button>
+        <Button className={'purple-btn mb-2'} onClick={generateReport}>Generar reporte</Button>
       </Modal.Footer>
     </Modal>
   );
