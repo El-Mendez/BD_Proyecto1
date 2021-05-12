@@ -26,11 +26,10 @@ const getChangesArtist = async (req, res) => {
 };
 const getChangesPlaylist = async (req, res) => {
   const response = await pool.query(`
-    SELECT * FROM bitacora b WHERE tabla = 'playlist';
-  `);
+    select * from playlist_record;`);
+
   res.status(200).json(response.rows);
 };
-
 
 
 module.exports = {

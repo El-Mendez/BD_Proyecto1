@@ -63,7 +63,7 @@ const addPlaylistSong = async (req, res) => {
   const { playlist_id, cancion, modifier } = req.body;
   const response = await pool.query(`
     INSERT INTO playlist_canciones
-    SELECT $1 as id_playlist, c.id_cancion, $2 as modificador
+    SELECT $1 as id_playlist, c.id_cancion, $3 as modificador
     FROM canciones c
     WHERE c.nombre ILIKE $2;`, [playlist_id, cancion, modifier]);
 
