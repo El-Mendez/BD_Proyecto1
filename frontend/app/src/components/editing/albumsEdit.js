@@ -69,8 +69,8 @@ export default function AlbumsEdit(){
             {
               albums.map((album) => {
                   const index = albums.indexOf(album)
-                  return(
-                    album.estado?
+                  return (
+                    album.estado ?
                       <EditingItem
                         key={index}
                         index={index + 1}
@@ -82,9 +82,9 @@ export default function AlbumsEdit(){
                         details_el={"¿Estas seguro que deseas eliminar el álbum?"}
                         header_des={"Desactivación de álbum"}
                         details_des={"¿Estas seguro que deseas desactivar el álbum?"}
-                        artist = {'false'}
-                        des_request = "http://3.135.234.254:3000/deactivateAlbum"
-                        del_request = "http://3.135.234.254:3000/deleteAlbum"
+                        des_request="http://3.135.234.254:3000/deactivateAlbum"
+                        del_request="http://3.135.234.254:3000/deleteAlbum"
+                        request="http://3.135.234.254:3000/changeAlbumName"
                       />
                       : ''
                   );

@@ -39,9 +39,7 @@ export default function EditItem(props){
            </span>
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            {
-              !data.artist? <li><button className="dropdown-item" onClick={() => setInputModal(true)}>Actualizar nombre</button></li> :''
-            }
+            <li><button className="dropdown-item" onClick={() => setInputModal(true)}>Actualizar nombre</button></li>
             <li><button className="dropdown-item" onClick={() => setModalShow(true)}>Desactivar </button></li>
             <li><a className="dropdown-item" onClick={() => setModal1Show(true)}>Eliminar </a></li>
           </ul>
@@ -55,6 +53,8 @@ export default function EditItem(props){
         header = {"Actualización de nombre"}
         option = "Actualizar"
         identifier = {data.title}
+        details = {data.details}
+        request = {data.request}
       />
       {/* Desactivar álbum */}
       <ConfirmModal

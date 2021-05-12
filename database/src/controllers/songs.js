@@ -135,6 +135,7 @@ const deactivateSong = async (req, res) => {
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $1);`,
     [identifier, modifier]);
+
   res.status(200).json(response.rows);
 };
 

@@ -7,18 +7,22 @@ import Axios from 'axios';
 
 export default function InputModal(props) {
   const data = props;
-  const post = data.request //Pasar por props
   let { user } = useParams;
 
   //State variables
   const [filled, setFilled] = React.useState(false);
+  const [name, setName] = React.useState('');
 
   function updateName(){
+    console.log(props.details)
+    console.log(props.identifier)
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(post,
+        const { data } = await Axios.post(props.request,
           {
-            identifier: data.identifier,
+            newName: name,
+            oldName: props.identifier,
+            artist: props.details,
             modifier: user,
           }
         );
@@ -31,8 +35,7 @@ export default function InputModal(props) {
   };
 
   const handleInputChange = (e) =>{
-    console.log(e.target.value);
-    setReportDate(e.target.value);
+    setName(e.target.value);
     if(e.target.value !==''){
       setFilled(true);
     }else{
@@ -42,7 +45,6 @@ export default function InputModal(props) {
 
   const handleClick = ()=>{
       updateName();
-      data.show = false;
   }
 
 

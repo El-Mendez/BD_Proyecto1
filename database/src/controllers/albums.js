@@ -40,7 +40,7 @@ const getSpecificAlbum = async (req, res) => {
 const updateAlbumName = async (req, res) => {
   const { oldName, newName, artist, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE albumes SET nombre = $1, modifier = $4 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
+  UPDATE albumes SET nombre = $1, modificador = $4 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
     INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
     INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
     INNER JOIN artista a ON a.id_artista = c.id_artista

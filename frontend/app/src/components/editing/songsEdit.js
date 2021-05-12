@@ -70,8 +70,8 @@ export default function SongsEdit(){
             {
               songs.map((song) => {
                   const index = songs.indexOf(song)
-                  return(
-                    song.estado?
+                  return (
+                    song.estado ?
                       <EditingItem
                         key={index}
                         index={index + 1}
@@ -85,7 +85,8 @@ export default function SongsEdit(){
                         details_des={"¿Estas seguro que deseas desactivar la canción?"}
                         del_request="http://3.135.234.254:3000/deleteSong"
                         des_request="http://3.135.234.254:3000/deactivateSong"
-                      />: ''
+                        request="http://3.135.234.254:3000/changeSongName"
+                      /> : ''
                   );
                 }
               )

@@ -6,7 +6,6 @@ import Axios from 'axios';
 
 export default function ConfirmModal(props) {
   const data = props;
-  const post = data.request //Pasa por props
   let { user } = useParams();
 
   function sendQuery(){
@@ -14,8 +13,8 @@ export default function ConfirmModal(props) {
       try {
         const { } = await Axios.post(data.request,
           {
-            modifier: user,
             identifier: data.identifier,
+            modifier: user,
           }
         );
         alert('Se ha efectuado la operación correctamente');
@@ -25,11 +24,6 @@ export default function ConfirmModal(props) {
     };
     fetchData();
   };
-
-
-  const handleClick = ()=>{
-    sendQuery();
-  }
 
   return (
     <Modal
@@ -54,7 +48,7 @@ export default function ConfirmModal(props) {
       </Modal.Body>
       <Modal.Footer className="mt-2">
         <Button className={"border-btn mb-2"} onClick={data.onHide}>Cancelar</Button>
-        <Button className={'purple-btn mb-2'} onClick={handleClick} >{data.option}</Button>
+        <Button className={'purple-btn mb-2'} onClick={sendQuery}>{data.option}</Button>
       </Modal.Footer>
     </Modal>
   );
