@@ -75,7 +75,7 @@ export default function SongsEdit(){
                       <EditingItem
                         key={index}
                         index={index + 1}
-                        title={song.nombre}
+                        title={song.cancion}
                         details={song.artista}
                         info={song.album}
                         icon={<I_menu/>}

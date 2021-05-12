@@ -77,23 +77,23 @@ const getSpecificSong = async (req, res) => {
 };
 
 const songOff = async (req, res) => {
-  const { estado, cancion, artista } = req.body;
+  const { cancion, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET estado = $1 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+  UPDATE canciones SET estado = false, modifier = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $2 AND a.nombre = $3);`,
-  [estado, cancion, artista]);
+  [cancion, modifier]);
 
   res.status(200).json(response.rows);
 };
 
 const updateSongName = async (req, res) => {
-  const { newName, oldName, artist } = req.body;
+  const { newName, oldName, artist, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET nombre = $1 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
+  UPDATE canciones SET nombre = $1, modifier = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $2 AND a.nombre = $3);`,
-  [newName, oldName, artist]);
+  [newName, oldName, artist, modifier]);
 
   res.status(200).json(response.rows);
 };
@@ -108,12 +108,10 @@ const updateSongLink = async (req, res) => {
 };
 
 const deleteSong = async (req, res) => {
-  const { cancion, artista } = req.body;
+  const { modifier, cancion } = req.body;
   const response = await pool.query(`
-  DELETE FROM canciones WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
-    INNER JOIN artista a ON c.id_artista = a.id_artista 
-    WHERE c.nombre = $1 AND a.nombre = $2)`,
-  [cancion, artista]);
+  SELECT delete_song($1.$2)`,
+  [modifier, cancion]);
 
   res.status(200).json(response.rows);
 };

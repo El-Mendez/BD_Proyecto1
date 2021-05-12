@@ -26,7 +26,7 @@ GROUP BY a2.nombre, year`,
 const getSpecificAlbum = async (req, res) => {
   const { album } = req.body;
   const response = await pool.query(`
-  SELECT DISTINCT a2.nombre AS artista, a.nombre AS albumes, count(*) as quantity
+  SELECT DISTINCT a2.nombre as artista, a.nombre as albumes, a.activado as estado, count(*) as quantity
     FROM albumes a
       INNER JOIN cancion_album ca on a.id_album = ca.id_album
       INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
@@ -38,14 +38,14 @@ const getSpecificAlbum = async (req, res) => {
 };
 
 const updateAlbumName = async (req, res) => {
-  const { oldName, newName, artist } = req.body;
+  const { oldName, newName, artist, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE albumes SET nombre = $1 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
+  UPDATE albumes SET nombre = $1, modifier = $4 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
     INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
     INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
     INNER JOIN artista a ON a.id_artista = c.id_artista
     WHERE a2.nombre = $2 AND a.nombre = $3);`,
-  [newName, oldName, artist]);
+  [newName, oldName, artist, modifier]);
 
   res.status(200).json(response.rows);
 };
@@ -64,16 +64,15 @@ const updateAlbumDate = async (req, res) => {
 };
 
 const deleteAlbum = async (req, res) => {
-  const { album, artista } = req.body;
+  const { modifier, album } = req.body;
   const response = await pool.query(`
-  DELETE FROM albumes WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
-    INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
-    INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
-    INNER JOIN artista a ON a.id_artista = c.id_artista
-    WHERE a2.nombre = $1 AND a.nombre = $2);`,
-  [album, artista]);
-
-  res.status(200).json(response.rows);
+    select * from delete_album($1,$2)`, [modifier, album])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
 };
 
 const addAlbum = async (req, res) => {
@@ -94,6 +93,19 @@ const addSongAlbum = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const deactivateAlbum = async (req, res) => {
+  const { modifier, album } = req.body;
+  const response = await pool.query(`
+    select * from deactivate_album($1,$2)  
+  `, [modifier, album])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
 module.exports = {
   getAlbums,
   getAlbumByArtist,
@@ -103,4 +115,5 @@ module.exports = {
   deleteAlbum,
   addAlbum,
   addSongAlbum,
+  deactivateAlbum,
 };

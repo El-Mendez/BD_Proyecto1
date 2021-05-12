@@ -72,7 +72,7 @@ export default function AlbumsEdit(){
                       <EditingItem
                         key={index}
                         index={index + 1}
-                        title={album.nombre}
+                        title={album.albumes}
                         details={album.artista}
                         info={'álbum'}
                         icon={<I_menu/>}

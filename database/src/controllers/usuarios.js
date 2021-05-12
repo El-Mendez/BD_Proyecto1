@@ -33,13 +33,16 @@ const logIn = async (req, res) => {
 };
 
 const updateToArtist = async (req, res) => {
-  const { username } = req.body;
+  const { username, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE usuarios SET id_tipoUsuario = 4 WHERE username = $1;
-          `,
-  [username]);
-
-  res.status(200).json(response.rows);
+  SELECT upgrade_artist($1,$2);`,
+  [username, modifier])
+    .then(() => {
+    res.status(200).json(response.rows);
+  })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
 };
 
 const updateData = async (req, res) => {
@@ -107,6 +110,57 @@ const updateToPremium = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const getSpecificUser = async (req, res) => {
+  const { nombre } = req.body;
+  const response = await pool.query(`
+    SELECT concat(nombres, ' ' ,apellidos) as nombre, username, tu.descripcion as tipo, activo as estado
+    FROM usuarios
+    INNER JOIN tipo_usuario tu on tu.id_tipousuario = usuarios.id_tipousuario
+    WHERE username ILIKE $1;`, [nombre]);
+  res.status(200).json(response.rows);
+};
+
+const deactivateUser = async (req, res) => {
+  const { username, modifier } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;`,
+    [username, modifier])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
+const deleteSubscription = async (req, res) => {
+  const { username, modifier } = req.body;
+  const response = await pool.query(`
+    UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;`,
+    [username, modifier])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
+const monitorProfile = async (req, res) => {
+  const { username, monitor, modifier } = req.body;
+  const response = await pool.query(`
+  UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modifier = $3 WHERE username = $1`,
+    [username, monitor, modifier])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
+
+
 module.exports = {
   createUser,
   logIn,
@@ -117,4 +171,8 @@ module.exports = {
   updateData,
   addSubscription,
   updateToPremium,
+  getSpecificUser,
+  deactivateUser,
+  deleteSubscription,
+  monitorProfile,
 };

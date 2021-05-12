@@ -12,6 +12,10 @@ const {
   updateData,
   addSubscription,
   updateToPremium,
+  getSpecificUser,
+  deactivateUser,
+  deleteSubscription,
+  monitorProfile,
 } = require('../controllers/usuarios');
 // Queries songs
 const {
@@ -34,6 +38,7 @@ const {
   updateArtistName,
   deleteArtist,
   revenueArtist,
+  deactivateArtist,
 } = require('../controllers/artist');
 // Queries albums
 const {
@@ -45,6 +50,7 @@ const {
   deleteAlbum,
   addAlbum,
   addSongAlbum,
+  deactivateAlbum,
 } = require('../controllers/albums');
 // Queries genres
 const {
@@ -98,12 +104,18 @@ router.post('/getUserDescription', getUserDescription);
 router.post('/getUserPlaylist', getUserPlaylist);
 router.post('/updateData', updateData);
 router.post('/addSubscription', addSubscription);
+router.post('/getSpecificUser', getSpecificUser);
+router.post('/deactivateUser', deactivateUser);
+router.post('/deleteSubscription', deleteSubscription);
+router.post('/monitorProfile', monitorProfile);
+
 // --------------------Queries artist--------------------------
 router.get('/artists', getArtists);
 router.post('/SpecificArtist', getSpecificArtist);
 router.post('/updateArtistName', updateArtistName);
 router.post('/deleteArtist', deleteArtist);
 router.post('/revenueArtist', revenueArtist);
+router.post('/deactivateArtist', deactivateArtist);
 // --------------------Queries genres--------------------------
 router.get('/genres', getGenres);
 router.post('/getSpecificGenre', getSpecificGenre);
@@ -116,6 +128,7 @@ router.post('/changeAlbumDate', updateAlbumDate);
 router.post('/deleteAlbum', deleteAlbum);
 router.post('/addAlbum', addAlbum);
 router.post('/addSongAlbum', addSongAlbum);
+router.post('/deactivateAlbum', deactivateAlbum);
 // --------------------Queries songs--------------------------
 router.get('/songs', getSongs);
 router.post('/songByArtist', getSongByArtist);

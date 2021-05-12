@@ -74,7 +74,7 @@ export default function UsersEdit(){
                       <EditUserItem
                         key={index}
                         index={index + 1}
-                        title={user.nombres + user.apellidos}
+                        title={user.nombre}
                         info={user.username}
                         usertype={user.tipo}
                         icon={<I_menu/>}

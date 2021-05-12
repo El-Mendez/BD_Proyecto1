@@ -28,12 +28,16 @@ const updateArtistName = async (req, res) => {
 };
 
 const deleteArtist = async (req, res) => {
-  const { nombre } = req.body;
+  const { modifier, nombre } = req.body;
   const response = await pool.query(`
-  DELETE FROM artista WHERE nombre = $1;`,
-  [nombre]);
-
-  res.status(200).json(response.rows);
+  SELECT delete_artist($1, $2)`,
+  [modifier, nombre])
+  .then(() => {
+    res.status(200).json(response.rows);
+  })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
 };
 
 const revenueArtist = async (req, res) => {
@@ -44,10 +48,24 @@ const revenueArtist = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const deactivateArtist = async (req, res) => {
+  const { modifier, nombre } = req.body;
+  const response = await pool.query(`
+  SELECT deactivate_artist($1, $2)`,
+    [modifier, nombre])
+    .then(() => {
+      res.status(200).json(response.rows);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Bad request' });
+    });
+};
+
 module.exports = {
   getArtists,
   getSpecificArtist,
   updateArtistName,
   deleteArtist,
   revenueArtist,
+  deactivateArtist,
 };
