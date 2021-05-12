@@ -91,9 +91,15 @@ const updateSongName = async (req, res) => {
   UPDATE canciones SET nombre = $1, modificador = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
     WHERE c.nombre = $2 AND a.nombre = $3);`,
-  [newName, oldName, artist, modifier]);
-
-  res.status(200).json(response.rows);
+  [newName, oldName, artist, modifier]).then(() => {
+    res.status(201).json({
+      status: 'correct',
+    });
+  }).catch(() => {
+    res.status(500).json({
+      error: 'Could not update the name.',
+    });
+  });
 };
 
 const updateSongLink = async (req, res) => {

@@ -124,7 +124,7 @@ const deactivateUser = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;`,
-    [username, identifier])
+    [identifier, modifier])
     .then(() => {
       res.status(200).json(response.rows);
     })
@@ -137,7 +137,7 @@ const deleteSubscription = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
     UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;`,
-    [username, identifier])
+    [identifier, modifier])
     .then(() => {
       res.status(200).json(response.rows);
     })
