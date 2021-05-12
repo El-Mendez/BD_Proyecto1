@@ -163,15 +163,29 @@ const addMonitor = async (req, res) => {
   const { monitor } = req.body;
   const response = await pool.query(`
   INSERT INTO monitores (nombre) VALUES ($1);`,
-    [monitor])
+    [monitor]);
+  res.status(200).json(response.rows);
 };
 
 const monitorTask = async (req, res) => {
   const { monitor, tarea } = req.body;
   const response = await pool.query(`
   SELECT tareas_monitor ($1, $2);`,
-    [monitor, tarea])
+    [monitor, tarea]);
+  res.status(200).json(response.rows);
 };
+
+const getSpecificTaskMonitor = async (req, res) => {
+  const { monitor } = req.body;
+  const response = await pool.query(`
+  SELECT m.nombre, mt.id_tarea FROM monitor_tarea mt 
+	INNER JOIN monitores m ON mt.id_monitor = m.id_monitor 
+	WHERE m.nombre = $1;`,
+    [monitor, tarea]);
+  res.status(200).json(response.rows);
+};
+
+
 
 
 
@@ -191,4 +205,5 @@ module.exports = {
   monitorProfile,
   monitorTask,
   addMonitor,
+  getSpecificTaskMonitor,
 };
