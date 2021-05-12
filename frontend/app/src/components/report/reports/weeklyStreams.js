@@ -2,23 +2,22 @@ import React from 'react';
 import NewReportsItem from '../../utils/itemComponents/newReportsitem';
 import RangeDate from './rangeDate';
 
-export default function WeeklyStreams(props){
+export default function WeeklyStreams(){
 
   const [modalShow, setModalShow] = React.useState(false);
 
   const [wStreams, setWStreams] = React.useState({
-    date: '',
+    start: '',
+    end: '',
     streams: 0,
   });
 
-  const updateData = (data, stream) =>{
-    console.log('entras?')
+  const updateData = (start, end, stream) =>{
     setWStreams({
-      date: data,
+      start: start,
+      end: end,
       streams: stream,
     })
-    console.log(wStreams.date);
-    console.log(wStreams.streams);
   };
 
   return(
@@ -31,11 +30,12 @@ export default function WeeklyStreams(props){
         <RangeDate
           show={modalShow}
           onHide={() => setModalShow(false)}
-          updateData = {(data, stream) => updateData(data, stream)}
+          updateData = {(start, end, stream) => updateData(start, end, stream)}
         />
       </div>
         <NewReportsItem
-        date={wStreams.date}
+        start={wStreams.start}
+        end={wStreams.end}
         streams={wStreams.streams}
         />
     </section>

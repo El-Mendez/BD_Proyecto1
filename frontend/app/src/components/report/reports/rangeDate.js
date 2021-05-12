@@ -47,12 +47,14 @@ export default function RangeDate(props) {
     if(reportDate !== ''){
       generateReport();
       setTimeout(()=>{
-        console.log(result);
-        props.updateData(reportDate.toString(), result);
-        props.updateData(reportDate.toString(), result);
-      },1000)
+        var end = new Date();
+        end.setDate(new Date(reportDate).getDate() + 7);
+        props.updateData(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-" + end.getDate())) ,result);
+        props.updateData(reportDate.toString(), (reportDate.setDate(+7)) , result);
+        props.onHide();
+      },300)
     }else{
-      alert('Indica un nombre para tu playlist')
+      alert('Indica la fecha de inicio para el reporte')
     }
   }
 
@@ -75,7 +77,7 @@ export default function RangeDate(props) {
                  name="name"
                  onChange={handleInputChange}
           />
-          <label className={'label'}>Fecha de inicio</label>
+          <label className={'label'}>Reporte desde</label>
         </div>
       </Modal.Body>
       <Modal.Footer>
