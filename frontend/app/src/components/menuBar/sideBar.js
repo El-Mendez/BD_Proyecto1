@@ -116,6 +116,17 @@ export default function sideBar(){
 
                             </MenuItem> : ''
                         }
+                        {
+                            admin? <MenuItem>
+                                <Link to={`${url}/bitacora`}>
+                                    <p className={'sidebar-menuItem'}>
+                                        <span className={'mr-3'}><I_report/></span>
+                                        Bitacora
+                                    </p>
+                                </Link>
+
+                            </MenuItem> : ''
+                        }
                     </Menu>
 
                 </SidebarContent>

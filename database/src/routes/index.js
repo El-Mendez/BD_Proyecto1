@@ -76,6 +76,14 @@ const {
   topArtistSongs,
   modifyAlbumSong,
 } = require('../controllers/reports');
+// Queries bitacora
+const {
+  getChangesUsers,
+  getChangesAlbumes,
+  getChangesSongs,
+  getChangesArtist,
+  getChangesPlaylist,
+} = require('../controllers/bitacora');
 // Queries para el stream
 const {
   streamSong,
@@ -129,6 +137,12 @@ router.post('/getSpecificPlaylist', getSpecificPlaylist);
 router.post('/addPlaylistSong', addPlaylistSong);
 router.post('/deletePlaylistSong', deletePlaylistSong);
 router.post('/playlistSongs', playlistSongs);
+// --------------------Queries bitacora--------------------------
+router.get('/getChangesUsers', getChangesUsers);
+router.get('/getChangesAlbumes', getChangesAlbumes);
+router.get('/getChangesSongs', getChangesSongs);
+router.get('/getChangesArtist', getChangesArtist);
+router.get('/getChangesPlaylist', getChangesPlaylist);
 // --------------------Queries reports--------------------------
 router.get('/reports/weeklyAlbums', weeklyAlbums);
 router.get('/reports/growingArtists', growingArtist);

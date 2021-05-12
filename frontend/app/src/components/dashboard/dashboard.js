@@ -17,7 +17,7 @@ import Library from '../playlist/library';
 import AlbumSongs from '../showSongs/albumSongs';
 import GenreSongs from '../showSongs/genreSongs';
 import Editing from '../editing/editing';
-
+import Bitacora from '../bitacora/bitacora';
 
 export default function dashboard() {
   let { user } = useParams();
@@ -105,6 +105,9 @@ export default function dashboard() {
               </Route>
               <Route path={`${path}/search`}>
                 <Search/>
+              </Route>
+              <Route path={`${path}/bitacora`}>
+                <Bitacora/>
               </Route>
               <Route exact paht={{path}} children={
                 <HomeView
