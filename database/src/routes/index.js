@@ -33,6 +33,7 @@ const {
   getSpecificArtist,
   updateArtistName,
   deleteArtist,
+  revenueArtist,
 } = require('../controllers/artist');
 // Queries albums
 const {
@@ -94,6 +95,7 @@ router.get('/artists', getArtists);
 router.post('/SpecificArtist', getSpecificArtist);
 router.post('/updateArtistName', updateArtistName);
 router.post('/deleteArtist', deleteArtist);
+router.post('/revenueArtist', revenueArtist);
 // --------------------Queries genres--------------------------
 router.get('/genres', getGenres);
 router.post('/getSpecificGenre', getSpecificGenre);

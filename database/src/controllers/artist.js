@@ -36,9 +36,18 @@ const deleteArtist = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const revenueArtist = async (req, res) => {
+  const { nombre } = req.body;
+  const response = await pool.query(`
+  SELECT * FROM calculate_revenue($1);`,
+  [nombre]);
+  res.status(200).json(response.rows);
+};
+
 module.exports = {
   getArtists,
   getSpecificArtist,
   updateArtistName,
   deleteArtist,
+  revenueArtist,
 };

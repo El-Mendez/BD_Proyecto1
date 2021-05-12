@@ -372,6 +372,7 @@ $$
         INNER JOIN artista a on a.id_artista = c.id_artista
         WHERE date_part('month', current_date) = date_part('month', s.fecha)
            AND date_part('year', current_date) = date_part('year', s.fecha)
+           AND a.nombre = artista
         GROUP BY c.id_artista, a.nombre
 $$ LANGUAGE 'sql';
 
