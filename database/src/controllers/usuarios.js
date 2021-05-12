@@ -178,6 +178,13 @@ const getSpecificTaskMonitor = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const getMonitors = async (req, res) => {
+  const response = await pool.query(`
+    SELECT nombre FROM monitores;`);
+
+  res.status(200).json(response.rows);
+};
+
 
 module.exports = {
   createUser,
@@ -196,4 +203,5 @@ module.exports = {
   monitorTask,
   addMonitor,
   getSpecificTaskMonitor,
+  getMonitors,
 };

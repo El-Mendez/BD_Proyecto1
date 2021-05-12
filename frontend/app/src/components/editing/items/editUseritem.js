@@ -1,14 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ConfirmModal from '../../utils/confirmModal';
 import { BsFillTrashFill as ElIcon, BsXCircleFill as DesIcon} from 'react-icons/bs';
 import MonitorModal from '../modals/monitorModal';
+import Axios from 'axios';
 
 export default function EditUserItem(props){
   const data = props;
 
+  const get_monitors = 'http://3.135.234.254:3000/getMonitors';
+
   const [modalShow, setModalShow] = React.useState(false);
   const [modal1Show, setModal1Show] = React.useState(false);
   const [monitorShow, setMonitorShow] = React.useState(false);
+  const [monitors, setMonitors] = React.useState([]);
+
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
+        const { response } = await Axios.get(get_monitors);
+        console.log(response.data)
+        setMonitors(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  });
 
   return(
     <div className="row-title-grid pSong-grid text-secondary mt-2">
@@ -74,6 +91,7 @@ export default function EditUserItem(props){
         onHide={() => setMonitorShow(false)}
         header = {"Asociar perfil de monitoreo"}
         option = "Asociar perfil"
+        monitors = {monitors}
       />
     </div>
   );

@@ -47,7 +47,6 @@ export default function sideBar(){
                     username: user
                 })
                 id_monitor = data[0].id_monitor;
-                console.log(id_monitor)
                 if (data[0].descripcion === 'Admin'){
                     setAdmin(true);
                     setPremium (true);
@@ -60,51 +59,47 @@ export default function sideBar(){
 
         if(id_monitor !== null){
             setMonitor(true);
-            console.log(monitor)
                 try{
                     const { data } = await Axios.post(get_tasks,
                       {
                           id_monitor: id_monitor
                       })
-                    console.log(data.some(item => item.id_tarea === 2));
-                    console.log(data);
                     if(data.some(item => item.id_tarea === 1)){
                         setTasks({
                             ...tasks,
                             first: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 2)){
-                        console.log('help')
+                    }if(data.some(item => item.id_tarea === 2)){
                         setTasks({
                             ...tasks,
                             second: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 3)){
+                    }if(data.some(item => item.id_tarea === 3)){
                         setTasks({
                             ...tasks,
                             third: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 4)){
+                    }if(data.some(item => item.id_tarea === 4)){
                         setTasks({
                             ...tasks,
                             fourth: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 5)){
+                    }if(data.some(item => item.id_tarea === 5)){
                         setTasks({
                             ...tasks,
                             fifth: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 6)){
+                    }if(data.some(item => item.id_tarea === 6)){
                         setTasks({
                             ...tasks,
                             sixth: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 7)){
+                    }if(data.some(item => item.id_tarea === 7)){
                         setTasks({
                             ...tasks,
                             seventh: true,
                         })
-                    }else if(data.some(item => item.id_tarea === 8)){
+                    }if(data.some(item => item.id_tarea === 8)){
                         setTasks({
                             ...tasks,
                             eighth: true,
@@ -119,7 +114,7 @@ export default function sideBar(){
         fetchData();
     })
 
-    
+
         return(
             <ProSidebar>
                 <SidebarHeader className={'d-flex justify-content-center'}>

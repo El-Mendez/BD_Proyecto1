@@ -6,23 +6,19 @@ import Axios from 'axios';
 
 
 export default function MonitorModal(props) {
-  const data = props;
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Pasar por props
-  const get_monitors = 'http://3.135.234.254:3000/createPlaylist';
+  const info = props;
+  const post = 'http://3.135.234.254:3000/monitorProfile'
   let { user } = useParams;
   let monitorUsuario = 'Mr';
-
-  //State variables
-  const [monitors, setMonitors] = React.useState([]);
 
   function addMonitor(){
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(post,
           {
-            identifier: data.identifier,
-            modifier: user,
+            identifier: info.identifier,
             monitor: monitorUsuario,
+            modifier: user,
           }
         );
         alert('Se ha asociado el perfil correctamente');
@@ -34,28 +30,8 @@ export default function MonitorModal(props) {
   };
 
   const handleEstado = (e) =>{
-    console.log(e.target.value);
     monitorUsuario = e.target.value;
   }
-
-  useEffect(()=>{
-      const fetchData = async () => {
-        try {
-          const { data } = await Axios.post(get_monitors);
-          setMonitors(data);
-        } catch (error) {
-          console.log(error);
-        }
-      };
-      fetchData();
-  });
-
-
-  const handleClick = ()=>{
-    addMonitor();
-    data.show = false;
-  }
-
 
   return (
     <Modal
@@ -66,28 +42,24 @@ export default function MonitorModal(props) {
       <Modal.Header className="bg-purple-dark">
         <Modal.Title id="contained-modal-title-vcenter">
           <p className="modalHeader my-2">
-            {data.header}
+            {info.header}
           </p>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <select onChange={handleEstado}>
           {
-            monitors.map((monitor) => {
+            info.monitors.map((monitor) => {
               return(
                 <option value={monitor.nombre}>{monitor.nombre}</option>
               );
             })
           }
-          <option value="Mr">Mr</option>
-          <option value="Mrs">Mrs</option>
-          <option value="Miss">Miss</option>
-          <option value="Dr">Dr</option>
         </select>
       </Modal.Body>
       <Modal.Footer className="mt-2">
-        <Button className={"border-btn mb-2"} onClick={data.onHide}>Cancelar</Button>
-        <Button className={'purple-btn mb-2'} onClick={handleClick}>{data.option}</Button>
+        <Button className={"border-btn mb-2"} onClick={info.onHide}>Cancelar</Button>
+        <Button className={'purple-btn mb-2'} onClick={()=>{addMonitor(); info.onHide()}}>{info.option}</Button>
       </Modal.Footer>
     </Modal>
   );
