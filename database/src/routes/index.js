@@ -18,6 +18,7 @@ const {
   monitorProfile,
   monitorTask,
   addMonitor,
+  getSpecificTaskMonitor,
 } = require('../controllers/usuarios');
 // Queries songs
 const {
@@ -113,6 +114,7 @@ router.post('/deleteSubscription', deleteSubscription);
 router.post('/monitorProfile', monitorProfile);
 router.post('/monitorTask', monitorTask);
 router.post('/addMonitor', addMonitor);
+router.post('/getSpecificTaskMonitor', getSpecificTaskMonitor);
 // --------------------Queries artist--------------------------
 router.get('/artists', getArtists);
 router.post('/SpecificArtist', getSpecificArtist);

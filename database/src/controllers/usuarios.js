@@ -175,6 +175,18 @@ const monitorTask = async (req, res) => {
   res.status(200).json(response.rows);
 };
 
+const getSpecificTaskMonitor = async (req, res) => {
+  const { monitor } = req.body;
+  const response = await pool.query(`
+  SELECT m.nombre, mt.id_tarea FROM monitor_tarea mt 
+	INNER JOIN monitores m ON mt.id_monitor = m.id_monitor 
+	WHERE m.nombre = $1;`,
+    [monitor, tarea]);
+  res.status(200).json(response.rows);
+};
+
+
+
 
 
 module.exports = {
@@ -193,4 +205,5 @@ module.exports = {
   monitorProfile,
   monitorTask,
   addMonitor,
+  getSpecificTaskMonitor,
 };

@@ -13,6 +13,7 @@ import EditAlbum from './editarAlbum.js'
 import EditArtist from './editarArtista'
 import AddArtist from './newSong'
 import EditUser from './editarUsuarios'
+import AddMonitor from './monitor/añadirMonitor'
 import Profit from './profit/profit'
 
 import './user.scss';
@@ -48,6 +49,11 @@ export default function userDescriptor (props) {
                 </Route>
                 <Route path={`${path}/profit`}>
                     <Profit
+                    username = {data.username}
+                    />
+                </Route>
+                <Route path={`${path}/añadir_monitor`}>
+                    <AddMonitor
                     username = {data.username}
                     />
                 </Route>

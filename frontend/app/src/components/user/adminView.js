@@ -10,43 +10,47 @@ import './user.scss';
 export default function userView () {
     let {url} = useRouteMatch();
     let { user } = useParams();
-
-        return (
-            <ProSidebar>
-                <SidebarHeader className={'d-flex justify-content-center'}>
-                    <img src={logo} className = 'usuario'></img>
-                </SidebarHeader>
-                <SidebarContent>
-                    <Menu iconShape="circle">
-                        <MenuItem icon={<I_info />}>
-                            <Link to={`${url}`}></Link>
-                                Datos generales
+    return (
+        <ProSidebar>
+            <SidebarHeader className={'d-flex justify-content-center'}>
+                <img src={logo} className = 'usuario'></img>
+            </SidebarHeader>
+            <SidebarContent>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<I_info />}>
+                        <Link to={`${url}`}></Link>
+                            Datos generales
+                    </MenuItem>
+                    <SubMenu title="Edicion de datos" icon = {<I_edition />}>
+                        <MenuItem>
+                            <Link to={`${url}/editar_cancion`}></Link>
+                                Editar canción
                         </MenuItem>
-                        <SubMenu title="Edicion de datos" icon = {<I_edition />}>
-                            <MenuItem>
-                                <Link to={`${url}/editar_cancion`}></Link>
-                                    Editar canción
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_album`}></Link>
-                                    Editar album
-                            </MenuItem>
-                            <MenuItem>
-                                <Link to={`${url}/editar_artista`}></Link>
-                                    Editar artista
-                            </MenuItem>
-                        </SubMenu>
-                    </Menu>
-                </SidebarContent>
-                <SidebarFooter>
-                    <Menu iconShape="circle">
-                        <MenuItem icon={<I_house />}>
-                            <Link to={`/home/${user}`}>
-                                Home
-                            </Link>
+                        <MenuItem>
+                            <Link to={`${url}/editar_album`}></Link>
+                                Editar album
                         </MenuItem>
-                    </Menu>
-                </SidebarFooter>
-            </ProSidebar>
-            )
-        }
+                        <MenuItem>
+                            <Link to={`${url}/editar_artista`}></Link>
+                                Editar artista
+                        </MenuItem>
+                        <MenuItem>
+                            <Link to={`${url}/añadir_monitor`}></Link>
+                                Añadir monitor
+                        </MenuItem>
+                    </SubMenu>
+                </Menu>
+            </SidebarContent>
+            <SidebarFooter>
+                <Menu iconShape="circle">
+                    <MenuItem icon={<I_house />}>
+                        <Link to={`/home/${user}`}>
+                            Home
+                        </Link>
+                    </MenuItem>
+                </Menu>
+            </SidebarFooter>
+        </ProSidebar>
+    )
+}
+    
