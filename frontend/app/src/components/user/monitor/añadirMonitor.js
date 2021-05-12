@@ -20,7 +20,7 @@ export default function añadirMonitor (){
             <div className="asd">
                 <div className="row editArtist">
                 <p>Añadir un nuevo monitor en la base de datos</p>
-                <Button variant="dark" onClick={() => setModalAddMonitor(true)}>
+                <Button onClick={() => setModalAddMonitor(true)}>
                     Añadir nuevo monitor
                 </Button>
                 <AddMonitor 
@@ -30,7 +30,7 @@ export default function añadirMonitor (){
                 </div>
                 <div className="row editArtist">
                 <p>Asignarle tareas a un monitor</p>
-                <Button variant="dark" onClick={() => setModalAddTask(true)}>
+                <Button onClick={() => setModalAddTask(true)}>
                     Asignar una tarea a un monitor
                 </Button>
                 <AddTask 

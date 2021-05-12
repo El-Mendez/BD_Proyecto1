@@ -19,7 +19,7 @@ export default function editSong (){
             <div className="asd">
                 <div className="row editArtist">
                 <p>Activa o desactiva una canción de la base de datos</p>
-                <Button variant="dark" onClick={() => setModalState(true)}>
+                <Button onClick={() => setModalState(true)}>
                     Activar/Desactivar canción
                 </Button>
                 <StateSong 
@@ -29,7 +29,7 @@ export default function editSong (){
                 </div>
                 <div className="row editArtist">
                 <p>Cambiar el link de una canción de la base de datos</p>
-                <Button variant="dark" onClick={() => setModalLink(true)}>
+                <Button onClick={() => setModalLink(true)}>
                     Cambiar Link de una canción
                 </Button>
                 <LinkSong 

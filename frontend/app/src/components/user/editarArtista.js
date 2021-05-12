@@ -17,7 +17,7 @@ export default function editAlbum (){
             <div className="asd">
                 <div className="row editArtist">
                 <p>Cambiale el nombre a un artista de la base de datos</p>
-                <Button variant="dark"  onClick={() => setModalShowName(true)}>
+                <Button onClick={() => setModalShowName(true)}>
                     Cambiar nombre de un artista
                     </Button>
                     <EditArtist 
@@ -27,7 +27,7 @@ export default function editAlbum (){
                 </div>
                 <div className="row editArtist">
                 <p>Desactivar Artista (sus canciones y albumes se desactivaran)</p>
-                <Button variant="dark"  onClick={() => setModalState(true)}>Activar/Desactivar artista</Button>
+                <Button onClick={() => setModalState(true)}>Activar/Desactivar artista</Button>
                     <StateArtist 
                             show={modalState}
                             onHide={() => setModalState(false)}
