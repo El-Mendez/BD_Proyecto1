@@ -24,7 +24,7 @@ GROUP BY a2.nombre, year`,
 };
 
 const getSpecificAlbum = async (req, res) => {
-  const { album } = req.body;
+  const { nombre } = req.body;
   const response = await pool.query(`
   SELECT DISTINCT a2.nombre as artista, a.nombre as album, a.activado as estado, count(*) as quantity
     FROM albumes a
@@ -32,12 +32,9 @@ const getSpecificAlbum = async (req, res) => {
       INNER JOIN canciones c ON c.id_cancion = ca.id_canciones
       INNER JOIN artista a2 ON c.id_artista = a2.id_artista
     WHERE a.nombre ILIKE $1
-  GROUP BY a2.nombre, a.nombre, a.activado;`, [album])
-    .then(() => {
-      res.status(200).json(response.rows);
-  }).catch(() => {
-    res.status(500).json({ error: 'Bad request' });
-  });
+  GROUP BY a2.nombre, a.nombre, a.activado;`, [nombre]);
+
+  res.status(200).json(response.rows);
 };
 
 const updateAlbumName = async (req, res) => {
