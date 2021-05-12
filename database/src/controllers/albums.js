@@ -35,13 +35,9 @@ const getSpecificAlbum = async (req, res) => {
   GROUP BY a2.nombre, a.nombre, a.activado;`,
   [album])
     .then(() => {
-    res.status(201).json({
-      status: 'correct',
-    });
+      res.status(200).json(response.rows);
   }).catch(() => {
-    res.status(500).json({
-      error: 'Bad request',
-    });
+    res.status(500).json({ error: 'Bad request' });
   });
 };
 
