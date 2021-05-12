@@ -4,6 +4,8 @@ ALTER TABLE canciones ADD COLUMN modificador VARCHAR(150);
 ALTER TABLE artista ADD COLUMN modificador VARCHAR(150);
 ALTER TABLE albumes ADD COLUMN modificador VARCHAR(150);
 ALTER TABLE manager ADD COLUMN modificador VARCHAR(150);
+ALTER TABLE playlist ADD COLUMN modificador VARCHAR(150);
+ALTER TABLE playlist_canciones ADD COLUMN modificador VARCHAR(150);
 
 CREATE TABLE bitacora
 (
@@ -30,6 +32,9 @@ BEGIN
         IF (tg_table_name = 'usuarios') THEN
             INSERT INTO bitacora
             VALUES (now()::timestamp(0), OLD.modificador, TG_OP, TG_TABLE_NAME, OLD.username);
+        ELSIF (tg_table_name = 'playlist_canciones') THEN
+            INSERT INTO bitacora
+            VALUES (now()::timestamp(0), OLD.modificador, TG_OP, TG_TABLE_NAME, OLD.id_playlist);
         ELSE
             INSERT INTO bitacora
             VALUES (now()::timestamp(0), OLD.modificador, TG_OP, TG_TABLE_NAME, OLD.nombre);
@@ -38,6 +43,9 @@ BEGIN
         IF (tg_table_name = 'usuarios') THEN
             INSERT INTO bitacora
             VALUES (now()::timestamp(0), NEW.modificador, TG_OP, TG_TABLE_NAME, NEW.username);
+        ELSIF (tg_table_name = 'playlist_canciones') THEN
+            INSERT INTO bitacora
+            VALUES (now()::timestamp(0), NEW.modificador, TG_OP, TG_TABLE_NAME, NEW.id_playlist);
         ELSE
             INSERT INTO bitacora
             VALUES (now()::timestamp(0), NEW.modificador, TG_OP, TG_TABLE_NAME, NEW.nombre);
@@ -79,6 +87,20 @@ AFTER INSERT OR UPDATE OR DELETE
 ON manager
 FOR EACH ROW
 EXECUTE PROCEDURE record();
+-- PLAYLIST
+CREATE TRIGGER save_record
+AFTER INSERT
+ON playlist
+FOR EACH ROW
+EXECUTE PROCEDURE record();
+-- ACUTALIZACIÓN DE PLAYLIST → SE HACE EN TABLA CANCIÓN_PLAYLIST
+CREATE TRIGGER save_record
+AFTER INSERT OR UPDATE OR DELETE
+ON playlist_canciones
+FOR EACH ROW
+EXECUTE PROCEDURE record();
+
+
 
 -- ACTUALIZACIÓN E INSERCIÓN DE DATOS
 -- USUARIOS
@@ -101,7 +123,7 @@ UPDATE canciones SET estado = false, modificador = 'Alguien' WHERE nombre = 'Can
 -- Modificar nombre
 UPDATE albumes SET nombre = 'Nuevo nombre', modificador = 'alguien' WHERE nombre = 'old name';
 -- Desactivar álbum → desactivación de canciones de ese álbum
-
+-- Parametros: 1 → modifier, 2 → album
 CREATE OR REPLACE function deactivate_album(varchar, varchar)
 RETURNS VOID AS
     $BODY$
@@ -119,7 +141,7 @@ RETURNS VOID AS
         FOREACH song in array songs LOOP
            UPDATE canciones SET estado = FALSE, modificador = $1 WHERE id_cancion = song;
         END LOOP;
-       UPDATE albumes SET activado = false, modificador = $1 WHERE nombre = $2;
+       UPDATE albumes SET activado = false, modificador = $1 WHERE id_album = album_id;
     END;
     $BODY$
 LANGUAGE 'plpgsql';
@@ -171,7 +193,7 @@ RETURNS VOID AS
     END
     $BODY$
 LANGUAGE 'plpgsql';
-SELECT updgrade_artist('Nombre artista', 'Modificador - username');
+SELECT updgrade_artist('hell', 'Zara12');
 
 -- MANAGER
 INSERT INTO manager VALUES ('Nombre de manager - sames as username', 'Modificador - same, porque se hace un upgrade');
@@ -214,7 +236,6 @@ LANGUAGE 'plpgsql';
 
 -- ÁLBUM
 -- Parámetros: 1 → modificador, 2 → álbum
-
 CREATE OR REPLACE function delete_album(varchar, varchar)
 RETURNS VOID AS
     $BODY$
@@ -226,7 +247,7 @@ RETURNS VOID AS
         SELECT id_album into album_id
         FROM albumes
         WHERE nombre = $2;
-        SELECT ARRAY(SELECT *
+        SELECT ARRAY(SELECT id_canciones
                     FROM cancion_album
                     WHERE id_album = album_id) INTO songs;
         FOREACH song in array songs LOOP
@@ -237,9 +258,11 @@ RETURNS VOID AS
     END;
     $BODY$
 LANGUAGE 'plpgsql';
+
+DROP FUNCTION delete_album(varchar, varchar);
+
 -- CANCIÓN
 -- Parámetros 1 → modificador, 2 → canción
-
 CREATE OR REPLACE function delete_song(varchar, varchar)
 RETURNS VOID AS
     $BODY$
@@ -255,4 +278,4 @@ RETURNS VOID AS
     $BODY$
 LANGUAGE 'plpgsql';
 
-
+SELECT delete_song('Zara12','Savoiur');
