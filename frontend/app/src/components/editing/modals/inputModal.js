@@ -1,29 +1,28 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { useRouteMatch } from 'react-router-dom';
-import history from '../history';
+import { useParams } from 'react-router-dom';
 import Axios from 'axios';
 
 
 export default function InputModal(props) {
   const data = props;
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Cambiar por la generación del reporte
-  let { url } = useRouteMatch();
+  const post = 'http://3.135.234.254:3000/createPlaylist' //Pasar por props
+  let { user } = useParams;
 
   //State variables
-  const [reportDate, setReportDate] = React.useState(new Date());
   const [filled, setFilled] = React.useState(false);
 
-  function generateReport(){
+  function updateName(){
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(post,
           {
-            date: reportDate
+            identifier: data.identifier,
+            modifier: user,
           }
         );
-        console.log("todo fine")
+        alert('Se ha actualizado el nombre correctamente');
       } catch (error) {
         console.log(error);
       }
@@ -42,16 +41,8 @@ export default function InputModal(props) {
   }
 
   const handleClick = ()=>{
-    if(playlistName !== ''){
-      generateReport();
-      setTimeout(()=>{
-        console.log(history.location);
-        history.push(`${url}/songStreams`);
-        history.go();
-      },300)
-    }else{
-      alert('Indica un nombre para tu playlist')
-    }
+      updateName();
+      data.show = false;
   }
 
 
@@ -80,7 +71,7 @@ export default function InputModal(props) {
       </Modal.Body>
       <Modal.Footer className="mt-2">
         <Button className={"border-btn mb-2"} onClick={data.onHide}>Cancelar</Button>
-        <Button className={'purple-btn mb-2'} >{data.option}</Button>
+        <Button className={'purple-btn mb-2'} onClick={handleClick}>{data.option}</Button>
       </Modal.Footer>
     </Modal>
   );

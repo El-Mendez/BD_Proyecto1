@@ -1,30 +1,30 @@
 import React from 'react';
-import test from '../../assets/badLiar.jpg'
-import ConfirmModal from '../utils/confirmModal';
+import ConfirmModal from '../../utils/confirmModal';
+import { BsFillTrashFill as ElIcon, BsXCircleFill as DesIcon} from 'react-icons/bs';
+import MonitorModal from '../modals/monitorModal';
 
-export default function EditSongsItem(props){
-  const songData = props;
+export default function EditUserItem(props){
+  const data = props;
 
   const [modalShow, setModalShow] = React.useState(false);
   const [modal1Show, setModal1Show] = React.useState(false);
+  const [monitorShow, setMonitorShow] = React.useState(false)
 
   return(
     <div className="row-title-grid pSong-grid text-secondary mt-2">
       {/* INDEX */}
       <div className={"pR_title justify-self-end"}>
-        <small>{songData.song_index}</small>
+        <small>{data.index}</small>
       </div>
-      {/* SONG INFO */}
+      {/* USER INFO */}
       <div className={"pR_title text-secondary"}>
-        <img src={test} alt="Test" width={"45px"} className={"mr-3"}/>
         <div>
-          <p className="m-0 p-0">{songData.song_t}</p>
-          <p className={"p-0"} id="song-artist">{songData.song_a}</p>
+          <p className="m-0 p-0">{data.title}</p>
         </div>
       </div>
       {/* SONG ALBUM */}
       <div className={"pR_title justify-self-star"}>
-        <small>{songData.song_album}</small>
+        <small>{data.info}</small>
       </div>
       {/* DROPDOWN MENU */}
       <div className={"pR_title justify-self-end cursor"}>
@@ -32,13 +32,13 @@ export default function EditSongsItem(props){
           <button className=" no-design" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false">
            <span className=" text-secondary ">
-                   {songData.I_options}
+                   {data.icon}
            </span>
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-            <li><button className="dropdown-item">Actualizar nombre</button></li>
-            <li><button className="dropdown-item" onClick={() => setModal1Show(true)}>Desactivar</button></li>
-            <li><a className="dropdown-item" onClick={() => setModalShow(true)}>Eliminar</a></li>
+            <li><button className="dropdown-item" onClick={() => setModalShow(true)}>Desactivar </button></li>
+            <li><button className="dropdown-item" onClick={() => setModal1Show(true)}>Eliminar suscripción </button></li>
+            <li><button className="dropdown-item" onClick={() => setMonitorShow(true)}>Asociar a un perfil de monitoreo </button></li>
           </ul>
         </div>
       </div>
@@ -47,17 +47,26 @@ export default function EditSongsItem(props){
       <ConfirmModal
         show={modalShow}
         onHide={() => setModalShow(false)}
-        header = "Desactivación de álbum"
-        details = "¿Estas seguro que deseas desactivar el álbum?"
+        header = {data.header_des}
+        details = {data.details_des}
         option = "Desactivar"
+        icon = {<DesIcon/>}
       />
       {/* Eliminar álbum */}
       <ConfirmModal
         show={modal1Show}
         onHide={() => setModal1Show(false)}
-        header = "Eliminación de álbum"
-        details = "¿Estas seguro que deseas eliminar el álbum?"
+        header = {data.header_el}
+        details ={data.details_el}
         option = "Eliminar"
+        icon = {<ElIcon/>}
+      />
+    {/* Perfil de monitoreo */}
+      <MonitorModal
+        show={monitorShow}
+        onHide={() => setMonitorShow(false)}
+        header = {"Asociar perfil de monitoreo"}
+        option = "Asociar perfil"
       />
     </div>
   );

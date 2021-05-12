@@ -1,30 +1,29 @@
 import React from 'react';
 import Axios from 'axios';
-import SongItem from './songsEdititem';
-import { BsPlus as I_add,
-  BsSearch as I_search} from 'react-icons/bs';
+import { BsSearch as I_search, BsThreeDotsVertical as I_menu
+} from 'react-icons/bs';
+import EditingItem from './items/editItem';
 
 
 export default function SongsEdit(){
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
+  const get = 'http://3.135.234.254:3000/getSpecificSong';
 
 
   const [search, setSearch] = React.useState('');
-  const [lsongs, setLsongs] = React.useState([]);
+  const [songs, setSongs] = React.useState([]);
 
 
   //Search songs
   function getSong(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get_song,
+        const { data } = await Axios.post(get,
           {
             nombre: search + '%'
           }
         );
-        console.log('just Testing')
         console.log(data)
-        setLsongs(data)
+        setSongs(data)
       } catch (error) {
         console.log(error);
       }
@@ -65,28 +64,44 @@ export default function SongsEdit(){
             </button>
           </div>
         </div>
-        {/* CANCIONES ENCONTRADAS */}
+        {/* FOUND SONGS */}
         <section className={'my-4'}>
           <div id="songs">
             {
-              lsongs.map((song) => {
-                  const index = lsongs.indexOf(song)
+              songs.map((song) => {
+                  const index = songs.indexOf(song)
                   return(
                     song.estado?
-                      <SongItem
+                      <EditingItem
                         key={index}
-                        song_index={index + 1}
-                        song_t={song.cancion}
-                        song_a={song.artista}
-                        song_album={song.album}
-                        I_options={<I_add/>}
-                      /> : ''
+                        index={index + 1}
+                        title={song.nombre}
+                        details={song.artista}
+                        info={song.album}
+                        icon={<I_menu/>}
+                        header_el={"Eliminación de canción"}
+                        details_el={"¿Estas seguro que deseas eliminar la canción?"}
+                        header_des={"Desactivación de canción"}
+                        details_des={"¿Estas seguro que deseas desactivar la canción?"}
+                      />: ''
                   );
                 }
               )
             }
           </div>
         </section>
+        <EditingItem
+          key={1}
+          index={1}
+          title={'Algo'}
+          details={"Alguien"}
+          info={"quien sabe"}
+          icon={<I_menu/>}
+          header_el={"Eliminación de canción"}
+          details_el={"¿Estas seguro que deseas eliminar la canción?"}
+          header_des={"Desactivación de canción"}
+          details_des={"¿Estas seguro que deseas desactivar la canción?"}
+        />
       </section>
     </section>
   );

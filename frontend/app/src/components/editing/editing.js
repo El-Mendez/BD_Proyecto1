@@ -5,6 +5,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import SongsEdit from './songsEdit';
 import AlbumsEdit from './albumsEdit';
 import UsersEdit from './usersEdit';
+import ArtistsEdit from './artistsEdit';
 
 
 
@@ -17,25 +18,31 @@ export default function Editing(){
         {/* Opciones de reporte */}
         <h1 className={'text-secondary'}>Edición</h1>
         <div className={'d-flex flex-wrap'}>
-          <ReportItem
-            image={albums}
-            title={'Canciones'}
-            description={'Edición de canciones'}
-            redirect={`${url}/songsEditing`}
-            click={true} />
+        <ReportItem
+          image={albums}
+          title={'Canciones'}
+          description={'Edición de canciones'}
+          redirect={`${url}/songsEditing`}
+          click={true} />
         <ReportItem
           image={albums}
           title={'Álbumes'}
           description={'Edición de álbumes'}
           redirect={`${url}/albumsEditing`}
           click={true} />
-      <ReportItem
-        image={albums}
-        title={'Usuarios'}
-        description={'Edición de usuarios y artistas'}
-        redirect={`${url}/usersEditing`}
-        click={true} />
-      </div>
+          <ReportItem
+            image={albums}
+            title={'Artistas'}
+            description={'Edición de artistas'}
+            redirect={`${url}/artistsEditing`}
+            click={true} />
+          <ReportItem
+            image={albums}
+            title={'Usuarios'}
+            description={'Edición de usuarios y artistas'}
+            redirect={`${url}/usersEditing`}
+            click={true} />
+          </div>
     </div>
       {/* Presentación de reportes */}
       <section className={'section-container home-container'}>
@@ -46,6 +53,9 @@ export default function Editing(){
             </Route>
             <Route  path={`${path}/albumsEditing`}>
               <AlbumsEdit/>
+            </Route>
+            <Route  path={`${path}/artistsEditing`}>
+              <ArtistsEdit/>
             </Route>
             <Route  path={`${path}/usersEditing`}>
               <UsersEdit/>

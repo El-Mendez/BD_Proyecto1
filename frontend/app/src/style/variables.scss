@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant');
 
+/* Dropdown menu */
+$dropdown-bg:  #323232de;
+$dropdown-link-hover-bg:  #1D1D1DF2;
+
 /* Typography */
 $font-family-base: Circular,Candara;
 $font-size-base: 1.4rem;
@@ -13,7 +17,8 @@ $secondary-light: #F4EEED94;
 $theme-colors: (
         "primary": #1D1D1DF2,
         "secondary": #ebebeb,
-        "secondary-light": #F4EEED94
+        "secondary-light": #F4EEED94,
+        "purple-dark": #3F51B5,
 );
 $facebook: #3a5897;
 $facebook-hover: #6B82B1;
@@ -21,7 +26,11 @@ $color-dark: #3F51B5;
 $color-medium: #5C6BC0;
 $color-light: #9FA8dA;
 $primary-light: #1D1D1DCC;
-$modal-content-bg: $secondary;
-$modal-content-color: $primary;
-$modal-content-border-color: $secondary;
-$modal-header-border-color: $secondary;
+
+/* Modals */
+$modal-header-padding: 8px;
+$modal-content-border-radius: 0px;
+$modal-content-border-width: 0px;
+$modal-content-bg: #ffffff;
+$modal-footer-border-width: 2px;
+$modal-sm: 400px;

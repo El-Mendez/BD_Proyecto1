@@ -1,32 +1,26 @@
 import React from 'react';
 import Axios from 'axios';
-import SongItem from '../playlist/songPlaylist';
-import { BsPlus as I_add,
-  BsSearch as I_search,
+import { BsSearch as I_search,
   BsThreeDotsVertical as I_menu} from 'react-icons/bs';
-import EditingItem from './songsEdititem';
-import 'bootstrap/dist/js/bootstrap';
+import EditingItem from './items/editItem';
 
 export default function AlbumsEdit(){
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
-
+  const get = 'http://3.135.234.254:3000/getSpecificSong';
 
   const [search, setSearch] = React.useState('');
-  const [lsongs, setLsongs] = React.useState([]);
+  const [albums, setAlbums] = React.useState([]);
 
-
-  //Search songs
-  function getSong(){
+  //Search albums
+  function getAlbums(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get_song,
+        const { data } = await Axios.post(get,
           {
             nombre: search + '%'
           }
         );
-        console.log('just Testing')
         console.log(data)
-        setLsongs(data)
+        setAlbums(data)
       } catch (error) {
         console.log(error);
       }
@@ -40,15 +34,15 @@ export default function AlbumsEdit(){
   }
   const onClick = () =>{
     if(search !== ''){
-      getSong();
+      getAlbums();
     }else{
-      alert('Ingrese el nombre de la canción para buscar')
+      alert('Ingrese el nombre del álbum a buscar');
     }
   }
 
   return(
     <section className={'overflow-auto'}>
-      {/* SEARCH SONG FOR THE PLAYLIST */}
+      {/* SEARCH ALBUM TO EDIT */}
       <section className={"search-songs"}>
         <div className={"d-inline-block"}>
           <h5 className={'text-secondary mb-3'}>Busca el álbum a editar</h5>
@@ -67,25 +61,28 @@ export default function AlbumsEdit(){
             </button>
           </div>
         </div>
-        {/* CANCIONES ENCONTRADAS */}
+        {/*  FOUND ALBUMS */}
         <section className={'my-4'}>
           <div id="songs">
             {
-              lsongs.map((song) => {
-                  const index = lsongs.indexOf(song)
+              albums.map((album) => {
+                  const index = albums.indexOf(album)
                   return(
-                    song.estado?
-                      <SongItem
+                    album.estado?
+                      <EditingItem
                         key={index}
-                        song_index={index + 1}
-                        song_t={song.cancion}
-                        song_a={song.artista}
-                        song_album={song.album}
-                        I_options={<I_add/>}
-                        option={1}
-                        playlist_id={details.id}
-                        actualizacion={() => actualizarPlaylist()}
-                      /> : ''
+                        index={index + 1}
+                        title={album.nombre}
+                        details={album.artista}
+                        info={'álbum'}
+                        icon={<I_menu/>}
+                        header_el={"Eliminación de álbum"}
+                        details_el={"¿Estas seguro que deseas eliminar el álbum?"}
+                        header_des={"Desactivación de álbum"}
+                        details_des={"¿Estas seguro que deseas desactivar el álbum?"}
+                        artist = {'false'}
+                      />
+                      : ''
                   );
                 }
               )
@@ -94,11 +91,15 @@ export default function AlbumsEdit(){
         </section>
         <EditingItem
           key={1}
-          song_index={1}
-          song_t={'Algo'}
-          song_a={"Alguien"}
-          song_album={"quien sabe"}
-          I_options={<I_menu/>}
+          index={1}
+          title={'Algo'}
+          details={"Alguien"}
+          info={'álbum'}
+          icon={<I_menu/>}
+          header_el={"Eliminación de álbum"}
+          details_el={"¿Estas seguro que deseas eliminar el álbum?"}
+          header_des={"Desactivación de álbum"}
+          details_des={"¿Estas seguro que deseas desactivar el álbum?"}
         />
       </section>
     </section>

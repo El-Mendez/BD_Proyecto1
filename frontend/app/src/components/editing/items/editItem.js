@@ -1,8 +1,8 @@
 import React from 'react';
-import test from '../../assets/badLiar.jpg'
-import ConfirmModal from '../utils/confirmModal';
+import test from '../../../assets/badLiar.jpg'
+import ConfirmModal from '../../utils/confirmModal';
 import { BsFillTrashFill as ElIcon, BsXCircleFill as DesIcon} from 'react-icons/bs';
-import InputModal from './inputModal';
+import InputModal from '../modals/inputModal';
 
 export default function EditItem(props){
   const data = props;
@@ -15,19 +15,19 @@ export default function EditItem(props){
     <div className="row-title-grid pSong-grid text-secondary mt-2">
       {/* INDEX */}
       <div className={"pR_title justify-self-end"}>
-        <small>{data.song_index}</small>
+        <small>{data.index}</small>
       </div>
       {/* SONG INFO */}
       <div className={"pR_title text-secondary"}>
-        <img src={test} alt="Test" width={"45px"} className={"mr-3"}/>
+        <img src={test} alt="Test" width={"45px"} className={"me-3"}/>
         <div>
-          <p className="m-0 p-0">{data.song_t}</p>
-          <p className={"p-0"} id="song-artist">{data.song_a}</p>
+          <p className="m-0 p-0">{data.title}</p>
+          <p className={"p-0"} id="song-artist">{data.details}</p>
         </div>
       </div>
       {/* SONG ALBUM */}
       <div className={"pR_title justify-self-star"}>
-        <small>{data.song_album}</small>
+        <small>{data.info}</small>
       </div>
       {/* DROPDOWN MENU */}
       <div className={"pR_title justify-self-end cursor"}>
@@ -35,7 +35,7 @@ export default function EditItem(props){
           <button className=" no-design" type="button" id="dropdownMenuButton1"
                   data-bs-toggle="dropdown" aria-expanded="false">
            <span className=" text-secondary ">
-                   {data.I_options}
+                   {data.icon}
            </span>
           </button>
           <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -54,6 +54,7 @@ export default function EditItem(props){
         onHide={() => setInputModal(false)}
         header = {"Actualización de nombre"}
         option = "Actualizar"
+        identifier = {data.identifier}
       />
       {/* Desactivar álbum */}
       <ConfirmModal
@@ -63,6 +64,7 @@ export default function EditItem(props){
         details = {data.details_des}
         option = "Desactivar"
         icon = {<DesIcon/>}
+        identifier = {data.identifier}
       />
       {/* Eliminar álbum */}
       <ConfirmModal
@@ -72,6 +74,7 @@ export default function EditItem(props){
         details ={data.details_el}
         option = "Eliminar"
         icon = {<ElIcon/>}
+        identifier = {data.identifier}
       />
     </div>
   );

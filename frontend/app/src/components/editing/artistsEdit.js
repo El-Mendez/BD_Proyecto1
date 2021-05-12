@@ -1,33 +1,29 @@
 import React from 'react';
 import Axios from 'axios';
-import SongItem from './editItem';
-import { BsPlus as I_add,
-  BsSearch as I_search,
+import { BsSearch as I_search,
   BsThreeDotsVertical as I_menu
 } from 'react-icons/bs';
-import EditingItem from './editItem';
+import EditingItem from './items/editItem';
 
 
 export default function ArtistsEdit(){
-  const get_song = 'http://3.135.234.254:3000/getSpecificSong';
-
+  const get = 'http://3.135.234.254:3000/getSpecificSong'; // getArtists
 
   const [search, setSearch] = React.useState('');
-  const [lsongs, setLsongs] = React.useState([]);
+  const [artists, setArtists] = React.useState([]);
 
 
-  //Search songs
-  function getSong(){
+  //Search Artists
+  function getArtists(){
     const fetchData = async () => {
       try {
-        const { data } = await Axios.post(get_song,
+        const { data } = await Axios.post(get,
           {
             nombre: search + '%'
           }
         );
-        console.log('just Testing')
         console.log(data)
-        setLsongs(data)
+        setArtists(data)
       } catch (error) {
         console.log(error);
       }
@@ -41,9 +37,9 @@ export default function ArtistsEdit(){
   }
   const onClick = () =>{
     if(search !== ''){
-      getSong();
+      getArtists();
     }else{
-      alert('Ingrese el nombre de la canción para buscar')
+      alert('Ingrese el nombre del artista a buscar');
     }
   }
 
@@ -72,17 +68,22 @@ export default function ArtistsEdit(){
         <section className={'my-4'}>
           <div id="songs">
             {
-              lsongs.map((song) => {
-                  const index = lsongs.indexOf(song)
+              artists.map((artist) => {
+                  const index = artists.indexOf(artist)
                   return(
-                    song.estado?
-                      <SongItem
+                    artist.estado?
+                      <EditingItem
                         key={index}
-                        song_index={index + 1}
-                        song_t={song.cancion}
-                        song_a={song.artista}
-                        song_album={song.album}
-                        I_options={<I_add/>}
+                        index={index + 1}
+                        title={artist.nombre}
+                        details={" "}
+                        info={'artista'}
+                        icon={<I_menu/>}
+                        header_el={"Eliminación de artista"}
+                        details_el={"¿Estas seguro que deseas eliminar al artista?"}
+                        header_des={"Desactivación de canción"}
+                        details_des={"¿Estas seguro que deseas desactivar al artista?"}
+                        artist = {'true'}
                       /> : ''
                   );
                 }
@@ -92,11 +93,11 @@ export default function ArtistsEdit(){
         </section>
         <EditingItem
           key={1}
-          song_index={1}
-          song_t={'Algo'}
-          song_a={" "}
-          song_album={'artista'}
-          I_options={<I_menu/>}
+          index={1}
+          title={'Algo'}
+          details={" "}
+          info={'artista'}
+          icon={<I_menu/>}
           header_el={"Eliminación de artista"}
           details_el={"¿Estas seguro que deseas eliminar al artista?"}
           header_des={"Desactivación de canción"}

@@ -1,19 +1,19 @@
 import React from 'react';
 import Axios from 'axios';
-import SongItem from '../playlist/songPlaylist';
-import { BsPlus as I_add,
-  BsSearch as I_search} from 'react-icons/bs';
+import { BsSearch as I_search, BsThreeDotsVertical as I_menu
+} from 'react-icons/bs';
+import EditUserItem from './items/editUseritem';
 
 
 export default function UsersEdit(){
   const get_song = 'http://3.135.234.254:3000/getSpecificSong';
 
   const [search, setSearch] = React.useState('');
-  const [lsongs, setLsongs] = React.useState([]);
+  const [users, setUsers] = React.useState([]);
 
 
-  //Search songs
-  function getSong(){
+  //Search users
+  function getUsers(){
     const fetchData = async () => {
       try {
         const { data } = await Axios.post(get_song,
@@ -21,9 +21,8 @@ export default function UsersEdit(){
             nombre: search + '%'
           }
         );
-        console.log('just Testing')
         console.log(data)
-        setLsongs(data)
+        setUsers(data)
       } catch (error) {
         console.log(error);
       }
@@ -37,7 +36,7 @@ export default function UsersEdit(){
   }
   const onClick = () =>{
     if(search !== ''){
-      getSong();
+      getUsers();
     }else{
       alert('Ingrese el nombre de la canción para buscar')
     }
@@ -68,20 +67,21 @@ export default function UsersEdit(){
         <section className={'my-4'}>
           <div id="songs">
             {
-              lsongs.map((song) => {
-                  const index = lsongs.indexOf(song)
+              users.map((user) => {
+                  const index = users.indexOf(user)
                   return(
-                    song.estado?
-                      <SongItem
+                    user.estado?
+                      <EditUserItem
                         key={index}
-                        song_index={index + 1}
-                        song_t={song.cancion}
-                        song_a={song.artista}
-                        song_album={song.album}
-                        I_options={<I_add/>}
-                        option={1}
-                        playlist_id={details.id}
-                        actualizacion={() => actualizarPlaylist()}
+                        index={index + 1}
+                        title={user.nombres + user.apellidos}
+                        info={user.username}
+                        usertype={user.tipo}
+                        icon={<I_menu/>}
+                        header_el={"Eliminación de suscripción"}
+                        details_el={"¿Estas seguro que deseas eliminar la suscripción?"}
+                        header_des={"Desactivación de usuario"}
+                        details_des={"¿Estas seguro que deseas desactivar al usuario?"}
                       /> : ''
                   );
                 }
@@ -89,6 +89,17 @@ export default function UsersEdit(){
             }
           </div>
         </section>
+        <EditUserItem
+          key={1}
+          index={1}
+          title={'Algo'}
+          info={'usuario'}
+          icon={<I_menu/>}
+          header_el={"Eliminación de suscripción"}
+          details_el={"¿Estas seguro que deseas eliminar la suscripción?"}
+          header_des={"Desactivación de usuario"}
+          details_des={"¿Estas seguro que deseas desactivar al usuario?"}
+        />
       </section>
     </section>
   );
