@@ -7,12 +7,14 @@ import Axios from 'axios';
 
 export default function RangeDate(props) {
 
-  const post = 'http://3.135.234.254:3000/createPlaylist' //Cambiar por la generación del reporte
+  const post = 'http://3.135.234.254:3000/reports/weeklyStreams' //Cambiar por la generación del reporte
   let { url } = useRouteMatch();
 
   //State variables
+  let result = 0;
   const [reportDate, setReportDate] = React.useState(new Date());
   const [filled, setFilled] = React.useState(false);
+
 
   function generateReport(){
     const fetchData = async () => {
@@ -22,7 +24,8 @@ export default function RangeDate(props) {
             date: reportDate
           }
         );
-        console.log("todo fine")
+        console.log(data[0].weekly_streams);
+        result = data[0].weekly_streams;
       } catch (error) {
         console.log(error);
       }
@@ -41,13 +44,13 @@ export default function RangeDate(props) {
   }
 
   const handleClick = ()=>{
-    if(playlistName !== ''){
+    if(reportDate !== ''){
       generateReport();
       setTimeout(()=>{
-        console.log(history.location);
-        history.push(`${url}/songStreams`);
-        history.go();
-      },300)
+        console.log(result);
+        props.updateData(reportDate.toString(), result);
+        props.updateData(reportDate.toString(), result);
+      },1000)
     }else{
       alert('Indica un nombre para tu playlist')
     }
@@ -77,7 +80,7 @@ export default function RangeDate(props) {
       </Modal.Body>
       <Modal.Footer>
         <Button className={"border-btn mb-2"} onClick={props.onHide}>Cerrar</Button>
-        <Button className={'purple-btn mb-2'} >Generar reporte</Button>
+        <Button className={'purple-btn mb-2'} onClick={handleClick}>Generar reporte</Button>
       </Modal.Footer>
     </Modal>
   );

@@ -171,11 +171,11 @@ router.get('/reports/topArtist', topArtist);
 router.get('/reports/topGenres', topGenres);
 router.get('/reports/topActiveUsers', topActiveUsers);
 
-router.post('reports/weeklyStreams', weeklyStreams);
-router.post('reports/bestArtist', bestArtist);
-router.post('reports/genreStreams', genreStream);
-router.post('reports/topArtistSongs', topArtistSongs);
-router.post('reports/modifyAlbumSong', modifyAlbumSong);
+router.post('/reports/weeklyStreams', weeklyStreams);
+router.post('/reports/bestArtist', bestArtist);
+router.post('/reports/genreStreams', genreStream);
+router.post('/reports/topArtistSongs', topArtistSongs);
+router.post('/reports/modifyAlbumSong', modifyAlbumSong);
 
 // --------------------Stream Song--------------------------
 router.post('/stream', streamSong);

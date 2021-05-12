@@ -95,14 +95,9 @@ const topActiveUsers = async (req, res) => {
 const weeklyStreams = async (req, res) => {
   const { date } = req.body;
   const response = await pool.query(`
-    select * from weekly_streams($1)  
-  `, [date])
-    .then(() => {
-      res.status(200).json(response.rows);
-    })
-    .catch(() => {
-      res.status(500).json({ error: 'Invalid date' });
-    });
+    select * from weekly_streams($1)`, [date])
+
+  res.status(200).json(response.rows);
 };
 
 // 8. Artistas con más reproducciones en fecha

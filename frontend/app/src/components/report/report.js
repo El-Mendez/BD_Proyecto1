@@ -16,11 +16,11 @@ import UsersReport from './reports/usersReport';
 import RangeDate from './reports/rangeDate';
 import ModalArtist from './reports/modalArtist';
 import ModalSongsArtists from './reports/modalSongsartists';
-
+import WeeklyStreams from './reports/weeklyStreams';
 
 export default function Report(){
   let {path, url} = useRouteMatch();
-  const [modalShow, setModalShow] = React.useState(false);
+
   const [modal1Show, setModal1Show] = React.useState(false);
   const [modal2Show, setModal2Show] = React.useState(false);
   const [modal3Show, setModal3Show] = React.useState(false);
@@ -77,11 +77,8 @@ export default function Report(){
             image={activeUsers}
             title={'Reproducciones semanales'}
             description={'Total de reproducciones por semana'}
-            redirect={() => setModalShow(true)}
-            click={false}/>
-          <RangeDate
-            show={modalShow}
-            onHide={() => setModalShow(false)}
+            redirect={`${url}/weeklyStreams`}
+            click={true}
           />
           <ReportItem
             image={activeUsers}
@@ -122,6 +119,9 @@ export default function Report(){
       <section className={'section-container home-container'}>
             <div id="songs">
               <Switch>
+                <Route  path={`${path}/weeklyStreams`}>
+                  <WeeklyStreams/>
+                </Route>
                 <Route  path={`${path}/recentAlbums`}>
                   <AlbumsReport/>
                 </Route>
