@@ -1,6 +1,7 @@
 import React from 'react';
 import test from '../../assets/badLiar.jpg'
 import Axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 //ADD SONG TO A PLAYLIST
 //DELETE SONG OF A PLAYLIST
@@ -9,7 +10,7 @@ import Axios from 'axios';
 
 export default function SongItem_artist(props){
   const songData = props;
-
+  let { user } = useParams();
   const add_song = 'http://3.135.234.254:3000/addPlaylistSong';
   const delete_song = 'http://3.135.234.254:3000/deletePlaylistSong';
 
@@ -20,7 +21,8 @@ export default function SongItem_artist(props){
         const { data } = await Axios.post(add_song,
           {
             playlist_id: songData.playlist_id,
-            cancion: songData.song_t
+            cancion: songData.song_t,
+            modifier: user,
           }
         );
       } catch (error) {
@@ -36,7 +38,8 @@ export default function SongItem_artist(props){
         const { data } = await Axios.post(delete_song,
           {
             playlist_id: songData.playlist_id,
-            cancion: songData.song_t
+            cancion: songData.song_t,
+            modifier: user,
           }
         );
       } catch (error) {

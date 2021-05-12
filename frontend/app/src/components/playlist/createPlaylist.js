@@ -21,7 +21,8 @@ export default function CreatePlaylist(props) {
       try {
         const { data } = await Axios.post(post,
           {
-            nombre: playlistName
+            nombre: playlistName,
+            modifier: user
           }
         );
         console.log("todo fine")
