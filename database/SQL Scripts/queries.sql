@@ -506,3 +506,16 @@ CREATE OR REPLACE FUNCTION userMonitor(id TEXT, tipo INT)  RETURNS void AS $$
     	END IF;
     END;
 $$ LANGUAGE plpgsql;
+
+CREATE OR REPLACE FUNCTION calculate_revenue(artista varchar(50))
+RETURNS table(id_artista int, nombre varchar(50), revenue float) AS
+$$
+    SELECT c.id_artista, a.nombre, count(*) * 0.15
+    FROM stream s
+        INNER JOIN canciones c on c.id_cancion = s.id_cancion
+        INNER JOIN artista a on a.id_artista = c.id_artista
+        WHERE date_part('month', current_date) = date_part('month', s.fecha)
+           AND date_part('year', current_date) = date_part('year', s.fecha)
+           AND a.nombre = artista
+        GROUP BY c.id_artista, a.nombre
+$$ LANGUAGE 'sql';
