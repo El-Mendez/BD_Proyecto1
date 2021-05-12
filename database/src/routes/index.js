@@ -139,10 +139,10 @@ router.post('/deletePlaylistSong', deletePlaylistSong);
 router.post('/playlistSongs', playlistSongs);
 // --------------------Queries bitacora--------------------------
 router.get('/getChangesUsers', getChangesUsers);
-router.post('/getChangesAlbumes', getChangesAlbumes);
-router.post('/getChangesSongs', getChangesSongs);
-router.post('/getChangesArtist', getChangesArtist);
-router.post('/getChangesPlaylist', getChangesPlaylist);
+router.get('/getChangesAlbumes', getChangesAlbumes);
+router.get('/getChangesSongs', getChangesSongs);
+router.get('/getChangesArtist', getChangesArtist);
+router.get('/getChangesPlaylist', getChangesPlaylist);
 // --------------------Queries reports--------------------------
 router.get('/reports/weeklyAlbums', weeklyAlbums);
 router.get('/reports/growingArtists', growingArtist);
