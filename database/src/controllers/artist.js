@@ -21,9 +21,7 @@ const getSpecificArtist = async (req, res) => {
 const updateArtistName = async (req, res) => {
   const { newName, oldName, modifier } = req.body;
   const response = await pool.query(`
-  BEGIN;
-  UPDATE artista SET nombre = $1, modificador = $3 WHERE nombre = $2;
-  COMMIT;`,
+  UPDATE artista SET nombre = $1, modificador = $3 WHERE nombre = $2;`,
   [newName, oldName, modifier]);
   res.status(200).json(response.rows);
 };
@@ -31,9 +29,7 @@ const updateArtistName = async (req, res) => {
 const deleteArtist = async (req, res) => {
   const { modifier, identifier } = req.body;
   const response = await pool.query(`
-  BEGIN;
-  SELECT delete_artist($1, $2);
-  COMMIT;`,
+  SELECT delete_artist($1, $2)`,
   [modifier, identifier])
   .then(() => {
     res.status(200).json(response.rows);
@@ -54,9 +50,7 @@ const revenueArtist = async (req, res) => {
 const deactivateArtist = async (req, res) => {
   const { modifier, identifier } = req.body;
   const response = await pool.query(`
-  BEGIN;
-  SELECT deactivate_artist($1, $2);
-  COMMIT;`,
+  SELECT deactivate_artist($1, $2)`,
     [modifier, identifier])
     .then(() => {
       res.status(200).json(response.rows);
