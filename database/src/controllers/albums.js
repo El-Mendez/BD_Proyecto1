@@ -40,11 +40,13 @@ const getSpecificAlbum = async (req, res) => {
 const updateAlbumName = async (req, res) => {
   const { oldName, newName, artist, modifier } = req.body;
   const response = await pool.query(`
+  BEGIN;
   UPDATE albumes SET nombre = $1, modificador = $4 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
     INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
     INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
     INNER JOIN artista a ON a.id_artista = c.id_artista
-    WHERE a2.nombre = $2 AND a.nombre = $3);`,
+    WHERE a2.nombre = $2 AND a.nombre = $3);
+  COMMIT;`,
   [newName, oldName, artist, modifier]);
 
   res.status(200).json(response.rows);
@@ -53,11 +55,13 @@ const updateAlbumName = async (req, res) => {
 const updateAlbumDate = async (req, res) => {
   const { date, album, artista, modificador } = req.body;
   const response = await pool.query(`
+  BEGIN;
   UPDATE albumes SET fecha_publicacion = $1, modificador = $4 WHERE id_album = (SELECT DISTINCT a2.id_album FROM albumes a2 
     INNER JOIN cancion_album ca  ON ca.id_album = a2.id_album 
     INNER JOIN canciones c ON c.id_cancion = ca.id_canciones 
     INNER JOIN artista a ON a.id_artista = c.id_artista
-    WHERE a2.nombre = $2 AND a.nombre = $3);`,
+    WHERE a2.nombre = $2 AND a.nombre = $3);
+  COMMIT;`,
   [date, album, artista]);
 
   res.status(200).json(response.rows);
@@ -66,8 +70,9 @@ const updateAlbumDate = async (req, res) => {
 const deleteAlbum = async (req, res) => {
   const { modifier, identifier } = req.body;
   const response = await pool.query(`
-    select * from delete_album($1,$2)`, [modifier, identifier]);
-
+    begin;
+    select * from delete_album($1,$2);
+    commit;`, [modifier, identifier]);
   res.status(200).json(response.rows);
 };
 

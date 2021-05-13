@@ -6,8 +6,10 @@ const createUser = async (req, res) => {
   } = req.body;
 
   const response = await pool.query(
-    `INSERT INTO usuarios (username, contrasena, nombres, apellidos, correo, id_tipousuario) 
-        VALUES ($1, crypt($2, gen_salt('bf')),$3,$4,$5,$6)`,
+    `BEGIN;
+    INSERT INTO usuarios (username, contrasena, nombres, apellidos, correo, id_tipousuario) 
+        VALUES ($1, crypt($2, gen_salt('bf')),$3,$4,$5,$6)
+      COMMIT;`,
     [username, contrasena, nombres, apellidos, correo, 1],
   ).then(() => {
     res.status(201).json({
@@ -59,7 +61,7 @@ const updateToManager = async (req, res) => {
   const { username } = req.body;
   const response = await pool.query(`
   UPDATE usuarios SET id_tipoUsuario = 5 WHERE username = $1;
-          `,
+  `,
   [username]);
 
   res.status(200).json(response.rows);
@@ -96,8 +98,10 @@ const getUserPlaylist = async (req, res) => {
 const addSubscription = async (req, res) => {
   const { username } = req.body;
   const response = await pool.query(`
+  BEGIN;
   INSERT INTO suscripcion (id_usuario, Fecha_inicio)
-    VALUES ($1,current_date);`, [username]);
+    VALUES ($1,current_date);
+    COMMIT;`, [username]);
 
   res.status(200).json(response.rows);
 };
@@ -105,7 +109,9 @@ const addSubscription = async (req, res) => {
 const updateToPremium = async (req, res) => {
   const { username } = req.body;
   const response = await pool.query(`
-  UPDATE usuarios SET id_tipoUsuario = 2 WHERE username = $1;`, [username]);
+  BEGIN;
+  UPDATE usuarios SET id_tipoUsuario = 2 WHERE username = $1;
+  COMMIT;`, [username]);
 
   res.status(200).json(response.rows);
 };
@@ -124,7 +130,9 @@ const getSpecificUser = async (req, res) => {
 const deactivateUser = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;`,
+  BEGIN;
+  UPDATE usuarios SET activo = false, modificador = $2 WHERE username = $1;
+  COMMIT;`,
     [identifier, modifier]);
 
   res.status(200).json(response.rows);
@@ -133,7 +141,9 @@ const deactivateUser = async (req, res) => {
 const deleteSubscription = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
-    UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;`,
+  BEGIN;
+    UPDATE usuarios SET id_tipousuario = 1, modificador = $2 WHERE username = $1;
+    COMMIT;`,
     [identifier, modifier]);
 
   res.status(200).json(response.rows);
@@ -142,7 +152,9 @@ const deleteSubscription = async (req, res) => {
 const monitorProfile = async (req, res) => {
   const { identifier, monitor, modifier } = req.body;
   const response = await pool.query(`
-  UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modificador = $3 WHERE username = $1`,
+  BEGIN;
+  UPDATE usuarios SET id_monitor = (SELECT id_monitor FROM monitores WHERE nombre = $2), modificador = $3 WHERE username = $1;
+  COMMIT;`,
     [identifier, monitor, modifier]);
 
   res.status(200).json(response.rows);
@@ -151,7 +163,9 @@ const monitorProfile = async (req, res) => {
 const addMonitor = async (req, res) => {
   const { monitor } = req.body;
   const response = await pool.query(`
-  INSERT INTO monitores (nombre) VALUES ($1);`,
+  BEGIN;
+  INSERT INTO monitores (nombre) VALUES ($1);
+  COMMIT;`,
     [monitor]);
   res.status(200).json(response.rows);
 };

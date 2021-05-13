@@ -54,7 +54,7 @@ const getSongsByAlbum = async (req, res) => {
     INNER JOIN canciones c on c.id_cancion = cancion_album.id_canciones
     INNER JOIN artista a2 on a2.Id_artista = c.id_artista
     INNER JOIN albumes a on a.id_album = cancion_album.id_album
-WHERE a.nombre ILIKE $1;`,
+  WHERE a.nombre ILIKE $1;`,
   [nombre]);
 
   res.status(200).json(response.rows);
@@ -88,9 +88,11 @@ const songOff = async (req, res) => {
 const updateSongName = async (req, res) => {
   const { newName, oldName, artist, modifier } = req.body;
   const response = await pool.query(`
+  BEGIN;
   UPDATE canciones SET nombre = $1, modificador = $4 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
-    WHERE c.nombre = $2 AND a.nombre = $3);`,
+    WHERE c.nombre = $2 AND a.nombre = $3);
+  COMMIT;`,
   [newName, oldName, artist, modifier]);
 
   res.status(200).json(response.rows);
@@ -99,7 +101,9 @@ const updateSongName = async (req, res) => {
 const updateSongLink = async (req, res) => {
   const { link, nombre } = req.body;
   const response = await pool.query(`
-  UPDATE canciones SET link = $1 WHERE nombre = $2; `,
+  BEGIN;
+  UPDATE canciones SET link = $1 WHERE nombre = $2; 
+  COMMIT;`,
   [link, nombre]);
 
   res.status(200).json(response.rows);
@@ -108,7 +112,9 @@ const updateSongLink = async (req, res) => {
 const deleteSong = async (req, res) => {
   const { modifier, identifier } = req.body;
   const response = await pool.query(`
-  SELECT delete_song($1, $2)`,
+  BEGIN;
+  SELECT delete_song($1, $2);
+  COMMIT;`,
   [modifier, identifier]);
 
   res.status(200).json(response.rows);
@@ -131,9 +137,11 @@ const addSong = async (req, res) => {
 const deactivateSong = async (req, res) => {
   const { identifier, modifier } = req.body;
   const response = await pool.query(`
+  BEGIN;
   UPDATE canciones SET estado = false, modificador = $2 WHERE id_cancion = (SELECT c.id_cancion FROM canciones c
     INNER JOIN artista a ON c.id_artista = a.id_artista 
-    WHERE c.nombre = $1);`,
+    WHERE c.nombre = $1);
+  COMMIT;`,
     [identifier, modifier]);
 
   res.status(200).json(response.rows);
