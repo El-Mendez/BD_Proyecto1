@@ -9,15 +9,18 @@ export default function MonitorModal(props) {
   const info = props;
   const post = 'http://3.135.234.254:3000/monitorProfile'
   let { user } = useParams();
-  let monitorUsuario = 'Mr';
+  const [monitor, setMonitor] = React.useState('');
 
   function addMonitor(){
     const fetchData = async () => {
+      console.log(monitor)
+      console.log(user)
+      console.log(info.identifier)
       try {
         const { data } = await Axios.post(post,
           {
             identifier: info.identifier,
-            monitor: monitorUsuario,
+            monitor: monitor,
             modifier: user,
           }
         );
@@ -30,7 +33,8 @@ export default function MonitorModal(props) {
   };
 
   const handleEstado = (e) =>{
-    monitorUsuario = e.target.value;
+    let index = e.target.selectedIndex;
+    setMonitor(e.target.options[index].text)
   }
 
   return (
@@ -47,11 +51,13 @@ export default function MonitorModal(props) {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <select onChange={handleEstado}>
+        <select onChange={handleEstado} defaultValue="choice">
+          <option value="choice" disabled>Seleccione un monitor</option>
           {
             info.monitors.map((monitor) => {
+              const index = info.monitors.indexOf(monitor)
               return(
-                <option value={monitor.nombre}>{monitor.nombre}</option>
+                <option value={monitor.nombre} key={index}>{monitor.nombre}</option>
               );
             })
           }

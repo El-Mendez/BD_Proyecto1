@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Axios from 'axios';
 
 export default function RangeDate(props) {
+  const prop = props;
 
   const post = 'http://3.135.234.254:3000/reports/weeklyStreams' //Cambiar por la generación del reporte
 
@@ -46,8 +47,9 @@ export default function RangeDate(props) {
       setTimeout(()=>{
         var end = new Date();
         end.setDate(new Date(reportDate).getDate() + 7);
-        props.updateData(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-0" + end.getDate())) ,result);
-        props.onHide();
+        prop.data(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-0" + end.getDate())).toString(), result);
+        prop.data(reportDate.toString(), (end.getFullYear() + "-0" + (end.getMonth()+1 + "-0" + end.getDate())).toString(), result);
+        prop.onHide();
       },300)
     }else{
       alert('Indica la fecha de inicio para el reporte')

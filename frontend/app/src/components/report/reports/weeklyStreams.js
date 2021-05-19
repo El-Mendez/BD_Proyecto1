@@ -1,5 +1,5 @@
 import React from 'react';
-import WeeklyReportItem from '../../utils/itemComponents/weeklyReportItem';
+import WeeklyReportItem from '../../utils/itemComponents/wReportitem';
 import RangeDate from './rangeDate';
 
 export default function WeeklyStreams(){
@@ -30,7 +30,7 @@ export default function WeeklyStreams(){
         <RangeDate
           show={modalShow}
           onHide={() => setModalShow(false)}
-          updateData = {(start, end, stream) => updateData(start, end, stream)}
+          data = {(start, end, stream) => updateData(start, end, stream)}
         />
       </div>
         <WeeklyReportItem
