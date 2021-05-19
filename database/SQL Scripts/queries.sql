@@ -536,3 +536,59 @@ CREATE INDEX genre ON genero(id_genero);
 CREATE INDEX artis ON artista(id_artista);
 CREATE INDEX stream_date ON stream(fecha);
 CREATE INDEX song ON canciones(id_cancion);
+
+-- SIMULACIÓN
+-- OPTION 1
+SELECT random()*3
+FROM canciones
+WHERE id_cancion = floor(random()*3)
+LIMIT 1;
+
+-- OPTION 2
+-- BEST OPTION
+-- RANDOM SONGS
+SELECT *
+FROM canciones
+WHERE estado=TRUE
+OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+LIMIT 1;
+
+-- RANDOM USERS
+SELECT *
+FROM usuarios
+WHERE id_tipoUsuario != 1 AND activo = TRUE
+OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+LIMIT 1;
+
+
+-- TRYING THE EXTENSION
+-- THIS DOESNT WORK ON SMALL TABLES
+SELECT *  FROM canciones TABLESAMPLE SYSTEM_ROWS(1);
+
+CREATE OR REPLACE function streams_simulation(date, integer)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        user_name varchar;
+        id_song numeric;
+    BEGIN
+        FOR i IN 1..$2 LOOP
+            -- RANDOM SONG
+            SELECT id_cancion INTO id_song
+            FROM canciones
+            WHERE estado=TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+            LIMIT 1;
+            -- RANDOM USER
+            SELECT username INTO user_name
+            FROM usuarios
+            WHERE id_tipoUsuario != 1 AND activo = TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+            LIMIT 1;
+            INSERT INTO stream VALUES (id_song,user_name, $1);
+            END LOOP;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT streams_simulation('05-19-2021',2);
