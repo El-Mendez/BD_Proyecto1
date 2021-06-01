@@ -4,7 +4,8 @@
   "description": "Es el backend para el proyecto zoa",
   "main": "index.js",
   "scripts": {
-    "test-run": "nodemon src/index.js"
+    "run": "nodemon src/index.js",
+    "mongofy":  "node src/mongofy.js"
   },
   "author": "",
   "license": "ISC",
