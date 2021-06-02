@@ -1,29 +1,18 @@
-const mongoose = require('mongoose');
-const pool = require('../../credentials');
 const { updateCanciones } = require('./updateCanciones');
-const { updateStreams } = require('./usuarios');
-
-mongoose.connect('mongodb://localhost/zoa', { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-
-let finished = false;
+const { updateStreams } = require('./updateUsuarios');
+const { fillRecommendation } = require('./recomendaciones');
 
 
-const end = () => {
-    if (finished) {
-        db.close();
-    }
-    finished = true;
-}
 
-db.once('open', function() {
-    updateStreams(db, pool).then( () => {
-        console.log("Se han actualizado las reproducciones por usuarios");
-        end();
+const updateDatabases = async (db, pool, fechaInicial, fechaFinal) => {
+    await updateStreams(db, pool, fechaInicial, fechaFinal).then(() => {
+        console.log("Se han actualizado la base de datos de Mongo de canciones.");
     });
-    updateCanciones(db, pool).then( () => {
-        console.log("Se han actualizado las canciones");
-        end();
+     await updateCanciones(db, pool).then(() => {
+        console.log("Se ha actualizado la base de datos de Mongo de reproducciones.");
     });
-});
+     await fillRecommendation()
+};
+
+module.exports = { updateDatabases };
+

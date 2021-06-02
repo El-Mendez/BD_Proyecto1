@@ -1,8 +1,14 @@
 const { Schema } = require('mongoose');
 
+
 const generosSchema = new Schema({
   _id: Number,
   nombre_genero: String,
+});
+
+const genreRecommendationSchema = new Schema({
+  _id: String,
+  genre: [generosSchema]
 });
 
 const reproduccionSchema = new Schema({
@@ -30,5 +36,5 @@ const cancionSchema = new Schema({
 });
 
 module.exports = {
-  generosSchema, reproduccionSchema, userSchema, cancionSchema,
+  generosSchema, reproduccionSchema, userSchema, cancionSchema, genreRecommendationSchema
 };

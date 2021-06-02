@@ -5,13 +5,15 @@
   "main": "index.js",
   "scripts": {
     "run": "nodemon src/index.js",
-    "mongofy": "node src/mongo/mongofy.js"
+    "mongofy": "node src/mongo/mongofy.js",
+    "admin":"node src/mongo/main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "inquirer": "^8.1.0",
     "mongoose": "^5.12.12",
     "pg": "^8.5.1"
   },

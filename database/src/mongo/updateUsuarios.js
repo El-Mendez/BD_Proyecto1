@@ -1,18 +1,17 @@
-const { userSchema, reproduccionSchema } = require('./models');
+const { Usuarios } = require('./models');
 
-const { Usuarios, Reproduccion } = require('./models');
-
-const newStreams = async (pool) => {
+const newStreams = async (pool, fechaInicial, fechaFinal) => {
   const respuesta = await pool.query(`
-      SELECT u.username, s.fecha, c.id_cancion, c.nombre AS nombre_cancion, a.id_artista, a.nombre AS nombre_artista, g.id_genero, g.nombre AS nombre_genero, count(*) AS cantidad FROM usuarios u
-        INNER JOIN stream s ON s.id_usuario = u.username 
-        INNER JOIN canciones c ON c.id_cancion = s.id_cancion
-        INNER JOIN artista a ON a.id_artista = c.id_artista 
-        INNER JOIN genero_canciones gc ON gc.id_canciones = c.id_cancion 
-        INNER JOIN genero g ON g.id_genero = gc.id_genero
-      GROUP BY u.username, c.nombre, nombre_artista,s.fecha, c.id_cancion, a.id_artista , g.id_genero
-    ORDER BY u.username , s.fecha , c.id_cancion ;`
-  );
+    SELECT u.username, s.fecha, c.id_cancion, c.nombre AS nombre_cancion, a.id_artista, a.nombre AS nombre_artista, g.id_genero, g.nombre AS nombre_genero, count(*) AS cantidad FROM usuarios u
+      INNER JOIN stream s ON s.id_usuario = u.username
+      INNER JOIN canciones c ON c.id_cancion = s.id_cancion
+      INNER JOIN artista a ON a.id_artista = c.id_artista
+      INNER JOIN genero_canciones gc ON gc.id_canciones = c.id_cancion
+      INNER JOIN genero g ON g.id_genero = gc.id_genero
+    WHERE s.fecha >= $1 AND s.fecha < $2
+    GROUP BY u.username, c.nombre, nombre_artista,s.fecha, c.id_cancion, a.id_artista , g.id_genero
+    ORDER BY u.username , s.fecha , c.id_cancion;
+  `, [fechaInicial, fechaFinal]);
   return respuesta;
 };
 
@@ -49,9 +48,9 @@ const parseResults = (streamsRow) => {
   return users;
 };
 
-const updateStreams = async (db, pool) => {
-  const test = await newStreams(pool)
-  const usuarios = parseResults(test.rows)
+const updateStreams = async (db, pool, fechaInicial, fechaFinal) => {
+  const test = await newStreams(pool, fechaInicial, fechaFinal);
+  const usuarios = parseResults(test.rows);
   // console.log(canciones);
   for (var i = 0; i < usuarios.length; i++) {
     await (Usuarios.findByIdAndUpdate(usuarios[i]._id,{ ...usuarios[i] },
