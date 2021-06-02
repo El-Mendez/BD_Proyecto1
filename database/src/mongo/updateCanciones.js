@@ -2,7 +2,7 @@ const { Cancion, Genero } = require('./models');
 
 const newCanciones = async (pool) => {
   const respuesta = await pool.query(`
-      select c.id_cancion, c.nombre as nombre_cancion, a.id_artista, a.nombre as nombre_artista, g.id_genero, g.nombre
+      select c.id_cancion, c.nombre as nombre_cancion, a.id_artista, a.nombre as nombre_artista, g.id_genero, g.nombre as nombre_genero
       from canciones c
         inner join artista a on a.id_artista = c.id_artista
         inner join genero_canciones gc on c.id_cancion = gc.id_canciones
@@ -22,36 +22,32 @@ const parseResults = (cancionesRow) => {
         nombre_cancion: cancion.nombre_cancion,
         id_artista: cancion.id_artista,
         nombre_artista: cancion.nombre_artista,
+        generos: [],
       };
       canciones.push(cancionActual);
-    }
+    };
 
-    /*cancionActual.generos.push({
+    cancionActual.generos.push({
       _id: cancion.id_genero,
       nombre_genero: cancion.nombre_genero,
-    });*/
+    });
   });
   return canciones;
 };
 
 const updateCanciones = async (db, pool) => {
-  newCanciones(pool).then((respuesta) => {
-    const canciones = parseResults(respuesta.rows);
-    const algo = new Cancion ({
-      _id: canciones.id,
-      nombre_cancion: 'sadsadsadsad cancion no funny',
-      id_artista: 1,
-      nombre_artista: 'nuestro futuro',
-      generos: [],
-    }); // const algo = new Cancion (canciones)
-    // algo.save();
-    /*canciones.forEach((cancion) => {
-    Cancion.findByIdAndUpdate(cancion._id, cancion, { new: true });
-    });*/
-    //console.log(canciones);
-
-  });
-  let test = await Cancion.findByIdAndUpdate(1, {nombre_cancion: 'COSAS FEAS PASAN'}, {new: true, useFindAndModify: false, upsert: true});
+  const test = await newCanciones(pool)
+  const canciones = parseResults(test.rows)
+  for (var i = 0; i < canciones.length; i++) {
+    await (Cancion.findByIdAndUpdate(canciones[i]._id,{
+          nombre_cancion: canciones[i].nombre_cancion,
+          id_artista: canciones[i].id_artista,
+          nombre_artista: canciones[i].nombre_artista,
+          generos: canciones[i].generos,
+        },
+        { new: true, useFindAndModify: false, upsert: true }
+    ))
+  }
 
 };
 
