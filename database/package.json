@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "run": "nodemon src/index.js",
-    "mongofy":  "node src/mongofy.js"
+    "mongofy": "node src/mongo/mongofy.js"
   },
   "author": "",
   "license": "ISC",
