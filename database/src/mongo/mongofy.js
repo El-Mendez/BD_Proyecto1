@@ -1,6 +1,6 @@
 const { updateCanciones } = require('./updateCanciones');
 const { updateStreams } = require('./updateUsuarios');
-const { fillRecommendation } = require('./recomendaciones');
+
 
 
 
@@ -11,7 +11,6 @@ const updateDatabases = async (db, pool, fechaInicial, fechaFinal) => {
      await updateCanciones(db, pool).then(() => {
         console.log("Se ha actualizado la base de datos de Mongo de reproducciones.");
     });
-     await fillRecommendation()
 };
 
 module.exports = { updateDatabases };

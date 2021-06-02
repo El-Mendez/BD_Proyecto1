@@ -1,5 +1,10 @@
 const { Schema } = require('mongoose');
 
+const userRecommendation = new Schema({
+  _id: String,
+  recomendaciones:[String]
+});
+
 
 const generosSchema = new Schema({
   _id: Number,
@@ -36,5 +41,5 @@ const cancionSchema = new Schema({
 });
 
 module.exports = {
-  generosSchema, reproduccionSchema, userSchema, cancionSchema, genreRecommendationSchema
+  generosSchema, reproduccionSchema, userSchema, cancionSchema, genreRecommendationSchema, userRecommendation
 };
