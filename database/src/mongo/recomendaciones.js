@@ -95,7 +95,6 @@ const topArtists = async () => {
             {$project:{cancion:"$nombre_cancion"}}
         ])
         for await (const song of songs) {
-            console.log(song.cancion)
             user_recommendation.recomendaciones.push(song.cancion)
         }
         recommendation.push(user_recommendation);

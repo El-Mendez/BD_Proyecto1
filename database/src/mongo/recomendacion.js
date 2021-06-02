@@ -1,6 +1,4 @@
 // Complaciendo a Orlando y Méndez
-
-
 db.canciones.aggregate([
     {$unwind: "$generos"},
 
