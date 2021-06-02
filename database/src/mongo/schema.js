@@ -12,11 +12,12 @@ const reproduccionSchema = new Schema({
   id_artista: Number,
   nombre_artista: String,
   generos: [generosSchema],
+  reproduccion: Number,
   fecha: Date,
 });
 
 const userSchema = new Schema({
-  username: String,
+  _id: String,
   reproducciones: [reproduccionSchema],
 });
 
