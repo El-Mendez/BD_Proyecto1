@@ -592,3 +592,454 @@ RETURNS VOID AS
 LANGUAGE 'plpgsql';
 
 SELECT streams_simulation('05-19-2021',2);
+
+------- SIMULACIONES
+
+-- OPTION 1
+SELECT random()*3
+FROM canciones
+WHERE id_cancion = floor(random()*3)
+LIMIT 1;
+
+-- OPTION 2
+-- BEST OPTION
+-- RANDOM SONGS
+SELECT *
+FROM canciones
+WHERE estado=TRUE
+OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+LIMIT 1;
+
+-- RANDOM USERS
+SELECT *
+FROM usuarios
+WHERE id_tipoUsuario != 1 AND activo = TRUE
+OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+LIMIT 1;
+
+
+-- TRYING THE EXTENSION
+-- THIS DOESNT WORK ON SMALL TABLES
+SELECT *  FROM canciones TABLESAMPLE SYSTEM_ROWS(1);
+
+-- SIMULACIÓN PARA ESCUCHAR CANCIONES
+CREATE OR REPLACE function streams_simulation(date, integer)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        user_name varchar;
+        id_song numeric;
+    BEGIN
+        FOR i IN 1..$2 LOOP
+            -- RANDOM SONG
+            SELECT id_cancion INTO id_song
+            FROM canciones
+            WHERE estado=TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+            LIMIT 1;
+            -- RANDOM USER
+            SELECT username INTO user_name
+            FROM usuarios
+            WHERE id_tipoUsuario != 1 AND activo = TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+            LIMIT 1;
+            INSERT INTO stream VALUES (id_song,user_name, $1);
+            END LOOP;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT streams_simulation('03-13-2019',30);
+
+-- nombre, artista, género musical,fecha de reproducción
+
+SELECT c.nombre as nombre, a.nombre as artista, g.nombre as genero, CAST(fecha AS VARCHAR) as reproduccion
+FROM stream
+    INNER JOIN canciones c on c.id_cancion = stream.id_cancion
+    INNER JOIN artista a on a.id_artista = c.id_artista
+    INNER JOIN genero_canciones gc on c.id_cancion = gc.id_canciones
+    INNER JOIN genero g on g.id_genero = gc.id_genero;
+
+DROP TABLE songs;
+
+-- #2
+CREATE TABLE songs(
+    nombre VARCHAR(250),
+    link VARCHAR(100)
+);
+
+INSERT INTO songs
+VALUES
+       ('All I Want','mtf7hC17IBM'),
+       ('Say You Wont Let Go','0yW7w8F2TVA'),
+       ('Secret Love', 'qgy7vEje5-w'),
+       ('Scars To Your Beautiful','d7s1dMSrZ_E'),
+       ('Where Have You Been','HBxt_v0WF6Y'),
+       ('Photograph','p1JmzB6E-C8'),
+       ('Back To You','-HjpL-Ns6_A'),
+       ('Like Im Gonna Lose You','2-MBfn8XjIU'),
+       ('Perfect','2Vv-BfVoq4g'),
+       ('The Hills','yzTuBuRdAyA'),
+       ('Sign Of The Times','qN4ooNx77u0'),
+       ('When I Was Your Man','ekzHIouo8Q4'),
+       ('Blank Space','e-ORhEE9VVg'),
+       ('Lovely','V1Pl8CzNzCw'),
+       ('Somebody','8UVNT4wvIGY'),
+       ('Million Reasons','en2D_5TzXCA'),
+       ('Mercy','KkGVmN68ByU'),
+       ('I Like Me Better','a7fzkqLozwA'),
+       ('Someone Like You','hLQl3WQQoQ0'),
+       ('What A Time','4OxZIyNC6qc'),
+       ('You & I','_kqQDCxRCzM'),
+       ('Ocean Eyes','viimfQi_pUw'),
+       ('The Heart Wants What Wants','ij_0p_6qTss'),
+       ('We Dont Talk Anymore','3AtDnEC4zak'),
+       ('Steal My Girl','UpsKGvPjAgw'),
+       ('All Of Me','450p7goxZqg'),
+       ('Just The Way Your Are', 'LjhCEhWiKXk'),
+       ('Please Dont Go','KTjHqOIwkow'),
+       ('Im Not The Only One','nCkpzqqog4k'),
+       ('Treat You Better','lY2yjAdbvdQ'),
+       ('Need You now','eM213aMKTHg'),
+       ('One Last Time', 'Wg92RrNhB8s'),
+       ('History','yjmp8CoZBIo'),
+       ('Somebody Else', 'U9NEoHrkldM'),
+       ('Love Like You Do', 'AJtDXIazrMo'),
+       ('Just Give Me a Reason', 'OpQFFLBMEPI'),
+       ('Dancing On My Own', 'q31tGyBJhRY'),
+       ('Pillowtalk', 'C_3d6GntKbk'),
+       ('Mirros', 'uuZE_IRwLNI'),
+       ('Stitches', 'VbfpW0pbvaU'),
+       ('When The Partys Over', 'na1QQbdgTC8'),
+       ('Drag Me Down', 'Jwgf3wmiA04'),
+       ('Stay With Me', 'pB-5XG-DbAA'),
+       ('Malibu', '8j9zMok6two'),
+       ('I Dont Wanna Live Foreve', '7F37r50VUTQ'),
+       ('Shower', '50-_oTkmF5I'),
+       ('She Looks So Perfect', 'X2BYmmTI04I'),
+       ('Love Yourself', 'oyEuk8j8imI'),
+       ('IDGAF', 'Mgfe5tIwOj0'),
+       ('Wolves', 'cH4E_t3m3xM'),
+       ('Shout To My Ex', 'yYjIcyc-uWM'),
+       ('Theres Nothing Holding Me Back', 'dT2owtxkU8k'),
+       ('What About Us', 'ClU3fctbGls'),
+       ('Locked Away', '6GUm5g8SG4o'),
+       ('Fight Song', 'xo1VInw-SKc'),
+       ('Never Be The Same', 'Ph54wQG8ynk'),
+       ('Issues', '9Ke4480MicU'),
+       ('Symphony', 'aatr_2MstrI'),
+       ('Thinking Out Loud', 'lp-EO5I60KA'),
+       ('Hurt Somebody', 'ZdsER1S3t8k'),
+       ('Dear Future Husband', 'ShlW5plD_40'),
+       ('Let It Go', 'L0MK7qz13bU'),
+       ('Up', 'rCiBgLOcuKU'),
+       ('Let Me Go', 'BQ_0QLL2gqI'),
+       ('Love You Like A Love Song', 'EgT_us6AsDg'),
+       ('One Call Away', 'BxuY9FET9Y4'),
+       ('Love On The Brain', '0RyInjfgNc4'),
+       ('Praying', 'v-Dur3uXXCQ'),
+       ('Close', 'XgJFqVvb2Ws'),
+       ('Black Magic', 'MkElfR_NPBI'),
+       ('Rude', 'PIh2xe4jnpk'),
+       ('Out Of The Woods', 'JLf9q36UsBk'),
+       ('Take Me To Church', 'PVjiKRfKpPI');
+
+-- OBTENER LOS ÁLBUMES POR ARTISTAS
+CREATE OR REPLACE VIEW album_artist AS
+    SELECT DISTINCT albumes.id_album as id_album, a.id_artista as id_artist
+    FROM albumes
+        INNER JOIN cancion_album ca on albumes.id_album = ca.id_album
+        INNER JOIN canciones c on c.id_cancion = ca.id_canciones
+        INNER JOIN artista a on a.id_artista = c.id_artista
+    WHERE albumes.activado = TRUE;
+
+
+-- SIMULACIÓN PARA AGREGAR CANCIONES
+CREATE OR REPLACE function songs_simulation(integer)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        song_name varchar;
+        link_song varchar;
+        artist_id numeric;
+        song_id numeric;
+        album_id numeric;
+        genre_id numeric;
+        is_song numeric;
+        counter numeric;
+    BEGIN
+        counter:= 0;
+
+        WHILE counter < $1 LOOP
+            -- RANDOM NAME AND LINK SONG
+            SELECT nombre, link INTO song_name, link_song
+            FROM songs
+            OFFSET floor(random()*(SELECT count(*) FROM songs))
+            LIMIT 1;
+            -- RANDOM ARTIST
+            SELECT id_artista INTO artist_id
+            FROM artista
+            WHERE  activado = TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM artista WHERE activado = TRUE))
+            LIMIT 1;
+            -- CHECKING IF THE SONG ALREADY EXISTS
+            SELECT COUNT(*) INTO is_song
+            FROM canciones
+            WHERE nombre = song_name AND id_artista = artist_id;
+            IF (is_song = 0) THEN
+                -- INSERTING A NEW SONG
+                INSERT INTO canciones (nombre, link, id_artista, modificador) VALUES (song_name, link_song,artist_id, 'Zara12');
+
+                -- OBTAINING SONG ID
+                SELECT id_cancion INTO song_id
+                FROM canciones
+                WHERE nombre = song_name AND id_artista = artist_id;
+                -- OBTAINING RANDOM ALBUM ID
+                SELECT id_album INTO album_id
+                FROM album_artist
+                WHERE id_artist = 1
+                OFFSET floor(random()*(SELECT count(*) FROM album_artist WHERE id_artist = 1))
+                LIMIT 1;
+                -- OBTAINING RANDOM GENRE
+                SELECT id_genero INTO genre_id
+                FROM genero
+                OFFSET floor(random()*(SELECT count(*) FROM genero))
+                LIMIT 1;
+                INSERT INTO genero_canciones values (genre_id, song_id);
+                INSERT INTO cancion_album VALUES (song_id, album_id);
+                counter:= counter + 1;
+            END IF;
+            END LOOP;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+
+SELECT songs_simulation(2);
+
+
+-------------------- SIMULACIONES
+
+-- OPTION 1
+SELECT random()*3
+FROM canciones
+WHERE id_cancion = floor(random()*3)
+LIMIT 1;
+
+-- OPTION 2
+-- BEST OPTION
+-- RANDOM SONGS
+SELECT *
+FROM canciones
+WHERE estado=TRUE
+OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+LIMIT 1;
+
+-- RANDOM USERS
+SELECT *
+FROM usuarios
+WHERE id_tipoUsuario != 1 AND activo = TRUE
+OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+LIMIT 1;
+
+
+-- TRYING THE EXTENSION
+-- THIS DOESNT WORK ON SMALL TABLES
+SELECT *  FROM canciones TABLESAMPLE SYSTEM_ROWS(1);
+
+-- SIMULACIÓN PARA ESCUCHAR CANCIONES
+CREATE OR REPLACE function streams_simulation(date, integer)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        user_name varchar;
+        id_song numeric;
+    BEGIN
+        FOR i IN 1..$2 LOOP
+            -- RANDOM SONG
+            SELECT id_cancion INTO id_song
+            FROM canciones
+            WHERE estado=TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM canciones WHERE estado = TRUE))
+            LIMIT 1;
+            -- RANDOM USER
+            SELECT username INTO user_name
+            FROM usuarios
+            WHERE id_tipoUsuario != 1 AND activo = TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM usuarios WHERE id_tipoUsuario != 1 AND activo = TRUE))
+            LIMIT 1;
+            INSERT INTO stream VALUES (id_song,user_name, $1);
+            END LOOP;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+
+SELECT c.nombre as nombre, a.nombre as artista, g.nombre as genero, CAST(fecha AS VARCHAR) as reproduccion
+FROM stream
+    INNER JOIN canciones c on c.id_cancion = stream.id_cancion
+    INNER JOIN artista a on a.id_artista = c.id_artista
+    INNER JOIN genero_canciones gc on c.id_cancion = gc.id_canciones
+    INNER JOIN genero g on g.id_genero = gc.id_genero;
+
+
+-- #2
+CREATE TABLE songs(
+    nombre VARCHAR(250),
+    link VARCHAR(100)
+);
+
+INSERT INTO songs
+VALUES
+       ('All I Want','mtf7hC17IBM'),
+       ('Say You Wont Let Go','0yW7w8F2TVA'),
+       ('Secret Love', 'qgy7vEje5-w'),
+       ('Scars To Your Beautiful','d7s1dMSrZ_E'),
+       ('Where Have You Been','HBxt_v0WF6Y'),
+       ('Photograph','p1JmzB6E-C8'),
+       ('Back To You','-HjpL-Ns6_A'),
+       ('Like Im Gonna Lose You','2-MBfn8XjIU'),
+       ('Perfect','2Vv-BfVoq4g'),
+       ('The Hills','yzTuBuRdAyA'),
+       ('Sign Of The Times','qN4ooNx77u0'),
+       ('When I Was Your Man','ekzHIouo8Q4'),
+       ('Blank Space','e-ORhEE9VVg'),
+       ('Lovely','V1Pl8CzNzCw'),
+       ('Somebody','8UVNT4wvIGY'),
+       ('Million Reasons','en2D_5TzXCA'),
+       ('Mercy','KkGVmN68ByU'),
+       ('I Like Me Better','a7fzkqLozwA'),
+       ('Someone Like You','hLQl3WQQoQ0'),
+       ('What A Time','4OxZIyNC6qc'),
+       ('You & I','_kqQDCxRCzM'),
+       ('Ocean Eyes','viimfQi_pUw'),
+       ('The Heart Wants What Wants','ij_0p_6qTss'),
+       ('We Dont Talk Anymore','3AtDnEC4zak'),
+       ('Steal My Girl','UpsKGvPjAgw'),
+       ('All Of Me','450p7goxZqg'),
+       ('Just The Way Your Are', 'LjhCEhWiKXk'),
+       ('Please Dont Go','KTjHqOIwkow'),
+       ('Im Not The Only One','nCkpzqqog4k'),
+       ('Treat You Better','lY2yjAdbvdQ'),
+       ('Need You now','eM213aMKTHg'),
+       ('One Last Time', 'Wg92RrNhB8s'),
+       ('History','yjmp8CoZBIo'),
+       ('Somebody Else', 'U9NEoHrkldM'),
+       ('Love Like You Do', 'AJtDXIazrMo'),
+       ('Just Give Me a Reason', 'OpQFFLBMEPI'),
+       ('Dancing On My Own', 'q31tGyBJhRY'),
+       ('Pillowtalk', 'C_3d6GntKbk'),
+       ('Mirros', 'uuZE_IRwLNI'),
+       ('Stitches', 'VbfpW0pbvaU'),
+       ('When The Partys Over', 'na1QQbdgTC8'),
+       ('Drag Me Down', 'Jwgf3wmiA04'),
+       ('Stay With Me', 'pB-5XG-DbAA'),
+       ('Malibu', '8j9zMok6two'),
+       ('I Dont Wanna Live Foreve', '7F37r50VUTQ'),
+       ('Shower', '50-_oTkmF5I'),
+       ('She Looks So Perfect', 'X2BYmmTI04I'),
+       ('Love Yourself', 'oyEuk8j8imI'),
+       ('IDGAF', 'Mgfe5tIwOj0'),
+       ('Wolves', 'cH4E_t3m3xM'),
+       ('Shout To My Ex', 'yYjIcyc-uWM'),
+       ('Theres Nothing Holding Me Back', 'dT2owtxkU8k'),
+       ('What About Us', 'ClU3fctbGls'),
+       ('Locked Away', '6GUm5g8SG4o'),
+       ('Fight Song', 'xo1VInw-SKc'),
+       ('Never Be The Same', 'Ph54wQG8ynk'),
+       ('Issues', '9Ke4480MicU'),
+       ('Symphony', 'aatr_2MstrI'),
+       ('Thinking Out Loud', 'lp-EO5I60KA'),
+       ('Hurt Somebody', 'ZdsER1S3t8k'),
+       ('Dear Future Husband', 'ShlW5plD_40'),
+       ('Let It Go', 'L0MK7qz13bU'),
+       ('Up', 'rCiBgLOcuKU'),
+       ('Let Me Go', 'BQ_0QLL2gqI'),
+       ('Love You Like A Love Song', 'EgT_us6AsDg'),
+       ('One Call Away', 'BxuY9FET9Y4'),
+       ('Love On The Brain', '0RyInjfgNc4'),
+       ('Praying', 'v-Dur3uXXCQ'),
+       ('Close', 'XgJFqVvb2Ws'),
+       ('Black Magic', 'MkElfR_NPBI'),
+       ('Rude', 'PIh2xe4jnpk'),
+       ('Out Of The Woods', 'JLf9q36UsBk'),
+       ('Take Me To Church', 'PVjiKRfKpPI');
+
+-- OBTENER LOS ÁLBUMES POR ARTISTAS
+CREATE OR REPLACE VIEW album_artist AS
+    SELECT DISTINCT albumes.id_album as id_album, a.id_artista as id_artist
+    FROM albumes
+        INNER JOIN cancion_album ca on albumes.id_album = ca.id_album
+        INNER JOIN canciones c on c.id_cancion = ca.id_canciones
+        INNER JOIN artista a on a.id_artista = c.id_artista
+    WHERE albumes.activado = TRUE;
+
+
+-- SIMULACIÓN PARA AGREGAR CANCIONES
+CREATE OR REPLACE function songs_simulation(integer)
+RETURNS VOID AS
+    $BODY$
+    DECLARE
+        song_name varchar;
+        link_song varchar;
+        artist_id numeric;
+        song_id numeric;
+        album_id numeric;
+        genre_id numeric;
+        is_song numeric;
+        counter numeric;
+    BEGIN
+        counter:= 0;
+
+        WHILE counter < $1 LOOP
+            -- RANDOM NAME AND LINK SONG
+            SELECT nombre, link INTO song_name, link_song
+            FROM songs
+            OFFSET floor(random()*(SELECT count(*) FROM songs))
+            LIMIT 1;
+            -- RANDOM ARTIST
+            SELECT id_artista INTO artist_id
+            FROM artista
+            WHERE  activado = TRUE
+            OFFSET floor(random()*(SELECT count(*) FROM artista WHERE activado = TRUE))
+            LIMIT 1;
+            -- CHECKING IF THE SONG ALREADY EXISTS
+            SELECT COUNT(*) INTO is_song
+            FROM canciones
+            WHERE nombre = song_name AND id_artista = artist_id;
+            IF (is_song = 0) THEN
+                -- INSERTING A NEW SONG
+                INSERT INTO canciones (nombre, link, id_artista, modificador) VALUES (song_name, link_song,artist_id, 'Zara12');
+
+                -- OBTAINING SONG ID
+                SELECT id_cancion INTO song_id
+                FROM canciones
+                WHERE nombre = song_name AND id_artista = artist_id;
+                -- OBTAINING RANDOM ALBUM ID
+                SELECT id_album INTO album_id
+                FROM album_artist
+                WHERE id_artist = 1
+                OFFSET floor(random()*(SELECT count(*) FROM album_artist WHERE id_artist = 1))
+                LIMIT 1;
+                -- OBTAINING RANDOM GENRE
+                SELECT id_genero INTO genre_id
+                FROM genero
+                OFFSET floor(random()*(SELECT count(*) FROM genero))
+                LIMIT 1;
+                INSERT INTO genero_canciones values (genre_id, song_id);
+                INSERT INTO cancion_album VALUES (song_id, album_id);
+                counter:= counter + 1;
+            END IF;
+            END LOOP;
+    END;
+    $BODY$
+LANGUAGE 'plpgsql';
+
+SELECT streams_simulation('03-13-2019',30);
+SELECT songs_simulation(2);
+
+
+
+
+
+
