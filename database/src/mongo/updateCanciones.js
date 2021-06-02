@@ -22,30 +22,37 @@ const parseResults = (cancionesRow) => {
         nombre_cancion: cancion.nombre_cancion,
         id_artista: cancion.id_artista,
         nombre_artista: cancion.nombre_artista,
-        generos: [],
       };
       canciones.push(cancionActual);
     }
 
-    cancionActual.generos.push({
+    /*cancionActual.generos.push({
       _id: cancion.id_genero,
       nombre_genero: cancion.nombre_genero,
-    });
+    });*/
   });
   return canciones;
 };
 
-const updateCanciones = (db, pool) => {
+const updateCanciones = async (db, pool) => {
   newCanciones(pool).then((respuesta) => {
     const canciones = parseResults(respuesta.rows);
+    const algo = new Cancion ({
+      _id: canciones.id,
+      nombre_cancion: 'sadsadsadsad cancion no funny',
+      id_artista: 1,
+      nombre_artista: 'nuestro futuro',
+      generos: [],
+    }); // const algo = new Cancion (canciones)
+    // algo.save();
+    /*canciones.forEach((cancion) => {
+    Cancion.findByIdAndUpdate(cancion._id, cancion, { new: true });
+    });*/
+    //console.log(canciones);
 
-    canciones.forEach((cancion) => {
-      const coso = Cancion.findByIdAndUpdate({ _id: cancion._id }, cancion, { upsert: true });
-      // coso.save();
-    });
-    // Canciones.save();
-    console.log(canciones);
   });
+  let test = await Cancion.findByIdAndUpdate(1, {nombre_cancion: 'COSAS FEAS PASAN'}, {new: true, useFindAndModify: false, upsert: true});
+
 };
 
 module.exports = { updateCanciones };

@@ -10,7 +10,7 @@ const reproduccionSchema = new Schema({
   id_cancion: Number,
   nombre_cancion: String,
   id_artista: Number,
-  nombre_artista: Number,
+  nombre_artista: String,
   generos: [generosSchema],
   fecha: Date,
 });
@@ -24,7 +24,7 @@ const cancionSchema = new Schema({
   _id: Number,
   nombre_cancion: String,
   id_artista: Number,
-  nombre_artista: Number,
+  nombre_artista: String,
   generos: [generosSchema],
 });
 

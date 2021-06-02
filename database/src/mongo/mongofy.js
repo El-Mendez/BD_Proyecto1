@@ -6,4 +6,11 @@ mongoose.connect('mongodb://localhost/zoa', { useNewUrlParser: true, useUnifiedT
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 
-updateCanciones(db, pool);
+
+db.once('open', function() {
+    updateCanciones(db, pool).then( () => {
+        console.log("Listo");
+    });
+});
+
+

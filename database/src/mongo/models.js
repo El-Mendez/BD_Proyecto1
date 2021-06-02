@@ -9,7 +9,7 @@ const {
 const Genero = model('Genero', generosSchema);
 const Reproduccion = model('Reproduccion', reproduccionSchema);
 const Usuarios = model('Usuarios', userSchema);
-const Cancion = model('Cancion', cancionSchema);
+const Cancion = model('Canciones', cancionSchema);
 
 module.exports = {
   Genero,
