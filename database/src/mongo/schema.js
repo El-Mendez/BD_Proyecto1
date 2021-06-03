@@ -5,6 +5,11 @@ const userRecommendation = new Schema({
   recomendaciones:[String]
 });
 
+const artistRecommendation = new Schema({
+  _id: String,
+  artista: String,
+  recomendaciones:[{_id: Number, cancion: String}]
+})
 
 const generosSchema = new Schema({
   _id: Number,
@@ -41,5 +46,5 @@ const cancionSchema = new Schema({
 });
 
 module.exports = {
-  generosSchema, reproduccionSchema, userSchema, cancionSchema, genreRecommendationSchema, userRecommendation
+  generosSchema, reproduccionSchema, userSchema, cancionSchema, genreRecommendationSchema, userRecommendation, artistRecommendation
 };

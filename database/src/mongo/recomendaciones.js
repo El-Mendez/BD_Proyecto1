@@ -1,4 +1,4 @@
-const { Usuarios, UserRecommendation, Cancion } = require('./models');
+const { Usuarios, UserRecommendation, Cancion, ArtistRecommendation } = require('./models');
 
 const topGenres = async () => {
     const recommendation = [];
@@ -44,7 +44,6 @@ const topGenres = async () => {
             {$project:{cancion:"$nombre_cancion"}}
         ])
         for await (const song of songs) {
-            console.log(song.cancion)
             user_recommendation.recomendaciones.push(song.cancion)
         }
         recommendation.push(user_recommendation);
@@ -61,12 +60,12 @@ const topGenres = async () => {
 const topArtists = async () => {
     const recommendation = [];
     let user_recommendation = {};
-
+    let r_song = {};
     const users = Usuarios.aggregate([
         { $unwind: "$reproducciones" },
 
         { $group: {
-                _id:{ usuario:"$_id", artist:"$reproducciones.id_artista"},
+                _id:{ usuario:"$_id", id_artist:"$reproducciones.id_artista", artist:"$reproducciones.nombre_artista"},
                 total:{$sum:1}
             }
         },
@@ -77,7 +76,8 @@ const topArtists = async () => {
                 _id:"$_id.usuario",
                 artists: {
                     $push: {
-                        artist:"$_id.artist",
+                        id_artist:"$_id.id_artist",
+                        artist: "$_id.artist",
                         total:"$total"
                     }
                 }}
@@ -87,21 +87,22 @@ const topArtists = async () => {
     ])
 
     for await (const user of users) {
-        user_recommendation = {_id: user._id, recomendaciones: []}
+        user_recommendation = {_id: user._id, artista:user.artist[0].artist, recomendaciones: []}
         const songs = Cancion.aggregate([
             {$unwind: "$generos"},
-            {$match: {id_artista: user.artist[0].artist}},
+            {$match: {id_artista: user.artist[0].id_artist}},
             {$sample: {size: 5}},
-            {$project:{cancion:"$nombre_cancion"}}
+            {$project:{cancion:"$nombre_cancion", artista: "$nombre_artista"}}
         ])
         for await (const song of songs) {
-            user_recommendation.recomendaciones.push(song.cancion)
+            r_song = {_id: song._id, cancion: song.cancion}
+            user_recommendation.recomendaciones.push(r_song)
         }
         recommendation.push(user_recommendation);
     }
 
     for (var i = 0; i < recommendation.length; i++) {
-        await (UserRecommendation.findByIdAndUpdate(recommendation[i]._id,{ ...recommendation[i] },
+        await (ArtistRecommendation.findByIdAndUpdate(recommendation[i]._id,{ ...recommendation[i] },
             { new: true, useFindAndModify: false, upsert: true }
         ))
     }
@@ -109,8 +110,7 @@ const topArtists = async () => {
 }
 
 
-const topSongs = async (username) => {
-    const recommendation = [];
+const topSongs = async () => {
     let user_recommendation = {};
     const top_songs = Usuarios.aggregate([
         {$unwind: "$reproducciones"},
@@ -123,30 +123,61 @@ const topSongs = async (username) => {
         },
 
         {$sort: {"total": -1}},
-        {$limit: 5},
+        {$limit: 7},
 
         {$project: {nombre: "$reproducciones.nombre_cancion"}}
     ])
 
-    user_recommendation = {_id: username, recomendaciones: []}
-    recommendation.push(user_recommendation);
+    user_recommendation = {_id: 'Zara12', recomendaciones: []}
 
     for await (const song of top_songs) {
         user_recommendation.recomendaciones.push(song._id)
+        console.log('--Canción: ' + song._id)
     }
 
-    for (var i = 0; i < recommendation.length; i++) {
-        await (UserRecommendation.findByIdAndUpdate(recommendation[i]._id,{ ...recommendation[i] },
-            { new: true, useFindAndModify: false, upsert: true }
-        ))
-    }
+
 }
-
-
-
 
 module.exports = { topGenres, topSongs, topArtists }
 
 
 
+const queryQueNoSirve = `db.getCollection("usuarios").aggregate([
+  { $unwind: "$reproducciones" },
+  {
+    $group: {
+      _id: { username: "$_id", artista: "$reproducciones.id_artista"},
+      nombre_artista_favorito: { $first: "$reproducciones.nombre_artista" },
+      reproducciones: {"$sum": 1}
+    }
+  },
 
+  { $sort: { "reproducciones": -1} },
+
+  {
+    $group: {
+      _id: "$_id.username",
+      id_artista_favorito: { $first: "$_id.artista" },
+      nombre_artista_favorito: { $first: "$nombre_artista_favorito" }
+    }
+  },
+
+  {
+    $lookup: {
+      from: "canciones",
+      let: { artist_identifier: "$id_artista_favorito" },
+      pipeline: [
+        {
+          $match: {
+            $expr: { $eq: ["$id_artista", "$$artist_identifier"] }
+          }
+        },
+        { $limit: 5 },
+        { $project: { _id: 1, nombre_cancion: 1 }  }
+      ],
+      as: "recomendadas"
+    }
+  }
+])
+
+`

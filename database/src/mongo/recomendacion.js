@@ -90,3 +90,34 @@ db.usuarios.aggregate([
 
     {$project: {genre: {$slice: ["$genres", 1]}}},
 ])
+
+db.canciones.aggregate([
+    {$unwind: "$generos"},
+    {$sample: {size: 5}},
+    {$project:{cancion:"$nombre_cancion", artista: "$nombre_artista"}}
+])
+
+db.usuarios.aggregate([
+    { $unwind: "$reproducciones" },
+
+    { $group: {
+            _id:{ usuario:"$_id", id_artist:"$reproducciones.id_artista", artista:"$reproducciones.nombre_artista"},
+            total:{$sum:1}
+        }
+    },
+
+    {$sort: {"total": -1}},
+
+    { $group: {
+            _id:"$_id.usuario",
+            artists: {
+                $push: {
+                    id_artist:"$_id.id_artist",
+                    artista: "$_id.artista",
+                    total:"$total"
+                }
+            }}
+    },
+
+    { $project: { artist: {$slice: [ "$artists", 1 ] }}  },
+])

@@ -1,4 +1,16 @@
-# Proyecto 2 de Base de Datos
+# Para el proyecto 3 de la base de datos
+A diferencia del proyecto 1 y 2, no realizamos una interfaz web para el programa. De manera que se debe de leer con 
+consola. 
+
+Adicionalmente, se necesita de el archivo credentials que tiene las credenciales para hacer los queries a la base
+de datos de postgres externa. Ese deberá ser modificado de acuerdo a las necesidades.
+```bash
+cd database
+npm run admin
+```
+
+
+# Proyecto 1 y 2 de Base de Datos
 ***
 Consiste en realizar una plataforma de música
 
