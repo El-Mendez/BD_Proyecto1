@@ -93,7 +93,6 @@ const main = async () => {
                 switch (simulacionRespuesta.respuesta) {
                     case 'Crear canciones':
                         crearCancionRespuesta = await inquirer.prompt(questionsSimulationSongs);
-                        console.log(crearCancionRespuesta.cantidad)
                         try {
                             await newSongs(pool, crearCancionRespuesta.cantidad);
                             console.log('Se han añadido las canciones');
@@ -103,7 +102,6 @@ const main = async () => {
                         break;
                     case 'Crear streams':
                         crearStreamRespuesta = await inquirer.prompt(questionsSimulationStreams);
-                        console.log(crearStreamRespuesta.fecha, crearStreamRespuesta.cantidad)
                         try {
                             await newStream(pool, crearStreamRespuesta.fecha, crearStreamRespuesta.cantidad);
                             console.log('Se han añadido los nuevos streams');
@@ -125,23 +123,22 @@ const main = async () => {
                 break;
             case 'Ver recomendaciones':
                 recomendacionRespuesta = await inquirer.prompt(questionRecomendaciones);
-                console.log(recomendacionRespuesta);
                 switch (recomendacionRespuesta.respuesta) {
                     case 'Género':
-                        console.log('Los géneros más escuchados son: ')
+                        console.log('Ver recomendaciones a partir de los géneros de cada usuario: ')
                         try {
                             await topGenres();
                             const docs = await UserRecommendation.find();
                             docs.forEach(doc => {
                                 console.log(doc._id);
                                 doc.recomendaciones.forEach(cancion => {
-                                    console.log(``)
+                                    console.log(`--${cancion}`);
                                 } )
                             });
                         } catch (err) {
                             console.log('No fue posible realizar la simulación. Intentalo más tarde.', err);
                         }
-                        break
+                        break;
                     case 'Por artista más escuchado':
                         console.log('El artista más escuchado es: ')
                         try {
@@ -174,7 +171,27 @@ const main = async () => {
                     default:
                         console.log('Vaya! Has descubierto nuestro Easter Egg secreto! Definitivamente no es un bug.');
                 }
-        }
+        break;
+        case 'Actualizar recomendaciones':
+            fechas = await inquirer.prompt(questionsDate);
+            try {
+            // await updateDatabases(db, pool, fechas.fechaInicial, fechas.fechaFinal);
+            console.log('Se han actualizado las recomendaciones.');
+            } catch (err) {
+            console.log('No fue posible actualizar las recomendaciones. Intentalo más tarde.');
+            }
+            break;
+        case 'Ver recomendaciones':
+            recomendacionRespuesta = await inquirer.prompt(questionRecomendaciones);
+            break;
+        case 'Salir':
+            exit = true;
+            await db.close();
+            console.log('Cerrando conexión con la base de datos');
+            break;
+        default:
+            console.log('Vaya! Has descubierto nuestro Easter Egg secreto! Definitivamente no es un bug.');
     }
+  }
 }
 main();

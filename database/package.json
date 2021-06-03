@@ -6,7 +6,7 @@
   "scripts": {
     "run": "nodemon src/index.js",
     "mongofy": "node src/mongo/mongofy.js",
-    "admin":"node src/mongo/main.js"
+    "admin": "node src/mongo/main.js"
   },
   "author": "",
   "license": "ISC",
